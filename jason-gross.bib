@@ -1,6 +1,30 @@
 % This file was created with JabRef 2.9.2.
 % Encoding: Cp1252
 
+@UNPUBLISHED{Gross2014,
+  author = {Jason Gross and Adam Chlipala and David Spivak},
+  title = {Experience Implementing a Performant Category-Theory Library in Coq},
+  note = {Draft; to be submitted to ITP 2014},
+  year = {2014},
+  abstract = {We describe our experience implementing a broad category-theory library
+	in Coq.  Category theory and computational performance are not usually
+	mentioned in the same breath, but we have needed substantial engineering
+	effort to teach Coq to cope with large categorical constructions
+	without slowing proof script processing unacceptably.  In this paper,
+	we share the lessons we have learned about how to represent very
+	abstract mathematical objects and arguments in Coq and how future
+	proof assistants might be designed to better support such reasoning.
+	 One particular encoding trick to which we draw attention allows
+	category-theoretic arguments involving \emph{duality} to be internalized
+	in Coq's logic with definitional equality.  Ours may be the largest
+	Coq development to date that uses the relatively new Coq version
+	developed by homotopy type theorists, and we reflect on which new
+	features were especially helpful.},
+  owner = {Jason},
+  timestamp = {2014.01.19},
+  url = {http://people.csail.mit.edu/jgross/category-coq-experience/category-coq-experience.pdf}
+}
+
 @INPROCEEDINGS{Lake2011,
   author = {Brenden M. Lake and Ruslan Salakhutdinov and Jason Gross and Joshua
 	B. Tenenbaum},
@@ -8,9 +32,11 @@
   booktitle = {Proceedings of the 33rd Annual Conference of the Cognitive Science
 	Society},
   year = {2011},
-  note = {[\href{http://www.mit.edu/~brenden/charactervideos.html}{videos}]},
-  abstract = {People can learn visual concepts from just one example, but it remains a mystery how this is accomplished. Many authors have proposed that transferred knowledge from more familiar concepts is a route to one shot learning, but what is the form of this abstract knowledge? One hypothesis is that the sharing of parts is core to one shot learning, and we evaluate this idea in the domain of handwritten characters, using a massive new dataset. These simple visual concepts have a rich internal part structure, yet they are particularly tractable for computational models. We introduce a generative model of how characters are composed from strokes, where knowledge from previous characters helps to infer the latent strokes in novel characters. The stroke model outperforms a competing state-of-the-art character model on a challenging one shot learning task, and it provides a good fit to human perceptual data.},
+  note = {note},
+  abstract = {abs},
   owner = {Jason},
+  review = {rev},
   timestamp = {2014.01.19},
-  url = {http://people.csail.mit.edu/jgross/personal-website/papers/LakeEtAl2011CogSci.pdf}
+  url = {http://people.csail.mit.edu/jgross/personal-website/papers/LakeEtAlNips2013.pdf}
 }
+
