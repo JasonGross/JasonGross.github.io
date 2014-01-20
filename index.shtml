@@ -3,6 +3,11 @@
 <head>
 <title>Jason Gross</title>
 <meta charset="utf-8">
+<style>
+blockquote, p {
+text-align:justify;
+}
+</style>
 </head>
 <body>
 <h1>Jason Gross</h1>
@@ -21,8 +26,6 @@ Please visit my <a href="https://github.com/JasonGross">GitHub</a> account in th
 <p>
 These days, I'm working on <a href="https://github.com/JasonGross/adt-synthesis">program synthesis</a> and <a href="https://github.com/JasonGross/HoTT/tree/master/theories/categories">category theory on top of homotopy type theory in Coq</a>.
 </p>
-
-<h2>Papers</h2>
 
 <!--#include virtual="jason-gross-stripped.html" -->
 
