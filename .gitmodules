@@ -4,3 +4,6 @@
 [submodule "pdf.js"]
 	path = pdf.js
 	url = https://github.com/mozilla/pdf.js.git
+[submodule "presentations/coq-8.6-wishlist"]
+	path = presentations/coq-8.6-wishlist
+	url = https://github.com/JasonGross/coq-8.6-wishlist

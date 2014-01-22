@@ -19,3 +19,6 @@ bibtex2html-1.97/bibtex2html: bibtex2html-1.97/Makefile
 
 bibtex2html-1.97/Makefile: bibtex2html-1.97/configure
 	cd bibtex2html-1.97; ./configure --prefix "$(readlink -f .)"
+
+presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf: presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist.tex presentations/coq-8.6-wishlist/Makefile presentations/coq-8.6-wishlist/appendixnumberbeamer.sty
+	cd presentations/coq-8.6-wishlist; $(MAKE)
