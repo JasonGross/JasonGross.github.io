@@ -10,35 +10,6 @@
 \usetikzlibrary{arrows}
 \usepackage[all]{xy}
 
-
-\makeatletter
-\AtBeginDocument{% example environment modified from the example environment in lshort.sty, using the verbatim package
-  \newwrite\examplesx@out
-  \newenvironment{examplesx}{%
-    \begingroup% Lets Keep the Changes Local
-      \@bsphack
-      \immediate\openout \examplesx@out \jobname.exa
-      \let\do\@makeother\dospecials\catcode`\^^M\active
-      \def\verbatim@processline{%
-        \immediate\write\examplesx@out{\the\verbatim@line}}%
-      \verbatim@start
-    }{%
-    \immediate\closeout\examplesx@out\@esphack\endgroup%
-    \noindent\makebox[\textwidth][l]{%
-      \begin{minipage}[c]{0.45\textwidth}%
-        \small\verbatiminput{\jobname.exa}
-      \end{minipage}%
-      \hspace*{0.1\textwidth}%
-      \framebox{%
-        \begin{minipage}{0.45\textwidth}%
-          \small\input{\jobname.exa}%
-        \end{minipage}
-      }%
-    }\vspace*{\parskip}%
-  }
-}
-\makeatother
-
 \pdfinfo {
   /Title (POPL --- Minute Madness)
   /Subject (POPL)
@@ -70,8 +41,8 @@
         }
         $$
       }
- 
-    \vspace{4ex} \\ The diagrams are ``the same''.
+
+    \vspace{6ex} The diagrams are ``the same''.
   \end{center}
 \end{frame}
 \end{document}
