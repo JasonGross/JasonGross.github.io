@@ -28,5 +28,5 @@ presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf: presentatio
 presentations/csw-2013/jgross-presentation-no-pause.pdf: presentations/csw-2013/jgross-presentation.tex presentations/csw-2013/Makefile
 	cd presentations/csw-2013; $(MAKE)
 
-presentations/popl-2013/jgross-student-talk.pdf presentations/popl-2013/minute-madness.pdf: presentations/popl-2013/jgross-student-talk.tex presentations/popl-2013/minute-madness.tex presentations/popl-2013/Makefile
-	cd presentations/popl-2013; $(MAKE)
+presentations/popl-2013/%.pdf: presentations/popl-2013/%.tex presentations/popl-2013/Makefile
+	cd presentations/popl-2013; $(MAKE) %.pdf
