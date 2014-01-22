@@ -1,0 +1,274 @@
+\documentclass[utf8x]{beamer}
+
+\usepackage{beamerthemesplit}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{verbatim}
+\usepackage{hyperref}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+\usepackage[all]{xy}
+
+
+\makeatletter
+\AtBeginDocument{% example environment modified from the example environment in lshort.sty, using the verbatim package
+  \newwrite\examplesx@out
+  \newenvironment{examplesx}{%
+    \begingroup% Lets Keep the Changes Local
+      \@bsphack
+      \immediate\openout \examplesx@out \jobname.exa
+      \let\do\@makeother\dospecials\catcode`\^^M\active
+      \def\verbatim@processline{%
+        \immediate\write\examplesx@out{\the\verbatim@line}}%
+      \verbatim@start
+    }{%
+    \immediate\closeout\examplesx@out\@esphack\endgroup%
+    \noindent\makebox[\textwidth][l]{%
+      \begin{minipage}[c]{0.45\textwidth}%
+        \small\verbatiminput{\jobname.exa}
+      \end{minipage}%
+      \hspace*{0.1\textwidth}%
+      \framebox{%
+        \begin{minipage}{0.45\textwidth}%
+          \small\input{\jobname.exa}%
+        \end{minipage}
+      }%
+    }\vspace*{\parskip}%
+  }
+}
+\makeatother
+
+\pdfinfo {
+  /Title (Database Management on top of Category Theory in Coq)
+  /Subject (POPL)
+  /Author (Jason Gross)
+  /Keywords (POPL, Coq, Category Theory, Databases)
+}
+
+\begin{document}
+
+\title[Database Management on top of Category Theory in Coq]{Building Database Management on top of Category Theory in Coq}
+\date{POPL 2013}
+\author{Jason Gross --- \href{mailto:jgross@mit.edu}{jgross@mit.edu}}
+
+\begin{frame}
+  \titlepage
+  This document is available at \url{http://web.mit.edu/jgross/Public/POPL/\jobname.pdf}.
+  
+  My category theory library is available at \url{https://bitbucket.org/JasonGross/catdb}.
+\end{frame}
+
+\section*{Outline}
+  \begin{frame}{Outline}
+    \tableofcontents[pausesections]
+  \end{frame}
+  
+\section{Introduction --- Databases and Category Theory}    
+  \subsection{Categories}
+    \begin{frame}{Categories}
+      A category is:
+      \begin{itemize}
+        \item
+          a collection of objects, \pause together with
+        \item
+          arrows between those objects, \pause together with
+        \item
+          a composition law for the arrows satisfying coherence conditions:
+          \begin{itemize}
+            \item existence of identity
+            \item associativity
+          \end{itemize} \pause
+      \end{itemize}
+      \begin{center}
+        \fbox{
+          $$
+          \xymatrix{
+            a \ar@/^{0.5pc}/[rr]^{f} \ar@/_{0.5pc}/[d]_{g} \ar@/^{0.5pc}/[d]^{h} && b \ar@/^{0.5pc}/[ll]^{i} \ar@/^{1.5pc}/[dll]^{j} \\
+            c
+          }
+          $$
+        }
+      \end{center}
+    \end{frame}
+    
+  \subsection{Relational Databases}
+    \begin{frame}{Relational Databases}
+      A database schema for a relational database can be modeled as a
+      \begin{itemize}
+        \item collection of \textbf{tables}, \pause together with 
+        \item a collection of \textbf{attributes} or column-labels for each table, \pause together with
+        \item integrity constraints \pause
+      \end{itemize}
+      \begin{center}
+        \fbox{
+          $$
+          \xymatrix{
+            *\txt{professor} \ar@/^{1pc}/[rr]^{\text{department}} \ar@/_{1pc}/[dd]_{\text{first name}} \ar@/^{1pc}/[dd]^{\text{last name}} && *\txt{department} \ar@/^{1pc}/[ll]^{\text{department head}} \ar@/^{2pc}/[ddll]^{\text{name}} \\ \\
+            *\txt{string} &&
+          }
+          $$
+          }
+      \end{center}
+    \end{frame}
+    
+  \subsection{Relational Database Schema = Category}
+    \begin{frame}{Relational Database Schema = Category}
+      \begin{center}
+        \only<1,3>{
+          \fbox{
+          $$
+          \xymatrix{
+            a \ar@/^{0.5pc}/[rr]^{f} \ar@/_{0.5pc}/[d]_{g} \ar@/^{0.5pc}/[d]^{h} && b \ar@/^{0.5pc}/[ll]^{i} \ar@/^{1.5pc}/[dll]^{j} \\
+            c
+          }
+          $$
+          }
+        }
+        \only<3>{\raisebox{-3.5ex}[\height][\depth]{$\cong$}}
+        \only<2,3>{
+          \fbox{\only<3>{\small}
+          $$
+          \xymatrix{
+            *\txt{professor} \ar@/^{1pc}/[rr]^{\text{department}} \ar@/_{1pc}/[dd]_{\text{f.~name}} \ar@/^{1pc}/[dd]^{\text{l.~name}} && *\txt{department} \ar@/^{1pc}/[ll]^{\text{department head}} \ar@/^{2pc}/[ddll]^{\text{name}} \\ \\
+            *\txt{string} &&
+          }
+          $$
+          }
+        }
+        \only<3>{\vspace{4ex} \\ The diagrams are ``the same''.}
+      \end{center}
+    \end{frame}
+    
+  \subsection{Usefulness}
+    \begin{frame}{Usefulness of Categorical Databases}
+      \begin{itemize}
+        \item
+          Built in notion of path equivalence (multiple equivalent paths of foreign keys can be a pain in typical database management). \pause
+        \item
+          Provides a rigorous language for data migration between databases (another hard task in standard database management).
+      \end{itemize}
+    \end{frame}
+  
+\section{Category Theory in Coq}
+  
+  \begin{frame}{Category Theory in Coq}
+    \begin{itemize}
+      \item
+        Many people learn a proof assistant by coding up category theory. \pause
+      \item
+        Category theory is relatively simple to code up. \pause
+        \begin{itemize}
+          \item
+            Standard rigorous formulation of concepts exists in the literature. \pause
+          \item
+            It's rare to get caught up in minute details of proofs. \pause
+          \item
+            If you can define something categorically, it's probably interesting.
+        \end{itemize}
+    \end{itemize}
+  \end{frame}
+  
+  \subsection{Universe Levels}
+    \begin{frame}
+      \frametitle{Universe Levels \only<1-7>{(Russel's Paradox)}}
+      \begin{itemize}
+        \item<1-7>
+          Consider, na\"ively, the set of all sets. \only<2->{Does it contain itself?} \only<3-7>{
+          \begin{itemize}
+            \item
+              It's a set, and it contains all sets, so it must.
+          \end{itemize}
+        }
+        \item<4-7>
+          Consider the set of all sets that do not contain themselves.  Does it contain itself?
+          \only<5-7>{
+          \begin{itemize}
+            \item<5->
+              If it contains itself, then it is not a set that doesn't contain itself, and so it cannot be a member of itself; contradiction.  Thus it cannot contain itself. \pause
+            \item<6->
+              If it does not contain itself, then it is a set that does not contain itself, and thus must be a member of itself; contradiction.  Thus it cannot fail to contain itself.
+          \end{itemize}
+        }
+        \item<7->
+          This is the \textbf{paradox of na\"ive set theory}.
+        \item<8->
+          Solution: universe levels
+          \begin{itemize}
+            \item<9->
+              \texttt{Set} or \texttt{Type}(0) is the collection of all sets, \texttt{Type}(1) is the collection of all \texttt{Type}(0)s, \ldots, \texttt{Type}($i + 1$) is the collection of all \text{Type}($i$)s
+            \item<9->
+              The \textbf{universe level} of an object of type \texttt{Type}($i$) is $i$
+          \end{itemize}
+        \item<10->
+          In some cases, Coq can infer the universe level of an inductive type from the universe levels of its parameters; when this happens, the inductive type is polymorphic over universe levels.
+        \item<11->
+          It's useful to talk about ``a category whose objects are of type \texttt{T}'' rather than just ``a category''.
+      \end{itemize}
+    \end{frame}
+  
+  \subsection{Limits and Colimits}
+    \begin{frame}{Limits and Colimits}
+      \begin{itemize}
+        \item
+          Categorical \textbf{limits} are like \textbf{Cartesian products}, subject to constraints about equality of components \pause
+        \item
+          Categorical \textbf{colimits} are like \textbf{disjoint unions}, modulo equivalence relations
+      \end{itemize}
+    \end{frame}
+    
+    \begin{frame}{Coq Category}
+      \begin{itemize}
+        \item Coq has all limits
+          \begin{itemize}
+            \item
+              Product types provide products (function types, e.g, \texttt{forall~a~:~A,~f~a} is the product $\prod_{a \in A} f(a)$)
+            \item
+              Sigma types provide constraints about equality of components (e.g., \texttt{\{ f : A $\to$ B | f a = f b \}})
+          \end{itemize} \pause
+        \item Coq has some colimits
+          \begin{itemize}
+            \item
+              Sigma types provide disjoint unions (e.g., \texttt{\{ j : J \& f j \}} is the disjoint union $\bigsqcup_{j \in J} f(j)$)
+            \item
+              Quotients are \ldots\space hard
+          \end{itemize}
+      \end{itemize}
+    \end{frame}
+    
+    \begin{frame}{Quotients}
+      \begin{itemize}
+        \item Quotients can be defined via axioms \pause
+        \begin{itemize}
+          \item
+            \texttt{proof\_irrelevance}; \texttt{(A $\leftrightarrow$ B) $\to$ A = B} for propositions; either decidable existence, or a way of turning proofs of existence into objects (\texttt{constructive\_indefinite\_description : (exists~x,~P~x)~$\to$~\{~x~|~P~x~\}})
+          \item
+            Not computational
+        \end{itemize} \pause
+        \item Quotients can be defined via setoids \pause
+        \begin{itemize}
+          \item
+            All objects carry around extra information of what the equivalence relation is
+          \item
+            This is somewhat clunky
+          \item
+            Not first-class quotients
+        \end{itemize}
+      \end{itemize}
+    \end{frame}
+    
+    \begin{frame}{Limits and Colimits (High-Level Summary)}
+      \begin{itemize}
+        \item
+          There are two categorical constructions (limits and colimits) that are ``dual'' \pause
+        \item
+          Coq's type-system fully implements only one of these (limits) \pause
+        \item
+          It's harder to define colimits inside of Coq than limits, in general, even for the ones that Coq does support
+      \end{itemize}
+    \end{frame}
+
+  \begin{frame}[Thank You]
+    \fontsize{128}{0}\selectfont\begin{center}Thank You!\end{center}
+  \end{frame}
+\end{document}

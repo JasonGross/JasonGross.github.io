@@ -22,3 +22,9 @@ bibtex2html-1.97/Makefile: bibtex2html-1.97/configure
 
 presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf: presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist.tex presentations/coq-8.6-wishlist/Makefile presentations/coq-8.6-wishlist/appendixnumberbeamer.sty
 	cd presentations/coq-8.6-wishlist; $(MAKE)
+
+presentations/csw-2013/jgross-presentation-no-pause.pdf: presentations/csw-2013/jgross-presentation.tex presentations/csw-2013/Makefile
+	cd presentations/csw-2013; $(MAKE)
+
+presentations/popl-2013/jgross-student-talk.pdf presentations/popl-2013/minute-madness.pdf: presentations/popl-2013/jgross-student-talk.tex presentations/popl-2013/minute-madness.tex presentations/popl-2013/Makefile
+	cd presentations/popl-2013; $(MAKE)
