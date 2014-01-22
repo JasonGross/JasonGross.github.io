@@ -3,10 +3,10 @@
 
 BIBTEX2HTML=bibtex2html-1.97/bibtex2html
 
-all: jason-gross-stripped.html
+all: jason-gross-stripped.html presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf
 
 clean:
-	rm -f jason-gross.html jason-gross_bib.html jason-gross-stripped.html
+	rm -f jason-gross.html jason-gross_bib.html jason-gross-stripped.html presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf
 
 jason-gross-stripped.html: jason-gross.html Makefile
 	sed s'/This file/This reference list/g' $< | sed s'/<hr>//g' | sed s'/h1/h2/g' > $@
