@@ -14,7 +14,7 @@ jason-gross-stripped.html: jason-gross.html Makefile
 	sed s'/This file/This reference list/g' $< | sed s'/<hr>//g' | sed s'/h1/h2/g' > $@
 
 jason-gross.html: jason-gross.bib $(BIBTEX2HMTL)
-	$(BIBTEX2HTML) -d -nodoc --title "Papers" $<
+	$(BIBTEX2HTML) -d -nodoc --title "Papers and Presentations" $<
 
 bibtex2html-1.97/bibtex2html: bibtex2html-1.97/Makefile
 	cd bibtex2html-1.97; $(MAKE)
