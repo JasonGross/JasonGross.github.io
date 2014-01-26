@@ -16,11 +16,11 @@ text-align:justify;
 
 <h2>Code, Résumé, and Curriculum Vitæ</h2>
 <p>
-Eventually, my projects will be integrated into this page.  In the meantime, please visit my <a href="https://github.com/JasonGross">GitHub</a> account, or look at my <a href="resume.pdf">résumé</a> or <a href="curriculum-vitae.pdf">curriculum vitæ</a>.
+Eventually, my projects will be integrated into this page.  In the meantime, please visit my <a href="https://github.com/JasonGross">GitHub</a> account, or look at my <a href="resume.pdf">résumé</a> (<a href="resume.pdf">general</a>, for <a href="resume-computer-science.pdf">computer science</a>, or for <a href="resume-mathematics.pdf">mathematics</a>) or <a href="curriculum-vitae.pdf">curriculum vitæ</a>.
 </p>
 
 <p>
-These days, I'm working on <a href="https://github.com/JasonGross/adt-synthesis">program synthesis</a> and <a href="https://github.com/JasonGross/HoTT/tree/master/theories/categories">category theory on top of homotopy type theory in Coq</a>.
+These days, I'm working on <a href="https://github.com/JasonGross/adt-synthesis">program synthesis</a> and <a href="https://github.com/JasonGross/HoTT/tree/master/theories/categories">category theory on top of homotopy type theory in Coq</a>.  I also occasionally commit to the <a href="https://github.com/JasonGross/barnowl">BarnOwl</a> project.
 </p>
 
 <!--#include virtual="jason-gross-stripped.html" -->
