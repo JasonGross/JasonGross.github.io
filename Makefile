@@ -3,7 +3,7 @@
 
 BIBTEX2HTML=bibtex2html-1.97/bibtex2html
 
-OUTPUTS := jason-gross-stripped.html presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf presentations/csw-2013/jgross-presentation-no-pause.pdf presentations/popl-2013/jgross-student-talk.pdf presentations/popl-2013/minute-madness.pdf
+OUTPUTS := jason-gross-stripped.html presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf presentations/csw-2013/jgross-presentation-no-pause.pdf presentations/popl-2013/jgross-student-talk.pdf presentations/popl-2013/minute-madness.pdf resume/resume.pdf
 
 all: $(OUTPUTS)
 
@@ -21,6 +21,9 @@ bibtex2html-1.97/bibtex2html: bibtex2html-1.97/Makefile
 
 bibtex2html-1.97/Makefile: bibtex2html-1.97/configure
 	cd bibtex2html-1.97; ./configure --prefix "$(readlink -f .)"
+
+resume/resume.pdf: resume/Makefile resume/Resume.tex
+	cd resume; $(MAKE)
 
 presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf: presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist.tex presentations/coq-8.6-wishlist/Makefile presentations/coq-8.6-wishlist/appendixnumberbeamer.sty
 	cd presentations/coq-8.6-wishlist; $(MAKE)
