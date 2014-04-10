@@ -7,3 +7,6 @@
 [submodule "presentations/coq-8.6-wishlist"]
 	path = presentations/coq-8.6-wishlist
 	url = https://github.com/JasonGross/coq-8.6-wishlist
+[submodule "papers/academic-papers-local"]
+	path = papers/academic-papers-local
+	url = https://github.com/JasonGross/academic-papers-local.git
