@@ -21,7 +21,8 @@ papers/category-coq-experience.html: %.html : %-filtered.bib $(BIBTEX2HMTL) Make
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Experience Implementing a Performant Category-Theory Library in Coq: Complete List of References" -o "$*" "$<"
 
 papers/category-coq-experience-filtered.bib: papers/category-coq-experience.bib Makefile
-	cat "$<" | \
+	@echo "FILTER $< > $@"
+	@cat "$<" | \
 	sed s'/@ELECTRONIC/@MISC/g' | \
 	sed s'/-old = / = /g' | \
 	sed s'/month = {1}/month = {January}/g' | \
