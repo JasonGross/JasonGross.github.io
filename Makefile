@@ -25,6 +25,7 @@ papers/category-coq-experience-filtered.bib: papers/category-coq-experience.bib 
 	@cat "$<" | \
 	sed s'/@ELECTRONIC/@MISC/g' | \
 	sed s'/-old = / = /g' | \
+	sed s'/howpublished = {\\url{\([^}]\+\)}}/url = {\1}/g' | \
 	sed s'/month = {1}/month = {January}/g' | \
 	sed s'/month = {2}/month = {February}/g' | \
 	sed s'/month = {3}/month = {March}/g' | \
