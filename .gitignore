@@ -27,6 +27,9 @@ jason-gross-stripped.html
 *.out
 *.snm
 *.toc
+*.bbl
+*.blg
+*.synctex.gz
 papers/category-coq-experience-filtered.bib
 papers/category-coq-experience.html
 jason-gross.html
@@ -35,3 +38,4 @@ papers/category-coq-experience_bib.html
 presentations/csw-2013/*.pdf
 presentations/csw-2013/jgross-presentation-no-pause.tex
 presentations/popl-2013/*.pdf
+presentations/coq-workshop-2014/*.pdf
