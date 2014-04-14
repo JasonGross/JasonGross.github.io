@@ -41,6 +41,7 @@ TITLE: Experience Implementing a Performant Category-Theory Library in Coq
 AUTHORS: Jason Gross, Adam Chlipala and David Spivak
 
 OVERALL EVALUATION: 2 (accept)
+REVIEWER'S CONFIDENCE: 5 (expert)
 
 ----------- REVIEW -----------
 This is a large scale experiment in developing a library for category theory.
@@ -99,6 +100,7 @@ TITLE: Experience Implementing a Performant Category-Theory Library in Coq
 AUTHORS: Jason Gross, Adam Chlipala and David Spivak
 
 OVERALL EVALUATION: 1 (weak accept)
+REVIEWER'S CONFIDENCE: 4 (high)
 
 ----------- REVIEW -----------
 This paper describes a category theory library developed in the Coq
@@ -202,6 +204,7 @@ TITLE: Experience Implementing a Performant Category-Theory Library in Coq
 AUTHORS: Jason Gross, Adam Chlipala and David Spivak
 
 OVERALL EVALUATION: 1 (weak accept)
+REVIEWER'S CONFIDENCE: 5 (expert)
 
 ----------- REVIEW -----------
 This paper describes a fairly comprehensive Coq formalization of
