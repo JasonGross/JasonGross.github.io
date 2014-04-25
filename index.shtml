@@ -10,11 +10,11 @@ text-align:justify;
 </style>
 </head>
 <body>
-<h1>Jason Gross</h1>
+<h1 id="jason-gross">Jason Gross</h1>
 
 <img src="jason-gross.jpg" style="width: 10em" />
 
-<h2>Contact Me</h2>
+<h2 id="contact">Contact Me</h2>
 <p>Email: <a href="mailto:jgross@mit.edu">jgross@mit.edu</a></p>
 <!--<h3>Social Media</h3>-->
 <!--include virtual="twitter.html" -->
@@ -25,7 +25,7 @@ text-align:justify;
 <!--include virtual="github.html" -->
 
 
-<h2>Code, Résumé, and Curriculum Vitæ</h2>
+<h2 id="resume">Code, Résumé, and Curriculum Vitæ</h2>
 <p>
 Eventually, my projects will be integrated into this page.  In the meantime, please visit my <a href="https://github.com/JasonGross">GitHub</a> account, or look at my <a href="resume.pdf">résumé</a> (<a href="resume.pdf">general</a>, for <a href="resume-computer-science.pdf">computer science</a>, or for <a href="resume-mathematics.pdf">mathematics</a>) or <a href="curriculum-vitae.pdf">curriculum vitæ</a>.
 </p>
@@ -36,7 +36,7 @@ These days, I'm working on <a href="https://github.com/JasonGross/adt-synthesis"
 
 <!--#include virtual="jason-gross-stripped.html" -->
 
-<h2>Hobbies and Fun Facts</h2>
+<h2 id="hobbies">Hobbies and Fun Facts</h2>
 I enjoy wind-surfing, sailing, sky-diving, programming, philosophy, math, physics, learning, and building.  I've written up <a href="http://web.mit.edu/jgross/Public/social-interactions/">some thoughts on social interactions and emotions</a>, <a href="http://web.mit.edu/jgross/Public/skydive.txt">my experience skydiving</a>, and <a href="http://web.mit.edu/jgross/Public/18.100C_paper_newest.pdf">a visual proof that the reals are uncountable, geared at a child</a>.
 
 As far as I know, my Erdös Number is 5, because <a href="http://adam.chlipala.net/">Adam Chlipala</a>'s is 4.

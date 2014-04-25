@@ -14,7 +14,7 @@ clean:
 	rm -f jason-gross_bib.html papers/category-coq-experience_bib.html $(OUTPUTS)
 
 jason-gross-stripped.html: jason-gross.html Makefile
-	sed s'/This file/This reference list/g' $< | sed s'/<hr>//g' | sed s'/h1/h2/g' > $@
+	sed -e s'/This file/This reference list/g' -e s'/<hr>//g' -e s'/h1/h2/g' -e s'/<h2>/<h2 id="publications">/g' $< > $@
 
 jason-gross.html: %.html : %.bib $(BIBTEX2HMTL) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Papers and Presentations" -o "$*" "$<"
