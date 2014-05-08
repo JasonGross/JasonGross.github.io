@@ -2,7 +2,7 @@
 .PHONY: all clean
 
 BIBTEX2HTML=bibtex2html-1.97/bibtex2html
-BIBTEX2HTML_ARGS=-d -r -nodoc -nf videos videos -nf reviews reviews -nf full-bibliography "full bibliography" -nf code-v "code (.v)" -nf code-html "code (.html)"
+BIBTEX2HTML_ARGS=-d -r -nodoc -nf videos videos -nf reviews reviews -nf full-bibliography "full bibliography" -nf code-v "code (.v)" -nf code-html "code (.html)" -nf original-url "original conference submission (.pdf)"
 
 COQBIN=$(shell readlink -f ~/.local64/coq/coq-trunk/bin)/
 
