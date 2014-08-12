@@ -33,6 +33,7 @@ jason-gross-stripped.html
 *.vo
 *.v.d
 *.glob
+.coq-native
 papers/category-coq-experience-filtered.bib
 papers/category-coq-experience.html
 jason-gross.html
