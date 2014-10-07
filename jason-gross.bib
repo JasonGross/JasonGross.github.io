@@ -1,22 +1,59 @@
 % This file was created with JabRef 2.9.2.
 % Encoding: Utf8
 
+@MISC{adt-synthesis,
+  author = {Ben Delaware and Clément Pit--Claudel and Jason Gross and Adam},
+  title = {Fiat: Deductive Synthesis of Abstract Data Types in a Proof Assistant},
+  month = {December},
+  year = {2015},
+  note = {Accepted at POPL 2015},
+  owner = {Jason},
+  timestamp = {2014.10.07},
+  url = {http://people.csail.mit.edu/jgross/personal-website/papers/adt-synthesis.pdf}
+}
+
+@MISC{coqpl-15,
+  author = {Jason Gross},
+  title = {Coq Bug Minimizer},
+  month = {December},
+  year = {2015},
+  note = {Submitted for presentation at CoqPL 2015},
+  abstract = {Are bugs the bane of your existence?  Do you dread Coq upgrades, because
+	they mean you'll have to spend days tracking down subtle failures
+	deep in your developments?  Have you ever hit an anomaly that just
+	wouldn't go away, and wished you understood what triggered it?  Have
+	you ever been tormented by two blocks of code that looked identical,
+	but behaved differently?  Do you wish you submit more helpful error
+	reports, but don't want to put in the time to construct minimal examples?
+	 If you answered ``yes'' to any of these questions, then the Coq
+	Bug Minimizer is for you!  Clone your own copy at \url{https://github.com/JasonGross/coq-bug-finder}.},
+  owner = {Jason},
+  timestamp = {2014.10.07},
+  url = {http://people.csail.mit.edu/jgross/personal-website/papers/coq-bug-minimizer.pdf}
+}
+
 @MISC{2014-msr-x86proved-io,
   author = {Jason Gross},
   title = {Presentation: Input, Output, and Automation in x86 Proved},
   month = {August},
   year = {2014},
   note = {Presented at Microsoft Research, Cambridge, UK},
-  abstract = {The x86proved project can now verify assembly programs with input and output!  The code-reasoning throughout the project is now mostly automatic.  Although not yet push-button verification (specification-level reasoning, in particular, leaves a lot to be desired) these tactics make a significant step towards that goal.   This presentation will cover: \\
-• some programs whose I/O behaviour has been verified (including a simplified version of the \texttt{echo} command-line tool) \\
-• the new automation for fully automatic correctness proofs of Hoare-triple rules for basic instructions \\
-• the new automation for applying Hoare rules for assembly instructions automatically \\
-• the basics of how we’re specifying and verifying the I/O behaviour of programs},
+  abstract = {The x86proved project can now verify assembly programs with input
+	and output! The code-reasoning throughout the project is now mostly
+	automatic. Although not yet push-button verification (specification-level
+	reasoning, in particular, leaves a lot to be desired) these tactics
+	make a significant step towards that goal. This presentation will
+	cover: \\ • some programs whose I/O behaviour has been verified (including
+	a simplified version of the \texttt{echo} command-line tool) \\ •
+	the new automation for fully automatic correctness proofs of Hoare-triple
+	rules for basic instructions \\ • the new automation for applying
+	Hoare rules for assembly instructions automatically \\ • the basics
+	of how we’re specifying and verifying the I/O behaviour of programs},
   day = {20},
   owner = {Jason},
   timestamp = {2014.08.20},
-  url-pptx = {http://people.csail.mit.edu/jgross/personal-website/presentations/msr-2014-final-talk/input-output-and-automation-in-x86proved.pptx},
-  url = {http://people.csail.mit.edu/jgross/personal-website/presentations/msr-2014-final-talk/input-output-and-automation-in-x86proved.pdf}
+  url = {http://people.csail.mit.edu/jgross/personal-website/presentations/msr-2014-final-talk/input-output-and-automation-in-x86proved.pdf},
+  url-pptx = {http://people.csail.mit.edu/jgross/personal-website/presentations/msr-2014-final-talk/input-output-and-automation-in-x86proved.pptx}
 }
 
 @MISC{Gross2014a-coq-wishlist,
@@ -45,9 +82,6 @@
   month = {April},
   year = {2014},
   note = {Accepted to the 6th Coq Workshop},
-  code-v = {http://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/tactics_in_terms_presentation.v},
-  code-html = {http://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_presentation.html},
-  reviews = {http://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/reviews.txt},
   abstract = {Coq 8.5 has a number of new features. It has more powerful universe
 	polymorphism support. It allows tactics to be run at interpretation
 	to construct other terms. The ability to switch from Gallina to Ltac
@@ -59,8 +93,11 @@
 	allows overloading notations based on the type of their arguments;
 	and there is a way to talk about universe levels explicitly, helped
 	along by tactics in terms.},
+  code-html = {http://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_presentation.html},
+  code-v = {http://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/tactics_in_terms_presentation.v},
   day = {11},
   owner = {Jason},
+  reviews = {http://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/reviews.txt},
   timestamp = {2014.04.11},
   url = {http://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf}
 }
@@ -97,12 +134,12 @@
   url = {http://people.csail.mit.edu/jgross/personal-website/presentations/csw-2013/jgross-presentation-no-pause.pdf}
 }
 
-@UNPUBLISHED{category-coq-experience,
+@ARTICLE{category-coq-experience,
   author = {Jason Gross and Adam Chlipala and David I. Spivak},
   title = {Experience Implementing a Performant Category-Theory Library in {C}oq},
-  note = {Presented at ITP 2014},
-  month = {July},
   year = {2014},
+  month = {July},
+  note = {Presented at ITP 2014},
   abstract = {We describe our experience implementing a broad category-theory library
 	in Coq. Category theory and computational performance are not usually
 	mentioned in the same breath, but we have needed substantial engineering
@@ -119,14 +156,14 @@
 	helpful.},
   eprint = {1401.7694},
   full-bibliography = {http://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience.html},
-  owner = {Jason},
-  reviews = {http://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience-itp-2014-reviews.txt},
-  timestamp = {2014.01.19},
   original-url = {http://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience-itp-submission.pdf},
-  url = {http://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience-itp-submission-final.pdf},
+  owner = {Jason},
   presentation-annotated-pptx = {http://people.csail.mit.edu/jgross/personal-website/presentations/itp-2014/category-coq-experience.pptx},
   presentation-pdf = {http://people.csail.mit.edu/jgross/personal-website/presentations/itp-2014/category-coq-experience.pptx},
   published-url-springer = {http://link.springer.com/chapter/10.1007\%2F978-3-319-08970-6\_18},
+  reviews = {http://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience-itp-2014-reviews.txt},
+  timestamp = {2014.01.19},
+  url = {http://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience-itp-submission-final.pdf}
 }
 
 @INPROCEEDINGS{Lake2011,
@@ -155,3 +192,4 @@
   url = {http://people.csail.mit.edu/jgross/personal-website/papers/LakeEtAl2011CogSci.pdf},
   videos = {http://www.mit.edu/~brenden/charactervideos.html}
 }
+
