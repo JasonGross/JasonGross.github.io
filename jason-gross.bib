@@ -1,8 +1,20 @@
 % This file was created with JabRef 2.9.2.
 % Encoding: Utf8
 
+@MISC{pldi-15-fiat-to-facade,
+  author = {Cl\'ement Pit--Claudel and Peng Wang and Jason Gross and Ben Delaware and Adam Chlipala},
+  title = {Correct-by-Construction Program Derivation from Specifications to Assembly Language},
+  month = {June},
+  year = {2015},
+  note = {Submitted to PLDI 2015},
+  owner = {Jason},
+  abstract = {We present a Coq-based system to certify the entire process of implementing declarative mathematical specifications with efficient assembly code.  That is, we produce formal assembly-code libraries with proofs, in the style of Hoare logic, demonstrating compatibility with relational specifications in higher-order logic.  Most code-generation paths from high-level languages involve the introduction of garbage collection and other runtime support for source-level abstractions, but we generate code suitable for resource-constrained embedded systems, using manual memory management and in-place updating of heap-allocated data structures.  We start from very high-level source code, applying the Fiat framework to refine set-theory expressions into functional programs; then we further apply Fiat's refinement tools to translate functional programs into Facade, a simple imperative language without a heap or aliasing; and finally we plug into the assembly-generation features of the Bedrock framework, where we link with handwritten data-structure implementations and their associated proofs.  Each program refinement leads to a proved Hoare-logic specification for an assembly function, with no trust dependencies on any aspect of our synthesis process, which is highly automated.},
+  timestamp = {2014.11.17},
+  url = {https://people.csail.mit.edu/jgross/personal-website/papers/2015-fiat-to-facade.pdf}
+}
+
 @MISC{adt-synthesis,
-  author = {Ben Delaware and Cl\'ement Pit--Claudel and Jason Gross and Adam},
+  author = {Ben Delaware and Cl\'ement Pit--Claudel and Jason Gross and Adam Chlipala},
   title = {Fiat: Deductive Synthesis of Abstract Data Types in a Proof Assistant},
   month = {December},
   year = {2015},
@@ -10,7 +22,7 @@
   owner = {Jason},
   abstract = {We present Fiat, a library for the Coq proof assistant supporting refinement of declarative specifications into efficient functional programs with a high degree of automation.  Each refinement process leaves a proof trail, checkable by the normal Coq kernel, justifying its soundness.  We focus on the synthesis of abstract data types that package methods with private data. We demonstrate the utility of our framework by applying it to the synthesis of \textit{query structures} -- abstract data types with SQL-like query and insert operations. Fiat includes a library for writing specifications of query structures in SQL-inspired notation, expressing operations over relations (tables) in terms of mathematical sets. This library includes a set of tactics for automating the refinement of these specifications into efficient, correct-by-construction OCaml code.  Using these tactics, a programmer can generate such an implementation completely automatically by only specifying the equivalent of SQL indexes, data structures capturing useful views of the abstract data. We conclude by speculating on the new programming modularity possibilities enabled by an automated refinement system with proved-correct rules.},
   timestamp = {2014.10.07},
-  url = {http://people.csail.mit.edu/jgross/personal-website/papers/adt-synthesis.pdf}
+  url = {https://people.csail.mit.edu/jgross/personal-website/papers/2015-adt-synthesis.pdf}
 }
 
 @MISC{coqpl-15-coq-bug-minimizer,
@@ -28,9 +40,24 @@
 	reports, but don't want to put in the time to construct minimal examples?
 	 If you answered ``yes'' to any of these questions, then the Coq
 	Bug Minimizer is for you!  Clone your own copy at \url{https://github.com/JasonGross/coq-bug-finder}.},
+  reviews = {https://people.csail.mit.edu/jgross/personal-website/papers/2015-coq-bug-minimizer-reviews.txt},
   owner = {Jason},
   timestamp = {2014.10.07},
-  url = {http://people.csail.mit.edu/jgross/personal-website/papers/coq-bug-minimizer.pdf}
+  url = {https://people.csail.mit.edu/jgross/personal-website/papers/2015-coq-bug-minimizer.pdf}
+}
+
+@MISC{coqpl-15-ltac-profiler,
+  author = {Tobias Tebbi and Jason Gross},
+  title = {A Profiler for {L}tac},
+  month = {December},
+  year = {2015},
+  note = {Submitted for presentation at CoqPL 2015},
+  abstract = {We present a simple profiler for the Ltac tactic language of the Coq Proof Assistent.
+It measures the time spent in invocations of primitive tactics as well as tactics defined in Ltac and their inner invocations.
+The profiler is controlled using Vernacular commands and prints an aggregated view that differentiates between tactic invocations depending on their call tree location.},
+  owner = {Jason},
+  timestamp = {2014.10.17},
+  url = {https://people.csail.mit.edu/jgross/personal-website/papers/2015-ltac-profiler.pdf}
 }
 
 @MISC{2014-msr-x86proved-io,
@@ -53,8 +80,8 @@
   day = {20},
   owner = {Jason},
   timestamp = {2014.08.20},
-  url = {http://people.csail.mit.edu/jgross/personal-website/presentations/msr-2014-final-talk/input-output-and-automation-in-x86proved.pdf},
-  url-pptx = {http://people.csail.mit.edu/jgross/personal-website/presentations/msr-2014-final-talk/input-output-and-automation-in-x86proved.pptx}
+  url = {https://people.csail.mit.edu/jgross/personal-website/presentations/msr-2014-final-talk/input-output-and-automation-in-x86proved.pdf},
+  url-pptx = {https://people.csail.mit.edu/jgross/personal-website/presentations/msr-2014-final-talk/input-output-and-automation-in-x86proved.pptx}
 }
 
 @MISC{Gross2014a-coq-wishlist,
@@ -64,7 +91,7 @@
   year = {2014},
   owner = {Jason},
   timestamp = {2014.01.21},
-  url = {http://people.csail.mit.edu/jgross/personal-website/presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf}
+  url = {https://people.csail.mit.edu/jgross/personal-website/presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf}
 }
 
 @MISC{Gross2014b-popl-minute-madness,
@@ -74,7 +101,7 @@
   year = {2014},
   owner = {Jason},
   timestamp = {2014.01.21},
-  url = {http://people.csail.mit.edu/jgross/personal-website/presentations/popl-2014-minute-madness/jason-gross-minute-madness.pdf}
+  url = {https://people.csail.mit.edu/jgross/personal-website/presentations/popl-2014-minute-madness/jason-gross-minute-madness.pdf}
 }
 
 @MISC{Gross2014c-coq-workshop-proposal,
@@ -94,13 +121,13 @@
 	allows overloading notations based on the type of their arguments;
 	and there is a way to talk about universe levels explicitly, helped
 	along by tactics in terms.},
-  code-html = {http://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_presentation.html},
-  code-v = {http://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/tactics_in_terms_presentation.v},
+  code-html = {https://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_presentation.html},
+  code-v = {https://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/tactics_in_terms_presentation.v},
   day = {11},
   owner = {Jason},
-  reviews = {http://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/reviews.txt},
+  reviews = {https://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/reviews.txt},
   timestamp = {2014.04.11},
-  url = {http://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf}
+  url = {https://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf}
 }
 
 @MISC{Gross2013a-database-in-categories,
@@ -110,7 +137,7 @@
   year = {2013},
   owner = {Jason},
   timestamp = {2014.01.21},
-  url = {http://people.csail.mit.edu/jgross/personal-website/presentations/popl-2013/jgross-student-talk.pdf}
+  url = {https://people.csail.mit.edu/jgross/personal-website/presentations/popl-2013/jgross-student-talk.pdf}
 }
 
 @MISC{Gross2013b-popl-minute-madness,
@@ -121,7 +148,7 @@
   year = {2013},
   owner = {Jason},
   timestamp = {2014.01.21},
-  url = {http://people.csail.mit.edu/jgross/personal-website/presentations/popl-2013/minute-madness.pdf}
+  url = {https://people.csail.mit.edu/jgross/personal-website/presentations/popl-2013/minute-madness.pdf}
 }
 
 @MISC{Gross2013-csw,
@@ -132,7 +159,7 @@
   year = {2013},
   owner = {Jason},
   timestamp = {2014.01.21},
-  url = {http://people.csail.mit.edu/jgross/personal-website/presentations/csw-2013/jgross-presentation-no-pause.pdf}
+  url = {https://people.csail.mit.edu/jgross/personal-website/presentations/csw-2013/jgross-presentation-no-pause.pdf}
 }
 
 @ARTICLE{category-coq-experience,
@@ -156,15 +183,15 @@
 	type theorists, and we reflect on which new features were especially
 	helpful.},
   eprint = {1401.7694},
-  full-bibliography = {http://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience.html},
-  original-url = {http://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience-itp-submission.pdf},
+  full-bibliography = {https://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience.html},
+  original-url = {https://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience-itp-submission.pdf},
   owner = {Jason},
-  presentation-annotated-pptx = {http://people.csail.mit.edu/jgross/personal-website/presentations/itp-2014/category-coq-experience.pptx},
-  presentation-pdf = {http://people.csail.mit.edu/jgross/personal-website/presentations/itp-2014/category-coq-experience.pdf},
-  published-url-springer = {http://link.springer.com/chapter/10.1007\%2F978-3-319-08970-6\_18},
-  reviews = {http://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience-itp-2014-reviews.txt},
+  presentation-annotated-pptx = {https://people.csail.mit.edu/jgross/personal-website/presentations/itp-2014/category-coq-experience.pptx},
+  presentation-pdf = {https://people.csail.mit.edu/jgross/personal-website/presentations/itp-2014/category-coq-experience.pdf},
+  published-url-springer = {https://link.springer.com/chapter/10.1007\%2F978-3-319-08970-6\_18},
+  reviews = {https://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience-itp-2014-reviews.txt},
   timestamp = {2014.01.19},
-  url = {http://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience-itp-submission-final.pdf}
+  url = {https://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience-itp-submission-final.pdf}
 }
 
 @INPROCEEDINGS{Lake2011,
@@ -190,6 +217,6 @@
 	good fit to human perceptual data.},
   owner = {Jason},
   timestamp = {2014.01.19},
-  url = {http://people.csail.mit.edu/jgross/personal-website/papers/LakeEtAl2011CogSci.pdf},
-  videos = {http://people.csail.mit.edu/jgross/personal-website/media/charactervideos.html}
+  url = {https://people.csail.mit.edu/jgross/personal-website/papers/LakeEtAl2011CogSci.pdf},
+  videos = {https://people.csail.mit.edu/jgross/personal-website/media/charactervideos.html}
 }
