@@ -1,3 +1,9 @@
+From: CoqPL 2015 <coqpl2015@easychair.org>
+Date: Sun Nov 02 2014 at 5:56:58 PM
+Subject: CoqPL 2015 notification for paper 1
+To: Jason Gross <jgross@mit.edu>
+
+
 Dear Jason,
 
   We are very pleased to inform you that your submission:
@@ -8,7 +14,9 @@ Coq Bug Minimizer
 
 The reviews for your paper are attached to this e-mail.
 
-Please carefully consider comments in the reviews when preparing your final version and your (30min) presentation. The deadline for the final version which will be put on the website is november 21.
+Please carefully consider comments in the reviews when preparing your
+final version and your (30min) presentation. The deadline for the
+final version which will be put on the website is november 21.
 
 We are looking forward to seeing you at CoqPL 2015.
 
@@ -23,7 +31,14 @@ AUTHORS: Jason Gross
 
 
 ----------- REVIEW -----------
-The abstract presents a bug minimizer for Coq that can automatically build minimal test cases starting from anywhere in a development. This tool can be of great help when debugging the development versions of Coq against large developments in particular. It can also help developers finding minimal test cases without losing time, this is a nice addition to their toolset. I'd be curious to see how a more clever strategy based on BackTo/navigation could help make this more tractable, I hope it will be explained in the talk.
+The abstract presents a bug minimizer for Coq that can automatically
+build minimal test cases starting from anywhere in a development. This
+tool can be of great help when debugging the development versions of
+Coq against large developments in particular. It can also help
+developers finding minimal test cases without losing time, this is a
+nice addition to their toolset. I'd be curious to see how a more
+clever strategy based on BackTo/navigation could help make this more
+tractable, I hope it will be explained in the talk.
 
 
 ----------------------- REVIEW 2 ---------------------
@@ -33,25 +48,31 @@ AUTHORS: Jason Gross
 
 
 ----------- REVIEW -----------
-This abstract describes a tool to minimize Coq bug reports. The tool is a script
-written in Python, is available online, and has already been used by the
-author to submit a number of reports on Coq's bug tracker.
+This abstract describes a tool to minimize Coq bug reports. The tool
+is a script written in Python, is available online, and has already
+been used by the author to submit a number of reports on Coq's bug
+tracker.
 
-The idea is to isolate an error message and try to strip off everything that is
-not a strict dependency of the script which triggers the error message.
+The idea is to isolate an error message and try to strip off
+everything that is not a strict dependency of the script which
+triggers the error message.
 
-The text is well written, and gives a clear overview of the features of the tool. This kind of tool is very interesting to help communication between expert users and Coq developers. So a talk including a demo at CoqPL 2015 would be great.
+The text is well written, and gives a clear overview of the features
+of the tool. This kind of tool is very interesting to help
+communication between expert users and Coq developers. So a talk
+including a demo at CoqPL 2015 would be great.
 
-I have noticed two points in the abstract which are not completely clear. The
-author mentions as future work porting the tool to OCaml or Haskell. What is the
-motivation of such a port? Or conversely, what was the motivation for using
-Python so far? What would be the implications for users of the tool? Also, the
-author writes smarter heuristics for minimizing test cases are also future
-work. Is there any concrete proposal? This is minor and can be delayed for
-discussion during the talk.
+I have noticed two points in the abstract which are not completely
+clear. The author mentions as future work porting the tool to OCaml or
+Haskell. What is the motivation of such a port? Or conversely, what
+was the motivation for using Python so far? What would be the
+implications for users of the tool? Also, the author writes smarter
+heuristics for minimizing test cases are also future work. Is there
+any concrete proposal? This is minor and can be delayed for discussion
+during the talk.
 
-I guess it would be also very interesting for the author to hear some feedback
-during or after the presentation from developers who have dealt with bugs
-reported using the tool.
+I guess it would be also very interesting for the author to hear some
+feedback during or after the presentation from developers who have
+dealt with bugs reported using the tool.
 
 p.2 user-cases -> did you mean use cases?
