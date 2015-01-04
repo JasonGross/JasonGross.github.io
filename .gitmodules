@@ -10,3 +10,6 @@
 [submodule "papers/academic-papers-local"]
 	path = papers/academic-papers-local
 	url = https://github.com/JasonGross/academic-papers-local.git
+[submodule "publications"]
+	path = publications
+	url = https://github.com/JasonGross/publications.git
