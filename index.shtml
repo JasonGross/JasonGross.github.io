@@ -36,7 +36,7 @@ These days, I'm working on <a href="https://github.com/JasonGross/adt-synthesis"
 </p>
 
 <p>
-  What I do, <a href="https://xkcd.com/1133/">with only the ten-hundred most used words</a> (checked by <a href="http://splasho.com/upgoer5/">The Up-Goer Five Words Typing-Box</a>): It would be nice if we could tell computers what should be done in simple words (but in words that can only mean one thing), and the computers would just know how to do it, and never be slow and never be wrong.  I'm working on making this dream come true.
+  What I do, <a href="https://xkcd.com/1133/">with only the ten-hundred most used words</a> (checked by <a href="http://splasho.com/upgoer5/">The Up-Goer Five Words Typing-Box</a>): It would be nice if we could tell computers what should be done in only a few simple words (but in words that can only mean one thing), and the computers would just know how to do it, and never be slow and never be wrong.  I'm working on making this dream come true.
 </p>
 
 <!--#include virtual="jason-gross-stripped.html" -->
