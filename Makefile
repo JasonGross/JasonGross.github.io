@@ -6,7 +6,7 @@ BIBTEX2HTML_ARGS=-d -r -nodoc -nf videos videos -nf reviews reviews -nf full-bib
 
 COQBIN=$(shell readlink -f ~/.local64/coq/coq-trunk/bin)/
 
-OUTPUTS := jason-gross-stripped.html presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf presentations/csw-2013/jgross-presentation-no-pause.pdf presentations/popl-2013/jgross-student-talk.pdf presentations/popl-2013/minute-madness.pdf resume/resume.pdf papers/category-coq-experience.html jason-gross.html papers/category-coq-experience-filtered.bib presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_paper_examples.html papers/lob-paper/lob.html papers/lob-paper/supplemental-nonymous.zip papers/lob-bibliography.html
+OUTPUTS := jason-gross-stripped.html presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf presentations/csw-2013/jgross-presentation-no-pause.pdf presentations/popl-2013/jgross-student-talk.pdf presentations/popl-2013/minute-madness.pdf resume/resume.pdf papers/category-coq-experience.html jason-gross.html papers/category-coq-experience-filtered.bib presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_paper_examples.html papers/lob-paper/html/lob.html papers/lob-paper/supplemental-nonymous.zip papers/lob-bibliography.html
 
 all: $(OUTPUTS)
 
@@ -83,8 +83,8 @@ presentations/coq-workshop-2014/%.pdf: presentations/coq-workshop-2014/%.tex pre
 presentations/coq-workshop-2014/html/CoqWorkshop.%.html: presentations/coq-workshop-2014/%.v presentations/coq-workshop-2014/Makefile
 	cd presentations/coq-workshop-2014; $(MAKE) COQBIN="$(COQBIN)" html/CoqWorkshop.$(*:=.html)
 
-papers/lob-paper/lob.html:
+papers/lob-paper/html/lob.html:
 	cd papers/lob-paper; $(MAKE) dependencies && $(MAKE) all
 
-papers/lob-paper/supplemental-nonymous.zip: papers/lob-paper/lob.html
+papers/lob-paper/supplemental-nonymous.zip: papers/lob-paper/html/lob.html
 	cd papers/lob-paper; $(MAKE) supplemental
