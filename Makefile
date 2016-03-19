@@ -2,11 +2,11 @@
 .PHONY: all clean
 
 BIBTEX2HTML=bibtex2html-1.97/bibtex2html
-BIBTEX2HTML_ARGS=-d -r -nodoc -nf videos videos -nf reviews reviews -nf full-bibliography "full bibliography" -nf code-v "code (.v)" -nf code-html "code (.html)" -nf original-url "original conference submission (.pdf)" -nf presentation-annotated-pptx "presentation (.pptx, annotated with notes)" -nf presentation-pptx "presentation (.pptx)" -nf url-pptx ".pptx" -nf presentation-pdf "presentation (.pdf)" -nf published-url "publication" -nf published-url-springer "Springer publication"
+BIBTEX2HTML_ARGS=-d -r -nodoc -nf videos videos -nf reviews reviews -nf full-bibliography "full bibliography" -nf bibliography "bibliography" -nf code-v "code (.v)" -nf code-html "code (.html)" -nf code-agda "code (.agda)" -nf artifact-zip "artifact (.zip)" -nf code-github "project (<img src='//media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' height='1ex' />)" -nf original-url "original conference submission (.pdf)" -nf presentation-annotated-pptx "presentation (.pptx, annotated with notes)" -nf presentation-pptx "presentation (.pptx)" -nf url-pptx ".pptx" -nf presentation-pdf "presentation (.pdf)" -nf published-url "publication" -nf published-url-springer "Springer publication"
 
 COQBIN=$(shell readlink -f ~/.local64/coq/coq-trunk/bin)/
 
-OUTPUTS := jason-gross-stripped.html presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf presentations/csw-2013/jgross-presentation-no-pause.pdf presentations/popl-2013/jgross-student-talk.pdf presentations/popl-2013/minute-madness.pdf resume/resume.pdf papers/category-coq-experience.html jason-gross.html papers/category-coq-experience-filtered.bib presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_paper_examples.html
+OUTPUTS := jason-gross-stripped.html presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf presentations/csw-2013/jgross-presentation-no-pause.pdf presentations/popl-2013/jgross-student-talk.pdf presentations/popl-2013/minute-madness.pdf resume/resume.pdf papers/category-coq-experience.html jason-gross.html papers/category-coq-experience-filtered.bib presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_paper_examples.html papers/lob-paper/lob.html papers/lob-paper/supplemental-nonymous.zip papers/lob-paper/lob-bibliography.html
 
 all: $(OUTPUTS)
 
@@ -22,7 +22,10 @@ jason-gross.html: %.html : %.bib $(BIBTEX2HMTL) Makefile
 papers/category-coq-experience.html: %.html : %-filtered.bib $(BIBTEX2HMTL) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Experience Implementing a Performant Category-Theory Library in Coq: Complete List of References" -o "$*" "$<"
 
-papers/category-coq-experience-filtered.bib: papers/category-coq-experience.bib Makefile
+papers/lob-paper/lob-bibliography.html: %-bibliography.html : %-filtered.bib $(BIBTEX2HMTL) Makefile
+	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Lӧb's Theorem: A functional pearl of dependently typed quining: List of References" -o "$*" "$<"
+
+papers/category-coq-experience-filtered.bib papers/lob-paper/lob-filtered.bib: %-filtered.bib : %.bib Makefile
 	@echo "FILTER $< > $@"
 	@cat "$<" | \
 	sed s'/@ELECTRONIC/@MISC/g' | \
@@ -65,3 +68,9 @@ presentations/coq-workshop-2014/%.pdf: presentations/coq-workshop-2014/%.tex pre
 
 presentations/coq-workshop-2014/html/CoqWorkshop.%.html: presentations/coq-workshop-2014/%.v presentations/coq-workshop-2014/Makefile
 	cd presentations/coq-workshop-2014; $(MAKE) COQBIN="$(COQBIN)" html/CoqWorkshop.$(*:=.html)
+
+papers/lob-paper/lob.html:
+	cd papers/lob-paper; $(MAKE) all
+
+papers/lob-paper/supplemental-nonymous.zip: papers/lob-paper/lob.html
+	cd papers/lob-paper; $(MAKE) supplemental

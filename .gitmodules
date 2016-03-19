@@ -13,3 +13,6 @@
 [submodule "publications"]
 	path = publications
 	url = https://github.com/JasonGross/publications.git
+[submodule "papers/lob-paper"]
+	path = papers/lob-paper
+	url = https://github.com/JasonGross/lob-paper.git
