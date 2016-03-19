@@ -87,7 +87,7 @@ presentations/coq-workshop-2014/html/CoqWorkshop.%.html: presentations/coq-works
 	cd presentations/coq-workshop-2014; $(MAKE) COQBIN="$(COQBIN)" html/CoqWorkshop.$(*:=.html)
 
 papers/lob-paper/lob.html:
-	cd papers/lob-paper; $(MAKE) all
+	cd papers/lob-paper; $(MAKE) dependencies && $(MAKE) all
 
 papers/lob-paper/supplemental-nonymous.zip: papers/lob-paper/lob.html
 	cd papers/lob-paper; $(MAKE) supplemental
