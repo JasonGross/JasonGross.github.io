@@ -22,27 +22,44 @@ jason-gross.html: %.html : %.bib $(BIBTEX2HMTL) Makefile
 papers/category-coq-experience.html: %.html : %-filtered.bib $(BIBTEX2HMTL) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Experience Implementing a Performant Category-Theory Library in Coq: Complete List of References" -o "$*" "$<"
 
-papers/lob-paper/lob-bibliography.html: %-bibliography.html : %-filtered.bib $(BIBTEX2HMTL) Makefile
-	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Lӧb's Theorem: A functional pearl of dependently typed quining: List of References" -o "$*" "$<"
+papers/lob-paper/lob-bibliography.html: %.html : %-filtered.bib $(BIBTEX2HMTL) Makefile
+	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "L&ouml;b's Theorem: A functional pearl of dependently typed quining: List of References" -o "$*" "$<"
 
-papers/category-coq-experience-filtered.bib papers/lob-paper/lob-filtered.bib: %-filtered.bib : %.bib Makefile
+papers/lob-paper/lob-bibliography.bib: papers/lob-paper/lob.bib
+	cp "$<" "$@"
+
+papers/category-coq-experience-filtered.bib papers/lob-paper/lob-bibliography-filtered.bib: %-filtered.bib : %.bib Makefile
 	@echo "FILTER $< > $@"
 	@cat "$<" | \
 	sed s'/@ELECTRONIC/@MISC/g' | \
-	sed s'/-old = / = /g' | \
-	sed s'/howpublished = {\\url{\([^}]\+\)}}/url = {\1}/g' | \
-	sed s'/month = {1}/month = {January}/g' | \
-	sed s'/month = {2}/month = {February}/g' | \
-	sed s'/month = {3}/month = {March}/g' | \
-	sed s'/month = {4}/month = {April}/g' | \
-	sed s'/month = {5}/month = {May}/g' | \
-	sed s'/month = {6}/month = {June}/g' | \
-	sed s'/month = {7}/month = {July}/g' | \
-	sed s'/month = {8}/month = {August}/g' | \
-	sed s'/month = {9}/month = {September}/g' | \
-	sed s'/month = {10}/month = {October}/g' | \
-	sed s'/month = {11}/month = {November}/g' | \
-	sed s'/month = {12}/month = {December}/g' > $@
+	sed s'/@Electronic/@Misc/g' | \
+	sed s'/@electronic/@misc/g' | \
+	sed s'/-old\s*=\s*/\s*=\s*/g' | \
+	sed s'/\\item/\\\\ •/g' | \
+	sed s'/howpublished\s*=\s*{\\url{\([^}]\+\)}}/url = {\1}/g' | \
+	sed s'/month\s*=\s*{1}/month = {January}/g' | \
+	sed s'/month\s*=\s*{2}/month = {February}/g' | \
+	sed s'/month\s*=\s*{3}/month = {March}/g' | \
+	sed s'/month\s*=\s*{4}/month = {April}/g' | \
+	sed s'/month\s*=\s*{5}/month = {May}/g' | \
+	sed s'/month\s*=\s*{6}/month = {June}/g' | \
+	sed s'/month\s*=\s*{7}/month = {July}/g' | \
+	sed s'/month\s*=\s*{8}/month = {August}/g' | \
+	sed s'/month\s*=\s*{9}/month = {September}/g' | \
+	sed s'/month\s*=\s*{10}/month = {October}/g' | \
+	sed s'/month\s*=\s*{11}/month = {November}/g' | \
+	sed s'/month\s*=\s*{12}/month = {December}/g' | \
+	sed s'/month\s*=\s*{Jan}/month = {January}/g' | \
+	sed s'/month\s*=\s*{Feb}/month = {February}/g' | \
+	sed s'/month\s*=\s*{Mar}/month = {March}/g' | \
+	sed s'/month\s*=\s*{Apr}/month = {April}/g' | \
+	sed s'/month\s*=\s*{Jun}/month = {June}/g' | \
+	sed s'/month\s*=\s*{Jul}/month = {July}/g' | \
+	sed s'/month\s*=\s*{Aug}/month = {August}/g' | \
+	sed s'/month\s*=\s*{Sep}/month = {September}/g' | \
+	sed s'/month\s*=\s*{Oct}/month = {October}/g' | \
+	sed s'/month\s*=\s*{Nov}/month = {November}/g' | \
+	sed s'/month\s*=\s*{Dec}/month = {December}/g' > $@
 
 
 bibtex2html-1.97/bibtex2html: bibtex2html-1.97/Makefile
