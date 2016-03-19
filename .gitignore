@@ -46,3 +46,6 @@ presentations/popl-2013/*.pdf
 presentations/coq-workshop-2014/*.pdf
 presentations/coq-workshop-2014/html
 presentations/coq-workshop-2014/Makefile.coq
+papers/lob-bibliography-filtered.bib
+papers/lob-bibliography.html
+papers/lob-bibliography_bib.html

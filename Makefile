@@ -6,7 +6,7 @@ BIBTEX2HTML_ARGS=-d -r -nodoc -nf videos videos -nf reviews reviews -nf full-bib
 
 COQBIN=$(shell readlink -f ~/.local64/coq/coq-trunk/bin)/
 
-OUTPUTS := jason-gross-stripped.html presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf presentations/csw-2013/jgross-presentation-no-pause.pdf presentations/popl-2013/jgross-student-talk.pdf presentations/popl-2013/minute-madness.pdf resume/resume.pdf papers/category-coq-experience.html jason-gross.html papers/category-coq-experience-filtered.bib presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_paper_examples.html papers/lob-paper/lob.html papers/lob-paper/supplemental-nonymous.zip papers/lob-paper/lob-bibliography.html
+OUTPUTS := jason-gross-stripped.html presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf presentations/csw-2013/jgross-presentation-no-pause.pdf presentations/popl-2013/jgross-student-talk.pdf presentations/popl-2013/minute-madness.pdf resume/resume.pdf papers/category-coq-experience.html jason-gross.html papers/category-coq-experience-filtered.bib presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_paper_examples.html papers/lob-paper/lob.html papers/lob-paper/supplemental-nonymous.zip papers/lob-bibliography.html
 
 all: $(OUTPUTS)
 
@@ -22,13 +22,10 @@ jason-gross.html: %.html : %.bib $(BIBTEX2HMTL) Makefile
 papers/category-coq-experience.html: %.html : %-filtered.bib $(BIBTEX2HMTL) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Experience Implementing a Performant Category-Theory Library in Coq: Complete List of References" -o "$*" "$<"
 
-papers/lob-paper/lob-bibliography.html: %.html : %-filtered.bib $(BIBTEX2HMTL) Makefile
+papers/lob-bibliography.html: %.html : %-filtered.bib $(BIBTEX2HMTL) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "L&ouml;b's Theorem: A functional pearl of dependently typed quining: List of References" -o "$*" "$<"
 
-papers/lob-paper/lob-bibliography.bib: papers/lob-paper/lob.bib
-	cp "$<" "$@"
-
-papers/category-coq-experience-filtered.bib papers/lob-paper/lob-bibliography-filtered.bib: %-filtered.bib : %.bib Makefile
+papers/category-coq-experience-filtered.bib papers/lob-bibliography-filtered.bib: %-filtered.bib : %.bib Makefile
 	@echo "FILTER $< > $@"
 	@cat "$<" | \
 	sed s'/@ELECTRONIC/@MISC/g' | \
