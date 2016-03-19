@@ -34,8 +34,8 @@ papers/category-coq-experience-filtered.bib papers/lob-paper/lob-bibliography-fi
 	sed s'/@ELECTRONIC/@MISC/g' | \
 	sed s'/@Electronic/@Misc/g' | \
 	sed s'/@electronic/@misc/g' | \
-	sed s'/-old\s*=\s*/\s*=\s*/g' | \
-	sed s'/\\item/\\\\ •/g' | \
+	sed s'/-old\s*=\s*/ = /g' | \
+	sed s'/\\item/\\\\ \&bull;/g' | \
 	sed s'/howpublished\s*=\s*{\\url{\([^}]\+\)}}/url = {\1}/g' | \
 	sed s'/month\s*=\s*{1}/month = {January}/g' | \
 	sed s'/month\s*=\s*{2}/month = {February}/g' | \
