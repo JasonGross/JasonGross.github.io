@@ -6,7 +6,7 @@ BIBTEX2HTML_ARGS=-d -r -nodoc -nf videos videos -nf reviews reviews -nf full-bib
 
 COQBIN=$(shell readlink -f ~/.local64/coq/coq-trunk/bin)/
 
-OUTPUTS := jason-gross-stripped.html presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf presentations/csw-2013/jgross-presentation-no-pause.pdf presentations/popl-2013/jgross-student-talk.pdf presentations/popl-2013/minute-madness.pdf resume/resume.pdf papers/category-coq-experience.html jason-gross.html papers/category-coq-experience-filtered.bib presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_paper_examples.html papers/lob-paper/html/lob.html papers/lob-paper/supplemental-nonymous.zip papers/lob-bibliography.html
+OUTPUTS := jason-gross-drafts-stripped.html jason-gross-stripped.html presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf presentations/csw-2013/jgross-presentation-no-pause.pdf presentations/popl-2013/jgross-student-talk.pdf presentations/popl-2013/minute-madness.pdf resume/resume.pdf papers/category-coq-experience.html jason-gross.html papers/category-coq-experience-filtered.bib presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_paper_examples.html papers/lob-paper/html/lob.html papers/lob-paper/supplemental-nonymous.zip papers/lob-bibliography.html
 
 all: $(OUTPUTS)
 
@@ -18,6 +18,12 @@ jason-gross-stripped.html: jason-gross.html Makefile
 
 jason-gross.html: %.html : %.bib $(BIBTEX2HMTL) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Papers and Presentations" -o "$*" "$<"
+
+jason-gross-drafts-stripped.html: jason-gross-drafts.html Makefile
+	sed -e s'/This file/This reference list/g' -e s'/<hr>//g' -e s'/h1/h2/g' -e s'/<h2>/<h2 id="drafts">/g' $< > $@
+
+jason-gross-drafts.html: %.html : %.bib $(BIBTEX2HMTL) Makefile
+	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Drafts" -o "$*" "$<"
 
 papers/category-coq-experience.html: %.html : %-filtered.bib $(BIBTEX2HMTL) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Experience Implementing a Performant Category-Theory Library in Coq: Complete List of References" -o "$*" "$<"
