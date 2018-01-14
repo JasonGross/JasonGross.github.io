@@ -1,0 +1,10 @@
+--2018-01-14 07:43:57--  https://www.dropbox.com/s/6x8ktnbvm8yzi5i/crypto.tar.gz?dl=0
+Resolving www.dropbox.com... 162.125.4.1, 2620:100:6019:1::a27d:401
+Connecting to www.dropbox.com|162.125.4.1|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://dl.dropboxusercontent.com/content_link/hJU8J4gAK9RRQpRZ4McJ2JNcQp37lXl4zyqGHyLkJshivcPJZ5U4rMVefcGuO7mx/file [following]
+--2018-01-14 07:43:57--  https://dl.dropboxusercontent.com/content_link/hJU8J4gAK9RRQpRZ4McJ2JNcQp37lXl4zyqGHyLkJshivcPJZ5U4rMVefcGuO7mx/file
+Resolving dl.dropboxusercontent.com... 162.125.4.6, 2620:100:6019:6::a27d:406
+Connecting to dl.dropboxusercontent.com|162.125.4.6|:443... connected.
+ERROR: certificate common name “*.dl.dropboxusercontent.com” doesn’t match requested host name “dl.dropboxusercontent.com”.
+To connect to dl.dropboxusercontent.com insecurely, use ‘--no-check-certificate’.
