@@ -1,18 +1,18 @@
 [submodule "resume"]
 	path = resume
-	url = https://github.com/JasonGross/resume.git
+	url = ../../JasonGross/resume.git
 [submodule "pdf.js"]
 	path = pdf.js
 	url = https://github.com/mozilla/pdf.js.git
 [submodule "presentations/coq-8.6-wishlist"]
 	path = presentations/coq-8.6-wishlist
-	url = https://github.com/JasonGross/coq-8.6-wishlist
+	url = ../../JasonGross/coq-8.6-wishlist
 [submodule "papers/academic-papers-local"]
 	path = papers/academic-papers-local
-	url = https://github.com/JasonGross/academic-papers-local.git
+	url = ../../JasonGross/academic-papers-local.git
 [submodule "publications"]
 	path = publications
-	url = https://github.com/JasonGross/publications.git
+	url = ../../JasonGross/publications.git
 [submodule "papers/lob-paper"]
 	path = papers/lob-paper
-	url = https://github.com/JasonGross/lob-paper.git
+	url = ../../JasonGross/lob-paper.git
