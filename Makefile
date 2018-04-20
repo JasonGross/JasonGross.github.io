@@ -1,7 +1,8 @@
 
 .PHONY: all clean
 
-BIBTEX2HTML=bibtex2html-1.98/bibtex2html
+BIBTEX2HTML_FOLDER=bibtex2html-1.99
+BIBTEX2HTML=$(BIBTEX2HTML_FOLDER)/bibtex2html
 BIBTEX2HTML_ARGS=-d -r -nodoc -nf videos videos -nf reviews reviews -nf full-bibliography "full bibliography" -nf bibliography "bibliography" -nf code-v "code (.v)" -nf code-html "code (.html)" -nf code-agda "code (.agda)" -nf artifact-zip "artifact (.zip)" -nf artifact-tar-gz "artifact (.tar.gz)" -nf code-github "project (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" -nf original-url "original conference submission (.pdf)" -nf presentation-annotated-pptx "presentation (.pptx, annotated with notes)" -nf presentation-pptx "presentation (.pptx)" -nf url-pptx ".pptx" -nf presentation-pdf "presentation (.pdf)" -nf project-homepage "project homepage" -nf published-url "publication" -nf published-url-springer "Springer publication" -nf acm-authorize-url "<img src='http://dl.acm.org/images/oa.gif' width='25' height='25' border='0' alt='ACM DL Author-ize Publication' style='vertical-align:middle'/>"
 
 COQBIN=$(shell readlink -f ~/.local64/coq/coq-trunk/bin)/
@@ -13,14 +14,20 @@ all: $(OUTPUTS)
 clean:
 	rm -f jason-gross_bib.html papers/category-coq-experience_bib.html $(OUTPUTS)
 
+COMMON_SED_REPS := \
+	-e s'/This file/This reference list/g' \
+	-e s'/<hr>//g' \
+	-e s'/h1/h2/g' \
+	-e s'|\[<a name="\([^"]*\)">\([^<]*\)</a>\]|[<a name="\1" href="#\1">\2</a>]|g'
+
 jason-gross-stripped.html: jason-gross.html Makefile
-	sed -e s'/This file/This reference list/g' -e s'/<hr>//g' -e s'/h1/h2/g' -e s'/<h2>/<h2 id="publications">/g' $< > $@
+	sed $(COMMON_SED_REPS) -e s'/<h2>/<h2 id="publications">/g' $< > $@
 
 jason-gross.html: %.html : %.bib $(BIBTEX2HMTL) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Papers and Presentations" -o "$*" "$<"
 
 jason-gross-drafts-stripped.html: jason-gross-drafts.html Makefile
-	sed -e s'/This file/This reference list/g' -e s'/<hr>//g' -e s'/h1/h2/g' -e s'/<h2>/<h2 id="drafts">/g' $< > $@
+	sed $(COMMON_SED_REPS) -e s'/<h2>/<h2 id="drafts">/g' $< > $@
 
 jason-gross-drafts.html: %.html : %.bib $(BIBTEX2HMTL) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Drafts" -o "$*" "$<"
@@ -65,11 +72,11 @@ papers/category-coq-experience-filtered.bib papers/lob-bibliography-filtered.bib
 	sed s'/month\s*=\s*{Dec}/month = {December}/g' > $@
 
 
-bibtex2html-1.98/bibtex2html: bibtex2html-1.98/Makefile
-	cd bibtex2html-1.98; $(MAKE)
+$(BIBTEX2HTML_FOLDER)/bibtex2html: $(BIBTEX2HTML_FOLDER)/Makefile
+	cd $(BIBTEX2HTML_FOLDER); $(MAKE)
 
-bibtex2html-1.98/Makefile: bibtex2html-1.98/configure
-	cd bibtex2html-1.98; ./configure --prefix "$(readlink -f .)"
+$(BIBTEX2HTML_FOLDER)/Makefile: $(BIBTEX2HTML_FOLDER)/configure
+	cd $(BIBTEX2HTML_FOLDER); ./configure --prefix "$$(readlink -f .)"
 
 resume/resume.pdf: resume/Makefile resume/Resume.tex
 	cd resume; $(MAKE)

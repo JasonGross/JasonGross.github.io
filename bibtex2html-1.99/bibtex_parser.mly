@@ -17,66 +17,94 @@
 /*
  * bibtex2html - A BibTeX to HTML translator
  * Copyright (C) 1997 Jean-Christophe FILLIATRE
- * 
+ *
  * This software is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * 
+ *
  * See the GNU General Public License version 2 for more details
  * (enclosed in the file GPL).
  */
 
-/*i $Id: condition_parser.mly,v 1.9 2010-02-22 07:38:19 filliatr Exp $ i*/
+/*i $Id: bibtex_parser.mly,v 1.15 2010-02-22 07:38:19 filliatr Exp $ i*/
+
+/*s Parser for BibTeX files. */
 
 %{
 
-  open Condition
+  open Bibtex
 
 %}
 
-%token <string> IDENT STRING COMP
-%token <string> INT 
-%token COLON AND OR NOT LPAR RPAR DOLLAR_KEY DOLLAR_TYPE EXISTS EOF
+%token <string> Tident Tstring Tcomment
+%token <string * string> Tentry
+%token Tabbrev Tpreamble Tlbrace Trbrace Tcomma Tequal EOF Tsharp
 
-%start condition_start
-%type <Condition.condition> condition_start
-
-%left OR
-%left AND
-%left NOT
+%start command_list
+%type <Bibtex.biblio> command_list
+%start command
+%type <Bibtex.command> command
 
 %%
 
-condition_start:
-  condition EOF              { $1 }
+command_list:
+  commands EOF { $1 }
 ;
 
-condition:
-  condition OR condition     { Or($1,$3) }
-| condition AND condition    { And($1,$3) }
-| NOT condition              { Not($2) }
-| LPAR condition RPAR        { $2 }
-| atom                       { $1 }
+commands:
+   commands command
+     { add_new_entry $2 $1 }
+ | /* epsilon */
+     { empty_biblio }
+;
+command:
+   Tcomment
+     { Comment $1 }
+ | Tpreamble sharp_string_list Trbrace
+     { Preamble $2 }
+ | Tabbrev Tident Tequal sharp_string_list Trbrace
+     { Abbrev (String.lowercase_ascii $2,$4) }
+ | entry Tcomma comma_field_list Trbrace
+     { let et,key = $1 in Entry (String.lowercase_ascii et, key, $3) }
 ;
 
+entry:
+ | Tentry
+     { let et,key = $1 in Bibtex.current_key := key; (et,key) }
+
+comma_field_list:
+   field Tcomma comma_field_list
+     { $1::$3 }
+ | field
+     { [$1] }
+ | field Tcomma
+     { [$1] }
+;
+field:
+   field_name Tequal sharp_string_list
+     { ($1,$3) }
+ | field_name  Tequal
+     { ($1,[String ""]) }
+;
+field_name:
+   Tident   { String.lowercase_ascii $1 }
+ | Tcomment { "comment" }
+;
+sharp_string_list:
+   atom Tsharp sharp_string_list
+     { $1::$3 }
+ | atom
+     { [$1] }
+;
 atom:
-| cte COLON STRING           
-    { let s = Latex_accents.normalize true $3 in
-    (*i
-      Printf.printf "regexp = %s\n" s;
-      i*)
-    Match($1, Str.regexp_case_fold s) }
-| cte COMP cte               
-    { Comp($1,$2,$3) }
-| EXISTS IDENT               
-    { Exists(String.lowercase $2) }
+   Tident
+     { Id (String.lowercase_ascii $1) }
+ | Tstring
+     { String $1 }
 ;
 
-cte: IDENT { Field(String.lowercase $1) } | INT { Cte($1) } | STRING {
-  Cte($1) } | DOLLAR_KEY { Key } | DOLLAR_TYPE { Entrytype } ;
-
-
+%%

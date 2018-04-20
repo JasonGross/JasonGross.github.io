@@ -30,11 +30,14 @@ MANDIR = @mandir@
 # where to install the doc
 DOCDIR = $(prefix)/doc/bibtex2html
 
+# only used in target 'binary', only on Linux machines these days
+OSTYPE=linux
+
 #########################################
 # End of configuration part
 #########################################
 
-VERSION=1.98
+VERSION=1.99
 
 OCAMLC   = @OCAMLC@
 OCAMLOPT = @OCAMLOPT@
@@ -100,11 +103,11 @@ win: bibtex2html$(EXE) bib2bib$(EXE) bibtex2html.nsi
 	"/cygdrive/c/Program Files (x86)/NSIS/makensis" /DVERSION=$(VERSION) bibtex2html.nsi
 
 local: bibtex2html bib2bib
-	cp bibtex2html bib2bib aux2bib $$HOME/bin/$$OSTYPE
+	cp bibtex2html bib2bib aux2bib $$HOME/bin/$(OSTYPE)
 	cp *.1 $$HOME/man/man1
 
 demons: bibtex2html bib2bib
-	cp bibtex2html bib2bib aux2bib /users/demons/demons/bin/$$OSTYPE
+	cp bibtex2html bib2bib aux2bib /users/demons/demons/bin/$(OSTYPE)
 	cp *.1 $$HOME/man/man1
 
 bibtex2html$(EXE): $(OBJS)
@@ -143,8 +146,8 @@ bib2bib.static: $(BIB2BIBOBJS)
 	strip $@
 
 static: bibtex2html.static bib2bib.static
-	cp bibtex2html.static $$HOME/bin/$$OSTYPE/bibtex2html
-	cp bib2bib.static $$HOME/bin/$$OSTYPE/bib2bib
+	cp bibtex2html.static $$HOME/bin/$(OSTYPE)/bibtex2html
+	cp bib2bib.static $$HOME/bin/$(OSTYPE)/bib2bib
 
 bibtex_parser.mli bibtex_parser.ml: bibtex_parser.mly
 	ocamlyacc bibtex_parser.mly
@@ -152,9 +155,15 @@ bibtex_parser.mli bibtex_parser.ml: bibtex_parser.mly
 condition_parser.mli condition_parser.ml: condition_parser.mly
 	ocamlyacc condition_parser.mly
 
+ifdef SOURCE_DATE_EPOCH
+BUILD_DATE=$(shell date -u -d "@$(SOURCE_DATE_EPOCH)" 2>/dev/null || date -u -r "$(SOURCE_DATE_EPOCH)" 2>/dev/null || date)
+else
+BUILD_DATE=$(shell date)
+endif
+
 version.ml: Makefile
-	echo "let version = \""$(VERSION)"\"" > version.ml
-	echo "let date = \""`date`"\"" >> version.ml
+	echo "let version = \""$(VERSION)"\"" > $@
+	echo 'let date = "'"$(BUILD_DATE)"'"' >> $@
 
 version.tex: Makefile
 	printf "\\\newcommand{\\\version}{$(VERSION)}" > version.tex
