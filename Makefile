@@ -14,11 +14,13 @@ all: $(OUTPUTS)
 clean:
 	rm -f jason-gross_bib.html papers/category-coq-experience_bib.html $(OUTPUTS)
 
+POUND=\#
+
 COMMON_SED_REPS := \
 	-e s'/This file/This reference list/g' \
 	-e s'/<hr>//g' \
 	-e s'/h1/h2/g' \
-	-e s'|\[<a name="\([^"]*\)">\([^<]*\)</a>\]|[<a name="\1" href="#\1">\2</a>]|g'
+	-e s'|\[<a name="\([^"]*\)">\([^<]*\)</a>\]|[<a name="\1" href="$(POUND)\1">\2</a>]|g'
 
 jason-gross-stripped.html: jason-gross.html Makefile
 	sed $(COMMON_SED_REPS) -e s'/<h2>/<h2 id="publications">/g' $< > $@
@@ -72,7 +74,7 @@ papers/category-coq-experience-filtered.bib papers/lob-bibliography-filtered.bib
 	sed s'/month\s*=\s*{Dec}/month = {December}/g' > $@
 
 
-$(BIBTEX2HTML_FOLDER)/bibtex2html: $(BIBTEX2HTML_FOLDER)/Makefile
+$(BIBTEX2HTML): $(BIBTEX2HTML_FOLDER)/Makefile
 	cd $(BIBTEX2HTML_FOLDER); $(MAKE)
 
 $(BIBTEX2HTML_FOLDER)/Makefile: $(BIBTEX2HTML_FOLDER)/configure
