@@ -39,13 +39,14 @@ These days, I'm working on <a href="https://github.com/JasonGross/adt-synthesis"
   What I do, <a href="https://xkcd.com/1133/">with only the ten-hundred most used words</a> (checked by <a href="http://splasho.com/upgoer5/">The Up-Goer Five Words Typing-Box</a>): It would be nice if we could tell computers what should be done in only a few simple words (but in words that can only mean one thing), and the computers would just know how to do it, and never be slow and never be wrong.  I'm working on making this dream come true.
 </p>
 
-<!--#include virtual="jason-gross-stripped.html" -->
-<!--#include virtual="jason-gross-drafts-stripped.html" -->
-
 <h2 id="hobbies">Hobbies and Fun Facts</h2>
-I enjoy wind-surfing, sailing, sky-diving, programming, philosophy, math, physics, learning, and building.  I've written up <a href="http://web.mit.edu/jgross/Public/social-interactions/">some thoughts on social interactions and emotions</a>, <a href="http://web.mit.edu/jgross/Public/skydive.txt">my experience skydiving</a>, and <a href="http://web.mit.edu/jgross/Public/18.100C_paper_newest.pdf">a visual proof that the reals are uncountable, geared at a child</a>.
+I enjoy wind-surfing, sailing, sky-diving, programming, philosophy, dancing ((&mu;-)fusion, blues, squares, ceili(dh), contra), <a href="https://web.mit.edu/~jgross/Public/social-interactions/circling.txt">circling</a>, math, physics, learning, building, and glassblowing.  I've written up <a href="https://web.mit.edu/jgross/Public/social-interactions/">some thoughts on social interactions and emotions</a>, <a href="https://web.mit.edu/jgross/Public/stories/skydive.txt">my experience skydiving</a>, a couple of other <a href="https://web.mit.edu/~jgross/Public/stories/">personal stories</a>, <a href="http://web.mit.edu/jgross/Public/18.100C_paper_newest.pdf">a visual proof that the reals are uncountable, geared at a child</a>, <a href="https://web.mit.edu/~jgross/Public/8_06-decoherence-paper.pdf">a term paper on quantum decoherence</a>.
+I also took an introduction to music composition, and the pieces I created are <a href="https://web.mit.edu/~jgross/Public/21M.065/">here</a>.
 
 As far as I know, my Erdös Number is 5, because <a href="http://adam.chlipala.net/">Adam Chlipala</a>'s is 4.
+
+<!--#include virtual="jason-gross-stripped.html" -->
+<!--#include virtual="jason-gross-drafts-stripped.html" -->
 
 </body>
 </html>
