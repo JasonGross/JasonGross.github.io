@@ -32,7 +32,7 @@ Eventually, my projects will be integrated into this page.  In the meantime, ple
 </p>
 
 <p>
-These days, I'm working on <a href="https://github.com/JasonGross/adt-synthesis">program synthesis</a> and <a href="https://github.com/JasonGross/HoTT/tree/master/theories/Categories">category theory on top of homotopy type theory in Coq</a>.  I also occasionally commit to the <a href="https://github.com/JasonGross/barnowl">BarnOwl</a> project.
+These days, I'm working on finishing up my PhD in <a href="https://github.com/mit-plv/rewriter">reflective rewriting</a>, <a href="https://github.com/mit-plv/fiat-crypto">verified cryptographic primitive synthesis</a>, <a href="https://github.com/mit-plv/fiat">general program synthesis</a>, and <a href="https://github.com/JasonGross/HoTT/tree/master/theories/Categories">category theory on top of homotopy type theory in Coq</a>.  I also occasionally commit to the <a href="https://github.com/JasonGross/barnowl">BarnOwl</a> project.
 </p>
 
 <p>
