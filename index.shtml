@@ -17,6 +17,7 @@ margin-right: 10px;
 </style>
 </head>
 <body>
+<div style="display: table">
 <div class="identity">
 <h1 id="jason-gross">Jason Gross</h1>
 
@@ -56,13 +57,10 @@ I also took an introduction to music composition, and the pieces I created are <
 
 As far as I know, my Erdös Number is 5, because <a href="http://adam.chlipala.net/">Adam Chlipala</a>'s is 4.
 </div>
+</div>
 
-<div class="section">
 <!--#include virtual="jason-gross-stripped.html" -->
-</div>
-<div class="section">
 <!--#include virtual="jason-gross-drafts-stripped.html" -->
-</div>
 
 </body>
 </html>
