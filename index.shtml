@@ -17,10 +17,11 @@ margin-right: 10px;
 </style>
 </head>
 <body>
-<div style="display: table">
-<div class="identity">
+
 <h1 id="jason-gross">Jason Gross</h1>
 
+<div style="display: table">
+<div class="identity">
 <img src="jason-gross.jpg" style="width: 10em" />
 
 <h2 id="contact">Contact Me</h2>
