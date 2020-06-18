@@ -7,12 +7,15 @@
 blockquote, p {
 text-align:justify;
 }
-.section {
+.section, .first-section {
 display: flow-root;
 }
 .identity {
 float: left;
 margin-right: 10px;
+}
+.first-section h2:first-of-type {
+margin-top: 0em;
 }
 </style>
 </head>
@@ -36,7 +39,7 @@ margin-right: 10px;
 <!--include virtual="github.html" -->
 </div>
 
-<div class="section">
+<div class="first-section">
 <h2 id="resume">Code, Résumé, and Curriculum Vitæ</h2>
 <p>
 Eventually, my projects will be integrated into this page.  In the meantime, please visit my <a href="https://github.com/JasonGross">GitHub</a> account, or look at my <a href="resume.pdf">résumé</a> (<a href="resume.pdf">general</a>, for <a href="resume-computer-science.pdf">computer science</a>, or for <a href="resume-mathematics.pdf">mathematics</a>) or <a href="curriculum-vitae.pdf">curriculum vitæ</a>.
