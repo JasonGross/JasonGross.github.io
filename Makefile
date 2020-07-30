@@ -109,7 +109,7 @@ $(COQ_2014)/bin/coqc: $(COQ_2014)/config/Makefile
 	cd $(COQ_2014); $(MAKE)
 
 .PHONY: coq-workshop-2014-html
-coq-workshop-2014-html:
+coq-workshop-2014-html: $(COQ_2014)/bin/coqc
 	cd presentations/coq-workshop-2014; $(MAKE) COQBIN="$(COQBIN_2014)" html
 
 presentations/coq-workshop-2018/%.pdf: presentations/coq-workshop-2018/%.tex presentations/coq-workshop-2018/Makefile
@@ -127,7 +127,7 @@ $(COQ_2018)/bin/coqc: $(COQ_2018)/config/Makefile
 	cd $(COQ_2018); $(MAKE)
 
 .PHONY: coq-workshop-2018-html
-coq-workshop-2018-html:
+coq-workshop-2018-html: $(COQ_2018)/bin/coqc
 	cd presentations/coq-workshop-2018; $(MAKE) COQBIN="$(COQBIN_2018)" html
 
 papers/lob-paper/html/lob.html:
