@@ -34,6 +34,8 @@
 *-blx.bib
 *.bcf
 
+.Makefile.coq.d
+Makefile.coq.conf
 *.vo
 *.glob
 *.v.d
