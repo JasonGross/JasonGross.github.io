@@ -98,17 +98,20 @@ presentations/popl-2013/%.pdf: presentations/popl-2013/%.tex presentations/popl-
 presentations/coq-workshop-2014/%.pdf: presentations/coq-workshop-2014/%.tex presentations/coq-workshop-2014/Makefile
 	cd presentations/coq-workshop-2014; $(MAKE) $(*:=.pdf)
 
-presentations/coq-workshop-2014/html/CoqWorkshop.%.html: presentations/coq-workshop-2014/%.v presentations/coq-workshop-2014/Makefile
-	cd presentations/coq-workshop-2014; $(MAKE) COQBIN="$(COQBIN)" html/CoqWorkshop.$(*:=.html)
+$(filter presentations/coq-workshop-2014/html/CoqWorkshop.%.html,$(OUTPUTS)): coq-workshop-2014-html
+
+.PHONY: coq-workshop-2014-html
+coq-workshop-2014-html:
+	cd presentations/coq-workshop-2014; $(MAKE) COQBIN="$(strip $(COQBIN))" html
 
 presentations/coq-workshop-2018/%.pdf: presentations/coq-workshop-2018/%.tex presentations/coq-workshop-2018/Makefile
 	cd presentations/coq-workshop-2018; $(MAKE) $(*:=.pdf)
 
-presentations/coq-workshop-2018/html/CoqWorkshop.%.html: coq-workshop-2018-html
+$(filter presentations/coq-workshop-2018/html/CoqWorkshop.%.html,$(OUTPUTS)): coq-workshop-2018-html
 
 .PHONY: coq-workshop-2018-html
 coq-workshop-2018-html:
-	cd presentations/coq-workshop-2018; $(MAKE) COQBIN="$(COQBIN)" html
+	cd presentations/coq-workshop-2018; $(MAKE) COQBIN="$(strip $(COQBIN))" html
 
 papers/lob-paper/html/lob.html:
 	cd papers/lob-paper; $(MAKE) dependencies && $(MAKE) all
