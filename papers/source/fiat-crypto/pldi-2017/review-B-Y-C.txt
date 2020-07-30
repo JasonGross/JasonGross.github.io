@@ -1,0 +1,41 @@
+===========================================================================
+                           PLDI '17 Review #39B
+---------------------------------------------------------------------------
+Paper #39: Systematic Synthesis of Elliptic Curve Cryptography
+           Implementations
+---------------------------------------------------------------------------
+
+                 Reviewer expertise: Y. Knowledgeable
+                      Overall merit: C. Weak paper, though I will not fight
+                                        strongly against it
+
+                           ===== Strengths =====
+
+- Clear motivation: writing fast crypto-implementations is difficult.
+- Impressive results: within factor of 6 of real-world implementations (at least for handshake)
+
+                          ===== Weaknesses =====
+
+- Lack of detail of the techniques used (e.g., what synthesis techniques were used?  What exactly was synthesized, and from what specification?).  This makes it impossible to evaluate or reproduce.
+- No attacker model, no clear indication of the trusted code base
+
+                      ===== Comments to authors =====
+
+The paper identifies implementations of elliptic curve cryptography as an important part of the security infrastructure of the Internet, with implementations required to provide excellent performance.  To achieve these high-performance implementations, complicated low-level strategies are employed that are highly specific to the particular elliptic curve in question, crafted with great effort manually in low-level languages.  Unsurprisingly, these are difficult to get right and a number of bugs have been found historically.  The paper proposes to synthesize these operations from a high-level specification, by using the same implementation tricks as the fastest implementations, but proving them correct in Coq.
+
+The paper explains in detail how modern implementations achieve high performance, through the use of clever variable-base integers, management of carry chains, canonical representations, Barret reduction, etc.  The approach uses a number of abstractions, and eventually produces an "assembly-like" functional program based on let bindings and simple arithmetic operations.  These operations are guaranteed to be free of overflows thanks to a bounds-checker.
+
+Unfortunately, even though the paper gives detailed and interesting insights into what existing implementations do and the kind of tricks they employ, the paper is light on details of the approach taken.  This makes it difficult to evaluate the paper.  For instance, the paper says to **synthesize** an efficient implementation, without ever saying what synthesis approach is used, or even what the specification is that is given to the synthesis procedure.  In fact, the paper reads more like the approach uses a very general hand-crafted implementation and then translates it (through partial evaluation and other techniques to concretely instantiate the general implementation) into a "low-level" functional program.  It does not appear to use synthesis, which is the process of finding an implementation from some form of specification (at least, this is the commonly assumed definition of synthesis, or program synthesis, in the area of programming languages).  In what sense does this paper synthesize an implementation?
+
+Given that the paper is talking about security, it requires an explicit attacker-model.  It appears that the papers implementation gives the same functional guarantees as a pen-and-paper version of the underlying cryptographic algorithms and protects against timing-attacks, but does not defend against other side-channel attacks.  Is this correct?  Which of these properties are formally proven (for instance, is the fact that the implementation is constant-time w.r.t. secret inputs proven formally?)?
+
+The paper also does not say what the trusted code base is.  The paper argues that it has a "smaller trusted code base than in past work, as all of our formal reasoning is done within Coq."  However, it appears that the code that is run is compiled by GHC, so GHC and the Haskell runtime system are presumably also part of the trusted code base.  What else is trusted?  Stating these assumptions explicitly would be useful.
+
+The evaluation talks about three aspects: safety, performance and effort.  The safety subsection can be summarized as "safe by proving so formally" and it is not clear why so many bugs in other systems are described in the paper (it is similar to earlier sections: interesting information, but does not explain the system from the paper).  During the development of the system, two small discrepancies in other systems have been uncovered.  The performance section compares against a number of existing systems, and outperforms other formally verified systems significantly.  For the handshake, the papers system is within a factor of 6 of state-of-the-art implementations, which is impressive.  For signing, however, there is still a 80x difference between the paper and the fastest implementations available.  This 80x slowdown seems to be swept under the rug (e.g., the abstract only mentions the 6x figure).
+
+
+More questions to the authors:
+
+- The paper highlights several times how currently implementations have to be written from scratch for every set of new parameters.  How often do these parameters actually change?  Would they change more often if the cost of reimplementing high-performance implementations was lower?
+
+- If a new curve wants to be supported using the system described in the paper, how much manual effort is necessary and how much can be done automatically.  The paper seems to indicate it is mostly automatic, but scattered throughout the paper are places that look like manual intervention is necessary (e.g., 4.4 "choosing which formulas to use is not within the scope of our library", or 4.2 "guessing the right bounds is beyond the scope of this paper").

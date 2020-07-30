@@ -1,0 +1,4 @@
+\usepackage{calc}
+
+\newcommand{\digitboxed}[1]{\raisebox{3pt}{$\underbracket[.4pt][5pt]{\,\raisebox{-3pt}[2pt][0pt]{\phantom{1}\clap{\ensuremath{#1}}\phantom{1}}\,}$}}
+\newcommand{\aswidthof}[3][l]{\ifmmode\makebox[\widthof{\ensuremath{#2}}][#1]{\ensuremath{#3}}\else\makebox[\widthof{#2}][#1]{#3}\fi}

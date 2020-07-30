@@ -1,0 +1,85 @@
+- Combine "Functoriality" (section 5) with "A type system for
+  categories" (section 6.1.2)
+
+- Turn "Category Theory Constructions" (Appendix A) into a bulleted
+  list with citations
+
+- Fill in citations
+
+- remove all things labeled FIX or FIXME after fixing them
+
+- remove use of "I"
+
+- write abstract
+
+- fix author, category, keywords, boilerplate, etc
+
+- decide whether or not Cat (and Set) should be set in tt, and
+  implement/uniformize decision
+
+- fix overfull/underfull box warnings
+
+- remove footnotes
+
+- make equality section more tutorial
+
+- map my category theory constructions to those of other libraries
+
+- elaborate on nested sums vs nested products:
+  >
+  > Adam:
+  >> I don't see what the problem is with nested products vs. sums in
+  >> Coq.  How could you do any better than a big [match] for a fancy
+  >> sum?
+
+- explain polarity and positive vs negative characterizations more
+
+- 2.1.4: The use of the set name "A" confuses me in a few places.  It
+  reminds me of some of the careless use of "variable binding" in
+  informal math, which we should be able to avoid. :)
+
+- 2.1.6 uses category theory terminology before introducing it.
+
+- explain "strict 1-category", etc.
+
+- add more detail to reified simplification ("Section 3.2 seems like a
+  big missed opportunity to explain something cool in detail (and
+  still with examples).")
+
+- ""because I have not yet found a way to code that the two Fs in
+  F(m1) o F(m2) are the same": this sounds trivial to do using
+  standard techniques for proof by reflection, as demonstrated in the
+  appropriate CPDT chapter and elsewhere.  We should talk about the
+  issues at some point."
+
+- some performance benchmarks  (Which ones? -jgross)
+
+- consider explaining Yoneda lemma
+
+- "There should be a section or subsection early in the paper
+  explaining the hot open design issues in Coq and related systems
+  today (e.g., homotopy type theory, universe polymorphism), and then
+  we can relate to those issues later in the paper, saying how our
+  experiences provide evidence for different choices."
+
+- "It would be lovely to have some concrete examples of the
+  "robustness" of category theory, as you call it.  That is, show some
+  constructions where details are implied by initial choices."
+
+- "Section 5, "Functoriality," doesn't seem long enough to justify a
+  section."
+
+- "Some of the future work seems too detailed.  Future work is supposed
+  to somehow shed light on interesting limitations or consequences of
+  the results from the paper, not just give a to-do list of planned
+  research.  I don't think you motivate the specifics of some of the
+  future work items enough that the reader will care about the
+  details.  Shorter descriptions of some of these would be more
+  worthwhile."
+
+- figure out whether strict 1-categories (and h-sets) are properly
+  called 0-truncated, or 1-truncated.  I think -2-truncated is
+  contractible, -1-truncated is a mere proposition, so 0-truncated
+  should be h-sets, but I've seen UIP called the 1-truncation axiom
+  (e.g., at http://www.cs.berkeley.edu/~megacz/coq-categories/), and
+  am not certain I got the numbers right
