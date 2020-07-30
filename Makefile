@@ -5,8 +5,6 @@ BIBTEX2HTML_FOLDER=bibtex2html
 BIBTEX2HTML=$(BIBTEX2HTML_FOLDER)/bibtex2html
 BIBTEX2HTML_ARGS=-d -r -nodoc -nf videos videos -nf reviews reviews -nf full-bibliography "full bibliography" -nf bibliography "bibliography" -nf code-v "code (.v)" -nf code-html "code (.html)" -nf code-agda "code (.agda)" -nf artifact-zip "artifact (.zip)" -nf artifact-tar-gz "artifact (.tar.gz)" -nf code-github "project (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" -nf artifact-github "artifact (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" -nf original-url "original conference submission (.pdf)" -nf presentation-annotated-pptx "presentation (.pptx, annotated with notes)" -nf presentation-pptx "presentation (.pptx)" -nf url-pptx ".pptx" -nf presentation-pdf "presentation (.pdf)" -nf project-homepage "project homepage" -nf published-url "publication" -nf published-url-springer "Springer publication" -nf acm-authorize-url "<img src='https://dl.acm.org/images/oa.gif' width='25' height='25' border='0' alt='ACM DL Author-ize Publication' style='vertical-align:middle'/>"
 
-COQBIN=$(shell readlink -f ~/.local64/coq/coq-trunk/bin)/
-
 OUTPUTS := jason-gross-drafts-stripped.html jason-gross-stripped.html presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf presentations/csw-2013/jgross-presentation-no-pause.pdf presentations/popl-2013/jgross-student-talk.pdf presentations/popl-2013/minute-madness.pdf resume/resume.pdf papers/category-coq-experience.html jason-gross.html papers/category-coq-experience-filtered.bib presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_paper_examples.html presentations/coq-workshop-2018/coq-workshop-proposal-notations.pdf presentations/coq-workshop-2018/html/CoqWorkshop.NotationsCheatSheet.html presentations/coq-workshop-2018/html/CoqWorkshop.Notations.html presentations/coq-workshop-2018/html/CoqWorkshop.NotationsMITPresentation.html presentations/coq-workshop-2018/html/CoqWorkshop.NotationsCoqWorkshop.html papers/lob-paper/html/lob.html papers/lob-paper/supplemental-nonymous.zip papers/lob-bibliography.html
 
 all: $(OUTPUTS)
@@ -100,18 +98,37 @@ presentations/coq-workshop-2014/%.pdf: presentations/coq-workshop-2014/%.tex pre
 
 $(filter presentations/coq-workshop-2014/html/CoqWorkshop.%.html,$(OUTPUTS)): coq-workshop-2014-html
 
+
+COQ_2014:=$(shell pwd)/presentations/coq-workshop-2014/coq
+COQBIN_2014:=$(COQ_2014)/bin/
+
+$(COQ_2014)/config/Makefile: $(COQ_2014)/configure
+	cd $(COQ_2014); ./configure -local -coqide no
+
+$(COQ_2014)/bin/coqc: $(COQ_2014)/config/Makefile
+	cd $(COQ_2014); $(MAKE)
+
 .PHONY: coq-workshop-2014-html
 coq-workshop-2014-html:
-	cd presentations/coq-workshop-2014; $(MAKE) COQBIN="$(COQBIN)" html
+	cd presentations/coq-workshop-2014; $(MAKE) COQBIN="$(COQBIN_2014)" html
 
 presentations/coq-workshop-2018/%.pdf: presentations/coq-workshop-2018/%.tex presentations/coq-workshop-2018/Makefile
 	cd presentations/coq-workshop-2018; $(MAKE) $(*:=.pdf)
 
 $(filter presentations/coq-workshop-2018/html/CoqWorkshop.%.html,$(OUTPUTS)): coq-workshop-2018-html
 
+COQ_2018:=$(shell pwd)/presentations/coq-workshop-2018/coq
+COQBIN_2018:=$(COQ_2018)/bin/
+
+$(COQ_2018)/config/Makefile: $(COQ_2018)/configure
+	cd $(COQ_2018); ./configure -local -coqide no
+
+$(COQ_2018)/bin/coqc: $(COQ_2018)/config/Makefile
+	cd $(COQ_2018); $(MAKE)
+
 .PHONY: coq-workshop-2018-html
 coq-workshop-2018-html:
-	cd presentations/coq-workshop-2018; $(MAKE) COQBIN="$(COQBIN)" html
+	cd presentations/coq-workshop-2018; $(MAKE) COQBIN="$(COQBIN_2018)" html
 
 papers/lob-paper/html/lob.html:
 	cd papers/lob-paper; $(MAKE) dependencies && $(MAKE) all
