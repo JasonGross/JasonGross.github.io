@@ -7,7 +7,7 @@ BIBTEX2HTML_ARGS=-d -r -nodoc -nf videos videos -nf reviews reviews -nf full-bib
 
 COQBIN=$(shell readlink -f ~/.local64/coq/coq-trunk/bin)/
 
-OUTPUTS := jason-gross-drafts-stripped.html jason-gross-stripped.html presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf presentations/csw-2013/jgross-presentation-no-pause.pdf presentations/popl-2013/jgross-student-talk.pdf presentations/popl-2013/minute-madness.pdf resume/resume.pdf papers/category-coq-experience.html jason-gross.html papers/category-coq-experience-filtered.bib presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_paper_examples.html presentations/coq-workshop-2018/coq-workshop-proposal-notations.pdf presentations/coq-workshop-2018/CoqWorkshop.NotationsCheatSheet.html presentations/coq-workshop-2018/CoqWorkshop.Notations.html presentations/coq-workshop-2018/CoqWorkshop.NotationsMITPresentation.html presentations/coq-workshop-2018/CoqWorkshop.NotationsCoqWorkshop.html papers/lob-paper/html/lob.html papers/lob-paper/supplemental-nonymous.zip papers/lob-bibliography.html
+OUTPUTS := jason-gross-drafts-stripped.html jason-gross-stripped.html presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf presentations/csw-2013/jgross-presentation-no-pause.pdf presentations/popl-2013/jgross-student-talk.pdf presentations/popl-2013/minute-madness.pdf resume/resume.pdf papers/category-coq-experience.html jason-gross.html papers/category-coq-experience-filtered.bib presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_paper_examples.html presentations/coq-workshop-2018/coq-workshop-proposal-notations.pdf presentations/coq-workshop-2018/html/CoqWorkshop.NotationsCheatSheet.html presentations/coq-workshop-2018/html/CoqWorkshop.Notations.html presentations/coq-workshop-2018/html/CoqWorkshop.NotationsMITPresentation.html presentations/coq-workshop-2018/html/CoqWorkshop.NotationsCoqWorkshop.html papers/lob-paper/html/lob.html papers/lob-paper/supplemental-nonymous.zip papers/lob-bibliography.html
 
 all: $(OUTPUTS)
 
@@ -102,7 +102,7 @@ $(filter presentations/coq-workshop-2014/html/CoqWorkshop.%.html,$(OUTPUTS)): co
 
 .PHONY: coq-workshop-2014-html
 coq-workshop-2014-html:
-	cd presentations/coq-workshop-2014; $(MAKE) COQBIN="$(strip $(COQBIN))" html
+	cd presentations/coq-workshop-2014; $(MAKE) COQBIN="$(COQBIN)" html
 
 presentations/coq-workshop-2018/%.pdf: presentations/coq-workshop-2018/%.tex presentations/coq-workshop-2018/Makefile
 	cd presentations/coq-workshop-2018; $(MAKE) $(*:=.pdf)
@@ -111,7 +111,7 @@ $(filter presentations/coq-workshop-2018/html/CoqWorkshop.%.html,$(OUTPUTS)): co
 
 .PHONY: coq-workshop-2018-html
 coq-workshop-2018-html:
-	cd presentations/coq-workshop-2018; $(MAKE) COQBIN="$(strip $(COQBIN))" html
+	cd presentations/coq-workshop-2018; $(MAKE) COQBIN="$(COQBIN)" html
 
 papers/lob-paper/html/lob.html:
 	cd papers/lob-paper; $(MAKE) dependencies && $(MAKE) all
