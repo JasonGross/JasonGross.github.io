@@ -1,7 +1,7 @@
 
 .PHONY: all clean
 
-BIBTEX2HTML_FOLDER=bibtex2html-1.99
+BIBTEX2HTML_FOLDER=bibtex2html
 BIBTEX2HTML=$(BIBTEX2HTML_FOLDER)/bibtex2html
 BIBTEX2HTML_ARGS=-d -r -nodoc -nf videos videos -nf reviews reviews -nf full-bibliography "full bibliography" -nf bibliography "bibliography" -nf code-v "code (.v)" -nf code-html "code (.html)" -nf code-agda "code (.agda)" -nf artifact-zip "artifact (.zip)" -nf artifact-tar-gz "artifact (.tar.gz)" -nf code-github "project (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" -nf artifact-github "artifact (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" -nf original-url "original conference submission (.pdf)" -nf presentation-annotated-pptx "presentation (.pptx, annotated with notes)" -nf presentation-pptx "presentation (.pptx)" -nf url-pptx ".pptx" -nf presentation-pdf "presentation (.pdf)" -nf project-homepage "project homepage" -nf published-url "publication" -nf published-url-springer "Springer publication" -nf acm-authorize-url "<img src='https://dl.acm.org/images/oa.gif' width='25' height='25' border='0' alt='ACM DL Author-ize Publication' style='vertical-align:middle'/>"
 
@@ -79,6 +79,9 @@ $(BIBTEX2HTML): $(BIBTEX2HTML_FOLDER)/Makefile
 
 $(BIBTEX2HTML_FOLDER)/Makefile: $(BIBTEX2HTML_FOLDER)/configure
 	cd $(BIBTEX2HTML_FOLDER); ./configure --prefix "$$(readlink -f .)"
+
+$(BIBTEX2HTML_FOLDER)/configure: $(BIBTEX2HTML_FOLDER)/configure.in
+	cd $(BIBTEX2HTML_FOLDER); autoconf
 
 resume/resume.pdf: resume/Makefile resume/Resume.tex
 	cd resume; $(MAKE)
