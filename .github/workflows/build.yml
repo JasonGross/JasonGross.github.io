@@ -73,3 +73,8 @@ jobs:
         run: |
           find .
           git status
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: ./
+        if: always()
