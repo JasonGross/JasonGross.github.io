@@ -8,8 +8,11 @@
 *.snm
 *.synctex.gz
 *.toc
-*.v.d
+*.d
 *.vo
+*.pyg
+Makefile.coq
+Makefile.coq.conf
 .coq-native
 /jason-gross-drafts-stripped.html
 /jason-gross-drafts.html
@@ -49,6 +52,7 @@ papers/lob-bibliography_bib.html
 presentations/coq-workshop-2014/*.pdf
 presentations/coq-workshop-2014/Makefile.coq
 presentations/coq-workshop-2014/html
+presentations/coqpl-2021/*.pdf
 presentations/csw-2013/*.pdf
 presentations/csw-2013/jgross-presentation-no-pause.tex
 presentations/popl-2013/*.pdf
