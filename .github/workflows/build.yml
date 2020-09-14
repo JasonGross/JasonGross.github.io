@@ -1,0 +1,75 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    env:
+      OCAML_DEFAULT_VERSION: 4.06.1
+      OCAML_2014_VERSION: 4.06.1
+      OCAML_2018_VERSION: 4.06.1
+      GHC_VERSION: 8.8.1
+      CABAL_VERSION: 3.0
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: submodules-init
+        uses: snickerbockers/submodules-init@v4
+      - uses: actions/setup-haskell@v1
+        with:
+          ghc-version: ${{ env.GHC_VERSION }}
+          cabal-version: ${{ env.CABAL_VERSION }}
+      - name: Install Build Deps
+        run: |
+          sudo apt-get -o Acquire::Retries=30 update -q
+          sudo apt-get -o Acquire::Retries=30 install -y --allow-unauthenticated \
+            texlive
+      - name: Setup Python
+        uses: actions/setup-python@v2
+      - name: install Python deps
+        run: |
+          pip install Pygments
+      - name: install Agda
+        run: |
+          cabal update
+          cabal install Agda
+      - name: Use OCaml ${{ env.OCAML_DEFAULT_VERSION }}
+        uses: avsm/setup-ocaml@v1
+        with:
+          ocaml-version: ${{ env.OCAML_DEFAULT_VERSION }}
+      - name: Install OCaml deps
+        run: |
+          opam update
+          opam switch ${OCAML_2018_VERSION} || opam switch create ${OCAML_2018_VERSION}
+          opam install -y "camlp5<8" ocamlfind lablgtk conf-gtksourceview hevea merlin oUnit ocp-indent dune num zarith
+          opam switch ${OCAML_2014_VERSION} || opam switch create ${OCAML_2014_VERSION}
+          opam install -y "camlp5<8" ocamlfind lablgtk conf-gtksourceview hevea merlin oUnit ocp-indent dune num zarith
+      - name: Build Coqs
+        run: |
+          opam switch ${OCAML_2014_VERSION}
+          eval $(opam env)
+          make coq-workshop-2014-html
+          opam switch ${OCAML_2018_VERSION}
+          eval $(opam env)
+          make coq-workshop-2018-html
+      - name: make
+        run: |
+          opam switch ${OCAML_DEFAULT_VERSION}
+          eval $(opam env)
+          make
+      - name: list
+        run: |
+          find .
+          git status
