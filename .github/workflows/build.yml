@@ -17,7 +17,7 @@ jobs:
       OCAML_2014_VERSION: 4.06.1
       OCAML_2018_VERSION: 4.06.1
       GHC_VERSION: 8.8.1
-      CABAL_VERSION: 3.0
+      CABAL_VERSION: 2.0.0.1
 
     steps:
       - uses: actions/checkout@v2
