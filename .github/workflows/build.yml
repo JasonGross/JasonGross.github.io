@@ -49,9 +49,9 @@ jobs:
         run: |
           opam update
           opam switch ${OCAML_2018_VERSION} || opam switch create ${OCAML_2018_VERSION}
-          opam install -y "camlp5<8" ocamlfind lablgtk conf-gtksourceview hevea merlin oUnit ocp-indent dune num zarith
+          opam install -y "camlp5<8" ocamlfind hevea merlin oUnit ocp-indent dune num zarith
           opam switch ${OCAML_2014_VERSION} || opam switch create ${OCAML_2014_VERSION}
-          opam install -y "camlp5<8" ocamlfind lablgtk conf-gtksourceview hevea merlin oUnit ocp-indent dune num zarith
+          opam install -y "camlp5<8" ocamlfind hevea merlin oUnit ocp-indent dune num zarith
       - name: Build Coqs
         run: |
           opam switch ${OCAML_2014_VERSION}
