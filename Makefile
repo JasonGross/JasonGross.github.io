@@ -102,7 +102,7 @@ presentations/coqpl-2021/%.pdf: presentations/coqpl-2021/%.tex presentations/coq
 $(filter presentations/coq-workshop-2014/html/CoqWorkshop.%.html,$(OUTPUTS)): coq-workshop-2014-html
 
 
-COQ_2014:=$(shell pwd)/presentations/coq-workshop-2014/coq
+COQ_2014:=$(shell pwd)/presentations/coq-workshop-2014-coq
 COQBIN_2014:=$(COQ_2014)/bin/
 
 $(COQ_2014)/config/Makefile: $(COQ_2014)/configure
@@ -120,7 +120,7 @@ presentations/coq-workshop-2018/%.pdf: presentations/coq-workshop-2018/%.tex pre
 
 $(filter presentations/coq-workshop-2018/html/CoqWorkshop.%.html,$(OUTPUTS)): coq-workshop-2018-html
 
-COQ_2018:=$(shell pwd)/presentations/coq-workshop-2018/coq
+COQ_2018:=$(shell pwd)/presentations/coq-workshop-2018-coq
 COQBIN_2018:=$(COQ_2018)/bin/
 
 $(COQ_2018)/config/Makefile: $(COQ_2018)/configure

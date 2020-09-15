@@ -20,8 +20,8 @@
 	path = bibtex2html
 	url = https://github.com/backtracking/bibtex2html.git
 [submodule "presentations/coq-workshop-2018/coq"]
-	path = presentations/coq-workshop-2018/coq
+	path = presentations/coq-workshop-2018-coq
 	url = https://github.com/coq/coq.git
 [submodule "presentations/coq-workshop-2014/coq"]
-	path = presentations/coq-workshop-2014/coq
+	path = presentations/coq-workshop-2014-coq
 	url = https://github.com/coq/coq.git

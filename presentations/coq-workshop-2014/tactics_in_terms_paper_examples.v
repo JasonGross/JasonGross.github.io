@@ -123,7 +123,7 @@ Definition funext_downward_closed
 Goal forall x y : NaiveFunext, x = y.
 Proof.
   intros x y; hnf in x, y.
-  (*Fail*) apply x. (** universe inconsistency *)
+  Fail apply x. (** universe inconsistency *)
   admit.
 Abort.
 
