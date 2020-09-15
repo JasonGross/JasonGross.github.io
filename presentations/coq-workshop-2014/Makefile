@@ -14,4 +14,4 @@ html: tactics_in_terms_paper_examples.vo tactics_in_terms_presentation.vo Makefi
 	$(MAKE) -f Makefile.coq $@
 
 Makefile.coq: tactics_in_terms_paper_examples.v tactics_in_terms_presentation.v Makefile
-	coq_makefile tactics_in_terms_paper_examples.v tactics_in_terms_presentation.v -R . CoqWorkshop -o $@
+	$(COQBIN)coq_makefile tactics_in_terms_paper_examples.v tactics_in_terms_presentation.v -R . CoqWorkshop -o $@
