@@ -14,7 +14,7 @@ jobs:
 
     env:
       OCAML_DEFAULT_VERSION: 4.06.1
-      OCAML_2014_VERSION: 4.06.1
+      OCAML_2014_VERSION: 4.02.3
       OCAML_2018_VERSION: 4.06.1
       GHC_VERSION: 7.10.3
       CABAL_VERSION: 2.0.0.1
@@ -53,11 +53,13 @@ jobs:
           opam install -y "camlp5<8" ocamlfind hevea merlin oUnit ocp-indent dune num zarith
           opam switch ${OCAML_2014_VERSION} || opam switch create ${OCAML_2014_VERSION}
           opam install -y "camlp5<8" ocamlfind hevea merlin oUnit ocp-indent dune num zarith
-      - name: Build Coqs
+      - name: Build 2014 Coq
         run: |
           opam switch ${OCAML_2014_VERSION}
           eval $(opam env)
           make coq-workshop-2014-html
+      - name: Build 2018 Coq
+        run: |
           opam switch ${OCAML_2018_VERSION}
           eval $(opam env)
           make coq-workshop-2018-html
