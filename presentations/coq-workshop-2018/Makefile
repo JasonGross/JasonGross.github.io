@@ -16,4 +16,4 @@ html: $(VFILES:.v=.vo) Makefile.coq
 	$(MAKE) -f Makefile.coq $@
 
 Makefile.coq: $(VFILES) Makefile
-	coq_makefile $(VFILES) -R . CoqWorkshop -o $@
+	$(COQBIN)coq_makefile $(VFILES) -R . CoqWorkshop -o $@
