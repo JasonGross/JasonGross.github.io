@@ -24,19 +24,19 @@ COMMON_SED_REPS := \
 jason-gross-stripped.html: jason-gross.html Makefile
 	sed $(COMMON_SED_REPS) -e s'/<h2>/<h2 id="publications">/g' $< > $@
 
-jason-gross.html: %.html : %.bib $(BIBTEX2HMTL) Makefile
+jason-gross.html: %.html : %.bib $(BIBTEX2HTML) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Papers and Presentations" -o "$*" "$<"
 
 jason-gross-drafts-stripped.html: jason-gross-drafts.html Makefile
 	sed $(COMMON_SED_REPS) -e s'/<h2>/<h2 id="drafts">/g' $< > $@
 
-jason-gross-drafts.html: %.html : %.bib $(BIBTEX2HMTL) Makefile
+jason-gross-drafts.html: %.html : %.bib $(BIBTEX2HTML) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Drafts" -o "$*" "$<"
 
-papers/category-coq-experience.html: %.html : %-filtered.bib $(BIBTEX2HMTL) Makefile
+papers/category-coq-experience.html: %.html : %-filtered.bib $(BIBTEX2HTML) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Experience Implementing a Performant Category-Theory Library in Coq: Complete List of References" -o "$*" "$<"
 
-papers/lob-bibliography.html: %.html : %-filtered.bib $(BIBTEX2HMTL) Makefile
+papers/lob-bibliography.html: %.html : %-filtered.bib $(BIBTEX2HTML) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "L&ouml;b's Theorem: A functional pearl of dependently typed quining: List of References" -o "$*" "$<"
 
 papers/category-coq-experience-filtered.bib papers/lob-bibliography-filtered.bib: %-filtered.bib : %.bib Makefile
