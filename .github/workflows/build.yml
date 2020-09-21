@@ -30,7 +30,9 @@ jobs:
           sudo apt-get -o Acquire::Retries=30 update -q
           sudo apt-get -o Acquire::Retries=30 install -y --allow-unauthenticated \
             texlive \
-            texlive-latex-extra
+            texlive-latex-extra \
+            texlive-bibtex-extra \
+            #
       - name: Setup Python
         uses: actions/setup-python@v2
       - name: install Python deps
