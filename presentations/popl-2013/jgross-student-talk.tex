@@ -55,7 +55,7 @@
 \begin{frame}
   \titlepage
   This document is available at \url{http://web.mit.edu/jgross/Public/POPL/\jobname.pdf}.
-  
+
   My category theory library is available at \url{https://bitbucket.org/JasonGross/catdb}.
 \end{frame}
 
@@ -63,8 +63,8 @@
   \begin{frame}{Outline}
     \tableofcontents[pausesections]
   \end{frame}
-  
-\section{Introduction --- Databases and Category Theory}    
+
+\section{Introduction --- Databases and Category Theory}
   \subsection{Categories}
     \begin{frame}{Categories}
       A category is:
@@ -91,12 +91,12 @@
         }
       \end{center}
     \end{frame}
-    
+
   \subsection{Relational Databases}
     \begin{frame}{Relational Databases}
       A database schema for a relational database can be modeled as a
       \begin{itemize}
-        \item collection of \textbf{tables}, \pause together with 
+        \item collection of \textbf{tables}, \pause together with
         \item a collection of \textbf{attributes} or column-labels for each table, \pause together with
         \item integrity constraints \pause
       \end{itemize}
@@ -111,7 +111,7 @@
           }
       \end{center}
     \end{frame}
-    
+
   \subsection{Relational Database Schema = Category}
     \begin{frame}{Relational Database Schema = Category}
       \begin{center}
@@ -139,7 +139,7 @@
         \only<3>{\vspace{4ex} \\ The diagrams are ``the same''.}
       \end{center}
     \end{frame}
-    
+
   \subsection{Usefulness}
     \begin{frame}{Usefulness of Categorical Databases}
       \begin{itemize}
@@ -149,9 +149,9 @@
           Provides a rigorous language for data migration between databases (another hard task in standard database management).
       \end{itemize}
     \end{frame}
-  
+
 \section{Category Theory in Coq}
-  
+
   \begin{frame}{Category Theory in Coq}
     \begin{itemize}
       \item
@@ -168,7 +168,7 @@
         \end{itemize}
     \end{itemize}
   \end{frame}
-  
+
   \subsection{Universe Levels}
     \begin{frame}
       \frametitle{Universe Levels \only<1-7>{(Russel's Paradox)}}
@@ -206,7 +206,7 @@
           It's useful to talk about ``a category whose objects are of type \texttt{T}'' rather than just ``a category''.
       \end{itemize}
     \end{frame}
-  
+
   \subsection{Limits and Colimits}
     \begin{frame}{Limits and Colimits}
       \begin{itemize}
@@ -216,7 +216,7 @@
           Categorical \textbf{colimits} are like \textbf{disjoint unions}, modulo equivalence relations
       \end{itemize}
     \end{frame}
-    
+
     \begin{frame}{Coq Category}
       \begin{itemize}
         \item Coq has all limits
@@ -235,7 +235,7 @@
           \end{itemize}
       \end{itemize}
     \end{frame}
-    
+
     \begin{frame}{Quotients}
       \begin{itemize}
         \item Quotients can be defined via axioms \pause
@@ -256,7 +256,7 @@
         \end{itemize}
       \end{itemize}
     \end{frame}
-    
+
     \begin{frame}{Limits and Colimits (High-Level Summary)}
       \begin{itemize}
         \item
