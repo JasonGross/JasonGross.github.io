@@ -32,6 +32,7 @@ jobs:
             texlive \
             texlive-latex-extra \
             texlive-bibtex-extra \
+            biber \
             #
       - name: Setup Python
         uses: actions/setup-python@v2
