@@ -139,3 +139,9 @@ papers/lob-paper/html/lob.html:
 
 papers/lob-paper/supplemental-nonymous.zip: papers/lob-paper/html/lob.html
 	cd papers/lob-paper; $(MAKE) supplemental
+
+.PHONY: deploy
+deploy:
+	rm -rf build
+	mkdir build
+	find . -name "*.pdf" -o -name "*.html" | xargs tar -czf - | ( cd build; tar -xzvf - )

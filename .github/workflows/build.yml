@@ -69,8 +69,9 @@ jobs:
         run: |
           find .
           git status
+      - run: make deploy
       - uses: actions/upload-artifact@v2
         with:
           name: build
-          path: ./
+          path: build/
         if: always()
