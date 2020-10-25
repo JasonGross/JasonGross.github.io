@@ -20,6 +20,7 @@ BIBTEX2HTML_ARGS=-d -r -nodoc \
 	-nf presentation-pptx "presentation (.pptx)" \
 	-nf url-pptx ".pptx" \
 	-nf presentation-pdf "presentation (.pdf)" \
+	-nf presentation-odp "presentation (.odp)" \
 	-nf project-homepage "project homepage" \
 	-nf published-url "publication" \
 	-nf published-url-springer 'publication (<div style="overflow: hidden; max-width: 1em; display: inline-block; vertical-align: middle"><img src="media/Springer-Mark/PNG/logo.png" alt="Springer" title="Springer" style="height: 1.5em; vertical-align: text-bottom"></div>)' \
