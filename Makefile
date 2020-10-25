@@ -3,7 +3,30 @@
 
 BIBTEX2HTML_FOLDER=bibtex2html
 BIBTEX2HTML=$(BIBTEX2HTML_FOLDER)/bibtex2html
-BIBTEX2HTML_ARGS=-d -r -nodoc -nf videos videos -nf reviews reviews -nf full-bibliography "full bibliography" -nf bibliography "bibliography" -nf code-v "code (.v)" -nf code-html "code (.html)" -nf code-agda "code (.agda)" -nf artifact-zip "artifact (.zip)" -nf artifact-tar-gz "artifact (.tar.gz)" -nf code-github "project (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" -nf artifact-github "artifact (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" -nf original-url "original conference submission (.pdf)" -nf presentation-annotated-pptx "presentation (.pptx, annotated with notes)" -nf presentation-pptx "presentation (.pptx)" -nf url-pptx ".pptx" -nf presentation-pdf "presentation (.pdf)" -nf project-homepage "project homepage" -nf published-url "publication" -nf published-url-springer "<img src='https://www.springer.com/spcom/sites/sgw/images/logo.png' height='25' border='0' alt='Springer publication' style='vertical-align:middle'/>" -nf acm-authorize-url "<img src='https://dl.acm.org/images/oa.gif' width='25' height='25' border='0' alt='ACM DL Author-ize Publication' style='vertical-align:middle'/>" -nf doi-url "<img src='https://www.doi.org/img/Logo_TM.png' width='25' height='25' border='0' alt='DOI' style='vertical-align:middle'/>" -nf dspace-url "DSpace@MIT" -nf arxiv-url "arXiv"
+BIBTEX2HTML_ARGS=-d -r -nodoc \
+	-nf videos videos \
+	-nf reviews reviews \
+	-nf full-bibliography "full bibliography" \
+	-nf bibliography "bibliography" \
+	-nf code-v "code (.v)" \
+	-nf code-html "code (.html)" \
+	-nf code-agda "code (.agda)" \
+	-nf artifact-zip "artifact (.zip)" \
+	-nf artifact-tar-gz "artifact (.tar.gz)" \
+	-nf code-github "project (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" \
+	-nf artifact-github "artifact (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" \
+	-nf original-url "original conference submission (.pdf)" \
+	-nf presentation-annotated-pptx "presentation (.pptx, annotated with notes)" \
+	-nf presentation-pptx "presentation (.pptx)" \
+	-nf url-pptx ".pptx" \
+	-nf presentation-pdf "presentation (.pdf)" \
+	-nf project-homepage "project homepage" \
+	-nf published-url "publication" \
+	-nf published-url-springer 'publication (<div style="overflow: hidden; max-width: 1em; display: inline-block; vertical-align: middle"><img src="media/Springer-Mark/PNG/logo.png" alt="Springer" title="Springer" style="height: 1.5em; vertical-align: text-bottom"></div>)' \
+	-nf published-url-elsevier-geoderma 'publication (<img src="media/Elsevier-Mark/PNG/elsevier-non-solus.png" alt="Elsevier" title="Elsevier" style="height: 1.25em;vertical-align: middle;"><img src="media/Geoderma-Mark/gif/cov150h.gif" alt="Geoderma" title="Geoderma" style="height: 1.25em;vertical-align: middle;">)' \
+	-nf acm-authorize-url "<img src='https://dl.acm.org/images/oa.gif' width='25' height='25' border='0' alt='ACM DL Author-ize Publication' title='ACM DL Author-ize Publication' style='vertical-align:middle'/>" \
+	-nf dspace-url "DSpace@MIT" \
+	# -nf doi "<img src='https://www.doi.org/img/Logo_TM.png' width='25' height='25' border='0' alt='DOI' style='vertical-align:middle'/>"
 
 OUTPUTS := jason-gross-drafts-stripped.html jason-gross-stripped.html presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf presentations/csw-2013/jgross-presentation-no-pause.pdf presentations/popl-2013/jgross-student-talk.pdf presentations/popl-2013/minute-madness.pdf papers/source/coqpl-2021/reification-by-type-inference.pdf resume/resume.pdf papers/category-coq-experience.html jason-gross.html papers/category-coq-experience-filtered.bib presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_paper_examples.html presentations/coq-workshop-2018/coq-workshop-proposal-notations.pdf presentations/coq-workshop-2018/html/CoqWorkshop.NotationsCheatSheet.html presentations/coq-workshop-2018/html/CoqWorkshop.Notations.html presentations/coq-workshop-2018/html/CoqWorkshop.NotationsMITPresentation.html presentations/coq-workshop-2018/html/CoqWorkshop.NotationsCoqWorkshop.html
 OLD_NO_LONGER_BUILT_OUTPUTS := papers/lob-paper/html/lob.html papers/lob-paper/supplemental-nonymous.zip papers/lob-bibliography.html
