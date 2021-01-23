@@ -18,6 +18,7 @@ BIBTEX2HTML_ARGS=-d -r -nodoc \
 	-nf original-url "original conference submission (.pdf)" \
 	-nf presentation-annotated-pptx "presentation (.pptx, annotated with notes)" \
 	-nf presentation-pptx "presentation (.pptx)" \
+	-nf presentation-youtube "presentation (YouTube)" \
 	-nf url-pptx ".pptx" \
 	-nf presentation-pdf "presentation (.pdf)" \
 	-nf presentation-odp "presentation (.odp)" \
