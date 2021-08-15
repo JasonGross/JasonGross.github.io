@@ -171,5 +171,5 @@ papers/lob-paper/supplemental-nonymous.zip: papers/lob-paper/html/lob.html
 deploy:
 	rm -rf build build.tar.gz
 	mkdir build
-	(find . -name "*.pdf" -o -name "*.html" -print0; git ls-files --recurse-submodules -z) | xargs -0 tar -czf build.tar.gz
+	(find . -name "*.pdf" -print0 -o -name "*.html" -print0; git ls-files --recurse-submodules -z) | xargs -0 tar -czvf build.tar.gz
 	cd build; tar -xzvf ../build.tar.gz
