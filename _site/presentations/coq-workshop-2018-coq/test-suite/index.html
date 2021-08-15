@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Coq Test Suite | Jason Gross</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Coq Test Suite" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Personal website of Jason Gross" />
+<meta property="og:description" content="Personal website of Jason Gross" />
+<link rel="canonical" href="http://localhost:4000/presentations/coq-workshop-2018-coq/test-suite/" />
+<meta property="og:url" content="http://localhost:4000/presentations/coq-workshop-2018-coq/test-suite/" />
+<meta property="og:site_name" content="Jason Gross" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Coq Test Suite" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"http://localhost:4000/presentations/coq-workshop-2018-coq/test-suite/","headline":"Coq Test Suite","description":"Personal website of Jason Gross","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Jason Gross" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Jason Gross</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/">Jason Gross</a><a class="page-link" href="/papers/lob-paper/README-SUPPLEMENTAL.html">Lӧb’s Theorem: A functional pearl of dependently typed quining</a><a class="page-link" href="/papers/source/fiat-crypto/pldi-2017/rebuttal.html">General Clarifications</a><a class="page-link" href="/papers/source/fiat-crypto/popl-2018/reviews.html">POPL ‘18 Paper #2 Reviews and Comments</a><a class="page-link" href="/papers/source/lob-paper/README-SUPPLEMENTAL.html">Lӧb’s Theorem: A functional pearl of dependently typed quining</a><a class="page-link" href="/papers/source/rewriting/rewriting.html">Rewriter</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/doc/changes.html">Changes between Coq 8.7 and Coq 8.8</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/doc/debugging.html">Debugging from Coq toplevel using Caml trace mechanism</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/doc/econstr.html">Evar-insensitive terms (EConstr)</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/doc/proof-engine.html">Tutorial on the new proof engine for ML tactic writers</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/doc/xml-protocol.html">Coq XML Protocol</a><a class="page-link" href="/papers/lob-paper/">Lӧb’s Theorem: A functional pearl of dependently typed quining</a><a class="page-link" href="/papers/source/lob-paper/">Lӧb’s Theorem: A functional pearl of dependently typed quining</a><a class="page-link" href="/presentations/coq-8.6-wishlist/">coq-8.6-wishlist</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/">Coq</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/ci/">Continuous Integration for the Coq Proof Assistant</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/ci/user-overlays/">Add overlays for your pull requests in this directory</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/test-suite/">Coq Test Suite</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Coq Test Suite</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="coq-test-suite">Coq Test Suite</h1>
+
+<p>The test suite can be run from the Coq root directory by <code class="language-plaintext highlighter-rouge">make test-suite</code>.
+This does a clean step first, so if you’ve already run it, then change something,
+you’ll have to do a lot of work again.</p>
+
+<p>If you run <code class="language-plaintext highlighter-rouge">make</code> from the <code class="language-plaintext highlighter-rouge">test-suite</code> directory, there is no clean step.
+You can also run <code class="language-plaintext highlighter-rouge">make aaa/bbb/ccc.v.log</code> to build the log for one test,
+or <code class="language-plaintext highlighter-rouge">make ddd</code> where <code class="language-plaintext highlighter-rouge">ddd</code> is on of the sub-directories of <code class="language-plaintext highlighter-rouge">test-suite</code>
+to just build the logs for that directory.
+In these cases, a summary is not printed, but can be generated by <code class="language-plaintext highlighter-rouge">make summary</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">make -B</code> can be used to rerun tests ( -B meaning always remake).</p>
+
+<p>From the <code class="language-plaintext highlighter-rouge">test-suite</code> directory, <code class="language-plaintext highlighter-rouge">make report</code> (included in <code class="language-plaintext highlighter-rouge">make
+all</code>) prints a summary of which tests failed using the produced log
+files (this still works when only some tests are built as described
+above). Setting the <code class="language-plaintext highlighter-rouge">PRINT_LOGS</code> variable will make it print the logs
+of the failing tests.</p>
+
+<p>For instance, running the following in the <code class="language-plaintext highlighter-rouge">test-suite</code> directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo </span>Fail. <span class="o">&gt;</span> success/fail.v <span class="c"># make some failing test</span>
+
+<span class="nv">$ </span>make
+TEST      prerequisite/make_local.v
+...
+TEST      success/fail.v
+...
+BUILDING SUMMARY FILE
+FAILURES
+    success/fail.v...Error! <span class="o">(</span>should be accepted<span class="o">)</span>
+Makefile:189: recipe <span class="k">for </span>target <span class="s1">'all failed
+make: *** [report] Error 1
+
+$ make report PRINT_LOGS=1
+BUILDING SUMMARY FILE
+logs/success/fail.v.log
+==========&gt; TESTING success/fail.v &lt;==========
+Welcome to Coq (version information)
+Skipping rcfile loading.
+File "/path/to/success/fail.v", line 1, characters 4-5:
+Error:
+Syntax error: [vernac:Vernac.vernac_control] expected after '</span>Fail<span class="s1">' (in [vernac:Vernac.vernac_control]).
+
+0m0.000000s 0m0.000000s
+0m0.040000s 0m0.000000s
+==========&gt; FAILURE &lt;==========
+    success/fail.v...Error! (should be accepted)
+
+FAILURES
+    success/fail.v...Error! (should be accepted)
+Makefile:189: recipe for target '</span>report<span class="s1">' failed
+make: *** [report] Error 1
+
+$ echo '</span>Comments <span class="s2">"foo"</span>.<span class="s1">' &gt; success/fail.v
+
+$ make
+TEST      success/fail.v
+BUILDING SUMMARY FILE
+NO FAILURES
+</span></code></pre></div></div>
+
+<p>See <a href="/test-suite/Makefile"><code class="language-plaintext highlighter-rouge">test-suite/Makefile</code></a> for more information.</p>
+
+<h2 id="adding-a-test">Adding a test</h2>
+
+<p>Regression tests for closed bugs should be added to <code class="language-plaintext highlighter-rouge">test-suite/bugs/closed</code>, as <code class="language-plaintext highlighter-rouge">1234.v</code> where <code class="language-plaintext highlighter-rouge">1234</code> is the bug number.
+Files in this directory are tested for successful compilation.
+When you fix a bug, you should usually add a regression test here as well.</p>
+
+<p>The error “(bug seems to be opened, please check)” when running <code class="language-plaintext highlighter-rouge">make test-suite</code> means that a test in <code class="language-plaintext highlighter-rouge">bugs/closed</code> failed to compile.</p>
+
+<p>There are also output tests in <code class="language-plaintext highlighter-rouge">test-suite/output</code> which consist of a <code class="language-plaintext highlighter-rouge">.v</code> file and a <code class="language-plaintext highlighter-rouge">.out</code> file with the expected output.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Jason Gross</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Jason Gross</li><li><a class="u-email" href="mailto:jgross@mit.edu">jgross@mit.edu</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/JasonGross"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">JasonGross</span></a></li><li><a href="https://www.twitter.com/diagram_chaser"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">diagram_chaser</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Personal website of Jason Gross</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
