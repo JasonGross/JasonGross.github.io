@@ -69,7 +69,7 @@ jobs:
         run: |
           find .
           git status
-      - run: make deploy
+      - run: make deploy-separate
       - uses: actions/upload-artifact@v2
         with:
           name: build
