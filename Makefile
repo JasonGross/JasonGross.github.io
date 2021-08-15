@@ -46,6 +46,7 @@ COMMON_SED_REPS := \
 	-e s'/This file/This reference list/g' \
 	-e s'/<hr>//g' \
 	-e s'/h1/h2/g' \
+	-e s',<p>,<p />,g' \
 	-e s'|\[<a name="\([^"]*\)">\([^<]*\)</a>\]|[<a name="\1" href="$(POUND)\1">\2</a>]|g'
 
 jason-gross-stripped.html: jason-gross.html Makefile
@@ -171,11 +172,15 @@ papers/lob-paper/supplemental-nonymous.zip: papers/lob-paper/html/lob.html
 deploy:
 	rm -rf build
 	mkdir build
-	find . -name "*.pdf" -print0 -o -name "*.html" -print0 | xargs -0 tar -cf - | { cd build; tar -xvf -; }
+	find . -path ./build -prune -false -name "*.pdf" -print0 -o -name "*.html" -print0 | xargs -0 tar -cf - | { cd build; tar -xvf -; }
 	git ls-files --recurse-submodules -z | xargs -0 tar -cf - | { cd build; tar -xvf -; }
+	find build -name ".gitignore" -o -name ".gitmodules" -delete
+	find build/*/ -xtype l -delete # remove broken symbolic links
 
 .PHONY: deploy-separate
 deploy-separate:
 	rm -rf build
 	mkdir build
-	/bin/bash -c 'while IFS= read i; do tar -cf - "$$i" | { cd build; tar -xvf -; }; done < <(find . -name "*.pdf" -o -name "*.html"; git ls-files --recurse-submodules)'
+	/bin/bash -c 'while IFS= read i; do tar -cf - "$$i" | { cd build; tar -xvf -; }; done < <(find . -path ./build -prune -false -o -name "*.pdf" -print -o -name "*.html" -print; git ls-files --recurse-submodules)'
+	find build -name ".gitignore" -o -name ".gitmodules" -delete
+	find build/*/ -xtype l -delete # remove broken symbolic links
