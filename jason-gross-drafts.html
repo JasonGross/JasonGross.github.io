@@ -1,0 +1,133 @@
+
+<!-- This document was automatically generated with bibtex2html 1.99
+     (see http://www.lri.fr/~filliatr/bibtex2html/),
+     with the following command:
+     bibtex2html -d -r -nodoc -nf videos videos -nf reviews reviews -nf full-bibliography "full bibliography" -nf bibliography bibliography -nf code-v "code (.v)" -nf code-html "code (.html)" -nf code-agda "code (.agda)" -nf artifact-zip "artifact (.zip)" -nf artifact-tar-gz "artifact (.tar.gz)" -nf code-github "project (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" -nf artifact-github "artifact (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" -nf original-url "original conference submission (.pdf)" -nf presentation-annotated-pptx "presentation (.pptx, annotated with notes)" -nf presentation-pptx "presentation (.pptx)" -nf presentation-youtube "presentation (YouTube)" -nf url-pptx .pptx -nf presentation-pdf "presentation (.pdf)" -nf presentation-odp "presentation (.odp)" -nf project-homepage "project homepage" -nf published-url publication -nf published-url-springer "publication (<div style="overflow: hidden; max-width: 1em; display: inline-block; vertical-align: middle"><img src="media/Springer-Mark/PNG/logo.png" alt="Springer" title="Springer" style="height: 1.5em; vertical-align: text-bottom"></div>)" -nf published-url-elsevier-geoderma "publication (<img src="media/ScienceDirect-Mark/svg/elsevier-non-solus-new-grey.svg" alt="ScienceDirect" title="ScienceDirect" style="height: 1em;vertical-align: text-bottom;">)" -nf acm-authorize-url "<img src='https://dl.acm.org/images/oa.gif' width='25' height='25' border='0' alt='ACM DL Author-ize Publication' title='ACM DL Author-ize Publication' style='vertical-align:middle'/>" -nf dspace-url DSpace@MIT --title Drafts -o jason-gross-drafts jason-gross-drafts.bib  -->
+
+<h1>Drafts</h1>
+<table>
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="partial-evaluation-rewriting">1</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross, Adam Chlipala, and Andres Erbsen.
+ A framework for building verified partial evaluators, January 2021.
+ Submitted to <a href="https://popl21.sigplan.org/">POPL 2021</a>.
+[&nbsp;<a href="jason-gross-drafts_bib.html#partial-evaluation-rewriting">bib</a>&nbsp;| 
+<a href="https://github.com/mit-plv/rewriter">project (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2021-rewriting-popl-draft.tar.gz">artifact (.tar.gz)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2021-rewriting-popl-draft.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+<em>Partial evaluation</em> is a classic technique for generating lean, customized code from libraries that start with more bells and whistles.
+It is also an attractive approach to creation of <em>formally verified</em> systems, where theorems can be proved about libraries, yielding correctness of all specializations &ldquo;for free.&rdquo;
+However, it can be challenging to make library specialization both performant (at compile time and runtime) and trustworthy.
+We present a new approach, prototyped in the Coq proof assistant, which supports specialization at the speed of native-code execution, without adding to the trusted code base.
+Our extensible engine, which combines the traditional concepts of tailored term reduction and automatic rewriting from hint databases, is also of interest to replace these ingredients in proof assistants' proof checkers and tactic engines, at the same time as it supports extraction to standalone compilers from library parameters to specialized code.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="lob-paper">2</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross, Jack Gallagher, and Benya Fallenstein.
+ L&ouml;b's theorem: A functional pearl of dependently typed quining,
+  March 2016.
+ Submitted to <a href="http://conf.researchr.org/home/icfp-2016/">ICFP
+  2016</a>.
+[&nbsp;<a href="jason-gross-drafts_bib.html#lob-paper">bib</a>&nbsp;| 
+<a href="https://github.com/JasonGross/lob-paper">project (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/lob-paper/supplemental-nonymous.zip">artifact (.zip)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/lob-paper/lob.lagda">code (.agda)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/lob-paper/html/lob.html">code (.html)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/lob-bibliography.html">bibliography</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2016-lob-icfp-2016-draft.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+L&ouml;b's theorem states that to prove that a proposition is provable, it
+is sufficient to prove the proposition under the assumption that it is
+provable.  The Curry-Howard isomorphism identifies formal proofs with
+abstract syntax trees of programs; L&ouml;b's theorem thus implies, for
+total languages which validate it, that self-interpreters are
+impossible.  We formalize a few variations of L&ouml;b's theorem in Agda
+using an inductive-inductive encoding of terms indexed over types.  We
+verify the consistency of our formalizations relative to Agda by
+giving them semantics via interpretation functions.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="parsing-parse-trees">3</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross and Adam Chlipala.
+ Parsing parses: A pearl of (dependently typed) programming and proof,
+  August 2015.
+ Submitted to <a href="http://icfpconference.org/icfp2015/cfp.html">ICFP
+  2015</a>.
+[&nbsp;<a href="jason-gross-drafts_bib.html#parsing-parse-trees">bib</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2015-parsing-parse-trees.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+We present a functional parser for arbitrary context-free grammars,
+	together with soundness and completeness proofs, all inside Coq.
+	 By exposing the parser in the right way with parametric polymorphism
+	and dependent types, we are able to use the parser to prove its own
+	soundness, and, with a little help from relational parametricity,
+	prove its own completeness, too.  Of particular interest is one strange
+	instantiation of the type and value parameters: by parsing <em>parse
+	trees</em> instead of strings, we convince the parser to generate its
+	own completeness proof.  We conclude with highlights of our experiences
+	iterating through several versions of the Coq development, and some
+	general lessons about dependently typed programming.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="pldi-15-fiat-to-facade">4</a>]
+</td>
+<td class="bibtexitem">
+Cl&eacute;ment Pit-Claudel, Peng Wang, Jason Gross, Ben Delaware, and Adam Chlipala.
+ Correct-by-construction program derivation from specifications to
+  assembly language, June 2015.
+ Submitted to PLDI 2015.
+[&nbsp;<a href="jason-gross-drafts_bib.html#pldi-15-fiat-to-facade">bib</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2015-fiat-to-facade.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+We present a Coq-based system to certify the entire process of implementing
+	declarative mathematical specifications with efficient assembly code.
+	That is, we produce formal assembly-code libraries with proofs, in
+	the style of Hoare logic, demonstrating compatibility with relational
+	specifications in higher-order logic. Most code-generation paths
+	from high-level languages involve the introduction of garbage collection
+	and other runtime support for source-level abstractions, but we generate
+	code suitable for resource-constrained embedded systems, using manual
+	memory management and in-place updating of heap-allocated data structures.
+	We start from very high-level source code, applying the Fiat framework
+	to refine set-theory expressions into functional programs; then we
+	further apply Fiat's refinement tools to translate functional programs
+	into Facade, a simple imperative language without a heap or aliasing;
+	and finally we plug into the assembly-generation features of the
+	Bedrock framework, where we link with handwritten data-structure
+	implementations and their associated proofs. Each program refinement
+	leads to a proved Hoare-logic specification for an assembly function,
+	with no trust dependencies on any aspect of our synthesis process,
+	which is highly automated.
+</font></blockquote>
+
+</td>
+</tr>
+</table><hr><p><em>This file was generated by
+<a href="http://www.lri.fr/~filliatr/bibtex2html/">bibtex2html</a> 1.99.</em></p>
