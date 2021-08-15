@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<title>Jason Gross</title>
+<meta charset="utf-8">
+<style>
+blockquote, p {
+text-align:justify;
+}
+.section, .first-section {
+display: flow-root;
+}
+.identity {
+float: left;
+margin-right: 10px;
+}
+.first-section h2:first-of-type {
+margin-top: 0em;
+}
+</style>
+</head>
+<body>
+
+<h1 id="jason-gross">Jason Gross</h1>
+
+<div style="display: table">
+<div class="identity">
+<img src="jason-gross.jpg" style="width: 10em" />
+
+<h2 id="contact">Contact Me</h2>
+<p>Email: <a href="mailto:jgross@mit.edu">jgross@mit.edu</a></p>
+<p>Office: <a href="//www.csail.mit.edu/sites/default/files/resources/maps/8G/G888.gif">32-G888</a></p>
+<!--<h3>Social Media</h3>-->
+<!--include virtual="twitter.html" -->
+<!--include virtual="google-plus.html" -->
+<!--include virtual="facebook.html" -->
+<!--include virtual="stack-overflow.html" -->
+<!--include virtual="linkedin.html" -->
+<!--include virtual="github.html" -->
+</div>
+
+<div class="first-section">
+<h2 id="resume">Code and Curriculum Vitæ</h2>
+<p>
+Eventually, my projects will be integrated into this page.  In the meantime, please visit my <a href="https://github.com/JasonGross">GitHub</a> account, or look at my <a href="curriculum-vitae.pdf">curriculum vitæ</a>.
+</p>
+
+<p>
+These days, I'm working on finishing up my PhD in <a href="https://github.com/mit-plv/rewriter">reflective rewriting</a>, <a href="https://github.com/mit-plv/fiat-crypto">verified cryptographic primitive synthesis</a>, <a href="https://github.com/mit-plv/fiat">general program synthesis</a>, and <a href="https://github.com/JasonGross/HoTT/tree/master/theories/Categories">category theory on top of homotopy type theory in Coq</a>.  I also occasionally commit to the <a href="https://github.com/JasonGross/barnowl">BarnOwl</a> project.
+</p>
+
+<p>
+  What I do, <a href="https://xkcd.com/1133/">with only the ten-hundred most used words</a> (checked by <a href="https://splasho.com/upgoer5/">The Up-Goer Five Words Typing-Box</a>): It would be nice if we could tell computers what should be done in only a few simple words (but in words that can only mean one thing), and the computers would just know how to do it, and never be slow and never be wrong.  I'm working on making this dream come true.
+</p>
+</div>
+
+<div class="section">
+<h2 id="hobbies">Hobbies and Fun Facts</h2>
+I enjoy wind-surfing, sailing, sky-diving, programming, philosophy, dancing ((&mu;-)fusion, blues, squares, ceili(dh), contra), <a href="https://web.mit.edu/~jgross/Public/social-interactions/circling.txt">circling</a>, math, physics, learning, building, and glassblowing.  I've written up <a href="https://web.mit.edu/jgross/Public/social-interactions/">some thoughts on social interactions and emotions</a>, <a href="https://web.mit.edu/jgross/Public/stories/skydive.txt">my experience skydiving</a>, <a href="https://web.mit.edu/~jgross/Public/stories/">a couple of other personal stories</a>, <a href="https://web.mit.edu/jgross/Public/18.100C_paper_newest.pdf">a visual proof that the reals are uncountable, geared at a child</a>, <a href="https://web.mit.edu/~jgross/Public/8_06-decoherence-paper.pdf">a term paper on quantum decoherence</a>.
+I also took an introduction to music composition, and the pieces I created are <a href="https://web.mit.edu/~jgross/Public/21M.065/">here</a>.
+
+As far as I know, my Erdös Number is 5, because <a href="http://adam.chlipala.net/">Adam Chlipala</a>'s is 4.
+</div>
+</div>
+
+<!--#include virtual="jason-gross-stripped.html" -->
+<!--#include virtual="jason-gross-drafts-stripped.html" -->
+
+</body>
+</html>

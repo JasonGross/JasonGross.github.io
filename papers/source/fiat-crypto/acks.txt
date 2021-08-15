@@ -1,0 +1,20 @@
+People to remember to acknowledge in final version
+==================================================
+
+Istvan Chung
+Peng Wang
+
+Comments at PL/SE Lunch on Nov. 14th, 2017
+==========================================
+
+Ray Wang (raywang@mit)
+Devin Neal
+Rahul Sridhar
+Ivan Kuraj
+
+Proofreading by correspondsnce (late february 2018)
+===================================================
+Adam Langley
+Daniel Ziegler
+Derek Ting-Haye
+Samuel Gruetter
