@@ -1,0 +1,556 @@
+
+<!-- This document was automatically generated with bibtex2html 1.99
+     (see http://www.lri.fr/~filliatr/bibtex2html/),
+     with the following command:
+     bibtex2html -d -r -nodoc -nf videos videos -nf reviews reviews -nf full-bibliography "full bibliography" -nf bibliography bibliography -nf code-v "code (.v)" -nf code-html "code (.html)" -nf code-agda "code (.agda)" -nf artifact-zip "artifact (.zip)" -nf artifact-tar-gz "artifact (.tar.gz)" -nf code-github "project (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" -nf artifact-github "artifact (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" -nf original-url "original conference submission (.pdf)" -nf presentation-annotated-pptx "presentation (.pptx, annotated with notes)" -nf presentation-pptx "presentation (.pptx)" -nf presentation-youtube "presentation (YouTube)" -nf url-pptx .pptx -nf presentation-pdf "presentation (.pdf)" -nf presentation-odp "presentation (.odp)" -nf project-homepage "project homepage" -nf published-url publication -nf published-url-springer "publication (<div style="overflow: hidden; max-width: 1em; display: inline-block; vertical-align: middle"><img src="media/Springer-Mark/PNG/logo.png" alt="Springer" title="Springer" style="height: 1.5em; vertical-align: text-bottom"></div>)" -nf published-url-elsevier-geoderma "publication (<img src="media/ScienceDirect-Mark/svg/elsevier-non-solus-new-grey.svg" alt="ScienceDirect" title="ScienceDirect" style="height: 1em;vertical-align: text-bottom;">)" -nf acm-authorize-url "<img src='https://dl.acm.org/images/oa.gif' width='25' height='25' border='0' alt='ACM DL Author-ize Publication' title='ACM DL Author-ize Publication' style='vertical-align:middle'/>" -nf dspace-url DSpace@MIT --title "Papers and Presentations" -o jason-gross jason-gross.bib  -->
+
+<h1>Papers and Presentations</h1>
+<table>
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="Gross2021thesis">1</a>]
+</td>
+<td class="bibtexitem">
+Jason&nbsp;S. Gross.
+ <em>Performance Engineering of Proof-Based Software Systems at
+  Scale</em>.
+ PhD thesis, Massachusetts Institute of Technology, February 2021.
+[&nbsp;<a href="jason-gross_bib.html#Gross2021thesis">bib</a>&nbsp;| 
+<a href="https://dspace.mit.edu/handle/1721.1/130763">DSpace@MIT</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2021-JGross-PhD-EECS-Feb2021.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+Formal verification is increasingly valuable as our world comes to rely more on software for critical infrastructure.
+A significant and understudied cost of developing mechanized proofs, especially at scale, is the computer performance of proof generation.
+This dissertation aims to be a partial guide to identifying and resolving performance bottlenecks in dependently typed tactic-driven proof assistants like Coq.<p>
+We present a survey of the landscape of performance issues in Coq, with micro- and macro-benchmarks.
+We describe various metrics that allow prediction of performance, such as term size, goal size, and number of binders, and note the occasional surprising lack of a bottleneck for some factors, such as total proof term size.
+To our knowledge such a roadmap to performance bottlenecks is a new contribution of this dissertation.<p>
+The central new technical contribution presented by this dissertation is a reflective framework for partial evaluation and rewriting, already used to compile a code generator for field-arithmetic cryptographic primitives which generates code currently used in Google Chrome.
+We believe this prototype is the first scalably performant realization of an approach for code specialization which does not require adding to the trusted code base.
+Our extensible engine, which combines the traditional concepts of tailored term reduction and automatic rewriting from hint databases with on-the-fly generation of inductive codes for constants, is also of interest to replace these ingredients in proof assistants' proof checkers and tactic engines.
+Additionally, we use the development of this framework itself as a case study for the various performance issues that can arise when designing large proof libraries.
+We also present a novel method of simple and fast reification, developed and published during this PhD.<p>
+Finally, we present additional lessons drawn from the case studies of a category-theory library, a proof-producing parser generator, and cryptographic code generation.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="coqpl-21-reification-by-type-inference">2</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross.
+ A limited case for reification by type inference, January 2021.
+ Presented at <a href="https://popl21.sigplan.org/home/CoqPL-2021">The
+  Seventh International Workshop on Coq for Programming Languages (CoqPL'21)</a>.
+[&nbsp;<a href="jason-gross_bib.html#coqpl-21-reification-by-type-inference">bib</a>&nbsp;| 
+<a href="https://youtu.be/cOO9lknGF2Y">presentation (YouTube)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/coqpl-2021/reification_by_type_inference_coqpl_2021.v">code (.v)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2021-reification-by-type-inference-coqpl.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+Proof by reflection is a common and well-studied automation tool.
+Reification---generally written using <em>L</em><sub><i>tac</i></sub>, OCaml, typeclasses, or canonical structures---is the means by which a structured representation is derived from an unstructured representation.
+The reflective automation then operates on the structured representation, relying on an interpretation or denotation function to justify a correspondence between the structured and unstructured representations.<p>
+A couple of years ago, I presented a trick for blazing fast reification in two lines of <em>L</em><sub><i>tac</i></sub>---using the <tt>pattern</tt> tactic---which I termed reification by parametricity.
+While I still advocate for parametricity as the preferred method of domain-specific reification, I would like to present here yet another method.<p>
+While reification typically requires meta-programming features, I was surprised and delighted to discover that, in some restricted cases, reification can be performed entirely by a combination of the notation system and type inference.
+In some sense, this is trivial: by redefining the basic syntactic notations, a term can be &ldquo;reified&rdquo; merely by writing the same symbols in another scope.
+In another sense, though, this trick is quite surprising: we use the notation system merely to insert &ldquo;reify here&rdquo; functions at every atom, and the reification itself is in fact performed by type inference.
+My hope is that the audience will walk away with this new trick in their toolbox, and that some day some problem will come along demanding a slight generalization of this trick, and that generalization will be new and interesting in its own right.
+This, after all, is how reification by parametricity was discovered.<p>
+I propose to present the one example I have for this trick: reifying the type structure of a function in a way that allows manipulations of the arguments, such as uncurrying, reassociation of the uncurried structure, and reordering.
+I will present the simple code for this example in detail.
+My goal will be that the audience understand completely how it works, why it works, and how it might be used elsewhere.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="Evaluation2021Huhmann">3</a>]
+</td>
+<td class="bibtexitem">
+Linden&nbsp;B. Huhmann, Charles&nbsp;F. Harvey, Jason Gross, Anjal Uddin, Imtiaz
+  Choudhury, Kazi&nbsp;M. Ahmed, John&nbsp;M. Duxbury, Benjamin Bostick, and Alexander
+  van Geen.
+ Evaluation of a field kit for testing arsenic in paddy soil
+  contaminated by irrigation water.
+ <em>Geoderma</em>, 382:114755, January 2021.
+[&nbsp;<a href="jason-gross_bib.html#Evaluation2021Huhmann">bib</a>&nbsp;| 
+<a href="https://doi.org/10.1016/j.geoderma.2020.114755">DOI</a>&nbsp;| 
+<a href="http://www.sciencedirect.com/science/article/pii/S0016706120325106">publication (<img src="media/ScienceDirect-Mark/svg/elsevier-non-solus-new-grey.svg" alt="ScienceDirect" title="ScienceDirect" style="height: 1em;vertical-align: text-bottom;">)</a>&nbsp;]
+<blockquote><font size="-1">
+Rice is the primary crop in Bangladesh and rice yield is diminished due to the buildup of arsenic (As) in soil from irrigation with high-As groundwater. Soil testing with an inexpensive kit could help farmers target high-As soil for mitigation or decide to switch to a different crop that is less sensitive to As in soil. A total of 3240 field kit measurements of As in 0.5 g of fresh soil added to 50 mL of water were compared with total soil As concentrations measured on oven-dried homogenized soil by X-ray fluorescence (XRF). For sets of 12 soil samples collected within a series of rice fields, the average of kit As measurements was a linear function of the average of XRF measurements (<em>r</em><sup>2</sup> = 0.69). Taking into account that the kit overestimates water As concentrations by about a factor of two, the relationship suggests that about a quarter of the As in paddy soil is released in the kit’s reaction vessel. Using the relationship and considering XRF measurements as the reference, the 12-sample average determined correctly whether soil As was above or below a 30 mg/kg threshold in 86% of cases where soil As was above the threshold and in 79% of cases where soil As was below the threshold. We also used a Bayesian approach using 12 kit measurements to estimate the probability that soil As was above a given threshold indicated by XRF measurements. The Bayesian approach is theoretically optimal but was only slightly more accurate than the linear regression. These results show that rice farmers can identify high-As portions of their fields for mitigation using a dozen field kit measurements on fresh soil and base their decisions on this information.
+</font></blockquote>
+<blockquote><font size="-1">
+Keywords: Field kit, Rice paddy, Irrigation, Arsenic
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="FiatIJCAR20">4</a>]
+</td>
+<td class="bibtexitem">
+Cl&eacute;ment Pit-Claudel, Peng Wang, Benjamin Delaware, Jason Gross, and Adam
+  Chlipala.
+ Extensible extraction of efficient imperative programs with foreign
+  functions, manually managed memory, and proofs.
+ In Nicolas Peltier and Viorica Sofronie-Stokkermans, editors, <em>
+  Proceedings of the <a href="https://ijcar2020.org/">9th International Joint
+  Conference on Automated Reasoning (IJCAR'20)</a></em>, pages 119--137, Cham, June
+  2020. Springer International Publishing.
+[&nbsp;<a href="jason-gross_bib.html#FiatIJCAR20">bib</a>&nbsp;| 
+<a href="https://doi.org/10.1007/978-3-030-51054-1_7">DOI</a>&nbsp;| 
+<a href="https://link.springer.com/chapter/10.1007/978-3-030-51054-1_7">publication (<div style="overflow: hidden; max-width: 1em; display: inline-block; vertical-align: middle"><img src="media/Springer-Mark/PNG/logo.png" alt="Springer" title="Springer" style="height: 1.5em; vertical-align: text-bottom"></div>)</a>&nbsp;| 
+<a href="https://github.com/mit-plv/fiat">project (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)</a>&nbsp;]
+<blockquote><font size="-1">
+We present an original approach to sound program extraction in a proof assistant, using syntax-driven automation to derive correct-by-construction imperative programs from nondeterministic functional source code. Our approach does not require committing to a single inflexible compilation strategy and instead makes it straightforward to create domain-specific code translators. In addition to a small set of core definitions, our framework is a large, user-extensible collection of compilation rules each phrased to handle specific language constructs, code patterns, or data manipulations. By mixing and matching these pieces of logic, users can easily tailor extraction to their own domains and programs, getting maximum performance and ensuring correctness of the resulting assembly code.<p>
+Using this approach, we complete the first proof-generating pipeline that goes automatically from high-level specifications to assembly code. In our main case study, the original specifications are phrased to resemble SQL-style queries, while the final assembly code does manual memory management, calls out to foreign data structures and functions, and is suitable to deploy on resource-constrained platforms. The pipeline runs entirely within the Coq proof assistant, leading to final, linked assembly code with overall full-functional-correctness proofs in separation logic.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="fiat-crypto">5</a>]
+</td>
+<td class="bibtexitem">
+Andres Erbsen, Jade Philipoom, Jason Gross, Robert Sloan, and Adam Chlipala.
+ Simple high-level code for cryptographic arithmetic -- with proofs,
+  without compromises.
+ In <em>Proceedings of the
+  <a href="https://www.ieee-security.org/TC/SP2019/">40th IEEE Symposium on
+  Security and Privacy (S&amp;P'19)</a></em>, May 2019.
+[&nbsp;<a href="jason-gross_bib.html#fiat-crypto">bib</a>&nbsp;| 
+<a href="https://doi.org/10.1145/3421473.3421477">DOI</a>&nbsp;| 
+<a href="https://dl.acm.org/doi/10.1145/3421473.3421477?cid=99658666674"><img src='https://dl.acm.org/images/oa.gif' width='25' height='25' border='0' alt='ACM DL Author-ize Publication' title='ACM DL Author-ize Publication' style='vertical-align:middle'/></a>&nbsp;| 
+<a href="https://github.com/mit-plv/fiat-crypto">project (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2019-fiat-crypto-ieee-sp.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+We introduce a new approach for implementing cryptographic arithmetic in short high-level code with machine-checked proofs of functional correctness.
+We further demonstrate that simple partial evaluation is sufficient to transform into the fastest-known C code, breaking the decades-old pattern that the only fast implementations are those whose instruction-level steps were written out by hand.<p>
+These techniques were used to build an elliptic-curve library that achieves competitive performance for 80 prime fields and multiple CPU architectures, showing that implementation and proof effort scales with the number and complexity of conceptually different algorithms, not their use cases.
+As one outcome, we present the first verified high-performance implementation of P-256, the most widely used elliptic curve.
+Implementations from our library were included in BoringSSL to replace existing specialized code, for inclusion in several large deployments for Chrome, Android, and CloudFlare.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="reification-by-parametricity">6</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross, Andres Erbsen, and Adam Chlipala.
+ Reification by parametricity: Fast setup for proof by reflection, in
+  two lines of Ltac.
+ In Jeremy Avigad and Assia Mahboubi, editors, <em>Proceedings of the
+  <a href="https://itp2018.inria.fr/">9th International Conference on Interactive
+  Theorem Proving (ITP'18)</a></em>, pages 289--305, Cham, July 2018. Springer
+  International Publishing.
+[&nbsp;<a href="jason-gross_bib.html#reification-by-parametricity">bib</a>&nbsp;| 
+<a href="https://doi.org/10.1007/978-3-319-94821-8_17">DOI</a>&nbsp;| 
+<a href="https://link.springer.com/chapter/10.1007/978-3-319-94821-8_17">publication (<div style="overflow: hidden; max-width: 1em; display: inline-block; vertical-align: middle"><img src="media/Springer-Mark/PNG/logo.png" alt="Springer" title="Springer" style="height: 1.5em; vertical-align: text-bottom"></div>)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/itp-2018/reification-by-parametricity.pdf">presentation (.pdf)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/itp-2018/reification-by-parametricity.pptx">presentation (.pptx, annotated with notes)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2018-reification-by-parametricity-itp-draft.pdf">original conference submission (.pdf)</a>&nbsp;| 
+<a href="https://github.com/mit-plv/reification-by-parametricity">artifact (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2018-reification-by-parametricity-itp-camera-ready-supplementary.tar.gz">artifact (.tar.gz)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2018-reification-by-parametricity-itp-camera-ready.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+We present a new strategy for performing reification in Coq.
+That is, we show how to generate first-class abstract syntax trees from &ldquo;native&rdquo; terms of Coq's logic, suitable as inputs to verified compilers or procedures in the <em>proof-by-reflection</em> style.
+Our new strategy, based on simple generalization of subterms as variables, is straightforward, short, and fast.
+In its pure form, it is only complete for constants and function applications, but &ldquo;let&rdquo; binders, eliminators, lambdas, and quantifiers can be accommodated through lightweight coding conventions or preprocessing.<p>
+We survey the existing methods of reification across multiple Coq metaprogramming facilities, describing various design choices and tricks that can be used to speed them up, as well as various limitations.
+We report benchmarking results for 18 variants, in addition to our own, finding that our own reification outperforms 16 of these methods in all cases, and one additional method in some cases; writing an OCaml plugin is the only method tested to be faster.
+Our method is the most concise of the strategies we considered, reifying terms using only two to four lines of <tt>Ltac</tt>---beyond lists of the identifiers to reify and their reified variants.
+Additionally, our strategy automatically provides error messages that are no less helpful than Coq's own error messages.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="Gross2018-coq-workshop-proposal">7</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross.
+ Presentation proposal for teaching your rooster to crow in C, July
+  2018.
+ Presented at <a href="https://coqworkshop2018.inria.fr/">The Coq
+  Workshop 2018</a>.
+[&nbsp;<a href="jason-gross_bib.html#Gross2018-coq-workshop-proposal">bib</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2018/html/CoqWorkshop.NotationsCheatSheet.html">code (.html)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2018/NotationsCheatSheet.v">code (.v)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2018/coq-workshop-proposal-notations.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+Coq's notation system is both extremely powerful and confusingly ad-hoc.
+While powerful enough to pretty-print abstract syntax trees in most domain-specific languages, how to do so does not seem to be common knowledge.
+Typical questions arising from such an endeavor might include &ldquo;How do I pick notation levels?&rdquo;, &ldquo;Why are these notations clashing?&rdquo;, &ldquo;Which things should be marked as symbols?&rdquo;, &ldquo;How do I use boxes in <tt>format</tt>?&rdquo;, and &ldquo;How do I get parentheses to show up (only) where I want them to?&rdquo;
+This interactive presentation aims to serve as a guide to these questions and more, by demonstrating and explaining how to pretty-print subsets of C using only Coq's <tt>Notation</tt> mechanism.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="FiatSNAPL17">8</a>]
+</td>
+<td class="bibtexitem">
+Adam Chlipala, Benjamin Delaware, Samuel Duchovni, Jason Gross, Cl&eacute;ment
+  Pit-Claudel, Sorawit Suriyakarn, Peng Wang, and Katherine Ye.
+ The end of history? using a proof assistant to replace language
+  design with library design.
+ In Benjamin&nbsp;S. Lerner, Rastislav Bod&iacute;k, and Shriram
+  Krishnamurthi, editors, <em>Proceedings of the
+  <a href="https://snapl.org/2017/">The 2nd Summit oN Advances in Programming
+  Languages (SNAPL'17)</a></em>, volume&nbsp;71 of <em>Leibniz International Proceedings
+  in Informatics (LIPIcs)</em>, pages 3:1--3:15, Dagstuhl, Germany, May 2017.
+  Schloss Dagstuhl--Leibniz-Zentrum fuer Informatik.
+[&nbsp;<a href="jason-gross_bib.html#FiatSNAPL17">bib</a>&nbsp;| 
+<a href="https://doi.org/10.4230/LIPIcs.SNAPL.2017.3">DOI</a>&nbsp;| 
+<a href="http://plv.csail.mit.edu/fiat/">project homepage</a>&nbsp;| 
+<a href="http://adam.chlipala.net/papers/FiatSNAPL17/FiatSNAPL17Talk.odp">presentation (.odp)</a>&nbsp;| 
+<a href="http://adam.chlipala.net/papers/FiatSNAPL17/FiatSNAPL17Talk.pdf">presentation (.pdf)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/FiatSNAPL17.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+Functionality of software systems has exploded in part because of advances in programming-language support for packaging reusable functionality as libraries.  Developers benefit from the uniformity that comes of exposing many interfaces in the same language, as opposed to stringing together hodgepodges of command-line tools.  Domain-specific languages may be viewed as an evolution of the power of reusable interfaces, when those interfaces become so flexible as to deserve to be called programming languages.  However, common approaches to domain-specific languages give up many of the hard-won advantages of library-building in a rich common language, and even the traditional approach poses significant challenges in learning new APIs.  We suggest that instead of continuing to develop new domain-specific languages, our community should embrace library-based ecosystems within very expressive languages that mix programming and theorem proving.  Our prototype framework Fiat, a library for the Coq proof assistant, turns languages into easily comprehensible libraries via the key idea of modularizing <em>functionality</em> and <em>performance</em> away from each other, the former via <em>macros that desugar into higher-order logic</em> and the latter via <em>optimization scripts</em> that derive efficient code from logical programs.
+</font></blockquote>
+<blockquote><font size="-1">
+Keywords: domain-specific languages, synthesis, verification, proof assistants, software development
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="Bauer:2017:HLF:3018610.3018615">9</a>]
+</td>
+<td class="bibtexitem">
+Andrej Bauer, Jason Gross, Peter&nbsp;LeFanu Lumsdaine, Michael Shulman, Matthieu
+  Sozeau, and Bas Spitters.
+ The HoTT library: A formalization of homotopy type theory in Coq.
+ In <em>Proceedings of the <a href="http://cpp2017.mpi-sws.org/">6th ACM
+  SIGPLAN Conference on Certified Programs and Proofs</a></em>, CPP 2017, pages
+  164--172, New York, NY, USA, January 2017. ACM.
+[&nbsp;<a href="jason-gross_bib.html#Bauer:2017:HLF:3018610.3018615">bib</a>&nbsp;| 
+<a href="https://doi.org/10.1145/3018610.3018615">DOI</a>&nbsp;| 
+<a href="http://arxiv.org/abs/1610.04591">arXiv</a>&nbsp;| 
+<a href="https://dl.acm.org/doi/10.1145/3018610.3018615?cid=99658666674"><img src='https://dl.acm.org/images/oa.gif' width='25' height='25' border='0' alt='ACM DL Author-ize Publication' title='ACM DL Author-ize Publication' style='vertical-align:middle'/></a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2017-HoTT-formalization.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+We report on the development of the <em>HoTT library</em>, a formalization of homotopy type theory in the Coq proof assistant. It formalizes most of basic homotopy type theory, including univalence, higher inductive types, and significant amounts of synthetic homotopy theory, as well as category theory and modalities. The library has been used as a basis for several independent developments. We discuss the decisions that led to the design of the library, and we comment on the interaction of homotopy type theory with recently introduced features of Coq, such as universe polymorphism and private inductive types.
+</font></blockquote>
+<blockquote><font size="-1">
+Keywords: Coq, Higher inductive types, Homotopy type theory, Univalent foundations, Universe polymorphism
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="hott-hott-and-category-coq-experience">10</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross.
+ The HoTT/HoTT library in Coq: Designing for speed, July 2016.
+ Presented at <a href="http://icms2016.zib.de/">The 5th International
+  Congress on Mathematical Software (ICMS 2016)</a>.
+[&nbsp;<a href="jason-gross_bib.html#hott-hott-and-category-coq-experience">bib</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/icms-2016/hott-hott-and-category-coq-experience.pptx">presentation (.pptx, annotated with notes)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/icms-2016/hott-hott-and-category-coq-experience.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+The HoTT/HoTT library is one of the major Coq libraries exploring univalent foundations and homotopy type theory, the other being UniMath. The library includes formalization of the basic type formers, some axiomatic higher inductive types including the circle, the interval, suspensions, and quotients, a formalization of modalities (reflective subtoposes) using modules as a way to quantify over all universe levels, formalizations of Cantor spaces and the surreals, the basic theory of h-levels, and a significant amount of category theory centered around comma categories and functoriality of various constructions involving comma categories. A significant amount of work has gone into ensuring that the library compiles quickly. This talk will discuss the various constructions in the HoTT library, as well as the design choices and features, both of Coq and of univalent type theory, which allow our library to compile and typecheck quickly.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="jgross-masters-thesis">11</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross.
+ An extensible framework for synthesizing efficient, verified parsers.
+ Master's thesis, Massachusetts Institute of Technology, September
+  2015.
+[&nbsp;<a href="jason-gross_bib.html#jgross-masters-thesis">bib</a>&nbsp;| 
+<a href="http://hdl.handle.net/1721.1/101581">DSpace@MIT</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2015-jgross-thesis.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+Parsers have a long history in computer science. This thesis proposes a novel approach to synthesizing efficient, verified parsers by refinement, and presents a demonstration of this approach in the Fiat framework by synthesizing a parser for arithmetic expressions. The benefits of this framework may include more flexibility in the parsers that can be described, more control over the low-level details when necessary for performance, and automatic or mostly automatic correctness proofs.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="coqpl-15-ltac-profiler">12</a>]
+</td>
+<td class="bibtexitem">
+Tobias Tebbi and Jason Gross.
+ A profiler for Ltac, January 2015.
+ Presented at <a href="https://coqpl.cs.washington.edu/2014/07/31/">The
+  First International Workshop on Coq for PL (CoqPL'15)</a>.
+[&nbsp;<a href="jason-gross_bib.html#coqpl-15-ltac-profiler">bib</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2015-ltac-profiler.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+We present a simple profiler for the Ltac tactic language of the Coq Proof Assistent. It measures the time spent in invocations of primitive tactics as well as tactics defined in Ltac and their inner invocations. The profiler is controlled using Vernacular commands and prints an aggregated view that differentiates between tactic invocations depending on their call tree location.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="coqpl-15-coq-bug-minimizer">13</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross.
+ Coq bug minimizer, January 2015.
+ Presented at <a href="https://coqpl.cs.washington.edu/2014/07/31/">The
+  First International Workshop on Coq for PL (CoqPL'15)</a>.
+[&nbsp;<a href="jason-gross_bib.html#coqpl-15-coq-bug-minimizer">bib</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2015-coq-bug-minimizer-reviews.txt">reviews</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2015-coq-bug-minimizer.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+Are bugs the bane of your existence? Do you dread Coq upgrades, because they mean you'll have to spend days tracking down subtle failures deep in your developments? Have you ever hit an anomaly that just wouldn't go away, and wished you understood what triggered it? Have you ever been tormented by two blocks of code that looked identical, but behaved differently? Do you wish you submit more helpful error reports, but don't want to put in the time to construct minimal examples? If you answered &ldquo;yes&rdquo; to any of these questions, then the Coq Bug Minimizer is for you! Clone your own copy at <a href="https://github.com/JasonGross/coq-bug-finder">https://github.com/JasonGross/coq-bug-finder</a>.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="adt-synthesis">14</a>]
+</td>
+<td class="bibtexitem">
+Ben Delaware, Cl&eacute;ment Pit-Claudel, Jason Gross, and Adam Chlipala.
+ Fiat: Deductive synthesis of abstract data types in a proof
+  assistant.
+ In <em>Proceedings of the <a href="http://popl.mpi-sws.org/2015/">42nd
+  ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages
+  (POPL'15)</a></em>, January 2015.
+[&nbsp;<a href="jason-gross_bib.html#adt-synthesis">bib</a>&nbsp;| 
+<a href="https://doi.org/10.1145/2775051.2677006">DOI</a>&nbsp;| 
+<a href="https://dl.acm.org/doi/10.1145/2676726.2677006?cid=99658666674"><img src='https://dl.acm.org/images/oa.gif' width='25' height='25' border='0' alt='ACM DL Author-ize Publication' title='ACM DL Author-ize Publication' style='vertical-align:middle'/></a>&nbsp;| 
+<a href="http://plv.csail.mit.edu/fiat/">project homepage</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/media/2015-popl/fiat-20141031.tar.gz">artifact (.tar.gz)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/2015-adt-synthesis.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+We present Fiat, a library for the Coq proof assistant supporting refinement of declarative specifications into efficient functional programs with a high degree of automation. Each refinement process leaves a proof trail, checkable by the normal Coq kernel, justifying its soundness. We focus on the synthesis of abstract data types that package methods with private data. We demonstrate the utility of our framework by applying it to the synthesis of <i>query structures</i> -- abstract data types with SQL-like query and insert operations. Fiat includes a library for writing specifications of query structures in SQL-inspired notation, expressing operations over relations (tables) in terms of mathematical sets. This library includes a set of tactics for automating the refinement of these specifications into efficient, correct-by-construction OCaml code. Using these tactics, a programmer can generate such an implementation completely automatically by only specifying the equivalent of SQL indexes, data structures capturing useful views of the abstract data. We conclude by speculating on the new programming modularity possibilities enabled by an automated refinement system with proved-correct rules.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="2014-msr-x86proved-io">15</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross.
+ Presentation: Input, output, and automation in x86 proved, August
+  2014.
+ Presented at Microsoft Research, Cambridge, UK.
+[&nbsp;<a href="jason-gross_bib.html#2014-msr-x86proved-io">bib</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/msr-2014-final-talk/input-output-and-automation-in-x86proved.pptx">.pptx</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/msr-2014-final-talk/input-output-and-automation-in-x86proved.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+The x86proved project can now verify assembly programs with input and output! The code-reasoning throughout the project is now mostly automatic. Although not yet push-button verification (specification-level reasoning, in particular, leaves a lot to be desired) these tactics make a significant step towards that goal. This presentation will cover: <br> • some programs whose I/O behaviour has been verified (including a simplified version of the <tt>echo</tt> command-line tool) <br> • the new automation for fully automatic correctness proofs of Hoare-triple rules for basic instructions <br> • the new automation for applying Hoare rules for assembly instructions automatically <br> • the basics of how we're specifying and verifying the I/O behaviour of programs
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="category-coq-experience">16</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross, Adam Chlipala, and David&nbsp;I. Spivak.
+ Experience implementing a performant category-theory library in
+  Coq.
+ In Gerwin Klein and Ruben Gamboa, editors, <em>Proceedings of the
+  <a href="http://www.cs.uwyo.edu/~ruben/itp-2014">5th International Conference on
+  Interactive Theorem Proving (ITP'14)</a></em>, pages 275--291, Cham, July 2014.
+  Springer International Publishing.
+[&nbsp;<a href="jason-gross_bib.html#category-coq-experience">bib</a>&nbsp;| 
+<a href="https://doi.org/10.1007/978-3-319-08970-6_18">DOI</a>&nbsp;| 
+<a href="http://arxiv.org/abs/1401.7694">arXiv</a>&nbsp;| 
+<a href="http://link.springer.com/chapter/10.1007/978-3-319-08970-6_18">publication (<div style="overflow: hidden; max-width: 1em; display: inline-block; vertical-align: middle"><img src="media/Springer-Mark/PNG/logo.png" alt="Springer" title="Springer" style="height: 1.5em; vertical-align: text-bottom"></div>)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/itp-2014/category-coq-experience.pdf">presentation (.pdf)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/itp-2014/category-coq-experience.pptx">presentation (.pptx, annotated with notes)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience-itp-submission.pdf">original conference submission (.pdf)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience.html">full bibliography</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience-itp-2014-reviews.txt">reviews</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/category-coq-experience-itp-submission-final.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+We describe our experience implementing a broad category-theory library in Coq. Category theory and computational performance are not usually mentioned in the same breath, but we have needed substantial engineering effort to teach Coq to cope with large categorical constructions without slowing proof script processing unacceptably. In this paper, we share the lessons we have learned about how to represent very abstract mathematical objects and arguments in Coq and how future proof assistants might be designed to better support such reasoning. One particular encoding trick to which we draw attention allows category-theoretic arguments involving <em>duality</em> to be internalized in Coq's logic with definitional equality. Ours may be the largest Coq development to date that uses the relatively new Coq version developed by homotopy type theorists, and we reflect on which new features were especially helpful.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="Gross2014c-coq-workshop-proposal">17</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross.
+ Presentation proposal for three neat tricks in Coq 8.5, April 2014.
+ Presented at the
+  <a href="http://www.easychair.org/smart-program/VSL2014/Coq-index.html">6th Coq
+  Workshop</a>.
+[&nbsp;<a href="jason-gross_bib.html#Gross2014c-coq-workshop-proposal">bib</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_presentation.html">code (.html)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/tactics_in_terms_presentation.v">code (.v)</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/reviews.txt">reviews</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+Coq 8.5 has a number of new features. It has more powerful universe polymorphism support. It allows tactics to be run at interpretation to construct other terms. The ability to switch from Gallina to Ltac in arbitrary locations nicely complements the <tt>constr:</tt>&nbsp;notation permitting the switch from Ltac to Gallina in tactics, and opens up many new possibilities. I propose to present three tricks involving these new features: tactics in terms allows the construction of tactics that recurse under binders; tactics in terms together with typeclasses allows overloading notations based on the type of their arguments; and there is a way to talk about universe levels explicitly, helped along by tactics in terms.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="Gross2014b-popl-minute-madness">18</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross.
+ POPL: Minute madness: Category theory in Coq, and program
+  synthesis, January 2014.
+ Presented at the <a href="http://popl.mpi-sws.org/2014/">41st ACM
+  SIGPLAN-SIGACT Symposium on Principles of Programming Languages (POPL'14)</a>.
+[&nbsp;<a href="jason-gross_bib.html#Gross2014b-popl-minute-madness">bib</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/popl-2014-minute-madness/jason-gross-minute-madness.pdf">.pdf</a>&nbsp;]
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="Gross2014a-coq-wishlist">19</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross.
+ Jason Gross' wishlist for Coq, January 2014.
+[&nbsp;<a href="jason-gross_bib.html#Gross2014a-coq-wishlist">bib</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf">.pdf</a>&nbsp;]
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="Gross2013-csw">20</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross.
+ CSAIL student workshop 2013: Computational higher inductive types:
+  Computing with custom equalities, October 2013.
+ Presented at the
+  <a href="http://projects.csail.mit.edu/csw/2014/index.htm">2014 MIT CSAIL
+  Student Workshop</a>.
+[&nbsp;<a href="jason-gross_bib.html#Gross2013-csw">bib</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/csw-2013/jgross-presentation-no-pause.pdf">.pdf</a>&nbsp;]
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="Gross2013b-popl-minute-madness">21</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross.
+ POPL: Minute madness: Database management on top of category theory
+  in Coq: Category of relational schemas = category of categories, January
+  2013.
+ Presented at the <a href="http://popl.mpi-sws.org/2013/">40th ACM
+  SIGPLAN-SIGACT Symposium on Principles of Programming Languages (POPL'13)</a>.
+[&nbsp;<a href="jason-gross_bib.html#Gross2013b-popl-minute-madness">bib</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/popl-2013/minute-madness.pdf">.pdf</a>&nbsp;]
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="Gross2013a-database-in-categories">22</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross.
+ Building database management on top of category theory in Coq,
+  January 2013.
+ Presented as a student talk at the
+  <a href="http://popl.mpi-sws.org/2013/">40th ACM SIGPLAN-SIGACT Symposium on
+  Principles of Programming Languages (POPL'13)</a>.
+[&nbsp;<a href="jason-gross_bib.html#Gross2013a-database-in-categories">bib</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/presentations/popl-2013/jgross-student-talk.pdf">.pdf</a>&nbsp;]
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="Lake2011">23</a>]
+</td>
+<td class="bibtexitem">
+Brenden&nbsp;M. Lake, Ruslan Salakhutdinov, Jason Gross, and Joshua&nbsp;B. Tenenbaum.
+ One shot learning of simple visual concepts.
+ In <em>Proceedings of the
+  <a href="https://web.archive.org/web/20160823113042/http://cognitivesciencesociety.org/conference2011/index.html">33rd
+  Annual Conference of the Cognitive Science Society</a></em>, 2011.
+[&nbsp;<a href="jason-gross_bib.html#Lake2011">bib</a>&nbsp;| 
+<a href="https://jgross.scripts.mit.edu/alphabets/">project homepage</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/media/charactervideos.html">videos</a>&nbsp;| 
+<a href="https://people.csail.mit.edu/jgross/personal-website/papers/LakeEtAl2011CogSci.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+People can learn visual concepts from just one example, but it remains a mystery how this is accomplished. Many authors have proposed that transferred knowledge from more familiar concepts is a route to one shot learning, but what is the form of this abstract knowledge? One hypothesis is that the sharing of parts is core to one shot learning, and we evaluate this idea in the domain of handwritten characters, using a massive new dataset. These simple visual concepts have a rich internal part structure, yet they are particularly tractable for computational models. We introduce a generative model of how characters are composed from strokes, where knowledge from previous characters helps to infer the latent strokes in novel characters. The stroke model outperforms a competing state-of-the-art character model on a challenging one shot learning task, and it provides a good fit to human perceptual data.
+</font></blockquote>
+
+</td>
+</tr>
+</table><hr><p><em>This file was generated by
+<a href="http://www.lri.fr/~filliatr/bibtex2html/">bibtex2html</a> 1.99.</em></p>
