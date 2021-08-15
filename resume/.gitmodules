@@ -1,0 +1,3 @@
+[submodule "publications"]
+	path = publications
+	url = ../publications.git
