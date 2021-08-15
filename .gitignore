@@ -12,6 +12,7 @@
 *.toc
 *.vo
 .coq-native
+/Gemfile.lock
 /build*.tar.gz
 /jason-gross-drafts-stripped.html
 /jason-gross-drafts.html
