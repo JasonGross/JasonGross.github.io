@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Jason Gross | Personal website of Jason Gross</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Jason Gross" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Personal website of Jason Gross" />
+<meta property="og:description" content="Personal website of Jason Gross" />
+<link rel="canonical" href="http://localhost:4000/papers/source/fiat-crypto/pldi-2018/response.html" />
+<meta property="og:url" content="http://localhost:4000/papers/source/fiat-crypto/pldi-2018/response.html" />
+<meta property="og:site_name" content="Jason Gross" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Jason Gross" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"http://localhost:4000/papers/source/fiat-crypto/pldi-2018/response.html","headline":"Jason Gross","description":"Personal website of Jason Gross","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Jason Gross" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Jason Gross</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/">Jason Gross</a><a class="page-link" href="/papers/lob-paper/README-SUPPLEMENTAL.html">Lӧb’s Theorem: A functional pearl of dependently typed quining</a><a class="page-link" href="/papers/source/fiat-crypto/pldi-2017/rebuttal.html">General Clarifications</a><a class="page-link" href="/papers/source/fiat-crypto/popl-2018/reviews.html">POPL ‘18 Paper #2 Reviews and Comments</a><a class="page-link" href="/papers/source/lob-paper/README-SUPPLEMENTAL.html">Lӧb’s Theorem: A functional pearl of dependently typed quining</a><a class="page-link" href="/papers/source/rewriting/rewriting.html">Rewriter</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/doc/changes.html">Changes between Coq 8.7 and Coq 8.8</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/doc/debugging.html">Debugging from Coq toplevel using Caml trace mechanism</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/doc/econstr.html">Evar-insensitive terms (EConstr)</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/doc/proof-engine.html">Tutorial on the new proof engine for ML tactic writers</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/doc/xml-protocol.html">Coq XML Protocol</a><a class="page-link" href="/papers/lob-paper/">Lӧb’s Theorem: A functional pearl of dependently typed quining</a><a class="page-link" href="/papers/source/lob-paper/">Lӧb’s Theorem: A functional pearl of dependently typed quining</a><a class="page-link" href="/presentations/coq-8.6-wishlist/">coq-8.6-wishlist</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/">Coq</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/ci/">Continuous Integration for the Coq Proof Assistant</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/ci/user-overlays/">Add overlays for your pull requests in this directory</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/test-suite/">Coq Test Suite</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title"></h1>
+  </header>
+
+  <div class="post-content">
+    <p>Thanks for the wealth of suggestions on improving the paper’s presentation.  We’ll be glad to consider reordering material or adding new information.  For now, we’d like to point out how a few of the requests for expansion can be addressed with existing material in the paper, possibly in the context of some brief new clarifications.</p>
+
+<ul>
+  <li>Review A asks for more detailed comparison with other approaches.  First, on the side of performance of related code, competing approaches involve writing code by hand, and they generally copy quite faithfully from the best known implementations (e.g., OpenSSL), so our comparison with best-known versions is a strong proxy for the performance elements of HACL*, Jasmin, and Vale.  On the side of developer effort, we hope the message came across that, once a new algorithm is implemented in our framework, it becomes almost free to recompile for a new prime modulus or a new hardware-architecture class, while as far as we know, no high-performance past project had implemented/verified more than one configuration of that kind per algorithm.  Furthermore, we don’t know of any prior high-performance verification of NISTP256 or Montgomery reduction, which are used by the vast majority of TLS connections today.</li>
+  <li>Review B asks how developers use the tool and what comes out in the end.  We should perhaps have been clearer that our story involves at least three layers: the framework, generic implementations of algorithms, and instantiations of those algorithms to new parameters.  Targeting a new algorithm involves new coding and proving work (often nontrivial).  However, compiling an existing algorithm with new parameters really does only require the level of effort seen in the “Input” part of Figure 1 (no proving, etc.).  Much of the PLDI audience probably takes that sort of thing for granted, but as far as we know, all past approaches have required days of work to “recompile” an existing algorithm for new parameters.  And, yes, the “Output” part of Figure 1 is representative of what our tool produces.  It can be copied-and-pasted into a project, compiled and linked as a library, etc.</li>
+  <li>Review C expresses skepticism that crypto-library authors will use this tool.  We’re not sure what to say beyond our original (blinded) description of how one of the most used crypto libraries has already adopted our framework (and more has happened since paper submission).  It seems there is a nontrivial segment of the crypto world where stronger security guarantees can outweigh the last 10% of performance.</li>
+  <li>Review D says that we failed to discuss side-channel resistance, though we believe the issue was treated fully (but perhaps the presentation deserves rearranging).  In addition to several other mentions throughout the paper, see the paragraph starting on line 951.  Essentially, our target language only exposes instructions that preserve constant time.</li>
+  <li>Review D asks how the compiler chooses a representation.  The main part of our framework is designed to take the representation as a parameter, and it is hard to predict analytically which choice will perform best.  Thus, the experiments of Figure 3 involve heuristic generation of several representations per configuration (prime modulus and hardware target), compiling with each choice, and keeping the best-performing version.  Currently we only bother generating 2 representations per configuration, but it is easy to add new heuristics to the mix, with no new formal-methods work.</li>
+  <li>Review E asks who performs CPS translation and makes important design choices.  Currently the programmer implementing a new generic algorithm codes and proves a CPS version manually.  We would like to apply CPS translation automatically, though our initial efforts were flummoxed by the dependent types used by our direct-style algorithms.  Design choices like data-representation changes for points are also made manually by the programmer implementing a new algorithm.  From this question and parts of other reviews, we see that one point we failed to make clearly is that nontrivial manual work goes into implementing a new verified, generic algorithm, while we then provide a good automation story for instantiating that algorithm with new parameters.</li>
+</ul>
+
+<h1 id="more-responses-past-the-700-word-limit">More responses past the 700-word limit</h1>
+
+<p>We see two main use cases for the artifact produced in this work.
+First it can be used in a plug-and-play fashion to generate modular arithmetic code using the already-implemented strategies.
+This use case is rather narrow but very expedient when it is applicable.
+More importantly, we think there is a lot going for implementing new optimized algorithms in the style we propose.
+In particular, the code reuse made possible by our library (relying on a predictable specializing compiler) allows new operations (e.g. polynomial multiplication) and tricks (e.g. Karatsuba’s multiplication, interleaved carrying and reduction) to be added with less effort than using any other methodology we are aware of.
+For example, we implemented (and proved correct) Goldilocks Karatsuba multiplication at a conference lunch break when the author of the technique inquired whether our framework could support it.</p>
+
+<h2 id="review-d">Review D</h2>
+
+<p>We wholly agree that going from the C code our pipeline generates to speed-record-setting assembly code requires a whole new set of techniques in addition to those described in this paper.
+In our opinion, our output language is a natural interface between domain-specific and microarchitecture-specific optimizations, so that the C-to-assembly translation would not need to understand modular arithmetic or limbed representations to produce the best assembly we know to wish for.
+As the first reviewer points out, a simple translation validation should be sufficient to connect the assembly code that includes low-level optimizations to the output of our pipeline it was generated from.
+In fact, as seen in libsecp256k-c64, it is even possible to improve on our performance within the C language by munging source code (at the same abstraction layer as our generated code) into a form that happens to persuade a particular compiler to produce the desired register allocation and instruction schedule.</p>
+
+<p>Asymmetric cryptography implementations (ours and others’) use very simple CPU instructions and cannot benefit from the AES/SHA implementations found on some popular CPUs.</p>
+
+<p>We view producing straight-line code as a strength rather than a limitation.
+Any conventional compiler (e.g., gcc, ocamlc) could turn code roughly at the same abstraction layer as our templates into machine code that uses loops and branches, but so far it has taken significant amounts of (duplicative) human effort to produce specialized constant-time code.
+We do not generate loops or complicated control-flow logic (e.g., as seen in elliptic-curve scalar multiplication routines that use precomputed tables) because writing (and verifying) the code with loops in the first place is pleasant and reliable when compared to doing the same for specialized field-arithmetic implementations.
+Our library already includes verified code with iteration and conditionals, and we have integrated it (with proofs) with our generated field arithmetic.
+There is just nothing novel about it.</p>
+
+<h2 id="review-e">Review E</h2>
+
+<p>The question “In Section 2.3, are we assuming $p &lt; 2^{64}$?” may have been caused by our typo of $\mathbb N_p$ in place of plain $\mathbb N$ on line 333.  Sorry!</p>
+
+<p>On guarantees throughout our pipline: each run of the entire pipeline, from a specification like “a * b mod m” to C code, generates a proof certificate for functional correctness.
+For the early phases, the proof is generated anew using tactics on each execution.
+The flattening and word-size-selection transformations (the “certified compiler”) are proven correct once and for all, and this proof is appropriately linked into the end-to-end proof.</p>
+
+<p>The hand-modified version in section 6.2 is proven equivalent to the generated code it replaces before word-size selection using the <code class="language-plaintext highlighter-rouge">ring</code> tactic from Coq’s standard library.
+It is indeed ad-hoc but has an end-to-end Coq-checkable correctness proof against the same specification as the rest of the library, and the proof is very automated, in the tradition of translation validation.
+We also intended that manual transformation as an experiment to zero in on the nature of our performance gap with other code; we are not suggesting manual code tweaking as part of the intended usage of a future, improved version of our framework (and it is easily skipped now if being within 10% of best-known performance is acceptable).</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Jason Gross</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Jason Gross</li><li><a class="u-email" href="mailto:jgross@mit.edu">jgross@mit.edu</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/JasonGross"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">JasonGross</span></a></li><li><a href="https://www.twitter.com/diagram_chaser"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">diagram_chaser</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Personal website of Jason Gross</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

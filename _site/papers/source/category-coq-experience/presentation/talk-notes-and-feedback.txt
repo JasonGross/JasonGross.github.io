@@ -1,0 +1,207 @@
+Notes from MSR
+Get remote (ask ToyBox/IT), and bring batteries
+
+Record self giving presentation
+
+Avoid animations in the background when talking
+
+Add more words/relevant pictures to show when I’m talking for a while
+
+Say what I did at the beginning
+	Mention lessons
+	Make promotion of library
+	“I did library, but I’m going to be talking about experience”
+
+Put exponential laws example first, then talk about the outline
+
+Say who the talk is for
+
+Look into Mizar (types outside of logic)
+
+71 – make size smaller, include full term
+
+Initial vertex has unique edges (50)
+
+Fix water drop animation
+
+I say “uh” too much
+
+Mention on “how theorem provers should work” (~13) that it’s ok to not know category theory
+
+Move “do terms actually get this large” to after plots (26-28)
+
+32 – remove “fixing 0-arrows”, let intuition fill in beyond “turn arrows into vertices”
+
+Idea of transporting across equality is uncommon, say “cast using equality”
+
+Include images for talking about examples (such as funext, generalization) around 61
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Nesting is repeated binary operation
+
+Don’t say “Thing” in answers
+
+Recap – can describe next steps, take home points at end (at most 3 points)
+
+_Computational Category Theory_ by Whitehead
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Remove hidden slides
+Include image of person asking Coq if proof on blackboard is valid
+Include images on "two options" slide (38)
+
+
+
+
+
+
+
+Fix slide size - Design -> Slide Size -> 4:3
+Don't use pronouns ("this vertex", not "this"), don't need to use laser pointer (don't want to need to)
+Look into copyright issues with images (creative commons, cc)
+Only cover some points, point at paper for rest
+Don't focus on using higher inductive types, but on how they let you avoid setoids
+
+
+Animation: exponential laws, whiteboard -> Coq example/animation "straightforward" -> "is slow", maybe adjoint composition (at beginning) (gold standard is "math on whiteboard -> coq says yes/no)
+
+
+Combine lattices with graphs
+
+Mention category theory names on slide, with standard convention uniform across slides and sign posts
+
+Note that category theory stresses the proof assistant, mention, e.g., three primary techniques, concrete examples
+
+Make abstraction barrier example way more concrete
+
+
+Mention: "I did this library, these are the issues I ran into"
+
+
+
+
+Same rooster in all slides
+
+
+
+----------------------------------------
+
+
+Circus-ready slide:
+Doesn't say anything about talk, doesn't convey useful information, takes time to explain, un-useful
+
+
+
+
+Squiggly lines from abstract category theory to Coq, why the line is squiggly is why the talk is interesting
+
+Less text at beginning, more pictures
+
+
+Slide 18, "What do proof assistants do?" - not question, too ill-defined - make it more specific to Coq
+
+Slide 23, "How large is slow?" - make question clearer verbally, maybe - add to notes, what do I mean by "slow"
+
+
+highlight things relevant to users vs. developers (hash consing)
+
+
+note to hide the taskbar
+
+
+
+Put projections first, make example about opaque nesting clearer
+
+
+
+Slide 35, different sizes of roosters, maybe, or actual duplicated code
+Maybe include on a list of things I didn't have time to include
+
+Clear outline early on (preview of names of techniques, without explanation)
+
+First towards users, then towards devs
+
+Fewer things, more time on each one
+
+
+Move proof by reflection to list; no interesting conlcusions, keep image/joke in a non-technical part at beginning
+
+
+Note: don't explain setoids to people who don't know them
+
+
+Group slides into "messages for experts" where I don't explain too many things.  Don't include (much?) explanation of HITs
+
+
+
+
+Two options: abstract things from user point of view (fence), or into the metatheory (bionic rooster?)
+
+
+Outline
+
+Fix lack of field name for edges in graph record, colors in IsGraph
+
+Pause between intros of Mapping, IsMapping, hide IsMapping at first
+
+
+Move duality earlier
+Maybe include one example (note that judgmentality is important)
+
+Fix duality image 56->57
+
+Add more pictures to ConCaT slide, people don't know ConCaT; ask Bas about ssr, mathclasses, flatness
+
+
+Recap, conclusions at end (things in library, things I talked about, can jog memory of questions, url to library)
+
+
+Try to arrange practice talk at MSR
+
+Talk to Georges
+
+
+Use vector rooster
+
+
+sigT <-> sig coercions and projections break abstraction barriers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NOTES:
+ExponentialLaws4 is 21.67 in catdb
+Hand-draw black-board

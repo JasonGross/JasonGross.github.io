@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Changes between Coq 8.7 and Coq 8.8 | Jason Gross</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Changes between Coq 8.7 and Coq 8.8" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Personal website of Jason Gross" />
+<meta property="og:description" content="Personal website of Jason Gross" />
+<link rel="canonical" href="http://localhost:4000/presentations/coq-workshop-2018-coq/dev/doc/changes.html" />
+<meta property="og:url" content="http://localhost:4000/presentations/coq-workshop-2018-coq/dev/doc/changes.html" />
+<meta property="og:site_name" content="Jason Gross" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Changes between Coq 8.7 and Coq 8.8" />
+<script type="application/ld+json">
+{"@type":"WebPage","url":"http://localhost:4000/presentations/coq-workshop-2018-coq/dev/doc/changes.html","headline":"Changes between Coq 8.7 and Coq 8.8","description":"Personal website of Jason Gross","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Jason Gross" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Jason Gross</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/">Jason Gross</a><a class="page-link" href="/papers/lob-paper/README-SUPPLEMENTAL.html">Lӧb’s Theorem: A functional pearl of dependently typed quining</a><a class="page-link" href="/papers/source/fiat-crypto/pldi-2017/rebuttal.html">General Clarifications</a><a class="page-link" href="/papers/source/fiat-crypto/popl-2018/reviews.html">POPL ‘18 Paper #2 Reviews and Comments</a><a class="page-link" href="/papers/source/lob-paper/README-SUPPLEMENTAL.html">Lӧb’s Theorem: A functional pearl of dependently typed quining</a><a class="page-link" href="/papers/source/rewriting/rewriting.html">Rewriter</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/doc/changes.html">Changes between Coq 8.7 and Coq 8.8</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/doc/debugging.html">Debugging from Coq toplevel using Caml trace mechanism</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/doc/econstr.html">Evar-insensitive terms (EConstr)</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/doc/proof-engine.html">Tutorial on the new proof engine for ML tactic writers</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/doc/xml-protocol.html">Coq XML Protocol</a><a class="page-link" href="/papers/lob-paper/">Lӧb’s Theorem: A functional pearl of dependently typed quining</a><a class="page-link" href="/papers/source/lob-paper/">Lӧb’s Theorem: A functional pearl of dependently typed quining</a><a class="page-link" href="/presentations/coq-8.6-wishlist/">coq-8.6-wishlist</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/">Coq</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/ci/">Continuous Integration for the Coq Proof Assistant</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/dev/ci/user-overlays/">Add overlays for your pull requests in this directory</a><a class="page-link" href="/presentations/coq-workshop-2018-coq/test-suite/">Coq Test Suite</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Changes between Coq 8.7 and Coq 8.8</h1>
+  </header>
+
+  <div class="post-content">
+    <h2 id="changes-between-coq-87-and-coq-88">Changes between Coq 8.7 and Coq 8.8</h2>
+
+<h3 id="bug-tracker">Bug tracker</h3>
+
+<p>As of 18/10/2017, Coq uses <a href="https://github.com/coq/coq/issues">GitHub issues</a>
+as bug tracker.
+Old bug reports were migrated from Bugzilla to GitHub issues using
+<a href="https://gist.github.com/Zimmi48/d923e52f64fe17c72852d9c148bfcdc6#file-bugzilla2github">this migration script</a>
+as detailed in <a href="https://www.theozimmermann.net/2017/10/bugzilla-to-github/">this blog post</a>.</p>
+
+<p>All the bugs with a number below 1154 had to be renumbered, you can find
+a correspondence table <a href="/dev/bugzilla2github_stripped.csv">here</a>.
+All the other bugs kept their number.</p>
+
+<h3 id="ml-api">ML API</h3>
+
+<p>General deprecation</p>
+
+<ul>
+  <li>All functions marked [@@ocaml.deprecated] in 8.7 have been
+removed. Please, make sure your plugin is warning-free in 8.7 before
+trying to port it over 8.8.</li>
+</ul>
+
+<p>Proof engine</p>
+
+<p>Due to the introduction of <code class="language-plaintext highlighter-rouge">EConstr</code> in 8.7, it is not necessary to
+  track “goal evar normal form status” anymore, thus the type <code class="language-plaintext highlighter-rouge">'a
+  Proofview.Goal.t</code> loses its ghost argument. This may introduce some
+  minor incompatibilities at the typing level. Code-wise, things
+  should remain the same.</p>
+
+<p>We removed the following functions:</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Universes.unsafe_constr_of_global</code>: use <code class="language-plaintext highlighter-rouge">Global.constr_of_global_in_context</code>
+instead. The returned term contains De Bruijn universe variables. If you don’t
+depend on universes being instantiated, simply drop the context.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Universes.unsafe_type_of_global</code>: same as above with
+<code class="language-plaintext highlighter-rouge">Global.type_of_global_in_context</code></p>
+  </li>
+</ul>
+
+<p>We changed the type of the following functions:</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Global.body_of_constant_body</code>: now also returns the abstract universe context.
+The returned term contains De Bruijn universe variables.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Global.body_of_constant</code>: same as above.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Constrinterp.*</code> generally, many functions that used to take an
+<code class="language-plaintext highlighter-rouge">evar_map ref</code> have been now switched to functions that will work in
+a functional way. The old style of passing <code class="language-plaintext highlighter-rouge">evar_map</code>s as references
+is not supported anymore.</p>
+  </li>
+</ul>
+
+<p>Changes in the abstract syntax tree:</p>
+
+<ul>
+  <li>The practical totality of the AST has been nodified using
+<code class="language-plaintext highlighter-rouge">CAst.t</code>. This means that all objects coming from parsing will be
+indeed wrapped in a <code class="language-plaintext highlighter-rouge">CAst.t</code>. <code class="language-plaintext highlighter-rouge">Loc.located</code> is on its way to
+deprecation. Some minor interfaces changes have resulted from
+this.</li>
+</ul>
+
+<p>We have changed the representation of the following types:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Lib.object_prefix</code> is now a record instead of a nested tuple.</li>
+</ul>
+
+<p>Some tactics and related functions now support static configurability, e.g.:</p>
+
+<ul>
+  <li>injectable, dEq, etc. takes an argument ~keep_proofs which,
+    <ul>
+      <li>if None, tells to behave as told with the flag Keep Proof Equalities</li>
+      <li>if Some b, tells to keep proof equalities iff b is true</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Declaration of printers for arguments used only in vernac command</p>
+
+<ul>
+  <li>It should now use “declare_extra_vernac_genarg_pprule” rather than
+“declare_extra_genarg_pprule”, otherwise, a failure at runtime might
+happen. An alternative is to register the corresponding argument as
+a value, using “Geninterp.register_val0 wit None”.</li>
+</ul>
+
+<h3 id="stm-api">STM API</h3>
+
+<p>The STM API has seen a general overhaul. The main change is the
+introduction of a “Coq document” type, which all operations now take
+as a parameter. This effectively functionalize the STM API and will
+allow in the future to handle several documents simultaneously.</p>
+
+<p>The main remarkable point is that key implicit global parameters such
+as load-paths and required modules are now arguments to the document
+creation function. This helps enforcing some key invariants.</p>
+
+<h3 id="xml-ide-protocol">XML IDE Protocol</h3>
+
+<ul>
+  <li>Before 8.8, <code class="language-plaintext highlighter-rouge">Query</code> only executed the first command present in the
+ <code class="language-plaintext highlighter-rouge">query</code> string; starting with 8.8, the caller may include several
+ statements. This is useful for instance for temporarily setting an
+ option and then executing a command.</li>
+</ul>
+
+<h2 id="changes-between-coq-86-and-coq-87">Changes between Coq 8.6 and Coq 8.7</h2>
+
+<h3 id="ocaml">Ocaml</h3>
+
+<p>Coq is compiled with <code class="language-plaintext highlighter-rouge">-safe-string</code> enabled and requires plugins to do
+the same. This means that code using <code class="language-plaintext highlighter-rouge">String</code> in an imperative way
+will fail to compile now. They should switch to <code class="language-plaintext highlighter-rouge">Bytes.t</code></p>
+
+<p>Configure supports passing flambda options, use <code class="language-plaintext highlighter-rouge">-flambda-opts OPTS</code>
+with a flambda-enabled Ocaml to tweak the compilation to your taste.</p>
+
+<h3 id="ml-api-1">ML API</h3>
+
+<ul>
+  <li>
+    <p>Added two functions for declaring hooks to be executed in reduction
+functions when some given constants are traversed:</p>
+
+    <ul>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">declare_reduction_effect</code>: to declare a hook to be applied when some
+constant are visited during the execution of some reduction functions
+(primarily cbv).</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">set_reduction_effect</code>: to declare a constant on which a given effect
+hook should be called.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>We renamed the following functions:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Context.Rel.Declaration.fold   -&gt; Context.Rel.Declaration.fold_constr
+Context.Named.Declaration.fold -&gt; Context.Named.Declaration.fold_constr
+Printer.pr_var_list_decl       -&gt; Printer.pr_compacted_decl
+Printer.pr_var_decl            -&gt; Printer.pr_named_decl
+Nameops.lift_subscript         -&gt; Nameops.increment_subscript
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>We removed the following functions:</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Termops.compact_named_context_reverse</code>: practical substitute is <code class="language-plaintext highlighter-rouge">Termops.compact_named_context</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">Namegen.to_avoid</code>: equivalent substitute is <code class="language-plaintext highlighter-rouge">Names.Id.List.mem</code>.</li>
+    </ul>
+  </li>
+  <li>
+    <p>We renamed the following modules:</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Context.ListNamed</code> -&gt; <code class="language-plaintext highlighter-rouge">Context.Compacted</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>The following type aliases where removed</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Context.section_context</code>: it was just an alias for <code class="language-plaintext highlighter-rouge">Context.Named.t</code> which is still available.</li>
+    </ul>
+  </li>
+  <li>
+    <p>The module <code class="language-plaintext highlighter-rouge">Constrarg</code> was merged into <code class="language-plaintext highlighter-rouge">Stdarg</code>.</p>
+  </li>
+  <li>
+    <p>The following types have been moved and modified:</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">local_binder</code> -&gt; <code class="language-plaintext highlighter-rouge">local_binder_expr</code></li>
+      <li><code class="language-plaintext highlighter-rouge">glob_binder</code> merged with <code class="language-plaintext highlighter-rouge">glob_decl</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>The following constructors have been renamed:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LocalRawDef -&gt; CLocalDef
+LocalRawAssum -&gt; CLocalAssum
+LocalPattern -&gt; CLocalPattern
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>In <code class="language-plaintext highlighter-rouge">Constrexpr_ops</code>:</p>
+
+    <p>Deprecating <code class="language-plaintext highlighter-rouge">abstract_constr_expr</code> in favor of <code class="language-plaintext highlighter-rouge">mkCLambdaN</code>, and
+<code class="language-plaintext highlighter-rouge">prod_constr_expr</code> in favor of <code class="language-plaintext highlighter-rouge">mkCProdN</code>. Note: the first ones were
+interpreting <code class="language-plaintext highlighter-rouge">(x y z:_)</code> as <code class="language-plaintext highlighter-rouge">(x:_) (y:_) (z:_)</code> while the second
+ones were preserving the original sharing of the type.</p>
+  </li>
+  <li>
+    <p>In <code class="language-plaintext highlighter-rouge">Nameops</code>:</p>
+
+    <p>The API has been made more uniform. New combinators added in the
+<code class="language-plaintext highlighter-rouge">Name</code> space name. Function <code class="language-plaintext highlighter-rouge">out_name</code> now fails with <code class="language-plaintext highlighter-rouge">IsAnonymous</code>
+rather than with <code class="language-plaintext highlighter-rouge">Failure "Nameops.out_name"</code>.</p>
+  </li>
+  <li>
+    <p>Location handling and AST attributes:</p>
+
+    <p>Location handling has been reworked. First, <code class="language-plaintext highlighter-rouge">Loc.ghost</code> has been
+removed in favor of an option type, all objects carrying an optional
+source code location have been switched to use <code class="language-plaintext highlighter-rouge">Loc.t option</code>.</p>
+
+    <p>Storage of location information has been also refactored. The main
+datatypes representing Coq AST (<code class="language-plaintext highlighter-rouge">constrexpr</code>, <code class="language-plaintext highlighter-rouge">glob_expr</code>) have been
+switched to a generic “node with attributes” representation <code class="language-plaintext highlighter-rouge">'a
+CAst.ast</code>, which is a record of the form:</p>
+
+    <div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="k">'</span><span class="n">a</span> <span class="n">ast</span> <span class="o">=</span> <span class="n">private</span> <span class="p">{</span>
+  <span class="n">v</span>   <span class="o">:</span> <span class="k">'</span><span class="n">a</span><span class="p">;</span>
+  <span class="n">loc</span> <span class="o">:</span> <span class="nn">Loc</span><span class="p">.</span><span class="n">t</span> <span class="n">option</span><span class="p">;</span>
+  <span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <p>consumers of AST nodes are recommended to use accessor-based pattern
+matching <code class="language-plaintext highlighter-rouge">{ v; loc }</code> to destruct <code class="language-plaintext highlighter-rouge">ast</code> object. Creation is done
+with <code class="language-plaintext highlighter-rouge">CAst.make ?loc obj</code>, where the attributes are optional. Some
+convenient combinators are provided in the module. A typical match:</p>
+
+    <div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">|</span> <span class="nc">CCase</span><span class="p">(</span><span class="n">loc</span><span class="o">,</span> <span class="n">a1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nc">CCase</span><span class="p">(</span><span class="n">loc</span><span class="o">,</span> <span class="n">f</span> <span class="n">a1</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>is now done as:</p>
+    <div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">|</span> <span class="p">{</span> <span class="n">v</span> <span class="o">=</span> <span class="nc">CCase</span><span class="p">(</span><span class="n">a1</span><span class="p">);</span> <span class="n">loc</span> <span class="p">}</span> <span class="o">-&gt;</span> <span class="nn">CAst</span><span class="p">.</span><span class="n">make</span> <span class="o">?</span><span class="n">loc</span> <span class="o">@@</span> <span class="nc">CCase</span><span class="p">(</span><span class="n">f</span> <span class="n">a1</span><span class="p">)</span>
+
+</code></pre></div>    </div>
+    <p>or even better, if plan to preserve the attributes you can wrap your
+top-level function in <code class="language-plaintext highlighter-rouge">CAst.map</code> to have:</p>
+
+    <div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">|</span> <span class="nc">CCase</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nc">CCase</span><span class="p">(</span><span class="n">f</span> <span class="n">a1</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>This scheme based on records enables easy extensibility of the AST
+node type without breaking compatibility.</p>
+
+    <p>Not all objects carrying a location have been converted to the
+generic node representation, some of them may be converted in the
+future, for some others the abstraction is not just worth it.</p>
+
+    <p>Thus, we still maintain a <code class="language-plaintext highlighter-rouge">'a Loc.located == Loc.t option * a'</code>,
+tuple type which should be treated as private datatype (ok to match
+against, but forbidden to manually build), and it is mandatory to
+use it for objects that carry a location. This policy has been
+implemented in the whole code base. Matching a located object hasn’t
+changed, however, <code class="language-plaintext highlighter-rouge">Loc.tag ?loc obj</code> must be used to build one.</p>
+  </li>
+  <li>
+    <p>In <code class="language-plaintext highlighter-rouge">GOption</code>:</p>
+
+    <p>Support for non-synchronous options has been removed. Now all
+options are handled as a piece of normal document state, and thus
+passed to workers, etc… As a consequence, the field
+<code class="language-plaintext highlighter-rouge">Goptions.optsync</code> has been removed.</p>
+  </li>
+  <li>
+    <p>In <code class="language-plaintext highlighter-rouge">Coqlib</code> / reference location:</p>
+
+    <p>We have removed from Coqlib functions returning <code class="language-plaintext highlighter-rouge">constr</code> from
+names. Now it is only possible to obtain references, that must be
+processed wrt the particular needs of the client.
+We have changed in constrintern the functions returnin <code class="language-plaintext highlighter-rouge">constr</code> as
+well to return global references instead.</p>
+
+    <p>Users of <code class="language-plaintext highlighter-rouge">coq_constant/gen_constant</code> can do
+<code class="language-plaintext highlighter-rouge">Universes.constr_of_global (find_reference dir r)</code> <em>however</em> note
+the warnings in the <code class="language-plaintext highlighter-rouge">Universes.constr_of_global</code> in the
+documentation. It is very likely that you were previously suffering
+from problems with polymorphic universes due to using
+<code class="language-plaintext highlighter-rouge">Coqlib.coq_constant</code> that used to do this. You must rather use
+<code class="language-plaintext highlighter-rouge">pf_constr_of_global</code> in tactics and <code class="language-plaintext highlighter-rouge">Evarutil.new_global</code> variants
+when constructing terms in ML (see univpoly.txt for more information).</p>
+  </li>
+</ul>
+
+<h3 id="tactic-api">Tactic API</h3>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">pf_constr_of_global</code> now returns a tactic instead of taking a continuation.
+Thus it only generates one instance of the global reference, and it is the
+caller’s responsibility to perform a focus on the goal.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">pf_global</code>, <code class="language-plaintext highlighter-rouge">construct_reference</code>, <code class="language-plaintext highlighter-rouge">global_reference</code>,
+<code class="language-plaintext highlighter-rouge">global_reference_in_absolute_module</code> now return a <code class="language-plaintext highlighter-rouge">global_reference</code>
+instead of a <code class="language-plaintext highlighter-rouge">constr</code>.</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">tclWEAK_PROGRESS</code> and <code class="language-plaintext highlighter-rouge">tclNOTSAMEGOAL</code> tacticals were removed. Their usecase
+was very specific. Use <code class="language-plaintext highlighter-rouge">tclPROGRESS</code> instead.</p>
+  </li>
+  <li>
+    <p>New (internal) tactical <code class="language-plaintext highlighter-rouge">tclINDEPENDENTL</code> that combined with enter_one allows
+to iterate a non-unit tactic on all goals and access their returned values.</p>
+  </li>
+  <li>
+    <p>The unsafe flag of the <code class="language-plaintext highlighter-rouge">Refine.refine</code> function and its variants has been
+renamed and dualized into typecheck and has been made mandatory.</p>
+  </li>
+</ul>
+
+<h3 id="ltac-api">Ltac API</h3>
+
+<p>Many Ltac specific API has been moved in its own ltac/ folder. Amongst other
+important things:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Pcoq.Tactic</code> -&gt; <code class="language-plaintext highlighter-rouge">Pltac</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Constrarg.wit_tactic</code> -&gt; <code class="language-plaintext highlighter-rouge">Tacarg.wit_tactic</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Constrarg.wit_ltac</code> -&gt; <code class="language-plaintext highlighter-rouge">Tacarg.wit_ltac</code></li>
+  <li>API below <code class="language-plaintext highlighter-rouge">ltac/</code> that accepted a *<code class="language-plaintext highlighter-rouge">_tactic_expr</code> now accept a *<code class="language-plaintext highlighter-rouge">_generic_argument</code>
+instead</li>
+  <li>Some printing functions were moved from <code class="language-plaintext highlighter-rouge">Pptactic</code> to <code class="language-plaintext highlighter-rouge">Pputils</code></li>
+  <li>A part of <code class="language-plaintext highlighter-rouge">Tacexpr</code> has been moved to <code class="language-plaintext highlighter-rouge">Tactypes</code></li>
+  <li>The <code class="language-plaintext highlighter-rouge">TacFun</code> tactic expression constructor now takes a <code class="language-plaintext highlighter-rouge">Name.t list</code> for the
+variable list rather than an <code class="language-plaintext highlighter-rouge">Id.t option list</code>.</li>
+</ul>
+
+<p>The folder itself has been turned into a plugin. This does not change much,
+but because it is a packed plugin, it may wreak havoc for third-party plugins
+depending on any module defined in the <code class="language-plaintext highlighter-rouge">ltac/</code> directory. Namely, even if
+everything looks OK at compile time, a plugin can fail to load at link time
+because it mistakenly looks for a module <code class="language-plaintext highlighter-rouge">Foo</code> instead of <code class="language-plaintext highlighter-rouge">Ltac_plugin.Foo</code>, with
+an error of the form:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: while loading myplugin.cmxs, no implementation available for Foo.
+</code></pre></div></div>
+
+<p>In particular, most <code class="language-plaintext highlighter-rouge">EXTEND</code> macros will trigger this problem even if they
+seemingly do not use any Ltac module, as their expansion do.</p>
+
+<p>The solution is simple, and consists in adding a statement <code class="language-plaintext highlighter-rouge">open Ltac_plugin</code>
+in each file using a Ltac module, before such a module is actually called. An
+alternative solution would be to fully qualify Ltac modules, e.g. turning any
+call to Tacinterp into <code class="language-plaintext highlighter-rouge">Ltac_plugin.Tacinterp</code>. Note that this solution does not
+work for <code class="language-plaintext highlighter-rouge">EXTEND</code> macros though.</p>
+
+<h3 id="additional-changes-in-tactic-extensions">Additional changes in tactic extensions</h3>
+
+<p>Entry <code class="language-plaintext highlighter-rouge">constr_with_bindings</code> has been renamed into
+<code class="language-plaintext highlighter-rouge">open_constr_with_bindings</code>. New entry <code class="language-plaintext highlighter-rouge">constr_with_bindings</code> now
+uses type classes and rejects terms with unresolved holes.</p>
+
+<h3 id="error-handling">Error handling</h3>
+
+<ul>
+  <li>
+    <p>All error functions now take an optional parameter <code class="language-plaintext highlighter-rouge">?loc:Loc.t</code>. For
+functions that used to carry a suffix <code class="language-plaintext highlighter-rouge">_loc</code>, such suffix has been
+dropped.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">errorlabstrm</code> and <code class="language-plaintext highlighter-rouge">error</code> has been removed in favor of <code class="language-plaintext highlighter-rouge">user_err</code>.</p>
+  </li>
+  <li>
+    <p>The header parameter to <code class="language-plaintext highlighter-rouge">user_err</code> has been made optional.</p>
+  </li>
+</ul>
+
+<h3 id="pretty-printing">Pretty printing</h3>
+
+<p>Some functions have been removed, see pretty printing below for more
+details.</p>
+
+<h4 id="pretty-printing-and-xml-protocol">Pretty Printing and XML protocol</h4>
+
+<p>The type <code class="language-plaintext highlighter-rouge">std_cmdpps</code> has been reworked and made the canonical “Coq rich
+document type”. This allows for a more uniform handling of printing
+(specially in IDEs). The main consequences are:</p>
+
+<ul>
+  <li>
+    <p>Richpp has been confined to IDE use. Most of previous uses of the
+<code class="language-plaintext highlighter-rouge">richpp</code> type should be replaced now by <code class="language-plaintext highlighter-rouge">Pp.std_cmdpps</code>. Main API
+has been updated.</p>
+  </li>
+  <li>
+    <p>The XML protocol will send a new message type of <code class="language-plaintext highlighter-rouge">pp</code>, which should
+be rendered client-wise.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Set Printing Width</code> is deprecated, now width is controlled
+client-side.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Pp_control</code> has removed. The new module <code class="language-plaintext highlighter-rouge">Topfmt</code> implements
+console control for the toplevel.</p>
+  </li>
+  <li>
+    <p>The impure tag system in <code class="language-plaintext highlighter-rouge">Pp</code> has been removed. This also does away
+with the printer signatures and functors. Now printers tag
+unconditionally.</p>
+  </li>
+  <li>
+    <p>The following functions have been removed from <code class="language-plaintext highlighter-rouge">Pp</code>:</p>
+
+    <div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">stras</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">-&gt;</span> <span class="n">std_ppcmds</span>
+<span class="k">val</span> <span class="n">tbrk</span>  <span class="o">:</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="n">std_ppcmds</span>
+<span class="k">val</span> <span class="n">tab</span>   <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="n">std_ppcmds</span>
+<span class="k">val</span> <span class="n">pifb</span>  <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="n">std_ppcmds</span>
+<span class="k">val</span> <span class="n">comment</span>  <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="n">std_ppcmds</span>
+<span class="k">val</span> <span class="n">comments</span> <span class="o">:</span> <span class="p">((</span><span class="kt">int</span> <span class="o">*</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">list</span> <span class="n">ref</span>
+<span class="k">val</span> <span class="n">eval_ppcmds</span> <span class="o">:</span> <span class="n">std_ppcmds</span> <span class="o">-&gt;</span> <span class="n">std_ppcmds</span>
+<span class="k">val</span> <span class="n">is_empty</span> <span class="o">:</span> <span class="n">std_ppcmds</span> <span class="o">-&gt;</span> <span class="kt">bool</span>
+<span class="k">val</span> <span class="n">t</span> <span class="o">:</span> <span class="n">std_ppcmds</span> <span class="o">-&gt;</span> <span class="n">std_ppcmds</span>
+<span class="k">val</span> <span class="n">hb</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="n">std_ppcmds</span>
+<span class="k">val</span> <span class="n">vb</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="n">std_ppcmds</span>
+<span class="k">val</span> <span class="n">hvb</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="n">std_ppcmds</span>
+<span class="k">val</span> <span class="n">hovb</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">-&gt;</span> <span class="n">std_ppcmds</span>
+<span class="k">val</span> <span class="n">tb</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="n">std_ppcmds</span>
+<span class="k">val</span> <span class="n">close</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="n">std_ppcmds</span>
+<span class="k">val</span> <span class="n">tclose</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="n">std_ppcmds</span>
+<span class="k">val</span> <span class="n">open_tag</span> <span class="o">:</span> <span class="nn">Tag</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">std_ppcmds</span>
+<span class="k">val</span> <span class="n">close_tag</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="n">std_ppcmds</span>
+<span class="k">val</span> <span class="n">msg_with</span>  <span class="o">:</span> <span class="o">...</span>
+
+<span class="k">module</span> <span class="nc">Tag</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="stm-api-1">Stm API</h3>
+
+<ul>
+  <li>
+    <p>We have streamlined the <code class="language-plaintext highlighter-rouge">Stm</code> API, now <code class="language-plaintext highlighter-rouge">add</code> and <code class="language-plaintext highlighter-rouge">query</code> take a
+<code class="language-plaintext highlighter-rouge">coq_parsable</code> instead a <code class="language-plaintext highlighter-rouge">string</code> so clients can have more control
+over their input stream. As a consequence, their types have been
+modified.</p>
+  </li>
+  <li>
+    <p>The main parsing entry point has also been moved to the
+<code class="language-plaintext highlighter-rouge">Stm</code>. Parsing is considered a synchronous operation so it will
+either succeed or raise an exception.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Feedback</code> is now only emitted for asynchronous operations. As a
+consequence, it always carries a valid stateid and the type has
+changed to accommodate that.</p>
+  </li>
+  <li>
+    <p>A few unused hooks were removed due to cleanups, no clients known.</p>
+  </li>
+</ul>
+
+<h3 id="toplevel-and-vernacular-api">Toplevel and Vernacular API</h3>
+
+<ul>
+  <li>
+    <p>The components related to vernacular interpretation have been moved
+to their own folder <code class="language-plaintext highlighter-rouge">vernac/</code> whereas toplevel now contains the
+proper toplevel shell and compiler.</p>
+  </li>
+  <li>
+    <p>Coq’s toplevel has been ported to directly use the common <code class="language-plaintext highlighter-rouge">Stm</code>
+API. The signature of a few functions has changed as a result.</p>
+  </li>
+</ul>
+
+<h3 id="xml-protocol">XML Protocol</h3>
+
+<ul>
+  <li>
+    <p>The legacy <code class="language-plaintext highlighter-rouge">Interp</code> call has been turned into a noop.</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">query</code> call has been modified, now it carries a mandatory
+<code class="language-plaintext highlighter-rouge">route_id</code> integer parameter, that associated the result of such
+query with its generated feedback.</p>
+  </li>
+</ul>
+
+<h2 id="changes-between-coq-85-and-coq-86">Changes between Coq 8.5 and Coq 8.6</h2>
+
+<h3 id="parsing">Parsing</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Pcoq.parsable</code> now takes an extra optional filename argument so as to
+bind locations to a file name when relevant.</p>
+
+<h3 id="files">Files</h3>
+
+<p>To avoid clashes with OCaml’s compiler libs, the following files were renamed:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kernel/closure.ml{,i} -&gt; kernel/cClosure.ml{,i}
+lib/errors.ml{,i} -&gt; lib/cErrors.ml{,i}
+toplevel/cerror.ml{,i} -&gt; toplevel/explainErr.mli{,i}
+</code></pre></div></div>
+
+<p>All IDE-specific files, including the XML protocol have been moved to <code class="language-plaintext highlighter-rouge">ide/</code></p>
+
+<h3 id="reduction-functions">Reduction functions</h3>
+
+<p>In <code class="language-plaintext highlighter-rouge">closure.ml</code>, we introduced the more precise reduction flags <code class="language-plaintext highlighter-rouge">fMATCH</code>, <code class="language-plaintext highlighter-rouge">fFIX</code>,
+<code class="language-plaintext highlighter-rouge">fCOFIX</code>.</p>
+
+<p>We renamed the following functions:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Closure.betadeltaiota -&gt; Closure.all
+Closure.betadeltaiotanolet -&gt; Closure.allnolet
+Reductionops.beta -&gt; Closure.beta
+Reductionops.zeta -&gt; Closure.zeta
+Reductionops.betaiota -&gt; Closure.betaiota
+Reductionops.betaiotazeta -&gt; Closure.betaiotazeta
+Reductionops.delta -&gt; Closure.delta
+Reductionops.betalet -&gt; Closure.betazeta
+Reductionops.betadelta -&gt; Closure.betadeltazeta
+Reductionops.betadeltaiota -&gt; Closure.all
+Reductionops.betadeltaiotanolet -&gt; Closure.allnolet
+Closure.no_red -&gt; Closure.nored
+Reductionops.nored -&gt; Closure.nored
+Reductionops.nf_betadeltaiota -&gt; Reductionops.nf_all
+Reductionops.whd_betadelta -&gt; Reductionops.whd_betadeltazeta
+Reductionops.whd_betadeltaiota -&gt; Reductionops.whd_all
+Reductionops.whd_betadeltaiota_nolet -&gt; Reductionops.whd_allnolet
+Reductionops.whd_betadelta_stack -&gt; Reductionops.whd_betadeltazeta_stack
+Reductionops.whd_betadeltaiota_stack -&gt; Reductionops.whd_all_stack
+Reductionops.whd_betadeltaiota_nolet_stack -&gt; Reductionops.whd_allnolet_stack
+Reductionops.whd_betadelta_state -&gt; Reductionops.whd_betadeltazeta_state
+Reductionops.whd_betadeltaiota_state -&gt; Reductionops.whd_all_state
+Reductionops.whd_betadeltaiota_nolet_state -&gt; Reductionops.whd_allnolet_state
+Reductionops.whd_eta -&gt; Reductionops.shrink_eta
+Tacmach.pf_whd_betadeltaiota -&gt; Tacmach.pf_whd_all
+Tacmach.New.pf_whd_betadeltaiota -&gt; Tacmach.New.pf_whd_all
+</code></pre></div></div>
+
+<p>And removed the following ones:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reductionops.whd_betaetalet
+Reductionops.whd_betaetalet_stack
+Reductionops.whd_betaetalet_state
+Reductionops.whd_betadeltaeta_stack
+Reductionops.whd_betadeltaeta_state
+Reductionops.whd_betadeltaeta
+Reductionops.whd_betadeltaiotaeta_stack
+Reductionops.whd_betadeltaiotaeta_state
+Reductionops.whd_betadeltaiotaeta
+</code></pre></div></div>
+
+<p>In <code class="language-plaintext highlighter-rouge">intf/genredexpr.mli</code>, <code class="language-plaintext highlighter-rouge">fIota</code> was replaced by <code class="language-plaintext highlighter-rouge">FMatch</code>, <code class="language-plaintext highlighter-rouge">FFix</code> and
+<code class="language-plaintext highlighter-rouge">FCofix</code>. Similarly, <code class="language-plaintext highlighter-rouge">rIota</code> was replaced by <code class="language-plaintext highlighter-rouge">rMatch</code>, <code class="language-plaintext highlighter-rouge">rFix</code> and <code class="language-plaintext highlighter-rouge">rCofix</code>.</p>
+
+<h3 id="notation_ops">Notation_ops</h3>
+
+<p>Use <code class="language-plaintext highlighter-rouge">Glob_ops.glob_constr_eq</code> instead of <code class="language-plaintext highlighter-rouge">Notation_ops.eq_glob_constr</code>.</p>
+
+<h3 id="logging-and-pretty-printing">Logging and Pretty Printing</h3>
+
+<ul>
+  <li>Printing functions have been removed from <code class="language-plaintext highlighter-rouge">Pp.mli</code>, which is now a
+purely pretty-printing interface. Functions affected are:</li>
+</ul>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">pp</span>          <span class="o">:</span> <span class="n">std_ppcmds</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">ppnl</span>        <span class="o">:</span> <span class="n">std_ppcmds</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">pperr</span>       <span class="o">:</span> <span class="n">std_ppcmds</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">pperrnl</span>     <span class="o">:</span> <span class="n">std_ppcmds</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">pperr_flush</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">pp_flush</span>    <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">flush_all</span>   <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">msg</span>         <span class="o">:</span> <span class="n">std_ppcmds</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">msgnl</span>       <span class="o">:</span> <span class="n">std_ppcmds</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">msgerr</span>      <span class="o">:</span> <span class="n">std_ppcmds</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">msgerrnl</span>    <span class="o">:</span> <span class="n">std_ppcmds</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">message</span>     <span class="o">:</span> <span class="kt">string</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+</code></pre></div></div>
+
+<p>which are no more available. Users of <code class="language-plaintext highlighter-rouge">Pp.pp msg</code> should now use the
+  proper <code class="language-plaintext highlighter-rouge">Feedback.msg_*</code> function. Clients also have no control over
+  flushing, the back end takes care of it.</p>
+
+<p>Also, the <code class="language-plaintext highlighter-rouge">msg_*</code> functions now take an optional <code class="language-plaintext highlighter-rouge">?loc</code> parameter
+  for relaying location to the client.</p>
+
+<ul>
+  <li>Feedback related functions and definitions have been moved to the
+<code class="language-plaintext highlighter-rouge">Feedback</code> module. <code class="language-plaintext highlighter-rouge">message_level</code> has been renamed to
+level. Functions moved from <code class="language-plaintext highlighter-rouge">Pp</code> to <code class="language-plaintext highlighter-rouge">Feedback</code> are:</li>
+</ul>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">set_logger</span>      <span class="o">:</span> <span class="n">logger</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">std_logger</span>      <span class="o">:</span> <span class="n">logger</span>
+<span class="k">val</span> <span class="n">emacs_logger</span>    <span class="o">:</span> <span class="n">logger</span>
+<span class="k">val</span> <span class="n">feedback_logger</span> <span class="o">:</span> <span class="n">logger</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Changes in the Feedback format/Protocol.</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">Message</code> feedback type now carries an optional location, the main
+payload is encoded using the richpp document format.</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">ErrorMsg</code> feedback type is thus unified now with <code class="language-plaintext highlighter-rouge">Message</code> at
+level <code class="language-plaintext highlighter-rouge">Error</code>.</p>
+  </li>
+  <li>
+    <p>We now provide several loggers, <code class="language-plaintext highlighter-rouge">log_via_feedback</code> is removed in
+favor of <code class="language-plaintext highlighter-rouge">set_logger feedback_logger</code>. Output functions are:</p>
+  </li>
+</ul>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">with_output_to_file</span> <span class="o">:</span> <span class="kt">string</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="k">'</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">'</span><span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">'</span><span class="n">a</span> <span class="o">-&gt;</span> <span class="k">'</span><span class="n">b</span>
+<span class="k">val</span> <span class="n">msg_error</span>   <span class="o">:</span> <span class="o">?</span><span class="n">loc</span><span class="o">:</span><span class="nn">Loc</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Pp</span><span class="p">.</span><span class="n">std_ppcmds</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">msg_warning</span> <span class="o">:</span> <span class="o">?</span><span class="n">loc</span><span class="o">:</span><span class="nn">Loc</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Pp</span><span class="p">.</span><span class="n">std_ppcmds</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">msg_notice</span>  <span class="o">:</span> <span class="o">?</span><span class="n">loc</span><span class="o">:</span><span class="nn">Loc</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Pp</span><span class="p">.</span><span class="n">std_ppcmds</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">msg_info</span>    <span class="o">:</span> <span class="o">?</span><span class="n">loc</span><span class="o">:</span><span class="nn">Loc</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Pp</span><span class="p">.</span><span class="n">std_ppcmds</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">msg_debug</span>   <span class="o">:</span> <span class="o">?</span><span class="n">loc</span><span class="o">:</span><span class="nn">Loc</span><span class="p">.</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="nn">Pp</span><span class="p">.</span><span class="n">std_ppcmds</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+</code></pre></div></div>
+
+<p>with the <code class="language-plaintext highlighter-rouge">msg_*</code> functions being just an alias for <code class="language-plaintext highlighter-rouge">logger $Level</code>.</p>
+
+<ul>
+  <li>The main feedback functions are:</li>
+</ul>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">set_feeder</span> <span class="o">:</span> <span class="p">(</span><span class="n">feedback</span> <span class="o">-&gt;</span> <span class="kt">unit</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">feedback</span> <span class="o">:</span> <span class="o">?</span><span class="n">id</span><span class="o">:</span><span class="n">edit_or_state_id</span> <span class="o">-&gt;</span> <span class="o">?</span><span class="n">route</span><span class="o">:</span><span class="n">route_id</span> <span class="o">-&gt;</span> <span class="n">feedback_content</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+<span class="k">val</span> <span class="n">set_id_for_feedback</span> <span class="o">:</span> <span class="o">?</span><span class="n">route</span><span class="o">:</span><span class="n">route_id</span> <span class="o">-&gt;</span> <span class="n">edit_or_state_id</span> <span class="o">-&gt;</span> <span class="kt">unit</span>
+</code></pre></div></div>
+<p>Note that <code class="language-plaintext highlighter-rouge">feedback</code> doesn’t take two parameters anymore. After
+  refactoring the following function has been removed:</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">get_id_for_feedback</span> <span class="o">:</span> <span class="kt">unit</span> <span class="o">-&gt;</span> <span class="n">edit_or_state_id</span> <span class="o">*</span> <span class="n">route_id</span>
+</code></pre></div></div>
+
+<h3 id="kernel-api-changes">Kernel API changes</h3>
+
+<ul>
+  <li>
+    <p>The interface of the <code class="language-plaintext highlighter-rouge">Context</code> module was changed.
+Related types and functions were put in separate submodules.
+The mapping from old identifiers to new identifiers is the following:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Context.named_declaration            ---&gt;  Context.Named.Declaration.t
+  Context.named_list_declaration       ---&gt;  Context.NamedList.Declaration.t
+  Context.rel_declaration              ---&gt;  Context.Rel.Declaration.t
+  Context.map_named_declaration        ---&gt;  Context.Named.Declaration.map_constr
+  Context.map_named_list_declaration   ---&gt;  Context.NamedList.Declaration.map
+  Context.map_rel_declaration          ---&gt;  Context.Rel.Declaration.map_constr
+  Context.fold_named_declaration       ---&gt;  Context.Named.Declaration.fold
+  Context.fold_rel_declaration         ---&gt;  Context.Rel.Declaration.fold
+  Context.exists_named_declaration     ---&gt;  Context.Named.Declaration.exists
+  Context.exists_rel_declaration       ---&gt;  Context.Rel.Declaration.exists
+  Context.for_all_named_declaration    ---&gt;  Context.Named.Declaration.for_all
+  Context.for_all_rel_declaration      ---&gt;  Context.Rel.Declaration.for_all
+  Context.eq_named_declaration         ---&gt;  Context.Named.Declaration.equal
+  Context.eq_rel_declaration           ---&gt;  Context.Rel.Declaration.equal
+  Context.named_context                ---&gt;  Context.Named.t
+  Context.named_list_context           ---&gt;  Context.NamedList.t
+  Context.rel_context                  ---&gt;  Context.Rel.t
+  Context.empty_named_context          ---&gt;  Context.Named.empty
+  Context.add_named_decl               ---&gt;  Context.Named.add
+  Context.vars_of_named_context        ---&gt;  Context.Named.to_vars
+  Context.lookup_named                 ---&gt;  Context.Named.lookup
+  Context.named_context_length         ---&gt;  Context.Named.length
+  Context.named_context_equal          ---&gt;  Context.Named.equal
+  Context.fold_named_context           ---&gt;  Context.Named.fold_outside
+  Context.fold_named_list_context      ---&gt;  Context.NamedList.fold
+  Context.fold_named_context_reverse   ---&gt;  Context.Named.fold_inside
+  Context.instance_from_named_context  ---&gt;  Context.Named.to_instance
+  Context.extended_rel_list            ---&gt;  Context.Rel.to_extended_list
+  Context.extended_rel_vect            ---&gt;  Context.Rel.to_extended_vect
+  Context.fold_rel_context             ---&gt;  Context.Rel.fold_outside
+  Context.fold_rel_context_reverse     ---&gt;  Context.Rel.fold_inside
+  Context.map_rel_context              ---&gt;  Context.Rel.map_constr
+  Context.map_named_context            ---&gt;  Context.Named.map_constr
+  Context.iter_rel_context             ---&gt;  Context.Rel.iter
+  Context.iter_named_context           ---&gt;  Context.Named.iter
+  Context.empty_rel_context            ---&gt;  Context.Rel.empty
+  Context.add_rel_decl                 ---&gt;  Context.Rel.add
+  Context.lookup_rel                   ---&gt;  Context.Rel.lookup
+  Context.rel_context_length           ---&gt;  Context.Rel.length
+  Context.rel_context_nhyps            ---&gt;  Context.Rel.nhyps
+  Context.rel_context_tags             ---&gt;  Context.Rel.to_tags
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Originally, rel-context was represented as:</p>
+
+    <div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">type</span> <span class="nn">Context</span><span class="p">.</span><span class="n">rel_context</span> <span class="o">=</span> <span class="nn">Names</span><span class="p">.</span><span class="nn">Name</span><span class="p">.</span><span class="n">t</span> <span class="o">*</span> <span class="nn">Constr</span><span class="p">.</span><span class="n">t</span> <span class="n">option</span> <span class="o">*</span> <span class="nn">Constr</span><span class="p">.</span><span class="n">t</span>
+</code></pre></div>    </div>
+
+    <p>Now it is represented as:</p>
+
+    <div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">type</span> <span class="nn">Context</span><span class="p">.</span><span class="nn">Rel</span><span class="p">.</span><span class="nn">Declaration</span><span class="p">.</span><span class="n">t</span> <span class="o">=</span> <span class="nc">LocalAssum</span> <span class="k">of</span> <span class="nn">Names</span><span class="p">.</span><span class="nn">Name</span><span class="p">.</span><span class="n">t</span> <span class="o">*</span> <span class="nn">Constr</span><span class="p">.</span><span class="n">t</span>
+                                 <span class="o">|</span> <span class="nc">LocalDef</span> <span class="k">of</span> <span class="nn">Names</span><span class="p">.</span><span class="nn">Name</span><span class="p">.</span><span class="n">t</span> <span class="o">*</span> <span class="nn">Constr</span><span class="p">.</span><span class="n">t</span> <span class="o">*</span> <span class="nn">Constr</span><span class="p">.</span><span class="n">t</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Originally, named-context was represented as:</p>
+
+    <div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">type</span> <span class="nn">Context</span><span class="p">.</span><span class="n">named_context</span> <span class="o">=</span> <span class="nn">Names</span><span class="p">.</span><span class="nn">Id</span><span class="p">.</span><span class="n">t</span> <span class="o">*</span> <span class="nn">Constr</span><span class="p">.</span><span class="n">t</span> <span class="n">option</span> <span class="o">*</span> <span class="nn">Constr</span><span class="p">.</span><span class="n">t</span>
+</code></pre></div>    </div>
+
+    <p>Now it is represented as:</p>
+
+    <div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">type</span> <span class="nn">Context</span><span class="p">.</span><span class="nn">Named</span><span class="p">.</span><span class="nn">Declaration</span><span class="p">.</span><span class="n">t</span> <span class="o">=</span> <span class="nc">LocalAssum</span> <span class="k">of</span> <span class="nn">Names</span><span class="p">.</span><span class="nn">Id</span><span class="p">.</span><span class="n">t</span> <span class="o">*</span> <span class="nn">Constr</span><span class="p">.</span><span class="n">t</span>
+                                   <span class="o">|</span> <span class="nc">LocalDef</span> <span class="k">of</span> <span class="nn">Names</span><span class="p">.</span><span class="nn">Id</span><span class="p">.</span><span class="n">t</span> <span class="o">*</span> <span class="nn">Constr</span><span class="p">.</span><span class="n">t</span> <span class="o">*</span> <span class="nn">Constr</span><span class="p">.</span><span class="n">t</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>The various <code class="language-plaintext highlighter-rouge">EXTEND</code> macros do not handle specially the Coq-defined entries
+anymore. Instead, they just output a name that have to exist in the scope
+of the ML code. The parsing rules (<code class="language-plaintext highlighter-rouge">VERNAC</code>) <code class="language-plaintext highlighter-rouge">ARGUMENT EXTEND</code> will look for
+variables <code class="language-plaintext highlighter-rouge">$name</code> of type <code class="language-plaintext highlighter-rouge">Gram.entry</code>, while the parsing rules of
+(<code class="language-plaintext highlighter-rouge">VERNAC COMMAND</code> | <code class="language-plaintext highlighter-rouge">TACTIC</code>) <code class="language-plaintext highlighter-rouge">EXTEND</code>, as well as the various <code class="language-plaintext highlighter-rouge">TYPED AS</code> clauses will
+look for variables <code class="language-plaintext highlighter-rouge">wit_$name</code> of type <code class="language-plaintext highlighter-rouge">Genarg.genarg_type</code>. The small DSL
+for constructing compound entries still works over this scheme. Note that in
+the case of (<code class="language-plaintext highlighter-rouge">VERNAC</code>) <code class="language-plaintext highlighter-rouge">ARGUMENT EXTEND</code>, the name of the argument entry is bound
+in the parsing rules, so beware of recursive calls.</p>
+
+    <p>For example, to get <code class="language-plaintext highlighter-rouge">wit_constr</code> you must <code class="language-plaintext highlighter-rouge">open Constrarg</code> at the top of the file.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Evarutil</code> was split in two parts. The new <code class="language-plaintext highlighter-rouge">Evardefine</code> file exposes functions
+<code class="language-plaintext highlighter-rouge">define_evar_</code>* mostly used internally in the unification engine.</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">Refine</code> module was moved out of <code class="language-plaintext highlighter-rouge">Proofview</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Proofview.Refine.* ---&gt;  Refine.*
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>A statically monotonic evarmap type was introduced in <code class="language-plaintext highlighter-rouge">Sigma</code>. Not all the API
+has been converted, so that the user may want to use compatibility functions
+<code class="language-plaintext highlighter-rouge">Sigma.to_evar_map</code> and <code class="language-plaintext highlighter-rouge">Sigma.Unsafe.of_evar_map</code> or <code class="language-plaintext highlighter-rouge">Sigma.Unsafe.of_pair</code> when
+needed. Code can be straightforwardly adapted in the following way:</p>
+
+    <div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="p">(</span><span class="n">sigma</span><span class="o">,</span> <span class="n">x1</span><span class="p">)</span> <span class="o">=</span> <span class="o">...</span> <span class="k">in</span>
+<span class="o">...</span>
+<span class="k">let</span> <span class="p">(</span><span class="n">sigma</span><span class="o">,</span> <span class="n">xn</span><span class="p">)</span> <span class="o">=</span> <span class="o">...</span> <span class="k">in</span>
+<span class="p">(</span><span class="n">sigma</span><span class="o">,</span> <span class="n">ans</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>should be turned into:</p>
+
+    <div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">open</span> <span class="nn">Sigma</span><span class="p">.</span><span class="nc">Notations</span>
+
+<span class="k">let</span> <span class="nc">Sigma</span> <span class="p">(</span><span class="n">x1</span><span class="o">,</span> <span class="n">sigma</span><span class="o">,</span> <span class="n">p1</span><span class="p">)</span> <span class="o">=</span> <span class="o">...</span> <span class="k">in</span>
+<span class="o">...</span>
+<span class="k">let</span> <span class="nc">Sigma</span> <span class="p">(</span><span class="n">xn</span><span class="o">,</span> <span class="n">sigma</span><span class="o">,</span> <span class="n">pn</span><span class="p">)</span> <span class="o">=</span> <span class="o">...</span> <span class="k">in</span>
+<span class="nc">Sigma</span> <span class="p">(</span><span class="n">ans</span><span class="o">,</span> <span class="n">sigma</span><span class="o">,</span> <span class="n">p1</span> <span class="o">+&gt;</span> <span class="o">...</span> <span class="o">+&gt;</span> <span class="n">pn</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>Examples of <code class="language-plaintext highlighter-rouge">Sigma.Unsafe.of_evar_map</code> include:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Evarutil.new_evar env (Tacmach.project goal) ty   ----&gt; Evarutil.new_evar env (Sigma.Unsafe.of_evar_map (Tacmach.project goal)) ty
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">Proofview.Goal.</code>*<code class="language-plaintext highlighter-rouge">enter</code> family of functions now takes a polymorphic
+continuation given as a record as an argument.</p>
+
+    <div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">Proofview</span><span class="p">.</span><span class="nn">Goal</span><span class="p">.</span><span class="n">enter</span> <span class="k">begin</span> <span class="k">fun</span> <span class="n">gl</span> <span class="o">-&gt;</span> <span class="o">...</span> <span class="k">end</span>
+</code></pre></div>    </div>
+
+    <p>should be turned into</p>
+
+    <div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">open</span> <span class="nn">Proofview</span><span class="p">.</span><span class="nc">Notations</span>
+
+<span class="nn">Proofview</span><span class="p">.</span><span class="nn">Goal</span><span class="p">.</span><span class="n">enter</span> <span class="p">{</span> <span class="n">enter</span> <span class="o">=</span> <span class="k">begin</span> <span class="k">fun</span> <span class="n">gl</span> <span class="o">-&gt;</span> <span class="o">...</span> <span class="k">end</span> <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Tacexpr.TacDynamic(Loc.dummy_loc, Pretyping.constr_in c)</code>      —&gt; <code class="language-plaintext highlighter-rouge">Tacinterp.Value.of_constr c</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Vernacexpr.HintsResolveEntry(priority, poly, hnf, path, atom)</code> —&gt; <code class="language-plaintext highlighter-rouge">Vernacexpr.HintsResolveEntry(Vernacexpr.({hint_priority = priority; hint_pattern = None}), poly, hnf, path, atom)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Pretyping.Termops.mem_named_context</code>                           —&gt; <code class="language-plaintext highlighter-rouge">Engine.Termops.mem_named_context_val</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Global.named_context</code>                                         —&gt; <code class="language-plaintext highlighter-rouge">Global.named_context_val</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Context.Named.lookup</code>                                         —&gt; <code class="language-plaintext highlighter-rouge">Environ.lookup_named_val</code></li>
+</ul>
+
+<h3 id="search-api">Search API</h3>
+
+<p>The main search functions now take a function iterating over the
+results. This allows for clients to use streaming or more economic
+printing.</p>
+
+<h3 id="xml-protocol-1">XML Protocol</h3>
+
+<ul>
+  <li>
+    <p>In several places, flat text wrapped in <code class="language-plaintext highlighter-rouge">&lt;string&gt;</code> tags now appears as structured text inside <code class="language-plaintext highlighter-rouge">&lt;richpp&gt;</code> tags.</p>
+  </li>
+  <li>
+    <p>The “errormsg” feedback has been replaced by a “message” feedback which contains <code class="language-plaintext highlighter-rouge">&lt;feedback\_content&gt;</code> tag, with a message_level attribute of “error”.</p>
+  </li>
+</ul>
+
+<h2 id="changes-between-coq-84-and-coq-85">Changes between Coq 8.4 and Coq 8.5</h2>
+
+<h3 id="refactoring--more-mli-interfaces-and-simpler-grammarcma">Refactoring : more mli interfaces and simpler grammar.cma</h3>
+
+<ul>
+  <li>
+    <p>A new directory intf/ now contains mli-only interfaces :</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Constrexpr</code> : definition of <code class="language-plaintext highlighter-rouge">constr_expr</code>, was in <code class="language-plaintext highlighter-rouge">Topconstr</code></li>
+      <li><code class="language-plaintext highlighter-rouge">Decl_kinds</code> : now contains <code class="language-plaintext highlighter-rouge">binding_kind = Explicit | Implicit</code></li>
+      <li><code class="language-plaintext highlighter-rouge">Evar_kinds</code> : type <code class="language-plaintext highlighter-rouge">Evar_kinds.t</code> was previously <code class="language-plaintext highlighter-rouge">Evd.hole_kind</code></li>
+      <li><code class="language-plaintext highlighter-rouge">Extend</code> : was <code class="language-plaintext highlighter-rouge">parsing/extend.mli</code></li>
+      <li><code class="language-plaintext highlighter-rouge">Genredexpr</code> : regroup <code class="language-plaintext highlighter-rouge">Glob_term.red_expr_gen</code> and <code class="language-plaintext highlighter-rouge">Tacexpr.glob_red_flag</code></li>
+      <li><code class="language-plaintext highlighter-rouge">Glob_term</code>  : definition of <code class="language-plaintext highlighter-rouge">glob_constr</code></li>
+      <li><code class="language-plaintext highlighter-rouge">Locus</code> : definition of occurrences and stuff about clauses</li>
+      <li><code class="language-plaintext highlighter-rouge">Misctypes</code> : <code class="language-plaintext highlighter-rouge">intro_pattern_expr</code>, <code class="language-plaintext highlighter-rouge">glob_sort</code>, <code class="language-plaintext highlighter-rouge">cast_type</code>, <code class="language-plaintext highlighter-rouge">or_var</code>, …</li>
+      <li><code class="language-plaintext highlighter-rouge">Notation_term</code> : contains <code class="language-plaintext highlighter-rouge">notation_constr</code>, was <code class="language-plaintext highlighter-rouge">Topconstr.aconstr</code></li>
+      <li><code class="language-plaintext highlighter-rouge">Pattern</code> : contains <code class="language-plaintext highlighter-rouge">constr_pattern</code></li>
+      <li><code class="language-plaintext highlighter-rouge">Tacexpr</code> : was <code class="language-plaintext highlighter-rouge">tactics/tacexpr.ml</code></li>
+      <li><code class="language-plaintext highlighter-rouge">Vernacexpr</code> : was <code class="language-plaintext highlighter-rouge">toplevel/vernacexpr.ml</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>Many files have been divided :</p>
+
+    <ul>
+      <li>vernacexpr: vernacexpr.mli + Locality</li>
+      <li>decl_kinds: decl_kinds.mli + Kindops</li>
+      <li>evd: evar_kinds.mli + evd</li>
+      <li>tacexpr: tacexpr.mli + tacops</li>
+      <li>glob_term: glob_term.mli + glob_ops + genredexpr.mli + redops</li>
+      <li>topconstr: constrexpr.mli + constrexpr_ops
+          + notation_expr.mli + notation_ops + topconstr</li>
+      <li>pattern: pattern.mli + patternops</li>
+      <li>libnames: libnames (qualid, reference) + globnames (global_reference)</li>
+      <li>egrammar: egramml + egramcoq</li>
+    </ul>
+  </li>
+  <li>
+    <p>New utility files : miscops (cf. misctypes.mli) and
+redops (cf genredexpr.mli).</p>
+  </li>
+  <li>Some other directory changes :
+    <ul>
+      <li>grammar.cma and the source files specific to it are now in grammar/</li>
+      <li>pretty-printing files are now in printing/</li>
+    </ul>
+  </li>
+  <li>
+    <p>Inner-file changes :</p>
+
+    <ul>
+      <li>
+        <p>aconstr is now notation_constr, all constructors for this type
+now start with a N instead of a A (e.g. NApp instead of AApp),
+and functions about aconstr may have been renamed (e.g. match_aconstr
+is now match_notation_constr).</p>
+      </li>
+      <li>occurrences (now in Locus.mli) is now an algebraic type, with
+        <ul>
+          <li>AllOccurrences instead of all_occurrences_expr = (false,[])</li>
+          <li>(AllOccurrencesBut l) instead of (all_occurrences_expr_but l) = (false,l)</li>
+          <li>NoOccurrences instead of no_occurrences_expr = (true,[])</li>
+          <li>(OnlyOccurrences l) instead of (no_occurrences_expr_but l) = (true,l)</li>
+        </ul>
+      </li>
+      <li>move_location (now in Misctypes) has two new constructors
+MoveFirst and MoveLast replacing (MoveToEnd false) and (MoveToEnd true)</li>
+    </ul>
+  </li>
+  <li>API of pretyping.ml and constrintern.ml has been made more uniform
+    <ul>
+      <li>Parametrization of understand_* functions is now made using
+“inference flags”</li>
+      <li>Functions removed:
+        <ul>
+          <li>interp_constr_judgment (inline its former body if really needed)</li>
+          <li>interp_casted_constr, interp_type: use instead interp_constr with
+expected_type set to OfType or to IsType</li>
+          <li>interp_gen: use any of interp_constr, interp_casted_constr, interp_type</li>
+          <li>interp_open_constr_patvar</li>
+          <li>interp_context: use interp_context_evars (with a “evar_map ref”) and
+call solve_remaining_evars afterwards with a failing flag
+(e.g. all_and_fail_flags)</li>
+          <li>understand_type, understand_gen: use understand with appropriate
+parameters</li>
+        </ul>
+      </li>
+      <li>Change of semantics:
+        <ul>
+          <li>Functions interp_*_evars_impls have a different interface and do
+not any longer check resolution of evars by default; use
+check_evars_are_solved explicitly to check that evars are solved.
+See also the corresponding commit log.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Tactics API: new_induct -&gt; induction; new_destruct -&gt; destruct;
+letin_pat_tac do not accept a type anymore</p>
+  </li>
+  <li>
+    <p>New file find_subterm.ml for gathering former functions
+<code class="language-plaintext highlighter-rouge">subst_closed_term_occ_modulo</code>, <code class="language-plaintext highlighter-rouge">subst_closed_term_occ_decl</code> (which now
+take and outputs also an <code class="language-plaintext highlighter-rouge">evar_map</code>), and
+<code class="language-plaintext highlighter-rouge">subst_closed_term_occ_modulo</code>, <code class="language-plaintext highlighter-rouge">subst_closed_term_occ_decl_modulo</code> (now
+renamed into <code class="language-plaintext highlighter-rouge">replace_term_occ_modulo</code> and
+<code class="language-plaintext highlighter-rouge">replace_term_occ_decl_modulo</code>).</p>
+  </li>
+  <li>
+    <p>API of Inductiveops made more uniform (see commit log or file itself).</p>
+  </li>
+  <li>
+    <p>API of intros_pattern style tactic changed; “s” is dropped in
+“intros_pattern” and “intros_patterns” is not anymore behaving like
+tactic “intros” on the empty list.</p>
+  </li>
+  <li>
+    <p>API of cut tactics changed: for instance, cut_intro should be replaced by
+“assert_after Anonymous”</p>
+  </li>
+  <li>All functions taking an env and a sigma (or an evdref) now takes the
+env first.</li>
+</ul>
+
+<h2 id="changes-between-coq-83-and-coq-84">Changes between Coq 8.3 and Coq 8.4</h2>
+
+<ul>
+  <li>
+    <p>Functions in unification.ml have now the evar_map coming just after the env</p>
+  </li>
+  <li>
+    <p>Removal of Tacinterp.constr_of_id</p>
+  </li>
+</ul>
+
+<p>Use instead either global_reference or construct_reference in constrintern.ml.</p>
+
+<ul>
+  <li>Optimizing calls to Evd functions</li>
+</ul>
+
+<p>Evars are split into defined evars and undefined evars; for
+efficiency, when an evar is known to be undefined, it is preferable to
+use specific functions about undefined evars since these ones are
+generally fewer than the defined ones.</p>
+
+<ul>
+  <li>Type changes in TACTIC EXTEND rules</li>
+</ul>
+
+<p>Arguments bound with tactic(_) in TACTIC EXTEND rules are now of type
+glob_tactic_expr, instead of glob_tactic_expr * tactic. Only the first
+component is kept, the second one can be obtained via
+Tacinterp.eval_tactic.</p>
+
+<ul>
+  <li>ARGUMENT EXTEND</li>
+</ul>
+
+<p>It is now forbidden to use TYPED simultaneously with {RAW,GLOB}_TYPED
+in ARGUMENT EXTEND statements.</p>
+
+<ul>
+  <li>Renaming of rawconstr to glob_constr</li>
+</ul>
+
+<p>The “rawconstr” type has been renamed to “glob_constr” for
+consistency. The “raw” in everything related to former rawconstr has
+been changed to “glob”. For more details about the rationale and
+scripts to migrate code using Coq’s internals, see commits 13743,
+13744, 13755, 13756, 13757, 13758, 13761 (by glondu, end of December
+2010) in Subversion repository. Contribs have been fixed too, and
+commit messages there might also be helpful for migrating.</p>
+
+<h2 id="changes-between-coq-82-and-coq-83">Changes between Coq 8.2 and Coq 8.3</h2>
+
+<h3 id="light-cleaning-in-evaruilml">Light cleaning in evaruil.ml</h3>
+
+<p>whd_castappevar is now whd_head_evar
+obsolete whd_ise disappears</p>
+
+<h3 id="restructuration-of-the-syntax-of-binders">Restructuration of the syntax of binders</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>binders_let -&gt; binders
+binders_let_fixannot -&gt; binders_fixannot
+binder_let -&gt; closed_binder (and now covers only bracketed binders)
+binder was already obsolete and has been removed
+</code></pre></div></div>
+
+<h3 id="semantical-change-of-h_induction_destruct">Semantical change of h_induction_destruct</h3>
+
+<p>Warning, the order of the isrec and evar_flag was inconsistent and has
+been permuted. Tactic induction_destruct in tactics.ml is unchanged.</p>
+
+<h3 id="internal-tactics-renamed">Internal tactics renamed</h3>
+
+<p>There is no more difference between bindings and ebindings. The
+following tactics are therefore renamed</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apply_with_ebindings_gen -&gt; apply_with_bindings_gen
+left_with_ebindings -&gt; left_with_bindings
+right_with_ebindings -&gt; right_with_bindings
+split_with_ebindings -&gt; split_with_bindings
+</code></pre></div></div>
+
+<p>and the following tactics are removed</p>
+
+<ul>
+  <li>apply_with_ebindings (use instead apply_with_bindings)</li>
+  <li>eapply_with_ebindings (use instead eapply_with_bindings)</li>
+</ul>
+
+<h3 id="obsolete-functions-in-typingml">Obsolete functions in typing.ml</h3>
+
+<p>For mtype_of, msort_of, mcheck, now use type_of, sort_of, check</p>
+
+<h3 id="renaming-functions-renamed">Renaming functions renamed</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>concrete_name -&gt; compute_displayed_name_in
+concrete_let_name -&gt; compute_displayed_let_name_in
+rename_rename_bound_var -&gt; rename_bound_vars_as_displayed
+lookup_name_as_renamed -&gt; lookup_name_as_displayed
+next_global_ident_away true -&gt; next_ident_away_in_goal
+next_global_ident_away false -&gt; next_global_ident_away
+</code></pre></div></div>
+
+<h3 id="cleaning-in-commmandml">Cleaning in commmand.ml</h3>
+
+<p>Functions about starting/ending a lemma are in lemmas.ml
+Functions about inductive schemes are in indschemes.ml</p>
+
+<p>Functions renamed:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>declare_one_assumption -&gt; declare_assumption
+declare_assumption -&gt; declare_assumptions
+Command.syntax_definition -&gt; Metasyntax.add_syntactic_definition
+declare_interning_data merged with add_notation_interpretation
+compute_interning_datas -&gt; compute_full_internalization_env
+implicits_env -&gt; internalization_env
+full_implicits_env -&gt; full_internalization_env
+build_mutual -&gt; do_mutual_inductive
+build_recursive -&gt; do_fixpoint
+build_corecursive -&gt; do_cofixpoint
+build_induction_scheme -&gt; build_mutual_induction_scheme
+build_indrec -&gt; build_induction_scheme
+instantiate_type_indrec_scheme -&gt; weaken_sort_scheme
+instantiate_indrec_scheme -&gt; modify_sort_scheme
+make_case_dep, make_case_nodep -&gt; build_case_analysis_scheme
+make_case_gen -&gt; build_case_analysis_scheme_default
+</code></pre></div></div>
+
+<p>Types:</p>
+
+<p>decl_notation -&gt; decl_notation option</p>
+
+<h3 id="cleaning-in-libnamesnametab-interfaces">Cleaning in libnames/nametab interfaces</h3>
+
+<p>Functions:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dirpath_prefix -&gt; pop_dirpath
+extract_dirpath_prefix pop_dirpath_n
+extend_dirpath -&gt; add_dirpath_suffix
+qualid_of_sp -&gt; qualid_of_path
+pr_sp -&gt; pr_path
+make_short_qualid -&gt; qualid_of_ident
+sp_of_syntactic_definition -&gt; path_of_syntactic_definition 
+sp_of_global -&gt; path_of_global
+id_of_global -&gt; basename_of_global
+absolute_reference -&gt; global_of_path
+locate_syntactic_definition -&gt; locate_syndef
+path_of_syntactic_definition -&gt; path_of_syndef
+push_syntactic_definition -&gt; push_syndef
+</code></pre></div></div>
+
+<p>Types:</p>
+
+<p>section_path -&gt; full_path</p>
+
+<h3 id="cleaning-in-parsing-extensions-commit-12108">Cleaning in parsing extensions (commit 12108)</h3>
+
+<p>Many moves and renamings, one new file (Extrawit, that contains wit_tactic).</p>
+
+<h3 id="cleaning-in-tacticalmli">Cleaning in tactical.mli</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tclLAST_HYP -&gt; onLastHyp
+tclLAST_DECL -&gt; onLastDecl
+tclLAST_NHYPS -&gt; onNLastHypsId
+tclNTH_DECL -&gt; onNthDecl
+tclNTH_HYP -&gt; onNthHyp
+onLastHyp -&gt; onLastHypId
+onNLastHyps -&gt; onNLastDecls
+onClauses -&gt; onClause
+allClauses -&gt; allHypsAndConcl
+</code></pre></div></div>
+
+<p>and removal of various unused combinators on type “clause”</p>
+
+<h2 id="changes-between-coq-81-and-coq-82">Changes between Coq 8.1 and Coq 8.2</h2>
+
+<h3 id="datatypes">Datatypes</h3>
+
+<p>List of occurrences moved from “int list” to “Termops.occurrences” (an
+  alias to “bool * int list”)
+ETIdent renamed to ETName</p>
+
+<h3 id="functions">Functions</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Eauto: e_resolve_constr, vernac_e_resolve_constr -&gt; simplest_eapply
+Tactics: apply_with_bindings -&gt; apply_with_bindings_wo_evars
+Eauto.simplest_apply -&gt; Hiddentac.h_simplest_apply
+Evarutil.define_evar_as_arrow -&gt; define_evar_as_product
+Old version of Tactics.assert_tac disappears
+Tactics.true_cut renamed into Tactics.assert_tac
+Constrintern.interp_constrpattern -&gt; intern_constr_pattern
+Hipattern.match_with_conjunction is a bit more restrictive
+Hipattern.match_with_disjunction is a bit more restrictive
+</code></pre></div></div>
+
+<h3 id="universe-names-univmli">Universe names (univ.mli)</h3>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">base_univ</span> <span class="o">-&gt;</span> <span class="n">type0_univ</span>  <span class="c">(* alias of Set is the Type hierarchy *)</span>
+ <span class="n">prop_univ</span> <span class="o">-&gt;</span> <span class="n">type1_univ</span>  <span class="c">(* the type of Set in the Type hierarchy *)</span>
+ <span class="n">neutral_univ</span> <span class="o">-&gt;</span> <span class="n">lower_univ</span> <span class="c">(* semantic alias of Prop in the Type hierarchy *)</span>
+ <span class="n">is_base_univ</span> <span class="o">-&gt;</span> <span class="n">is_type1_univ</span>
+ <span class="n">is_empty_univ</span> <span class="o">-&gt;</span> <span class="n">is_lower_univ</span>
+</code></pre></div></div>
+
+<h3 id="sort-names-termmli">Sort names (term.mli)</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  mk_Set -&gt; set_sort
+  mk_Prop -&gt; prop_sort
+  type_0 -&gt; type1_sort
+</code></pre></div></div>
+
+<h2 id="changes-between-coq-80-and-coq-81">Changes between Coq 8.0 and Coq 8.1</h2>
+
+<h3 id="functions-1">Functions</h3>
+
+<ul>
+  <li>Util: option_app -&gt; option_map</li>
+  <li>Term: substl_decl -&gt; subst_named_decl</li>
+  <li>Lib: library_part -&gt; remove_section_part</li>
+  <li>Printer: prterm -&gt; pr_lconstr</li>
+  <li>Printer: prterm_env -&gt; pr_lconstr_env</li>
+  <li>Ppconstr: pr_sort -&gt; pr_rawsort</li>
+  <li>Evd: in_dom, etc got standard ocaml names (i.e. mem, etc)</li>
+  <li>Pretyping:
+    <ul>
+      <li>understand_gen_tcc and understand_gen_ltac merged into understand_ltac</li>
+      <li>type_constraints can now say typed by a sort (use OfType to get the
+previous behavior)</li>
+    </ul>
+  </li>
+  <li>Library: import_library -&gt; import_module</li>
+</ul>
+
+<h3 id="constructors">Constructors</h3>
+
+<ul>
+  <li>Declarations: mind_consnrealargs -&gt; mind_consnrealdecls</li>
+  <li>NoRedun -&gt; NoDup</li>
+  <li>Cast and RCast have an extra argument: you can recover the previous
+  behavior by setting the extra argument to “CastConv DEFAULTcast” and
+  “DEFAULTcast” respectively</li>
+  <li>Names: “kernel_name” is now “constant” when argument of Term.Const</li>
+  <li>Tacexpr: TacTrueCut and TacForward(false,<em>,</em>) merged into new TacAssert</li>
+  <li>Tacexpr: TacForward(true,<em>,</em>) branched to TacLetTac</li>
+</ul>
+
+<h3 id="modules">Modules</h3>
+
+<ul>
+  <li>module Decl_kinds: new interface</li>
+  <li>module Bigint: new interface</li>
+  <li>module Tacred spawned module Redexpr</li>
+  <li>module Symbols -&gt; Notation</li>
+  <li>module Coqast, Ast, Esyntax, Termast, and all other modules related to old
+syntax are removed</li>
+  <li>module Instantiate: integrated to Evd</li>
+  <li>module Pretyping now a functor: use Pretyping.Default instead</li>
+</ul>
+
+<h3 id="internal-names">Internal names</h3>
+
+<p>OBJDEF and OBJDEF1 -&gt; CANONICAL-STRUCTURE</p>
+
+<h3 id="tactic-extensions">Tactic extensions</h3>
+
+<ul>
+  <li>printers have an extra parameter which is a constr printer at high precedence</li>
+  <li>the tactic printers have an extra arg which is the expected precedence</li>
+  <li>level is now a precedence in declare_extra_tactic_pprule</li>
+  <li>“interp” functions now of types the actual arg type, not its encapsulation
+ as a generic_argument</li>
+</ul>
+
+<h2 id="changes-between-coq-74-and-coq-80">Changes between Coq 7.4 and Coq 8.0</h2>
+
+<p>See files in dev/syntax-v8</p>
+
+<h2 id="main-changes-between-coq-74-and-coq-80">Main changes between Coq 7.4 and Coq 8.0</h2>
+
+<h3 id="changes-due-to-introduction-of-modules">Changes due to introduction of modules</h3>
+
+<h4 id="kernel">Kernel</h4>
+
+<p>The module level has no effect on constr except for the structure of
+section_path. The type of unique names for constructions (what
+section_path served) is now called a kernel name and is defined by</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="n">uniq_ident</span> <span class="o">=</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">*</span> <span class="n">dir_path</span> <span class="c">(* int may be enough *)</span>
+<span class="k">type</span> <span class="n">module_path</span> <span class="o">=</span>
+  <span class="o">|</span> <span class="nc">MPfile</span> <span class="k">of</span> <span class="n">dir_path</span>    <span class="c">(* reference to physical module, e.g. file *)</span>
+  <span class="o">|</span> <span class="nc">MPbound</span> <span class="k">of</span> <span class="n">uniq_ident</span> <span class="c">(* reference to a module parameter in a functor *)</span>
+  <span class="o">|</span> <span class="nc">MPself</span> <span class="k">of</span> <span class="n">uniq_ident</span>  <span class="c">(* reference to one of the containing module *)</span>
+  <span class="o">|</span> <span class="nc">MPdot</span> <span class="k">of</span> <span class="n">module_path</span> <span class="o">*</span> <span class="n">label</span>
+<span class="k">type</span> <span class="n">label</span> <span class="o">=</span> <span class="n">identifier</span>
+<span class="k">type</span> <span class="n">kernel_name</span> <span class="o">=</span> <span class="n">module_path</span> <span class="o">*</span> <span class="n">dir_path</span> <span class="o">*</span> <span class="n">label</span>
+                   <span class="o">^^^^^^^^^^^</span>   <span class="o">^^^^^^^^</span>   <span class="o">^^^^^</span>
+                        <span class="o">|</span>           <span class="o">|</span>         <span class="err">\</span>
+                        <span class="o">|</span>           <span class="o">|</span>          <span class="n">the</span> <span class="n">base</span> <span class="n">name</span>
+                        <span class="o">|</span>           <span class="err">\</span>
+                       <span class="o">/</span>             <span class="n">the</span> <span class="p">(</span><span class="bp">true</span><span class="p">)</span> <span class="n">section</span> <span class="n">path</span>
+   <span class="n">example</span><span class="o">:</span>                          <span class="p">(</span><span class="n">non</span> <span class="n">empty</span> <span class="n">only</span> <span class="n">inside</span> <span class="k">open</span> <span class="n">sections</span><span class="p">)</span>
+   <span class="nc">L</span> <span class="o">=</span> <span class="c">(* i.e. some file of logical name L *)</span>
+   <span class="k">struct</span>
+     <span class="k">module</span> <span class="nc">A</span> <span class="o">=</span> <span class="k">struct</span> <span class="nc">Def</span> <span class="n">a</span> <span class="o">=</span> <span class="o">...</span> <span class="k">end</span>
+   <span class="k">end</span>
+   <span class="nc">M</span> <span class="o">=</span> <span class="c">(* i.e. some file of logical name M *)</span>
+   <span class="k">struct</span>
+     <span class="nc">Def</span> <span class="n">t</span> <span class="o">=</span> <span class="o">...</span>
+     <span class="nc">N</span> <span class="o">=</span> <span class="k">functor</span> <span class="p">(</span><span class="nc">X</span> <span class="o">:</span> <span class="k">sig</span> <span class="k">module</span> <span class="nc">T</span> <span class="o">=</span> <span class="k">struct</span> <span class="nc">Def</span> <span class="n">b</span> <span class="o">=</span> <span class="o">...</span> <span class="k">end</span> <span class="k">end</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">struct</span>
+       <span class="k">module</span> <span class="nc">O</span> <span class="o">=</span> <span class="k">struct</span>
+         <span class="nc">Def</span> <span class="n">u</span> <span class="o">=</span> <span class="o">...</span>
+       <span class="k">end</span>
+       <span class="nc">Def</span> <span class="n">x</span> <span class="o">:=</span> <span class="o">...</span> <span class="o">&lt;</span><span class="nc">M</span><span class="o">&gt;.</span><span class="n">t</span> <span class="o">...</span> <span class="o">&lt;</span><span class="nc">N</span><span class="o">&gt;.</span><span class="nn">O</span><span class="p">.</span><span class="n">u</span> <span class="o">...</span> <span class="nn">X</span><span class="p">.</span><span class="nn">T</span><span class="p">.</span><span class="n">b</span> <span class="o">...</span> <span class="nn">L</span><span class="p">.</span><span class="nn">A</span><span class="p">.</span><span class="n">a</span>
+</code></pre></div></div>
+
+<M> and <N> are self-references, X is a bound reference and L is a
+reference to a physical module.
+ 
+  Notice that functor application is not part of a path: it must be
+named by a "module M = F(A)" declaration to be used in a kernel
+name.
+ 
+  Notice that Jacek chose a practical approach, making directories not
+modules. Another approach could have been to replace the constructor
+MPfile by a constant constructor MProot representing the root of the
+world.
+ 
+  Other relevant informations are in kernel/entries.ml (type
+module_expr) and kernel/declarations.ml (type module_body and
+module_type_body).                                                              
+
+#### Library
+
+1. tables
+[Summaries] - the only change is the special treatment of the
+global environmet.
+
+2. objects 
+[Libobject] declares persistent objects, given with methods:
+
+   * cache_function specifying how to add the object in the current
+       scope;
+   * load_function, specifying what to do when the module 
+       containing the object is loaded; 
+   * open_function, specifying what to do when the module 
+       containing the object is opened (imported);
+   * classify_function, specyfying what to do with the object,
+       when the current module (containing the object) is ended. 
+   * subst_function
+   * export_function, to signal end_section survival
+
+(Almost) Each of these methods is called with a parameter of type
+object_name = section_path * kernel_name
+where section_path is the full user name of the object (such as
+Coq.Init.Datatypes.Fst) and kernel_name is its substitutive internal
+version such as (MPself&lt;Datatypes#1&gt;,[],"Fst") (see above)
+
+
+#### What happens at the end of an interactive module ?
+
+(or when a file is stored and reloaded from disk)
+
+All summaries (except Global environment) are reverted to the state
+from before the beginning of the module, and:
+
+1. the objects (again, since last Declaremods.start_module or
+   Library.start_library) are classified using the classify_function.
+   To simplify consider only those who returned Substitute _ or Keep _.
+
+2. If the module is not a functor, the subst_function for each object of
+   the first group is called with the substitution 
+   [MPself "&lt;Datatypes#1&gt;" |-&gt; MPfile "Coq.Init.Datatypes"].
+   Then the load_function is called for substituted objects and the
+   "keep" object. 
+   (If the module is a library the substitution is done at reloading).
+
+3. The objects which returned substitute are stored in the modtab
+   together with the self ident of the module, and functor argument
+   names if the module was a functor.
+
+   They will be used (substituted and loaded) when a command like 
+     Module M := F(N)    or
+     Module Z := N 
+   is evaluated
+
+
+#### The difference between "substitute" and "keep" objects
+
+1. The "keep" objects can _only_ reference other objects by section_paths
+and qualids. They do not need the substitution function.
+
+They will work after end_module (or reloading a compiled library),
+because these operations do not change section_path's
+
+They will obviously not work after Module Z:=N.
+ 
+These would typically be grammar rules, pretty printing rules etc.
+
+
+
+2. The "substitute" objects can _only_ reference objects by
+kernel_names. They must have a valid subst_function. 
+
+They will work after end_module _and_ after Module Z:=N or 
+Module Z:=F(M).
+
+
+
+Other kinds of objects:
+
+3. "Dispose" - objects which do not survive end_module
+     As a consequence, objects which reference other objects sometimes
+     by kernel_names and sometimes by section_path must be of this kind...
+
+4. "Anticipate" - objects which must be treated individually by
+    end_module (typically "REQUIRE" objects)
+
+
+
+#### Writing subst_thing functions
+
+The subst_thing shoud not copy the thing if it hasn't actually
+changed. There are some cool emacs macros in dev/objects.el 
+to help writing subst functions this way quickly and without errors.
+Also there are *_smartmap functions in Util.
+
+The subst_thing functions are already written for many types,
+including constr (Term.subst_mps), 
+global_reference (Libnames.subst_global),
+rawconstr (Rawterm.subst_raw) etc
+
+They are all (apart from constr, for now) written in the non-copying
+way.
+
+
+#### Nametab
+
+Nametab has been made more uniform. For every kind of thing there is
+only one "push" function and one "locate" function. 
+
+
+#### Lib
+
+library_segment is now a list of object_name * library_item, where
+object_name = section_path * kernel_name (see above)
+
+New items have been added for open modules and module types
+
+
+#### Declaremods
+
+Functions to declare interactive and noninteractive modules and module
+types.
+
+
+#### Library
+
+Uses Declaremods to actually communicate with Global and to register
+objects.
+
+
+### Other changes
+
+Internal representation of tactics bindings has changed (see type
+Rawterm.substitution).
+
+New parsing model for tactics and vernacular commands
+
+  - Introduction of a dedicated type for tactic expressions
+    (Tacexpr.raw_tactic_expr)
+  - Introduction of a dedicated type for vernac expressions
+    (Vernacexpr.vernac_expr)
+  - Declaration of new vernacular parsing rules by a new camlp4 macro
+    GRAMMAR COMMAND EXTEND ... END  to be used in ML files
+  - Declaration of new tactics parsing/printing rules by a new camlp4 macro
+    TACTIC EXTEND ... END  to be used in ML files
+
+New organisation of THENS:
+
+- tclTHENS tac tacs : tacs is now an array
+- tclTHENSFIRSTn tac1 tacs tac2 :
+  apply tac1 then, apply the array tacs on the first n subgoals and
+  tac2 on the remaining subgoals (previously tclTHENST)
+- tclTHENSLASTn tac1 tac2 tacs :
+  apply tac1 then, apply tac2 on the first subgoals and apply the array
+  tacs on the last n subgoals
+- tclTHENFIRSTn tac1 tacs = tclTHENSFIRSTn tac1 tacs tclIDTAC (prev. tclTHENSI)
+- tclTHENLASTn tac1 tacs  = tclTHENSLASTn tac1 tclIDTAC tacs
+- tclTHENFIRST tac1 tac2  = tclTHENFIRSTn tac1 [|tac2|]
+- tclTHENLAST tac1 tac2   = tclTHENLASTn tac1 [|tac2|] (previously tclTHENL)
+- tclTHENS tac1 tacs = tclTHENSFIRSTn tac1 tacs (fun _ -&gt; error "wrong number")
+- tclTHENSV same as tclTHENS but with an array
+- tclTHENSi : no longer available
+
+Proof_type: subproof field in type proof_tree glued with the ref field
+
+Tacmach: no more echo from functions of module Refiner
+
+Files plugins/*/g_*.ml4 take the place of files plugins/*/*.v.
+
+Files parsing/{vernac,tac}extend.ml{4,i} implements TACTIC EXTEND andd
+  VERNAC COMMAND EXTEND macros
+
+File syntax/PPTactic.v moved to parsing/pptactic.ml
+
+Tactics about False and not now in tactics/contradiction.ml
+
+Tactics depending on Init now tactics/*.ml4 (no longer in tactics/*.v)
+
+File tacinterp.ml moved from proofs to directory tactics
+
+
+## Changes between Coq 7.1 and Coq 7.2
+
+The core of Coq (kernel) has meen minimized with the following effects:
+
+- kernel/term.ml      split into kernel/term.ml,      pretyping/termops.ml
+- kernel/reduction.ml split into kernel/reduction.ml, pretyping/reductionops.ml
+- kernel/names.ml     split into kernel/names.ml,     library/nameops.ml
+- kernel/inductive.ml split into kernel/inductive.ml, pretyping/inductiveops.ml
+
+the prefixes "Is" ans "IsMut" have been dropped from kind_of_term constructors,
+e.g. IsRel is now Rel, IsMutCase is now Case, etc.
+</N></M>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Jason Gross</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Jason Gross</li><li><a class="u-email" href="mailto:jgross@mit.edu">jgross@mit.edu</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/JasonGross"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">JasonGross</span></a></li><li><a href="https://www.twitter.com/diagram_chaser"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">diagram_chaser</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Personal website of Jason Gross</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+\documentclass{beamer}
+\usepackage{hyperref}
+\usepackage{multicol}
+\title[HITs]{Computational Higher Inductive Types}
+\subtitle{Computing with Custom Equalities}
+\author[Jason Gross]{Jason Gross\texorpdfstring{ \\ \texttt{\href{mailto:jgross@mit.edu}{jgross@mit.edu}}}{}}
+\institute{MIT CSAIL Student Workshop}
+
+\begin{document}
+\begin{frame}
+  \maketitle
+\end{frame}
+
+\begin{frame}
+  \tableofcontents
+\end{frame}
+
+\section{Properties of Equality}
+\begin{frame}{Properties of Equality}
+  \pause
+  \begin{itemize}
+    \item Reflexivity: $x = x$ \pause
+    \item Symmetry: if $x = y$ then $y = x$ \pause
+    \item Transitivity: if $x = y$ and $y = z$, then $x = z$ \pause
+    \item Leibniz rule: if $x = y$, then $f(x) = f(y)$
+  \end{itemize}
+\end{frame}
+
+\section{Warm Up: Linked Lists}
+\begin{frame}{Warm Up: Linked Lists}
+  \begin{itemize}
+    \item Two constructors: \pause \texttt{nil}, or \texttt{[]}, and \texttt{cons} \pause
+    \item Two accessors on non-nil lists: \pause \texttt{head} and \texttt{tail} \pause
+    \item Equality is defined on an element-by-element basis
+       \begin{itemize}
+         \item $[] = []$
+         \item $[] \ne [a,\ldots]$
+         \item $[a,\ldots] \ne []$
+         \item $[x_0,x_1,\ldots, x_n] = [y_0,y_1,\ldots,y_m]$ iff $[x_1,\ldots,x_n] = [y_1,\ldots,y_m]$ and $x_0 = y_0$
+       \end{itemize} \pause
+     \item Fairly easy to prove the properties of equality
+       \begin{itemize}
+         \item In Coq, Agda, and Idris, you get all of these properties for free
+       \end{itemize}
+   \end{itemize}
+\end{frame}
+
+\section{Example: Unordered Sets}
+\begin{frame}{Example: Unordered Sets}
+  \pause
+  \begin{itemize}
+    \item \texttt{nil}, or $\emptyset$ \pause
+    \item \texttt{add} \pause
+    \item \texttt{remove} \pause
+    \item \texttt{contains} \pause
+    \item Often implemented internally as a list or a tree \pause
+    \item Equality is then implemented as ``is one a permutation of the other?'' \pause
+    \item Fairly easy to prove that it's an equivalence relation \pause
+    \item Leibniz rule (if $x = y$, then $f(x) = f(y)$) is harder
+    \item In Haskell, Agda, Coq, and Idris, the Leibniz rule is false! \pause (or at least not internally provable) \pause
+      \begin{itemize}
+        \item The problem is that either you don't have private
+          fields, or you can't make use of the fact that everything is
+          defined in terms of your public methods.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\subsection{Canonical Inhabitants}
+\begin{frame}{Example: Unordered Sets}{Solution 1: Canonical Inhabitants}
+  \begin{itemize}
+    \item Give up private fields, but use element-wise equality \pause
+    \item Define a type of ``sorted lists without duplication'', and call them sets \pause
+    \item Now we can use element-wise equality, and get Leibniz (and other properties) for free \pause
+    \item What if we don't have an ordering on the elements, only equality? \pause
+    \item Is this really what we wanted?  We asked for unordered sets, and instead made sorted lists.
+  \end{itemize}
+\end{frame}
+
+\subsection{Higher Inductive Types}
+\begin{frame}{Example: Unordered Sets}{Solution 2: Higher Inductive Types}
+  \begin{itemize}
+    \item Higher Inductive Types \pause
+    \item Keep the built-in equality (so we get the properties for free), but turn it into equality up to permutation \pause
+    \item How do we get that it's an equivalence relation for free? \pause
+      \begin{itemize}
+        \item Take the reflexive symmetric transitive closure of the given relation
+      \end{itemize} \pause
+    \item How do we get Leibniz for free? \pause
+      \begin{itemize}
+        \item Require proving it each time you define a particular function
+        \item To define a function that deals with unordered sets,
+          you have to simultaneously prove that your function is
+          invariant under permutations
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Computing with Higher Inductive Types}
+\begin{frame}{Computing with Higher Inductive Types}
+  \begin{itemize}
+    \item It seems simple enough, so what's the problem? \pause
+    \item Having higher inductive types gives you functional extensionality (if $f(x) = g(x)$ for all $x$, then $f = g$), which doesn't yet have a good computational interpretation in Coq nor Agda nor Idris \pause
+    \item Equality in Coq and Agda (\texttt{--without-K}) actually has a rich structure \pause
+    \item If you look at proofs of equality, and equality of these proofs, and you iterate this process, you get enough math to do topology! \pause
+    \item This is Homotopy Type Theory
+  \end{itemize}
+\end{frame}
+
+
+\section{Thank you}
+\begin{frame}{Thank you}
+  \noindent \Huge
+  \noindent \begin{center}
+    \noindent Thanks! \\ $\left.\right.$ \pause \\
+    \noindent Questions?
+  \end{center}
+\end{frame}
+
+\section*{Parametricity}
+\begin{frame}{Example: Unordered Sets}{Solution 3: Parametricity}
+  \begin{itemize}
+    \item Make use of the fact that private fields are private \pause
+    \item Very hard to do! \pause
+    \item Can probably be done by way of parametricity (aka ``theorems for free''), or a generalization of it \pause
+    \item Parametricity can be given a computational interpretation,
+      but it's very non-trivial to do so
+  \end{itemize}
+\end{frame}
+
+
+
+\end{document}

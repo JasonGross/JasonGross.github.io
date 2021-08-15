@@ -1,0 +1,44 @@
+----------------------- REVIEW 1 ---------------------
+PAPER: 1
+TITLE: Teaching Your Rooster to Crow in C
+AUTHORS: Jason Gross
+
+Overall evaluation: 0 (borderline paper)
+Reviewer's confidence: 4 (high)
+
+----------- Overall evaluation -----------
+The author proposes to give an interactive talk about notations in Coq. While I am sympathetic to the idea, the submitted document does not really give much insight to anticipate the value of the talk compared to, say, reading the documentation. It is also not very clear what the expected level of the audience is. So I would say this proposal is rather risky, given the lack of details about the precise angle of the talk.
+
+
+----------------------- REVIEW 2 ---------------------
+PAPER: 1
+TITLE: Teaching Your Rooster to Crow in C
+AUTHORS: Jason Gross
+
+Overall evaluation: 3 (strong accept)
+Reviewer's confidence: 5 (expert)
+
+----------- Overall evaluation -----------
+This is a proposal for a tutorial talk on Coq notations. Given that this is an obscure but very useful feature of Coq, I think this would be a very profitable talk. Moreover, I am confident that the author of the proposal, Jason Gross, has sufficient expertise in this feature for giving an instructive talk.
+
+
+----------------------- REVIEW 3 ---------------------
+PAPER: 1
+TITLE: Teaching Your Rooster to Crow in C
+AUTHORS: Jason Gross
+
+Overall evaluation: 1 (weak accept)
+Reviewer's confidence: 3 (medium)
+
+----------- Overall evaluation -----------
+The proposal promises to address important questions about Coq's notation mechanism that I believe have not been suitably addressed elsewhere.
+However, the extended abstract only describes the questions that will be answered and does not explain much what those answers are.
+For this reason, I cannot firmly accept the proposal, even though I guess the author has all the answers.
+
+Here are some suggestions for things to consider for the presentation:
+
+1) One way to structure the presentation would be to declare that the notation section in the Coq reference manual is required reading for the talk. Then you can focus on how to use the system's features rather than describing those features.
+
+2) The type class mechanism also provides a way to overload notations. Consider discussing this as an alternative to notation scopes?
+
+3) Based on the author's experience in pretty-printing ASTs of DSLs formalized in Coq, a discussion on the limitations of Coq's notation system and how it can be further improved?

@@ -1,0 +1,24 @@
+===========================================================================
+                           PLDI '17 Review #39A
+---------------------------------------------------------------------------
+Paper #39: Systematic Synthesis of Elliptic Curve Cryptography
+           Implementations
+---------------------------------------------------------------------------
+
+                 Reviewer expertise: Z. Some familiarity
+                      Overall merit: B. OK paper, but I will not champion
+                                        it
+
+                           ===== Strengths =====
+
++ Strong motivation.
++ Well-written paper, with a good amount of background
++ Strong evaluation
+
+                      ===== Comments to authors =====
+
+The paper is well-motivated. Cryptography code is sophisticated as well as safety-critical, and manually refactoring complex crypto code for new parameter values seems like a recipe for disaster. This makes elliptic cryptography a good candidate for correct-by-construction program development. 
+
+The technical contribution is impressive, in that it evidently took a large amount of work and careful thought. The paper sets good goals for itself -- rigor, effort, and generality -- and adequately evaluates the framework it presents with respect to these goals. 
+
+The question is whether this paper is a good fit for PLDI. The paper is well-written, and gives a good amount of background. However, at the end, much of the paper is about the technical ins and outs of how to build a specific class of verified systems, and that too one that most of the PLDI audience is likely to be unfamiiar with. It would be one thing if there were some reusable insights here that can be used for the verification/development of other kinds of systems, even other kinds of cryptography code. But I am not sure that this is the case. None of this is to denigrate the work, which I find impressive. The question is only whether the paper is a better fit for a domain (crypto) conference.
