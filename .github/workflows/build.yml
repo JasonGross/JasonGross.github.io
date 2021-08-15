@@ -45,11 +45,39 @@ jobs:
           ocaml-compiler: ${{ env.OCAML_DEFAULT_VERSION }}
       - name: Install OCaml deps
         run: |
+          echo "::group::opam update"
           opam update
+          echo "::endgroup::"
+          echo "::group::opam switch ${OCAML_2018_VERSION}"
           opam switch ${OCAML_2018_VERSION} || opam switch create ${OCAML_2018_VERSION}
+          echo "::endgroup::"
+          echo "::group::eval opam env"
+          eval $(opam env --switch=${OCAML_2018_VERSION})
+          echo "::endgroup::"
+          echo "::group::opam install"
           opam install -y "camlp5<8" ocamlfind hevea merlin oUnit dune num zarith # ocp-indent
+          echo "::endgroup::"
+          echo "::group::opam switch"
+          opam switch
+          echo "::endgroup::"
+          echo "::group::opam list"
+          opam list
+          echo "::endgroup::"
+          echo "::group::opam switch ${OCAML_2014_VERSION}"
           opam switch ${OCAML_2014_VERSION} || opam switch create ${OCAML_2014_VERSION}
+          echo "::endgroup::"
+          echo "::group::eval opam env"
+          eval $(opam env --switch=${OCAML_2014_VERSION})
+          echo "::endgroup::"
+          echo "::group::opam install"
           opam install -y "camlp5<8" ocamlfind hevea merlin oUnit dune num zarith # ocp-indent
+          echo "::endgroup::"
+          echo "::group::opam switch"
+          opam switch
+          echo "::endgroup::"
+          echo "::group::opam list"
+          opam list
+          echo "::endgroup::"
       - name: Build 2014 Coq
         run: |
           opam switch ${OCAML_2014_VERSION}
