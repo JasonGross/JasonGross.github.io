@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\title{Coq Bug Minimizer}
+\author{Jason Gross}
+\date{CoqPL 2015}
+% Key Words: bugs, test-suite, automation, tools
+\begin{document}
+\maketitle
+\begin{abstract}
+\subsection*{Sales Pitch}
+Are bugs the bane of your existence?  Do you dread Coq upgrades, because they mean you'll have to spend days tracking down subtle failures deep in your developments?  Have you ever hit an anomaly that just wouldn't go away, and wished you understood what triggered it?  Have you ever been tormented by two blocks of code that looked identical, but behaved differently?  Do you wish you could submit more helpful error reports, but don't want to put in the time to construct minimal examples?  If you answered ``yes'' to any of these questions, then the Coq Bug Minimizer is for you!  Clone your own copy at \url{https://github.com/JasonGross/coq-bug-finder}.
+
+\subsection*{What does it do?  How do I use it?}
+The Coq Bug Minimizer is an external script that will take any error-generating Coq file in the middle of a development, and after confirming that it has picked up the right error message, will automatically produce a small, stand-alone file which is guaranteed to generate the same error message.
+
+The transformations automatically performed by the bug minimizer include:
+\begin{itemize}
+    \item inlining all of the dependencies of a file
+    \item removing unnecessary definitions, lemmas, hints, tactics, section variables, notations, and other lines
+    \item (optionally) replacing unnecessary proofs and definition bodies with \texttt{admit}
+    \item flattening module and section structure
+    \item removing unnecessary imports
+\end{itemize}
+
+The bug minimizer explicitly does not perform the following transformations:
+\begin{itemize}
+    \item removing unnecessary definition-specific variables
+    \item removing constructors of inductive types nor fields of records
+    \item simplifying the error-generating proof script itself
+\end{itemize}
+The first two are, unfortunately, changes that are often required to happen in multiple places at once; the bug minimizer, currently, only considers changes that can be made in isolation.  The third of these is actually a feature; it allows you to check for a particular state and then \texttt{fail} with an appropriate message.\footnote{If you have case where \texttt{rewrite} used to progress but no longer does, you would want to be able to use \texttt{progress rewrite foo} to trigger the error.  But if the minimizer was allowed to change anything, it could inform you that \texttt{progress idtac} produces the same error message.  That is certainly not the test case you were looking for!}
+
+Hence, typical interaction will consist of a few rounds of automatic minimization alternated with manual simplification of the final proof script and removal of record fields.  In practice, each round of automatic minimization decreases the number of lines by a factor of 5--10, bottoming out at around 50--500 lines.
+
+\subsection*{This sounds amazing!  Is it fast, too?}
+Not yet, unfortunately.  Because it re-runs Coq for every change it attempts, it tends to take a few minutes to minimize around a thousand lines of code, a few hours to handle a 5\,000 line file, and a few weeks to handle a 40\,000 line file.
+
+However, by the time the workshop comes, the Coq Bug Minimizer will hopefully be 100\% faster!\footnote{How is this possible, you may ask?  Currently, the bug minimizer takes time roughly $\mathcal O((\text{lines of code})^3)$.  By taking advantage of \texttt{BackTo}, it should be possible to chop off at least a factor of the number of lines of code.}
+
+\subsection*{What's left to do?}
+Possible future avenues of development include:
+\begin{itemize}
+    \item automatic anomaly reporting integrated into CoqIDE
+    \item automatic bug minimization service, where an end user can upload a tarball of their development, and the Coq developers can get a standalone test-case
+    \item smarter heuristics for minimization, e.g., remove slower lines first
+    \item integration of multiple versions of Coq simultaneously
+    \item using the new \texttt{-ideslave} XML protocol rather than the old and error-prone \texttt{-emacs} option
+    \item translation from Python into a saner language (like OCaml or Haskell)
+\end{itemize}
+
+\subsection*{What's left to say?}
+The proposed presentation will consist of a demo of using the Coq Bug Minimizer and a brief explanation of how it works and what scenarios it can be used in.  This will be followed by an audience driven presentation or discussion of other use-cases and details of its functioning, possibly including the warts of Coq that workarounds were required for.  The presentation will close with a brief period for the audience to make feature requests.
+\end{abstract}
+\end{document}

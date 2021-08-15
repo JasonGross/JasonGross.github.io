@@ -1,0 +1,94 @@
+Dear Jason Gross,
+
+Congratulations!  Your talk proposal for the 2014 Coq workshop,
+
+Presentation of Three Neat Tricks in Coq 8.5,
+
+has been accepted.  Talks will be 30 minutes long (25 minutes + 5
+minutes for questions).  Please read your reviews (see below) and take
+their feedback into account when preparing your talk.
+
+Best regards,
+Derek Dreyer and Viktor Vafeiadis
+Coq 2014 PC chairs
+
+
+----------------------- REVIEW 1 ---------------------
+PAPER: 14
+TITLE: Presentation of Three Neat Tricks in Coq 8.5
+AUTHORS: Jason Gross
+
+OVERALL EVALUATION: 2 (accept)
+REVIEWER'S CONFIDENCE: 4 (high)
+
+----------- REVIEW -----------
+This talk is just what the title says: three neat tricks that work in
+Coq 8.5.  They showcase the interaction between Gallina and Ltac code.
+I was intrigued by the examples in the proposal, but they could have
+been a bit more compelling with a few "practical" use cases.  (I don't
+doubt that these tricks would be useful, but it would be good if the
+author could make the case for their uses better motivated.)
+
+This could be a fun talk.
+
+
+----------------------- REVIEW 2 ---------------------
+PAPER: 14
+TITLE: Presentation of Three Neat Tricks in Coq 8.5
+AUTHORS: Jason Gross
+
+OVERALL EVALUATION: 1 (weak accept)
+REVIEWER'S CONFIDENCE: 4 (high)
+
+----------- REVIEW -----------
+The proposal presents three neat tricks that can be done in Coq 8.5
+because of the addition of allowing tactics in terms. I expect that
+these tricks would lead to a nice presentation at the workshop.
+
+I wonder, however, whether these tricks are actually useful.  I would
+therefore recommend that the presentation does not focus merely on the
+implementation of each trick, but rather on how these may be used
+(esp. the notation overloading one as I couldn't really follow it).
+
+Regarding the first trick (recursive tactics), I suspect one can
+already do this with Mtac, so perhaps it could just be eliminated in
+favor of spending more time on the other two tricks.
+
+
+----------------------- REVIEW 3 ---------------------
+PAPER: 14
+TITLE: Presentation of Three Neat Tricks in Coq 8.5
+AUTHORS: Jason Gross
+
+OVERALL EVALUATION: -1 (weak reject)
+REVIEWER'S CONFIDENCE: 3 (medium)
+
+----------- REVIEW -----------
+The paper presents three uses of a new feature of Coq 8.5, namely the
+possibility to include ltac expressions in an arbitrary Coq term,
+giving the possibility to build subterms by tactics. This is a very
+interesting feature, worth to be advertised. My main concern is that I
+found the three examples not so convincing, both in what they achieve
+and in the way they are written, also the explanations are not very
+clear, with emphasis on current bugs rather than general ideas. So I
+am concerned it will not result in a very interesting presentation.
+
+
+----------------------- REVIEW 4 ---------------------
+PAPER: 14
+TITLE: Presentation of Three Neat Tricks in Coq 8.5
+AUTHORS: Jason Gross
+
+OVERALL EVALUATION: 2 (accept)
+REVIEWER'S CONFIDENCE: 3 (medium)
+
+----------- REVIEW -----------
+This is a kind of "super-advanced user feedback" talk. A sophisticated
+user is doing things to Coq 8.5 which will give others even more ideas
+for (ab)use. I think this paper is somewhere between "accept and "weak
+accept". The weakness comes from the fact that the abstract reads like
+a presentation of three clever hacks, without regard to more general
+issues. Can the hacks be used more generally? Are there lessons to be
+learned, or can the author offer some suggestions to the Coq
+developers? But I think I can go with "accept" because the hacks are
+in fact quite neat.

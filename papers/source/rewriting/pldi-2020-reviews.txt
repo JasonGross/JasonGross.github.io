@@ -1,0 +1,187 @@
+PLDI 2020 Paper #226 Reviews and Comments
+===========================================================================
+Paper #226 A Framework for Building Verified Partial Evaluators
+
+
+Review #226A
+===========================================================================
+
+Overall merit
+-------------
+B. I support accepting this paper but will not champion it.
+
+Reviewer expertise
+------------------
+Z. Some familiarity
+
+Paper summary
+-------------
+This paper presents a new approach for partial evaluation in Coq. The
+goal is to generate more efficient extracted code using partial
+evaluation, but most existing partial evaluators for verified code
+either increase the size of the trusted code base or cannot scale to
+large programs. The new approach combines a different term encoding with
+verified (potentially conditional) optimizations. The new framework is
+capable of extracted efficient implementations of larger elliptic curve
+crypto primitives than previous work.
+
+Comments for author
+-------------------
+This is a well-written paper that was relatively easy to follow for me,
+a total non-expert in interactive theorem proving. It walks the reader
+through the motivation for a better partial evaluator (Fiat Crypto
+couldn't extract code for larger curves), the desiderata, and the
+solutions for each problem that arises. It's hard to argue with the
+results -- the new extraction process is much faster, allowing it to
+generate code for curves that the old implementation couldn't.
+
+As a non-expert, one challenge I had was that this paper reads more like
+a Coq experience report than a new conceptual contribution. There were a
+number of places in the paper where I (and, it sounds like, the authors)
+wondered if all this effort was just to work around some limitations of
+the Coq implementation. Concretely, there are several points (like the
+end of Section 3) where it seems like things would have been much easier
+if not for termination checking; then, later on, it's revealed that we
+got lucky(?) and the chosen PHOAS representation satisfies the
+termination checker without any effort. I wonder how much those in the
+PLDI audience who don't hack a lot of Coq will be able to learn from
+this paper.
+
+Section 3.1 discusses the need for efficient pattern matching for a
+partial evaluator, and how pattern matching in Coq's logic isn't very
+sophisticated, so the authors rolled their own based on [20]. That makes
+sense. However, Section 5.2 concedes that actually, the performance of
+the partial evaluator running inside Coq is pretty poor. To get that
+performance back up, we need to extract the evaluator to OCaml and run
+it natively. It seems like if we're going to make that concession, we
+don't need to worry much about the efficiency of the pattern matching
+engine -- we can just delegate to OCaml's, just like [1]?
+
+Something I was unclear about throughout the paper was what the user
+experience is for a tool like this. One of the cool things about LMS was
+that it was trivial to adopt -- just changing the types of the code you
+wanted to stage was enough to get the partial evaluation effect. I'm
+less clear on the story here -- if I've written and proven an
+implementation of some code, and now want to specialize it to a
+particular input, what exactly do I have to write and/or do? Section 4.4
+left me wondering how often I would actually need to do a lot more than
+just write down some rewrite rules -- it seems like depending on the
+problem, I would need to (1) write a new abstract interpretation, (2)
+prove that correct, and (3) write new rules with the results of that
+interpretation in mind. How laborious is that effort?
+
+
+
+Review #226B
+===========================================================================
+
+Overall merit
+-------------
+A. I will champion accepting this paper.
+
+Reviewer expertise
+------------------
+Y. Knowledgeable
+
+Paper summary
+-------------
+The paper addresses the problem of performing rewrite-intensive program transformation in the context of a provably semantics-preserving system, with proofs generated in checked with a proof assistant. Since type theory-based proof assistants, by design, have limited kernels, and the primitive operations therein are small (e.g. beta-reduction and unfolding of definitions), the proofs quickly become too large too manage and generating them infeasible. The approach combines several techniques to avoid expensive rewriting under binders (such as Coq’s setoid_rewrite) but still use the native kernel for lambda calculus normalization.
+
+Comments for author
+-------------------
+This work takes a very practical standpoint: if verified toolchains and proof-carrying code are to become mainstream, then someone has to do something about those proof term sizes. The solution is very creative, too. In some sense, it’s even counterintuitive: implement another layer of embedding when what you’re striving for is performance? — but the paper eventually delivers and the way that it does that is clever, by capitalizing on existing normalization mechanics that are already built into Coq.
+
+I find the treatment of the problem systematic and one that presents several different facets of proof-assistant engineering. Also, the writing is superb.
+
+= Specific comments =
+
+p.1 [75] “fancier reduction strategies grow the trusted code base” — this is a bit over-generalizing. They don’t necessarily do so, and I understand after reading this paper that it’s either that or really blowing up the proof size, but IMHO it should be stated as a tradeoff.
+
+p.2 [213] “reduction included in .. need not be requested explicitly.” What does it mean for a reduction to be “requested”?
+
+p.5 [457] “rely on no such embeddings” — it’s perhaps besides the point, but Coq’s extraction mechanism must rely on the semantics of OCaml, and probably any attempt to build a certified extraction procedure will need to have such embedding, right?
+
+p.5 [498] “set of inductive codes” — what are these codes? Is it just an implementation detail?
+
+p.5 [545] “does not need to look into definitions” — so this rewriting scheme never unfolds the definitions of symbols? Why is that an acceptable limitation?
+
+p.6 [630] “Wildcard”. The holes are not named nor indexed. Is it irrelevant or are they implicitly indexed left-to-right?
+p.6 [636] “App” — I am guessing the edge in the decision tree should read “Switch” (as in [609])? Or is “Switch” supposed to be written inside the circle?
+
+p.6 [654] “match e with etc.” — Where did the vectors go in this expression? Were they all eliminated by Coq’s Compute or similar?
+
+p.11 [1169] “including reification, cbv, etc.” — It is not clear how important these are, and whether the reader should consider them as part of the running time or not. Surely reification is a vital part of the process, so what is the significance of “only rewriting”?
+
+p.11 [1205] “Macrobenchmark”: maybe it’s just me but I read this as “Microbenchmark” (following 5.1) and was confused.
+
+
+
+Review #226C
+===========================================================================
+
+Overall merit
+-------------
+B. I support accepting this paper but will not champion it.
+
+Reviewer expertise
+------------------
+Z. Some familiarity
+
+Paper summary
+-------------
+Partial evaluation is an optimization technique that aims at generating faster, specialized variants of a function by reducing its application domain. An example in cryptography is a specialization of a function to a certain key size. The resulting function is faster than the more generic function, but a proof is required to demonstrate that the behaviour of the new function is the same as the general function. This paper presents a way to efficiently prove the correctness of partial evaluators. Although previous approaches exist, they introduced a trusted component in the Trusted Computing Base (TCB), and had performance issue due to the lack of common sub-expression handling. This paper proposes an approach that does not add to the TCB and that takes common sub-expression into account to reduce the redundancy in generated proofs.
+
+In order to prove correctness of partial evaluators, the authors have developed a Coq library, which works in two steps: first a rewriter is generated from equality lemmas, and then it can be applied to prove the equality of two functions or synthesize a specialized version of a function with its correctness proof. The paper presents a quick overview of the features of the library, followed by a more in-depth explanation of the techniques used to build it, comparing with existing implementations, as their work is heavily inspired by work by Aehlig et al. The paper evaluates the library speed compared to coq standard tactics on two microbenchmarks, and on a macrobenchmark involving code generation for the Fiat cryptography library.
+
+Comments for author
+-------------------
+Positives
+----------- 
+- The paper is well-structured and easy to follow. 
+- The authors are positioning well their work in the context of existing approaches and techniques that they use. The paper explains when they adapted them and justifies all of their choices. 
+They also compared how their own use-case impacts existing approaches, and how their implementation overcomes the difficulty. Overall, the formalization flows almost naturally.
+
+Negatives
+---------------
+
+- Through the paper there is a constant comparison between the introduced  approach and the work of Aehlig et al [1]. One expects that those two approaches will also be empirically compared and evaluated. 
+- Although important to the presented work, side conditions (in Sections 4.3 and 4.4) are not as well explained and justified as the rest of the paper. 
+- The abstract interpreter is not evaluated.
+
+
+Suggestions
+----------------------------------------------
+- Figure 3 (benchmark results) is really hard to read and evaluate since the text is small and the graphs are barely readable. Slightly reducing the size of Figure 1 might help you get enough space for Figure 3.
+
+
+
+Review #226D
+===========================================================================
+
+Overall merit
+-------------
+B. I support accepting this paper but will not champion it.
+
+Reviewer expertise
+------------------
+Y. Knowledgeable
+
+Paper summary
+-------------
+This paper proposes a new approach to do partial evaluation in Coq.  A large component of it is a term rewriter, which is used to simplify terms as knowledge about some parameters is given.  Unlike previous work by Achlig etal [1], where an operational semantics of an ML-like language for terms was defined via a deep embedding and had to be trusted as part of the overall proof checking, here the authors propose an approach where the language is defined at the core level via translation back and forth to Coq itself.  While this translation-based definition still needs to be given, the advantage is that Coq can now take over a lot of the checking work (like termination) and thus the overall trust base stays the same, without any need to modify or extend the proof checker.
+
+Coq being Coq, a lot of challenges had to be overcome in order to achieve usable performance.  First, a less-than-naive rewrite engine had to be implemented, where some limited indexing across rewrite rules was used, to avoid doing work from scratch each time a rule is attempted to be matched.    Second, translations to Coq and normalization of evaluation of terms had to be implemented in a certain way, to convince Coq that everything terminates.  Third, a shallow encoding of terms' binders into Coq's existing binders had to be implemented, to avoid the cost of de Bruijn encodings.  Then subterm sharing and side conditions to rules were necessary, which are also considered basic features of and implemented in other rewrite engines outhere.
+
+Evaluation was done both on microbenchmarks and on a larger example, the Fiat Crytocurrency.  The results show good results.
+
+Comments for author
+-------------------
+The paper is overall well-written.  The choice of what to include in the paper and what in the appendix is fair, although there is a lot of material in the appendix that is required to appreciate the contribution.  Not sure what you can do about it, though, but at least make sure that it will be all available in a companion report if the paper is accepted.  I do not have any major questions, only a few minor ones that made me have some reservations about the paper and not give it an A.
+
+Why not implement, once and for all in Coq, the efficient rewriting engine algorithms, based on indexing and pattern match automata, that the term rewriting community has developed over the years and implemented in truly fast rewrite engines, performing millions, or even tens of millions, or rewrite steps per second?  That would benefit the entire Coq community.
+
+Why should one trust the rewrite rules as correct?  Don't they become part of the trust base anyway?  Also, isn't your term translation back and forth to Coq the same as like giving a semantics to an ML-like language like in [1]?  One still has to trust these translations, including the fact that the ML-like language and Coq share the semantics of their similar constructs., which to me counts as the same level of trust that [1] requires from their users.  You should clarify that in the paper.
+
+Lines 701-704: this becomes part of the trust base, no?
+
+How is the approach in [11] different from the approach here?  Is it only a performance improvement?  How about the trust-base?  I was a bit disappointed to read that you generate essentially the same code as [11] and you only care about the performance of the partial evaluator; it would have been a really nice application where correctness is guaranteed through Coq, but if the application already had all these guarantees, then the work in this paper feels less critical and more incremental.

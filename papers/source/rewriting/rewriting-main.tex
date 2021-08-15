@@ -1,0 +1,8 @@
+\RequirePackage{luatex85}
+\documentclass[acmsmall]{acmart}
+\usepackage{pdfpages}
+\input{rewriting.supplement.startpage}
+\edef\presupplementstartpage{\the\numexpr\supplementstartpage-1\relax}
+\begin{document}
+\includepdf[pages={1-\presupplementstartpage}]{rewriting.pdf}
+\end{document}
