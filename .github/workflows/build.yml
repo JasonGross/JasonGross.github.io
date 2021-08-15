@@ -50,6 +50,7 @@ jobs:
           echo "::endgroup::"
           echo "::group::opam switch ${OCAML_2018_VERSION}"
           opam switch ${OCAML_2018_VERSION} || opam switch create ${OCAML_2018_VERSION}
+          opam switch ${OCAML_2018_VERSION}
           echo "::endgroup::"
           echo "::group::eval opam env"
           eval $(opam env --switch=${OCAML_2018_VERSION})
@@ -65,6 +66,7 @@ jobs:
           echo "::endgroup::"
           echo "::group::opam switch ${OCAML_2014_VERSION}"
           opam switch ${OCAML_2014_VERSION} || opam switch create ${OCAML_2014_VERSION}
+          opam switch ${OCAML_2014_VERSION}
           echo "::endgroup::"
           echo "::group::eval opam env"
           eval $(opam env --switch=${OCAML_2014_VERSION})
