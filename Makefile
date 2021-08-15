@@ -174,6 +174,7 @@ deploy:
 	find . -name "*.pdf" -print0 -o -name "*.html" -print0 | xargs -0 tar -cf - | { cd build; tar -xvf -; }
 	git ls-files --recurse-submodules -z | xargs -0 tar -cf - | { cd build; tar -xvf -; }
 	find build -name ".gitignore" -o -name ".gitmodules" -delete
+	find build -xtype l -delete # remove broken symbolic links
 
 .PHONY: deploy-separate
 deploy-separate:
@@ -181,3 +182,4 @@ deploy-separate:
 	mkdir build
 	/bin/bash -c 'while IFS= read i; do tar -cf - "$$i" | { cd build; tar -xvf -; }; done < <(find . -name "*.pdf" -o -name "*.html"; git ls-files --recurse-submodules)'
 	find build -name ".gitignore" -o -name ".gitmodules" -delete
+	find build -xtype l -delete # remove broken symbolic links
