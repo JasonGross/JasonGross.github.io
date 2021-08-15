@@ -40,7 +40,7 @@ jobs:
         run: |
           pip install Pygments
       - name: Use OCaml ${{ env.OCAML_DEFAULT_VERSION }}
-        uses: avsm/setup-ocaml@v1
+        uses: avsm/setup-ocaml@v2
         with:
           ocaml-version: ${{ env.OCAML_DEFAULT_VERSION }}
       - name: Install OCaml deps
