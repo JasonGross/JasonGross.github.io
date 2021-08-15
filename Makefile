@@ -169,8 +169,13 @@ papers/lob-paper/supplemental-nonymous.zip: papers/lob-paper/html/lob.html
 
 .PHONY: deploy
 deploy:
-	rm -rf build build1.tar.gz build2.tar.gz
+	rm -rf build
 	mkdir build
-	find . -name "*.pdf" -print0 -o -name "*.html" -print0 | xargs -0 tar -czf build1.tar.gz
-	git ls-files --recurse-submodules -z | xargs -0 tar -czf build2.tar.gz
-	cd build; tar -xzvf ../build1.tar.gz; tar -xzvf ../build2.tar.gz
+	find . -name "*.pdf" -print0 -o -name "*.html" -print0 | xargs -0 tar -cf - | { cd build; tar -xvf -; }
+	git ls-files --recurse-submodules -z | xargs -0 tar -cf - | { cd build; tar -xvf -; }
+
+.PHONY: deploy-separate
+deploy-separate:
+	rm -rf build
+	mkdir build
+	/bin/bash -c 'while IFS= read i; do tar -cf - "$$i" | { cd build; tar -xvf -; }; done < <(find . -name "*.pdf" -o -name "*.html"; git ls-files --recurse-submodules)'
