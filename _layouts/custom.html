@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>{{ page.title }}</title>
+    <meta charset="utf-8">
+    <style>
+      blockquote, p {
+          text-align:justify;
+      }
+      .section, .first-section {
+          display: flow-root;
+      }
+      .identity {
+          float: left;
+          margin-right: 10px;
+      }
+      .first-section h2:first-of-type {
+          margin-top: 0em;
+      }
+    </style>
+  </head>
+  <body>
+    {{ content }}
+  </body>
+</html>

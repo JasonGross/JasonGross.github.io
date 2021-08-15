@@ -46,6 +46,7 @@ COMMON_SED_REPS := \
 	-e s'/This file/This reference list/g' \
 	-e s'/<hr>//g' \
 	-e s'/h1/h2/g' \
+	-e s',<p>,<p />,g' \
 	-e s'|\[<a name="\([^"]*\)">\([^<]*\)</a>\]|[<a name="\1" href="$(POUND)\1">\2</a>]|g'
 
 jason-gross-stripped.html: jason-gross.html Makefile
