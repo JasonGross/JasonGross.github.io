@@ -169,7 +169,8 @@ papers/lob-paper/supplemental-nonymous.zip: papers/lob-paper/html/lob.html
 
 .PHONY: deploy
 deploy:
-	rm -rf build build.tar.gz
+	rm -rf build build1.tar.gz build2.tar.gz
 	mkdir build
-	(find . -name "*.pdf" -print0 -o -name "*.html" -print0; git ls-files --recurse-submodules -z) | xargs -0 tar -czvf build.tar.gz
-	cd build; tar -xzvf ../build.tar.gz
+	find . -name "*.pdf" -print0 -o -name "*.html" -print0 | xargs -0 tar -czf build1.tar.gz
+	git ls-files --recurse-submodules -z | xargs -0 tar -czf build2.tar.gz
+	cd build; tar -xzvf ../build1.tar.gz; tar -xzvf ../build2.tar.gz

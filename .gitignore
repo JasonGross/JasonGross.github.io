@@ -12,7 +12,7 @@
 *.toc
 *.vo
 .coq-native
-/build.tar.gz
+/build*.tar.gz
 /jason-gross-drafts-stripped.html
 /jason-gross-drafts.html
 /jason-gross-drafts_bib.html
