@@ -1,6 +1,0 @@
-djb says, on time to reach differen stages of development:
-Respectable version (like what we perform): ~1 hour
-Set a speed record: weekend
-Add verification: TBD (longer)
-
-Citation to 2^25.5 radix
