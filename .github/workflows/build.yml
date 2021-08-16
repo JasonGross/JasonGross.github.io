@@ -45,6 +45,7 @@ jobs:
           ocaml-compiler: ${{ env.OCAML_DEFAULT_VERSION }}
       - name: Install OCaml deps
         run: |
+          pushd /tmp # work around https://github.com/ocaml/setup-ocaml/issues/207
           echo "::group::opam update"
           opam update
           echo "::endgroup::"
@@ -80,6 +81,7 @@ jobs:
           echo "::group::opam list"
           opam list
           echo "::endgroup::"
+          popd
       - name: Build 2014 Coq
         run: |
           opam switch ${OCAML_2014_VERSION}
