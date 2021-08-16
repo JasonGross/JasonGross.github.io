@@ -53,7 +53,7 @@ jobs:
           opam switch ${OCAML_2018_VERSION}
           echo "::endgroup::"
           echo "::group::eval opam env"
-          eval $(opam env --switch=${OCAML_2018_VERSION})
+          eval $(opam env --set-switch --switch=${OCAML_2018_VERSION})
           echo "::endgroup::"
           echo "::group::opam install"
           opam install -y "camlp5<8" ocamlfind hevea merlin oUnit dune num zarith # ocp-indent
@@ -69,7 +69,7 @@ jobs:
           opam switch ${OCAML_2014_VERSION}
           echo "::endgroup::"
           echo "::group::eval opam env"
-          eval $(opam env --switch=${OCAML_2014_VERSION})
+          eval $(opam env --set-switch --switch=${OCAML_2014_VERSION})
           echo "::endgroup::"
           echo "::group::opam install"
           opam install -y "camlp5<8" ocamlfind hevea merlin oUnit dune num zarith # ocp-indent
@@ -83,17 +83,17 @@ jobs:
       - name: Build 2014 Coq
         run: |
           opam switch ${OCAML_2014_VERSION}
-          eval $(opam env --switch=${OCAML_2014_VERSION})
+          eval $(opam env --set-switch --switch=${OCAML_2014_VERSION})
           make coq-workshop-2014-html
       - name: Build 2018 Coq
         run: |
           opam switch ${OCAML_2018_VERSION}
-          eval $(opam env --switch=${OCAML_2018_VERSION})
+          eval $(opam env --set-switch --switch=${OCAML_2018_VERSION})
           make coq-workshop-2018-html
       - name: make
         run: |
           opam switch ${OCAML_DEFAULT_VERSION}
-          eval $(opam env --switch=${OCAML_DEFAULT_VERSION})
+          eval $(opam env --set-switch --switch=${OCAML_DEFAULT_VERSION})
           make
       - name: list
         run: |
