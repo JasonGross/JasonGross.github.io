@@ -113,4 +113,5 @@ jobs:
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: build # The folder the action should deploy.
+          git-config-email: JasonGross@users.noreply.github.com
         if: ${{ github.ref == 'refs/heads/master' }}
