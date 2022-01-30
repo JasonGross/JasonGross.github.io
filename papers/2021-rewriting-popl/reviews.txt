@@ -1,0 +1,283 @@
+POPL ‘21 Paper #81 Reviews and Comments
+===========================================================================
+Paper #81 A Framework for Building Verified Partial Evaluators
+
+
+Review #81A
+===========================================================================
+
+Overall merit
+-------------
+B. Weak Accept
+
+Reviewer expertise
+------------------
+X. Expert
+
+Paper summary
+-------------
+This paper presents the design and implementation of a verified
+partial evaluator in the Coq proof assistant that is both performant,
+extensible and does not rely on extending the trusted computing base
+of the proof assistant. The authors rely on proof by reflection and
+an internal object language for which they can define a
+normalization-by-evaluation algorithm extended with rewrite rules.
+This allows to apply partial evaluation w.r.t. the standard reduction
+rules of lambda-calculus extended with domain-specific rewrite rules
+on terms in a restricted fragments of Coq's syntax. The supported
+rewrite rules (of a specific shape) can be interpreted into decision
+trees that give rise to sound and terminating simplification functions
+on the reified syntax, that are combined with the otherwise standard
+NbE algorithm. The authors present extensions to the partial evaluator
+to support conditional rewrite rules and to preserve sharing through
+let-bindings, so that the evaluator can scale to large examples.
+Finally, the authors evaluate their setup quite favorably against
+existing rewriting tactics and a large example from the Fiat
+Cryptography library.
+
+Strengths
+---------
+- The framework is fully verified inside Coq
+  (except for the potentially failing reification part), relying
+  on the existing fast, trusted reduction procedures.
+  The formal development is an impressive feat.
+- The compilation of pattern-matching to decision trees
+  and the use of PHOAS improves upon the work of Aehlig on
+  extending NbE with rewrite rules, performing the reflection
+  entirely internally.
+- The framework allows preservation of sharing of common
+  subterms which is crucial for the Fiat Cryptography example,
+  and in general hard to achieve in the general rewriting
+  tactics (as carefully explained in the appendix). It makes
+  an interesting contribution that could benefit other
+  reflexive tactics.
+- The evaluation of the result are convincing and fair to
+  the existing work.
+- The paper is well-written and easy to follow.
+
+Weaknesses
+----------
+- The current presentation has a few minor issues
+
+- The exact rewrite strategy produced for a given rewrite system
+  is not entirely clear to me.
+
+- The supported language of goals and rewrite rules is rather
+  restricted compared to the one supported by Malecha and
+  Bengston's reflexive rewriter, which can deal
+  with quantified formulas for example and more general side
+  conditions. Arguably this is a less common use case for
+  repeated rewriting, but the paper does not really compare
+  their respective expressivity. In general I think the paper is lacking
+  a bit in terms of specifying the applicability of the
+  reducer and the shape of accepted rewrites rules.
+
+Comments for author
+-------------------
+L93 "apostropher mark" does that refer to l' on L97?
+
+L219: "before reaching normal forms".
+   By strong normalization, you can always reach the normal form
+   of an open term w.r.t. the reduction rules making up
+   definitional equality.
+   You seem to be referring to normal forms w.r.t. a larger rewrite
+   system here, please be more specific.
+
+L623: Maybe you can just say that reify and reflect are structurally recursive
+  on types and reduce on the expression?
+
+L557 Let binders are not included here, unlike the grammar L359, why?
+L762 Explains that you use a constant to represent them, it would be
+  good to give a hint earlier about this encoding trick.
+
+L709 Again we did not see any example of this syntax. Maybe you
+  can provide an example here?
+
+L710. If I understand correctly this means that `Expr t` contains
+    a boolean type among the base types, and certainly if-then-else and
+    constants as well. Can this be added simply by updating the denotation
+    of base types and constants (`denote_base_type` and `denoteI`)?
+
+L762 If Coq's `let ... in ..` are not reified as `Let_In`, are they then
+    reduced during reification?
+    I was a bit confused here because it is not clear in which world `Let_In`
+    is leaving, as a Coq identifier or as something used only by the reification/
+    interpretation. IIUC, you define a Coq constant
+    `Let_In: forall {A B} (a : A) (b : A -> B) := b a` that is used to
+    represent all lets in your goals and definitions to be reified?
+    This `Let_In` application is then reified simply as an `App (Ident "Let_In") ...`
+    in the deeply embedded language?
+    Interpretation of `UnderLets` in the semantic domain will hence target that
+    constant too?
+    Please provide a more detailed presentation of the treatments of lets, it
+    sounds unnecessarily vague as it is.
+
+L883: I'd like to know here what `cbv` does when it encounters
+    `Let_In`, do you make it so that it does not reduce it,
+    and only recurses in the value and body of the let independently?
+
+L929: What exactly happens in the extracted OCaml version? You are
+  running the compiled rewriter extracted to OCaml applied to the
+  extraction of the deeply-embedded language?
+
+  Why didn't you also compare the native compilation mode for
+  the prime example? It would also avoid the problem of doubly
+  interpreting of the VM.
+
+Typos:
+
+L883: refied
+
+Questions for the response period
+---------------------------------
+- There seems to be no handling of "alien" terms (of "alien" type)
+  in the reification/interpretation setup? Is it a difficulty that you
+  side-step or can it be supported easily? Is it the purpose of the
+  extra idents parameter of the Make command? In that case, the tactic
+  would not be able to reify goals mentioning variables of alien types
+  then which cannot be mentioned as extras?
+
+- The handling of LetIn is a bit strange: we switch between
+  a grammar with a LetIn constructor to a presentation of `expr`
+  which doesn't, but looking at the code (L588 of Rewriter/Language.v),
+  `LetIn` does appear in the `expr` type which is interpreted to `dlet`,
+  a notation for a `Let_In` constant. In the same file, L774, the
+  preprocessing step of reification apparently inlines dependent lets
+  or turn them into beta-redexes (depending on the dependency),
+  so let-ins are not preserved by reification? Please clarify the situation.
+
+- The framework requires no properties of the rewrite system
+  except for semantics preservation, as far as I understand.
+  In particular you don't guarantee that the final terms
+  cannot be rewritten anymore by the rewrite rules, as
+  `rewrite_head` only performs one rewrite at the head.
+  Similarly, you use the `do_again` option to force the
+  rewriter/reducer to perform an additional bottom-up pass.
+  So, do I understand correctly that the NbE algorithm
+  produces normal forms w.r.t. β, but it does not necessarily
+  compute a normal form w.r.t. the rewrite rules?
+  Does it also mean that the rewriter is resistant to looping
+  rewrite rules like commutativity, e.g. `?x + ?y -> y + x`?
+  Finally, if my assumption is correct, to compare with
+  other rewriting strategies like `rewrite !` which loop
+  until no rewrite matches appear, don't you need to
+  repeatedly call your rewriter to obtain the same simplified
+  terms in general?
+
+
+
+Review #81B
+===========================================================================
+
+Overall merit
+-------------
+C. Weak Reject
+
+Reviewer expertise
+------------------
+Y. Knowledgeable
+
+Paper summary
+-------------
+The paper implements an Nbe-based library in Coq for building verified and efficient partial evaluators. The library does not increase the TCB of Coq, and admits reduction steps using equalities proven as Coq theorems. Facilitated by sharing of common subterms, the library is shown to scale to partially evaluate examples that previously times out using Coq primitive reduction machinery.
+
+Comments for author
+-------------------
+The paper presents a Coq library for building verified partial evaluators and shows that it performs better than primitive Coq reduction on examples such as FIAT crypto. The library is carefully designed to preserve subterm sharing.
+
+Though I understand the scheme at a high-level, I find it hard to understand the research contributions and how all the pieces in the paper fit together. NBE has been implemented in Coq (Boespflug et al.) and in other proof assistants, so is the contribution here to make it usable from a tactic in a way it can be proof-checked?
+
+Most of the techniques used in the paper are already well-known (pattern matching using decision trees, Nbe, PHOAS), the paper has put them together to make them perform better in a verified way, however, it is not evaluated well.There is only a single macro-benchmark, leaving open its applicability to other domains. The tweaks for discharging side-conditions in 4.3 and 4.4 also seems specific to that single domain.
+
+There are other details that the paper glosses over, e.g. around line 618, what is the correctness theorem for pattern matching and how does it show up in the proof of this lemma? There are several key places in the paper where the details are left to the Appendix, which is surprising given that the paper does not use its full budget.
+
+Overall I think the paper could do a better job at explaining the main contributions and the technique. It is not quite convincing in its current form.
+
+
+Some other comments:
+
+- Please explain the notation [| E |] used on line 618 (or better show the Coq statement of the lemma?).
+
+- The paper could also elaborate/simplify the steps in 2.1 with the help of a small running example.
+
+- The micro-benchmark 4(a) does not include the reification time, which seems a little strange given that reification is very much part of the technique.
+
+- Does the technique allow for compilation of P-384 in Fiat Crypto? The introduction mentions it, but the experiments never come back to it.
+
+
+
+Review #81C
+===========================================================================
+
+Overall merit
+-------------
+B. Weak Accept
+
+Reviewer expertise
+------------------
+Z. No familiarity
+
+Paper summary
+-------------
+This is a substantial and sophisticated paper, far beyond my
+expertise.  This is a low-confidence review by a non-expert.
+
+It is a demanding paper.  You really need to be familiar with Coq (in
+depth), partial evaluation, NBE, PHOAS, double deep embeddings etc, to
+make sense of it.  Still, the authors seem to have tried hard to
+explain the challenges, and how they solve them, at a high level
+without getting bogged down in details.  That's good; I'm guessing
+that an expert would be able to makes sense of it all.
+
+That said, I doubt that even an expert could reproduce what they have
+done, based on this paper.  There's an overview in 2.1, aspects of
+which are fleshed out later, but a great deal is unspecified.  In a
+paper of this length that's probably inevitable.  But it's still sad.
+It's a description of a substantial and sophisticated engineering
+achivement, not a crisp, pearly idea.
+
+How important is the achievement?  Well, it clearly moves forward the
+state of the art in generating verified artefacts.  It's impressive
+that they apply this to a real crypto system, and have peformance
+numbers (both micro-benchmarks and their macro benchmark).  Getting
+verification to the point where it can be applied to real systems is
+a major threshold, and this paper appears to bring that threshold
+closer.
+
+In short, it doesn't feel like an intellectually *satisfying* paper,
+but it does seem impressive and useful.  I'll defer to experts about
+about how big a step forward it is.
+
+Comments for author
+-------------------
+Some small notes
+
+* Fiat Crypto.  Line 897 says you replicate Erbsen; and yet on line 55
+  you say you can do something they can't.  Which is right?  If they
+  can't do P-384, how is it done in deployed systems?  Do the deployed
+  systems use verified code?  If not, how does the verified code
+  compared with the (presumably hand-written) deployed code?  Please
+  be clearer about all this.
+
+* Line 93.  Special marker.  Is this part of Coq already, or are you
+  inventing it?
+
+* Line 96 "Further marker".  Same question.
+
+* Line 106. I'm already.  I'm not a Coq user so I don't know
+  what plugins do.  Is do_again defined by you or built-in?  "request
+  that some rules trigger a bottom-up pass.."  Who implements that
+  request.  It's all very baffling.
+
+* Line 226 little examples like this, illustrating what the perf
+  challenges are, are really helpful.  More please.
+
+
+
+Comment @A1 by Reviewer A
+---------------------------------------------------------------------------
+Thank you for your detailed response. Given strong competition from other submissions, the committee felt unable to fit your paper into the POPL programme. Reading the reviews you will see that no referee was strongly enthusiastic, and you should get other useful feedback from the reviews. In summary our main concerns were:
+
+While the engineering and implementation effort is impressive and combines many state-of- the-art techniques in a single system, the reviewers find it hard to grasp reusable ideas or get even a comprehensive view of the whole system.
+
+We agree that the presentation could hardly be improved in such limited space, and suggest the authors to target e.g. a journal article with less space constraints that could better serve the dissemination of this work.
