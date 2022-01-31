@@ -1,0 +1,462 @@
+Thanks for the reviews, and we'll address the seemingly largest concerns before returning to answer additional questions.
+
+The biggest concern seems to be about generality of the approach.
+There is enough going on in the Fiat Cryptography example (almost 200 distinct rewrite rules covering quite a range of functional-programming patterns) that quantifying it as just "one compiler" may be misleading.
+Still, we acknowledge that, beyond the microbenchmarks, we've only assessed this approach as an improvement to Fiat Cryptography.
+However, our tool is a fully free-standing Coq plugin, and making use of it requires only a couple lines of code in the simplest cases (see Appendix C in the supplement for details).
+We're pretty confident that we can get any Coq expert started using it on their own intuitive examples in 10 minutes; a sanity check of this kind could even be reasonable as a required revision.
+
+We expect that our approach would apply smoothly to any compiler which can be phrased in terms of rewrite rules.
+Our particular tool is subject to some minor engineering limitations, such as requiring that the source, target, and all intermediate languages be simply typed, and some less-minor limitations, such as, at present, requiring that the source and target language be total and that the semantics be expressed in terms of a denotation function.
+The reviewers are probably right that our approach applies more naturally to domain-specific languages/compilers (e.g., we don't save much effort when it comes to program-analysis phases), but we are interested to discuss with authors of the cited compiler-verification projects about opportunities to streamline with our tooling.
+
+Additionally, two reviewers asked about the rewriting strategy we implement and how this strategy is controlled by the user.
+
+Our rewriting strategy, described in detail in section 3.3, is normalization-by-evaluation-order rewriting.
+This is closest to a bottom-up strategy, except that it has much better behavior on lambda-abstractions, achieving asymptotically better performance than either top-down or bottom-up rewriting in some cases.
+We now plan to add a paragraph calling out this strategy more explicitly, emphasizing that we believe it's the correct one for rewriting higher-order terms.
+Rewrite rules are then performed in-order; more granular phasing of rewrite rules can be performed by sequencing invocations of the rewriter.
+As described in section 2, users can specify that certain rewrite rules should trigger additional rewriting in their output (with `do_again`), allowing for a limited form of top-down rewriting.
+
+As an example, consider rewriting with the rule `map f xs = list_rect _ [] (fun x _ map_tl => f x :: map_tl) xs` together with the rule that says to evaluate list recursion, `list_rect`, on concrete lists.
+If we want to rewrite in an expression such as `map succ (map succ [0; 1; 2; 3])`, we must mark the `map` rule as `do_again` to achieve complete rewriting in a single pass.
+
+# More responses past 500 words (other important high-level points)
+
+Reviewer B asked:
+> What about conditional rewriting rules in the style of OCaml's "when" or Agda's "with abstractions"?
+
+The side conditions described in section 4.3 support the full scope of OCaml's "when" and Agda's "with abstractions".
+The only restriction is that conditions can only be applied to fully evaluated terms (we cannot, for example, say that `x + y` should be rewritten into `2 * x` when `x == y` if `x` and `y` are not known to be fully evaluated).
+Users specify side conditions for our engine by implication, so OCaml's `| pat when cond -> body` becomes `cond = true -> pat = body`, and Agda's `f args with term` followed by `f pat1 | pat2 = body` becomes, roughly `forall args, term = pat2 -> pat1 = body`.
+
+Reviewer C asked:
+> A claimed advantage over Aehlig et al. is that the trusted computing base is not grown.
+> However, Aehlig et al. claim (page 2 of their paper) that their approach does not grow the trusted base either, "if the compiler used at runtime is the same as the one compiling the theorem prover".
+> Could you respond to this claim?
+
+As we understand it, Aehlig et al. formalize a semantics of ML, code up their rewriting engine relative to that semantics of ML, and then use a (trusted, unverified) compiler for ML to compile their rewrite engine and rewrite rules.
+In section 3 (Model and Verification), they say "we over-approximate the operational semantics of ML."
+This model that is an over-approximation of ML is an extension of the TCB, unless the ML compiler is proven with respect to this model.
+(Granted, using a different compiler for rewriting and for the proof assistant would grow the TCB much more.)
+
+Reviewer D asked:
+> Could you explain how the compiler works (and is used) when it is extracted to OCaml code?
+> In this scenario, what source language and target language does it use?
+
+Fundamentally, the extracted compiler consumes and produces ASTs of the kind introduced in this paper, for a subset of Gallina.
+Building a full real-world compiler requires statically composing the extracted heart of the compiler with two additional pieces: a way to input or generate deeply-embedded syntax, and a way to print or consume the resulting deeply-embedded output.
+In Fiat Cryptography, we reify once and for all a template library of arithmetic routines, extracting the deeply embedded syntax trees in addition to the compiler.
+We additionally have (mostly unverified) backends that pretty-print the compiled AST to strings, which we also extract to OCaml.
+This results in a binary that can parse elliptic curve parameters from the command line, apply pre-reified ASTs to these parameters, run the rewriter to produce compiled code, and pretty-print the resulting ASTs to stdout.
+Hence the source language of the compiler is Gallina (though in some sense the source language of our extracted binary can be said to be a tiny DSL of elliptic curve parameters), and the target language of the compiler is ASTs, which are then processed to emit C, Java, Rust, or Go code.
+In theory, we could, for example, write a translator from our ASTs to CompCert C and then compose our pipeline with the CompCert compiler, which would allow us to have extracted binaries which produce object files from elliptic curve parameters.
+
+
+# Answering remaining questions per review
+
+## Review A
+
+> line 232: This sentence seems to be missing a word.
+
+Perhaps the subject change in "That compiler execution ran inside of Coq, but even more pragmatic is to *extract* the compiler as a standalone program in OCaml or Haskell." is confusing, and we should have instead written "That compiler execution ran inside of Coq, but an even more pragmatic approach is to *extract* the compiler as a standalone program in OCaml or Haskell."
+
+> line 749: You refer to the developers of Fiat Crypto as 'we'; this is inconsistent with other places in the paper.
+
+Oops, thanks.
+I think for the camera-ready submission we will probably be changing all instances of "The Fiat Cryptography authors" to "we".
+
+> line 798: Please define IR (I suppose it is 'intermediate representation')
+
+Yes, that's correct.  We'll fix this.
+
+## Review B
+
+> Section 3.3: the motivating example could be treated by first beta-reducing to $z + 0$, then rewriting as usual.
+> I thought you wanted to demonstrate rewriting under lambdas?
+> In which case, $\lambda x. x + 0$ would be a better example.
+
+In fact we achieve something much better than just rewriting under lambdas: we are able to interleave reduction and rewriting in a way that only a single pass over the term is required for full reduction, in most cases, even when rewrite rules expose new beta redexes and even when beta reduction exposes new rewriting opportunities.
+A more complete example might have been $\texttt{map }(\lambda x. x + 1)\ [0, x, y]$, where rewriting exposes the $\beta$-redexes $[(\lambda x. x + 1)\ 0,\ (\lambda x. x + 1)\ 1,\ (\lambda x. x + 1)\ 2]$, $\beta$-reduction exposes rewriting opportunities in $[0 + 1, x + 1, y + 1]$, and finally rewriting reduces this to $[1, x + 1, y + 1]$.
+We were concerned that this might be too complicated or nuanced of an example just for orienting the reader to NbE.
+
+> Section 4.2: yes, subterm sharing is crucial, but sometimes terms must be unshared so that rewriting / reduction can proceed.
+> (That's the optimal reduction dilemma.)
+> Strategies such as "let-reduce when the bound term is a constant" are simplistic.
+> There are many other heuristics in the literature on compiling functional languages, e.g. Appel's book "Compiling with continuations", but maybe what is needed is ways for users to control "let" reductions?
+
+That is a fair point, which we have indeed avoided confronting because we are exploring a rather different compilation style than is most standard for functional languages, thanks to the opportunity to reduce away all higher-order features at compile time.
+It is still true that any pattern that can be expressed as a rewrite rule with Boolean side conditions can be used for inlining "let"-binders, and we also support some additional heuristics.
+
+> Section 4.4 and section 5.1.4: it is really unclear how bit-width of parameters and intermediate results is being tracked.
+> I would have expected types "bits(N)" to be used for this purpose, with specific passes to infer appropriate bit widths, but this is not what happens, apparently.
+
+Bitwidths are tracked using the arguments to the $\text{clip}_{l,u}$ functions in section 4.4.
+There is a specific pass, outside the rewriting engine, to infer these bitwidths via abstract interpretation (though, as mentioned in 5.1.6, having abstract interpretation outside the rewriting engine results in quartic performance where we ought to be able to achieve quadratic performance).
+We could have used "bits(N)" types, as long as we hard-coded the permissible values of N ahead of time and defined separate versions of each function for each value of N, because our engine doesn't yet support dependent types.
+However, we saw no benefit to using bits(N) types over the more general, less-dependently typed solution of using `clip` functions.
+
+## Review C
+
+> I was quite confused by the third paragraph of the intro.
+> The paragraph is explaining the scalability challenges of _proof-producing_ compilers.
+> But the next paragraph goes on to say that this paper is about a _proven-correct_ compiler, which doesn't have these challenges.
+> So I didn't understand why that third paragraph is necessary.
+> The reader has already been primed to expect proven-correct compilers from the very first line of the introduction, so can't proof-producing compilers be deferred to Related Work?
+
+We believe this paragraph is important for motivating our work.
+Proof-producing is almost always simpler, easier to manage, easier to debug, and easier to maintain than proven-correct.
+Hickey and Nogin's [2006] work, when cast in the frame of modern proof assistants such as Coq, Agda, or Isabelle/HOL, is about proof-producing compilers.
+We originally tried to have Fiat Cryptography be a proof-producing compiler (see Appendix D).
+Scalability challenges of proof-producing compilers are what motivated us to develop a toolkit for building proven-correct compilers in the first place, and performance concerns are essentially the only reason we see to maintain a proven-correct compiler for Fiat Cryptography rather than a proof-producing one.
+Since performance concerns are so front-and-center in motivating our particular tool, we believe this paragraph deserves its place in the introduction.
+
+> I was a bit surprised that Hickey and Nogin's [2006] work on compilers built using rewrite rules is criticised for its rewriting engine being _unproven_.
+> As I understand Hickey and Nogin's work, that's kinda the point -- once the rewrites are proven, it doesn't matter which order they're applied in, so the rewriting engine can be unproven (and hence easier to change, etc).
+> But your point about them not supporting side-conditions seems believable.
+
+As we understand it, Hickey and Nogin's claim is not that the rewriting engine can be unproven, but that it can be divided into unproven heuristic parts (determining the order of rule application, performing pattern matching) and a trusted Logical Framework for scope preservation, binder tracking, etc.
+Insofar as the Logical Framework maintains any kind of proof object (whether abstract as in Isabelle/HOL or concrete as in Coq), such a rewriting engine is inherently proof-producing rather than proven-correct, and hence subject to hard-to-avoid asymptotic issues in the presence of deeply nested binders.
+Indeed, in our framework, order selection and term decomposition for pattern matching are unproven; we only need to prove the part of the framework that composes the rewrite rules; tracks scope preservation, binders, and variable instantiation; and performs reduction.
+
+> Line 312: I'm not sure what "nearly simply typed" means.
+
+"Nearly simply typed" means that we support prenex type-polymorphism in constants so long as the types are always concretely instantiated whenever the constant actually appears in an expression.
+
+## Review D
+
+> My description is probably inaccurate, reflecting my limited understanding of the details.
+
+Your description is accurate.
+
+> The presentation is [...] not self-contained enough, not gentle enough.
+> The technical presentation is incomplete: reification is not described at all, I think; the use of decision trees is only briefly described; the treatment of `LetIn` constructs in the NbE algorithm is barely described; etc.
+
+We tried to strike a balance between being overly technical and inaccessible to all but the most expert readers on the one hand, and sweeping so many details under the rug that readers would come away with an inaccurate picture on the other.
+To give a sense of scale, we have another thirty pages of written content on the various design decisions, tradeoffs, and lessons of the core of the framework, and approximately another sixty pages sketching out the design of the rewriting engine in full detail.
+We aimed to give an overview of the novel features of the rewriting engine, describe the lessons we learned, and present the engine in enough detail that a motivated reader could reconstruct most of the key components.
+By and large, we chose to omit descriptions of techniques where there is already a rich existing literature (our engine is compatible with any method of reification, and the particular method we chose is unimportant), where we make no innovations over the existing literature (our implemention of decision trees is a transcription to Coq of the algorithm described in Maranget's "Compiling Pattern Matching to Good Decision Trees"), or where the treatment is straightforward and without pitfalls (the `LetIn` constructs follow the obvious combination of application and abstraction in the NbE algorithm of `reduce(let v := e_1 in e_2) = let x := reduce(e_1) in reduce([x/v]e_2)`).
+In Appendix E, we give a detailed map between the description in the paper and the code in the code supplement, which we hope will fill in the gaps which we had no space to cover in the paper.
+
+> lines 29-31, "most desired iteration on the compiler can be achieved through iteration on the rewrite rules".
+> The authors seem to suggest that all changes to the compiler can take the form of new rewrite rules, or modifications to existing rewrite rules.
+> However, much of the "foresight" that a compiler writer must display resides in the designing of appropriate intermediate languages, separated by conceptual gaps that must be just large enough to be interesting and small enough to be tractable; and in the ordering of these intermediate languages.
+> One might argue that, once the design of these ILs has been frozen, some optimisations may become difficult to express, as they might require extending the definition of one or more ILs, or (worse) they might require revisiting the order in which certain transformations take place.
+
+As we discuss in 5.1.2, 5.1.3, and especially 5.1.4, design of the appropriate intermediate languages falls within the scope of adding or tweaking rewrite rules in our framework.
+The plugin code will automatically generate identifiers for any definitions mentioned in any rewrite rule.
+Users are free to change which definitions they use for a shallowly-embedded IR; no freezing of design is necessary.
+
+> line 33, "Proof-producing compilers usually operate on the functional languages of the proof assistants that they are written in".
+> Perhaps I am missing something, but I don't see why that is or must be the case.
+> In fact, there is probably a spectrum of "proof-producing compilers", where the "proof" takes the form of a witness that can be checked by a certified verifier; the more complex the verifier, the closer we are to a "certified" compiler, and the simpler the verifier, the closer we are to a "certifying" compiler.
+> When the authors write "Proof-producing compilers usually operate [...]", which end of the spectrum do they have in mind?
+> (Perhaps the extreme where there is no user-defined verifier and the witness must be a term of type Prop?)
+
+Yes, we are considering the end where the type of a witness has type Prop.
+Propositions are about terms in the functional language of the proof assistant.
+While it's possible to add extra indirection (as is done, for example, in Iris' proof mode), the simplest solution is to just operate directly on such terms.
+
+> line 60, "Their execution timed out": the execution of what?
+
+Execution of the old Fiat Cryptography framework / code generator.
+(We let it run for over 300 hours; it didn't finish.)
+
+> line 90, "preserving subterm sharing".
+> It is not clear what kind of sharing the authors have in mind.
+> Sharing of program terms, or sharing of proof terms?
+> Why are there important opportunities for sharing?
+> Why cannot R_tac preserve sharing?
+
+Sharing of program terms.
+R_tac does not have native support for subterm sharing, and without the let-lifting optimization described in 4.2, rewriting requires asymptotically more term traversals.
+
+> line 135, "we expect it to be performance-prohibitive to perform bookkeeping operations on first-order-encoded terms".
+> Why is that?
+> Is it because the authors assume that de Bruijn indices are encoded as unary numbers?
+> Or would the cost be prohibitive even with an efficient representation of de Bruijn indices (either as natural integers in binary notation or as machine integers)?
+
+Merely having an efficient representations of de Bruijn indices is insufficient; subsitution is a very significant cost.
+In Figure 3(c), the gap between the blue line (our method with the final conversion from a deeply-embedded AST to a shallowly-embedded term) and the green line (just the rewriting and reduction portion of our method) is entirely due to an inefficiency in Coq's handling of de Bruijn indices, which are nevertheless encoded as machine integers.
+More details are available in [Coq Issue #11151](https://github.com/coq/coq/issues/11151#issuecomment-557435656), where the foremost expert on Coq performance says:
+
+> My understanding so far is that the cbv / lazy reduction machine are completely broken performance-wise on open terms.
+> The explicit substitutions for the CBV machine for instance seem to be enforcing a call-by-name behaviour for lifts, as every time we access a variable we have to crawl the substitution and recompute the lifted result.
+>
+> Compare this to the VM which uses an accumulator, where closures are represented by mere arrays.
+> I think that the NbE approach is inherently more efficient because object-language values are indeed represented by meta-language values.
+>
+> If anything, this is probably a theoretical issue that requires more pondering.
+
+The fix for this [required using "a variant of skewed lists enriched over a monoid" to track substitutions](https://github.com/coq/coq/pull/13537).
+We are happy to defer issues involving efficient handling of binders to the Coq kernel.
+
+One point that this reviewer might be missing is that we are dealing with enormous terms, and that many of the scaling challenges that arise in Fiat Cryptography are not present in any other project we've yet encountered.
+
+> line 142, "Fiat Cryptography's arithmetic routines rely on significant sharing".
+> It is still not clear what is meant.
+> If sharing matters, why not explicitly represent it via an object-level `let` construct?
+> Does the difficulty stem from the fact that a shallow embedding is used, therefore it is difficult to control whether and when Coq decides to unfold its meta-level `let` construct?
+
+We do explicitly represent sharing via an explicit object-level `let` construct.
+The issue is that this construct blocks reduction unless either the code is rewritten in CPS or the reduction engine has native support for lifting `let`-binders, and that attempting to support `let`-lifting via rewrite rules results in poor asymptotic performance.
+Again, the primary point here is about performance and scaling challenges.
+
+> line 178, I suppose I could have understood this earlier, but it is becoming clear only now that the paper is about partial evaluation, and about a form of supercompilation.
+
+Yes, perhaps we should have brought in the role of partial evaluation earlier.
+
+> line 203, the role of `ident.eagerly` is unclear.
+> Is it an identity function?
+> I assume that it serves as a marker.
+> It would be good to point precisely to the place in the paper where the recognition of this marker is explained.
+> Why is `ident.eagerly` *not* used in the lemmas `eval_combine` and `eval_length`?
+
+Yes, it is an identity function that serves as a marker.
+Recognition of this marker is hard-coded into the reification of replacement patterns of rewrite rules into NbE-typed values, where these identifiers are replaced by custom definitions which await concrete terms to recurse on.
+Appendices E.4.5 and E.2 describe some of the code associated to this feature.
+We decided that this detail was too technical and required too much contextual explanation to include in this paper.
+The `ident.eagerly` marker could be used in `eval_length`; there is no reason not to do so, and we would then not need to mark `eval_length` with `do_again`.
+However, while we could mark the `list_rect` in `eval_combine` with `ident.eagerly`, we would still need `do_again` to handle `list_case`, because we did not build in special support for "eager" evaluation of `list_case`.
+(Such support is unnecessary, because the two rewrite rules for the `cons` and `nil` cases for `list_case` are complete with only a single pass of rewriting, while no rewrite rule reified from a Gallina expression can express complete reduction of `list_rect` under a single pass of rewriting, or even under a fixed number of rewriting passes.)
+
+> lines 220-225, most of the details mentioned in this paragraph remain mysterious.
+> Why would "extra bottom-up passes" be needed?
+> (Doesn't rewriting produce a normal form?)
+> What is a "permitted" identifier?
+> What is `seq`? etc.
+
+We have apparently not made it clear that our rewriter performs only a *single* NbE-ordered pass over the term.
+Much like NbE is capable of fully reducing a term to normal form in a single pass, we've found that nearly all of our rewriting and compilation can be done in just a single pass over the AST.
+For the sake of convenience, we allow limited localized exceptions to this single-pass rule, primarily useful for cases where the RHS of one rewrite rule is expressed in terms of identifiers that allow immediate additional rewriting.
+Multiple passes are supported by wrapping the rewriter in a fueled loop at the Gallina level, but neither Fiat Cryptography nor our microbenchmarks required such looping.
+
+Our plugin emits on-the-fly an inductive type of identifiers which can be used in the AST.
+Any identifiers not in this inductive type cannot appear in goals to be reified.
+By default, this list is composed of the identifiers found in any rewrite rule mentioned.
+The `with extra idents` construct allows extending this list so that more goals can be reified.
+The `seq` identifier is `Coq.Lists.List.seq`, which shows up in the definition of `prefixSums` but not in any rewrite rule.
+It might seem like such identifiers are useless, because they will not be mentioned in any rewrite rule, but the `with delta` generates rules even for identifiers which show up only in the `with extra idents` list, and in fact in this example the rule that says to reduce `seq` to normal form only when its applied to fully concrete (ground / closed) arguments is adequate.
+
+> line 290, what is "the former"?
+
+Soundness.
+"The latter" would be "syntactic-well-formedness", both from the preceding sentence "The statements of rewrite rules are reified and soundness and syntactic-well-formedness lemmas are proven about each of them."
+
+> line 292, "Automating this step allows rewrite rules to be proven in terms of their shallow embedding".
+> I don't know what this means.
+
+In engines like R_tac, users must provide proofs about the reified, syntactic form of rewrite rules.
+This is a significant burden for users unfamiliar with the ins and outs of R_tac.
+In our engine, users never need to see the underlying reflective engine, nor perform any reasoning about it, thanks to automation.
+
+More concretely, a user merely needs to prove a lemma like `forall n, n + 0 = n`, not `forall n, Expr.Interp (expr.App (expr.App (expr.Ident expr.Z_add) n) (expr.Ident (expr.Literal 0))) = Expr.Interp n` nor `forall n, Expr.Wf n -> Expr.Wf (expr.App (expr.App (expr.Ident expr.Z_add) n) (expr.Ident (expr.Literal 0)))`.
+
+> line 312, "limited support".
+> Limited in what ways?
+
+We support only prenex type-polymorphism in constants, and furthermore the types must always be concretely instantiated whenever the constant actually appears in an expression.
+For example, we support `List.append`, which is polymorphic over the type of the list, but we only support it on concretely typed lists.
+That is, we can use `List.append` to concatenate two lists of `nat`s, but we can't talk about lists whose types are unknown or variable.
+
+> line 325, "we instead build our rewriter in Coq’s logic".
+> Not sure what this means.
+> Is your rewrite a program expressed in Gallina?
+> Is it something else?
+
+Yes, our rewriter is a Gallina program.
+We are contrasting this with Aehlig et al.'s rewriter, which is an OCaml program.
+
+> line 330, you adopt Maranget's approach, because you fear that a simpler approach would involve "duplicate work".
+> Have you compared the two approaches in practice?
+
+We're about 8x faster than the simpler approach.
+(We didn't include any numbers or plots because we've only done a very rough comparison, and didn't consider it worth it to do extensive performance-testing here.)
+This 8x can be broken down into a 4x factor and a 2x factor:
+Using decision trees gives us a 4x speed-up over the naive approach, and furthermore allows us to partially evaluate the rewriting engine itself to specialize it to the particular rewriting rules.
+(This partial evaluation is not easily possible without the decision tree; we needed to carefully craft our engine to be written in CPS subject to a few other constraints to allow such partial evaluation to be useful, and enabling partial evaluation on the naive approach would require an entirely different set of constraints on how we wrote the engine.
+Furthermore, partial evaluation done naively on the simpler approach would result in a roughly quadratic code-size blowup with no gain: it would duplicate the list of rewrite rules for every identifier in the language without actually specializing the logic to the particular rewrite rules.)
+Actually performing the early partial evaluation, so that the decision tree does not need to be evaluated when the rewriting engine is run, buys us another 2x speedup.
+
+> line 335, "There are three steps to turn a set of rewrite rules into a functional program that takes in an expression and reduces according to the rules."
+> Is the goal even well-defined?
+> What if the set of rewrite rules is not confluent or not terminating?
+
+Here is another place where we would have benefited from being clearer that the goal is a *single* NbE-ordered pass over the term, which is nearly sufficient for the vast majority of our use cases.
+Handling of non-confluent rewrite rules is determined first by NbE-order term traversal, and subsequently by applying all rules with the same head identifier in order and taking the first one that matches.
+Any looping must be fueled, and non-terminating rules would run repeatedly until fuel runs out.
+
+> line 379, what is "Coq's logic"?
+> What is "Coq's normal partial evaluation"?
+
+"Coq's logic" is Gallina.
+"Coq's normal partial evaluation" is `cbv` / `lazy` / `cbn` with a whitelist or blacklist.
+
+> line 440, is this an amendment to the code in Figure 1?
+> It would be clearer to have just one version of the code.
+
+Yes.
+Thanks for the suggestion.
+
+> line 482, I don't understand the implied opposition between "closed programs" and "thousands of lines of low-level code".
+> One aspect is whether the program has free variables; another aspect is the size of the program.
+
+In our experience, most routines scale super-linearly in the number of binders.
+Hence a rewriting engine or reduction procedure that scales linearly in the size of the output term, in the absence of binders, might scale quadratically or even cubically in the number of binders in the output term.
+This behavior will be invisible when the engine is only tested on closed programs and on open programs that produce only a couple lines of code.
+
+> line 496, "it is difficult to integrate arrays soundly in a logic".
+> This is a naïve question, but could Coq's primitive arrays be used here?
+
+Coq's primitive arrays have no recursion scheme and, as far as we're aware, have not been used in any major development.
+(Additionally, Coq had no primitive arrays when we completed work on this project.)
+We would be interested in seeing a performance analysis of various ways of doing binder bookkeeping that included primitive arrays.
+
+> line 504, "Here is the actual inductive definition".
+> Could this definition come earlier?
+> The definition of reify & reflect would be clearer if it did.
+
+It could, though we were wary of overwhelming the reader with large amounts of code.
+
+> line 517, "A good example of encoding adequacy".
+> I believe I know what "adequacy" means in this context, but I don't think every reader will.
+
+Noted, thanks.
+
+> line 577, "we needed to convince Coq that the function terminates".
+> Coq is convinced already, if it accepts your definition.
+> The phrasing is somewhat odd.
+>
+> line 581, "the Coq kernel is ready to run our Rewrite procedure during checking."
+> During checking of what?
+> If you mean that the Coq type-checker performs reduction during type-checking, that is a well-known fact which perhaps does not need to be recalled here.
+
+Indeed, the phrasing here is odd, and we'll reword it.
+
+> line 584, "These strategies have".
+> Not clear which strategies are meant here.
+
+The reduction strategies built in to Coq's kernel which are referred to at the end of the previous sentence, "[...] it is important to note how the Coq kernel builds in reduction strategies."
+In particular, we are referring to `lazy`, `vm_compute`, and `native_compute`.
+
+> line 590, "“known-good” goals".
+> I have no idea what this means.
+
+We mean goals that line up with the sorts of goals on which Coq's built-in reduction strategies have been tuned.
+Granted, this knowledge is probably only known to expert Coq users, and perhaps we should rephrase.
+
+> line 616, "Then we modified reduction to inline let binders instead of preserving them, at which point the reduction job terminated with an out-of-memory error [...]".
+> I don't really get the point.
+> Even if the compiler had been able to terminate, the resulting "optimized" code would be practically unusable, as it would perform many redundant computations.
+> Right?
+
+That's right.
+This is yet another argument that subterm sharing is crucial, which is what we're trying to argue in this section.
+
+> the "NbE strategy that outputs UnderLets telescopes" in Section 4.2 is never fully defined, as far as I can tell.
+
+The UnderLets type is defined on lines 639--641.
+This type is a monad, and it is straightforward to sprinkle the monadic `bind` and `return` operators in the NbE code given from lines 546--567 in such a way that the code typechecks.
+There is very little of note in the interplay of this monad with NbE, for all that it seems quite essential to the performance of our rewriting engine, and we felt that including this code in our initial presentation of NbE would overwhelm the reader with too many unfamiliar moving parts.
+
+> line 650, why is `with_lets` needed?
+> Is it used to implement the heuristics discussed on line 658?
+
+No, it's unrelated to the heuristic on line 658.
+Strictly speaking, `with_lets` is not needed.
+However, including `with_lets` allows us to avoid monadic binds in a number of places, which simplifies some of the code.
+Perhaps we should have dropped `with_lets` entirely from our presentation, since even our additional thirty pages of written content on the various design decisions, tradeoffs, and lessons does not delve into the tradeoffs of having `with_lets` vs avoiding it.
+However, we felt that it was better to present exactly the code that we actually use, in this instance.
+
+> I believe the authors could perhaps better explain why the rewriting rule at line 706 is preferable (somehow more tractable) than the rewriting rule at line 696.
+> At first sight, they seem similar.
+> I guess the point is that the variable `n` is unknown (i.e., *not* a compile-time constant) whereas the variable `u` is known (a compile-time constant), so the second rule falls within the scope of the technology described in Section 4.3, whereas the first rule does not.
+
+Yes, this is correct.
+
+> The `clip` trick seems to be a nice way of attaching statically computable information to variables.
+> It may be worth discussing how general this trick is (can it be used to carry arbitrary information, not just an interval?) and whether there might be other ways of achieving the same result (could the information be stored in some sort of environment?).
+
+Thanks!
+Yes, it can carry arbitrary information.
+However, we've neither needed nor evaluated it on any other sort of information, and expect that the reader can think up uses just as well as we can.
+Rewrite rules don't have access to any sort of environment, though I suppose that section 5.1.6 can be seen as suggesting that we provide rewrite rules with a sort of environment of abstract information.
+
+> lines 721 and 725, "Recall from section 2 [...]".
+> This was never really explained.
+> All of Section 4.5 is relatively obscure.
+
+Explaining the mechanism by which the rewriter makes use of these markers is far beyond the scope of this paper, and including all such details of the rewriting engine would probably result in upwards of a hundred pages of content.
+We were not sure how to make this section less obscure; these features implement relatively straightforward capabilities with highly technical code, and it's hard to say much more than "our framework supports this feature" without ending up exposing the reader to a great deal of detailed implementation minutiae.
+
+> line 736, "when converting the interpretation of the reified term with the prereified term".
+> I don't know what this means.
+
+As per your description of our engine, the user gives a program in Gallina and asks for the optimized version.
+This optmized version is equal to the original term.
+Since our rewriting engine operates on deeply-embedded syntax, we must equate the user-given program in Gallina with the interpretation of its own reification.
+This equality is proven by reflexivity, as the two terms are convertible, and we are referring to the user-given Gallina program as "the prereified term".
+
+> line 755, I don't understand the meaning of "iterating on the Fiat Cryptography compiler".
+
+Fiat Cryptography development is ongoing.
+Porting the core of the compiler to this framework did not end development.
+Some of the development since then has taken the form of tweaking the set of rewrite rules and rewriter passes, and we are referring to this development as "iterating on the Fiat Cryptography compiler".
+
+> Section 5.1.2 seems relatively uninteresting.
+
+Perhaps, though there's a sense in which section 5.1.2 might be more properly labeled "New Constructs in the Frontend and Intermediate Representations", and this easy ability to change the IRs seems to be something you argued is important above, when discussing lines 29-31.
+
+> line 808, "designating Z.combine_at_bitwidth as an identifier that should be inlined rather than let-bound".
+> I am not sure at which point it should be inlined away.
+> Certainly not too soon, otherwise the rewrite rules mentioned at lines 805-806 would never fire.
+
+Inlining occurs after all applicable rewrite rules have triggered at a location, and rewrite rules are allowed to let-bind subterms.
+However, you may be misinterpreting what we mean by "inlined", since inlining would not prevent the rewrite rules mentioned at lines 805-806 from firing.
+We mean that whenever the rewriter would emit a term such as `let x := Z.combine_at_bitwidth y in z`, it should instead emit `[Z.combine_at_bitwidth y/x]z`.
+
+> line 834-847, I think I understand this paragraph (more or less), but I do not see how it explains the quartic behavior discussed in the previous paragraph.
+
+The particular algorithm that we use contains quartically many variable assignments, but only quadratically many of them are distinct.
+However, this constant folding combined with limited common subexpression elimination (realzing that you don't need to have a variable holding `x + 0` if you already have a variable `x`) can only be realized after bounds analysis.
+The paragraph on lines 834-847 is a simplified example aimed at making concrete how the fusion can impact the number of operations used, rather than being precisely accurate about the source of quartic behavior.
+
+> line 852, the forward pointer to section 5.2.4 is somewhat unfortunate; the text cannot be fully understood without looking ahead, it seems.
+> We do not know what the parameters `n` and `m` represents.
+
+Indeed, we should rearrange the text so that we're not referring to variables before we display the code.
+
+> On line 853, it is not clear what "cubic" means (cubic in what parameter?).
+
+Cubic in the same variable that the first half of the sentence expressed linear performance in terms of, `n · m`:
+"We achieve linear performance in n · m when ignoring the final `cbv`, while `setoid_rewrite` and `rewrite_strat` are both cubic"
+
+> On line 858, what is `make`?
+> What is `map_dbl`? The whole paragraph (848-861) is extremely technical.
+> It does not clearly explain why it is the fundamentally difficult to perform let-lifting in an efficient way.
+
+We will move this paragraph after Figure 5, where `make` is defined.
+Hopefully this will make the explanation clear, since all we are doing is arguing that a particular reduction strategy (performing all rewriting and reduction with the exception of let-lifing, followed by lifting the let binders, and repeating this sequence of two steps) has a particular asymptotic performance.
+
+> It also does not explain its opening sentence, "Another essential pass to fuse with rewriting and partial evaluation is let-lifting".
+> Why is it essential?
+> Is it more efficient if fused than if performed separately?
+> Why is that?
+
+Setting aside the missing clarity of the proof of asymptotic behavior, which is hampered by the fact that this paragraph comes before Figure 5, we clearly state that performing let-lifting via rewrite rules results in $\mathcal O(n\cdot m^2)$ let-liftings, while we are able to achieve performance of $\mathcal O(n\cdot m)$ by fusing the passes.
+The analysis is identical if let-lifting is performed in any other way, so long as it alternates with reduction rather than being fused with it.
+
+> In Figure 2, is `m` in fact a known constant?
+> Otherwise I am not sure what the ellipsis means.
+
+For any particular data-point, both `m` and `n` are known constants.
+However, we do evaluate the code for multiple values of `m`.
+
+> line 958 (and elsewhere), "continuation-passing style [...] allows standard VM-based reduction to achieve good performance".
+> Is it folklore knowledge why writing in CPS style helps?
+> It might be worth briefly recalling why this is so.
+
+This is alluded to on lines 619--636.
+In the expression `map (λ x. y + x) (let z := e in [0; 1; 2; z; z + 1])`, the `map` will not reduce unless let-binders are inlined.
+However, in the equivalent CPS'd expression `(λ K. map_cps (λ x K. K (y + x)) (λ K. let z := e in K [0; 1; 2; z; z + 1]) K) (λ x. x)` reduces to `let z := e in [y; y + 1; y + 2; y + z; y + (z + 1)]` as desired.
+I'm not sure if there's any folklore citation to be had, and I'm also not sure how to express the general principle here.
