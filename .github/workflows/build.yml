@@ -35,7 +35,7 @@ jobs:
             biber \
             #
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3.1.1
       - name: install Python deps
         run: |
           pip install Pygments
