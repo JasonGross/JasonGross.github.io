@@ -1,0 +1,29 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{Require} \PYG{k+kn}{Import} \PYG{n}{Crypto}\PYG{o}{.}\PYG{n}{Rewriter}\PYG{o}{.}\PYG{n}{PerfTesting}\PYG{o}{.}\PYG{n}{Core}\PYG{o}{.}
+\PYG{k+kn}{Require} \PYG{k+kn}{Import} \PYG{n}{Crypto}\PYG{o}{.}\PYG{n}{Util}\PYG{o}{.}\PYG{n}{Option}\PYG{o}{.}
+
+\PYG{k+kn}{Import} \PYG{n}{WordByWordMontgomery}\PYG{o}{.}
+\PYG{k+kn}{Import} \PYG{n}{Core}\PYG{o}{.}\PYG{n}{RuntimeDefinitions}\PYG{o}{.}
+
+\PYG{k+kn}{Definition} \PYG{n}{p} \PYG{o}{:} \PYG{n}{params}
+  \PYG{o}{:=} \PYG{n}{Eval} \PYG{k}{compute} \PYG{k}{in} \PYG{n}{invert\PYGZus{}Some} \PYG{o}{(}\PYG{n}{of\PYGZus{}string} \PYG{l+s+s2}{\PYGZdq{}2\PYGZca{}256\PYGZhy{}2\PYGZca{}224+2\PYGZca{}192+2\PYGZca{}96\PYGZhy{}1\PYGZdq{}} \PYG{l+m+mi}{64}\PYG{o}{).}
+
+\PYG{k+kn}{Goal} \PYG{n}{True}\PYG{o}{.}
+  \PYG{c}{(* Successful run: *)}
+  \PYG{n}{Time} \PYG{k}{let} \PYG{n}{v} \PYG{o}{:=} \PYG{o}{(}\PYG{n}{eval} \PYG{k}{cbv}
+    \PYG{o}{\PYGZhy{}[}\PYG{n}{Let\PYGZus{}In}
+      \PYG{n}{runtime\PYGZus{}nth\PYGZus{}default}
+      \PYG{n}{runtime\PYGZus{}add} \PYG{n}{runtime\PYGZus{}sub} \PYG{n}{runtime\PYGZus{}mul} \PYG{n}{runtime\PYGZus{}opp} \PYG{n}{runtime\PYGZus{}div} \PYG{n}{runtime\PYGZus{}modulo}
+      \PYG{n}{RT\PYGZus{}Z}\PYG{o}{.}\PYG{n}{add\PYGZus{}get\PYGZus{}carry\PYGZus{}full} \PYG{n}{RT\PYGZus{}Z}\PYG{o}{.}\PYG{n}{add\PYGZus{}with\PYGZus{}get\PYGZus{}carry\PYGZus{}full} \PYG{n}{RT\PYGZus{}Z}\PYG{o}{.}\PYG{n}{mul\PYGZus{}split}\PYG{o}{]}
+    \PYG{k}{in} \PYG{o}{(}\PYG{n}{GallinaDefOf} \PYG{n}{p}\PYG{o}{))} \PYG{k}{in}
+    \PYG{k+kr}{idtac}\PYG{o}{.}
+  \PYG{c}{(* Unsuccessful OOM run: *)}
+  \PYG{n}{Time} \PYG{k}{let} \PYG{n}{v} \PYG{o}{:=} \PYG{o}{(}\PYG{n}{eval} \PYG{k}{cbv}
+    \PYG{o}{\PYGZhy{}[}\PYG{c}{(*Let\PYGZus{}In*)}
+      \PYG{n}{runtime\PYGZus{}nth\PYGZus{}default}
+      \PYG{n}{runtime\PYGZus{}add} \PYG{n}{runtime\PYGZus{}sub} \PYG{n}{runtime\PYGZus{}mul} \PYG{n}{runtime\PYGZus{}opp} \PYG{n}{runtime\PYGZus{}div} \PYG{n}{runtime\PYGZus{}modulo}
+      \PYG{n}{RT\PYGZus{}Z}\PYG{o}{.}\PYG{n}{add\PYGZus{}get\PYGZus{}carry\PYGZus{}full} \PYG{n}{RT\PYGZus{}Z}\PYG{o}{.}\PYG{n}{add\PYGZus{}with\PYGZus{}get\PYGZus{}carry\PYGZus{}full} \PYG{n}{RT\PYGZus{}Z}\PYG{o}{.}\PYG{n}{mul\PYGZus{}split}\PYG{o}{]}
+    \PYG{k}{in} \PYG{o}{(}\PYG{n}{GallinaDefOf} \PYG{n}{p}\PYG{o}{))} \PYG{k}{in}
+    \PYG{k+kr}{idtac}\PYG{o}{.}
+\PYG{k+kn}{Abort}\PYG{o}{.}
+\end{Verbatim}

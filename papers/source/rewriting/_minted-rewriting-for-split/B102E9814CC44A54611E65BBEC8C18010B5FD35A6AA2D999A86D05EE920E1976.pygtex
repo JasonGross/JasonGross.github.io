@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{Global} \PYG{k+kn}{Instance}\PYG{o}{:} \PYG{k}{forall} \PYG{n}{A} \PYG{n}{B}\PYG{o}{,}
+ \PYG{n}{Proper} \PYG{o}{((}\PYG{n}{eq} \PYG{o}{==\PYGZgt{}} \PYG{n}{eq} \PYG{o}{==\PYGZgt{}} \PYG{n}{eq}\PYG{o}{)} \PYG{o}{==\PYGZgt{}} \PYG{n}{eq} \PYG{o}{==\PYGZgt{}} \PYG{n}{eq} \PYG{o}{==\PYGZgt{}} \PYG{n}{eq}\PYG{o}{)}
+        \PYG{o}{(@}\PYG{n}{fold\PYGZus{}left} \PYG{n}{A} \PYG{n}{B}\PYG{o}{).}
+\end{Verbatim}

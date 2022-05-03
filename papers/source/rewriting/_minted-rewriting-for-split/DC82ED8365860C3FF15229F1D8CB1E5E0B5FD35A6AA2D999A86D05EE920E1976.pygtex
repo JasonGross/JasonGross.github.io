@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{Make} \PYG{n}{myrew} \PYG{o}{:=} \PYG{n}{Rewriter} \PYG{n}{For} \PYG{o}{(}\PYG{n}{eval\PYGZus{}repeat}\PYG{o}{,} \PYG{n}{eval\PYGZus{}rect} \PYG{n}{list}\PYG{o}{,} \PYG{n}{eval\PYGZus{}rect} \PYG{n}{nat}\PYG{o}{)}
+  \PYG{o}{(}\PYG{k}{with} \PYG{n}{extra} \PYG{n}{idents} \PYG{o}{(}\PYG{n}{Z}\PYG{o}{.}\PYG{n}{add}\PYG{o}{)).}
+\end{Verbatim}

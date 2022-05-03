@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{Lemma} \PYG{n}{eval\PYGZus{}map} \PYG{n}{A} \PYG{n}{B} \PYG{o}{(}\PYG{n}{f} \PYG{o}{:} \PYG{n}{A} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{B}\PYG{o}{)} \PYG{n}{l}
+\PYG{o}{:} \PYG{n}{map} \PYG{n}{f} \PYG{n}{l} \PYG{o}{=} \PYG{n}{ident}\PYG{o}{.}\PYG{n}{eagerly} \PYG{n}{list\PYGZus{}rect} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZus{}} \PYG{n+nb+bp}{[]} \PYG{o}{(λ} \PYG{n}{x} \PYG{o}{\PYGZus{}} \PYG{n}{l\PYGZsq{}}\PYG{o}{,} \PYG{n}{f} \PYG{n}{x} \PYG{o}{::} \PYG{n}{l\PYGZsq{}}\PYG{o}{)} \PYG{n}{l}\PYG{o}{.}
+\PYG{k+kn}{Lemma} \PYG{n}{eval\PYGZus{}fold\PYGZus{}left} \PYG{n}{A} \PYG{n}{B} \PYG{o}{(}\PYG{n}{f} \PYG{o}{:} \PYG{n}{A} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{B} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{A}\PYG{o}{)} \PYG{n}{l} \PYG{n}{a}
+\PYG{o}{:} \PYG{n}{fold\PYGZus{}left} \PYG{n}{f} \PYG{n}{l} \PYG{n}{a} \PYG{o}{=} \PYG{n}{ident}\PYG{o}{.}\PYG{n}{eagerly} \PYG{n}{list\PYGZus{}rect} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZus{}} \PYG{o}{(λ} \PYG{n}{a}\PYG{o}{,} \PYG{n}{a}\PYG{o}{)} \PYG{o}{(λ} \PYG{n}{x} \PYG{o}{\PYGZus{}} \PYG{n}{r} \PYG{n}{a}\PYG{o}{,} \PYG{n}{r} \PYG{o}{(}\PYG{n}{f} \PYG{n}{a} \PYG{n}{x}\PYG{o}{))} \PYG{n}{l} \PYG{n}{a}\PYG{o}{.}
+\PYG{k+kn}{Lemma} \PYG{n}{eval\PYGZus{}combine} \PYG{n}{A} \PYG{n}{B} \PYG{o}{(}\PYG{n}{la} \PYG{o}{:} \PYG{n}{list} \PYG{n}{A}\PYG{o}{)} \PYG{o}{(}\PYG{n}{lb} \PYG{o}{:} \PYG{n}{list} \PYG{n}{B}\PYG{o}{)}
+\PYG{o}{:} \PYG{n}{combine} \PYG{n}{la} \PYG{n}{lb} \PYG{o}{=}
+\PYG{n}{list\PYGZus{}rect} \PYG{o}{\PYGZus{}} \PYG{o}{(λ} \PYG{o}{\PYGZus{},} \PYG{n+nb+bp}{[]}\PYG{o}{)} \PYG{o}{(λ} \PYG{n}{x} \PYG{o}{\PYGZus{}} \PYG{n}{r} \PYG{n}{lb}\PYG{o}{,} \PYG{n}{list\PYGZus{}case} \PYG{o}{(λ} \PYG{o}{\PYGZus{},} \PYG{o}{\PYGZus{})} \PYG{n+nb+bp}{[]} \PYG{o}{(λ} \PYG{n}{y} \PYG{n}{ys}\PYG{o}{,} \PYG{o}{(}\PYG{n}{x}\PYG{o}{,}\PYG{n}{y}\PYG{o}{)::}\PYG{n}{r} \PYG{n}{ys}\PYG{o}{)} \PYG{n}{lb}\PYG{o}{)} \PYG{n}{la} \PYG{n}{lb}\PYG{o}{.}
+\PYG{k+kn}{Lemma} \PYG{n}{eval\PYGZus{}length} \PYG{n}{A} \PYG{o}{(}\PYG{n}{ls} \PYG{o}{:} \PYG{n}{list} \PYG{n}{A}\PYG{o}{)}
+\PYG{o}{:} \PYG{n}{length} \PYG{n}{ls} \PYG{o}{=} \PYG{n}{list\PYGZus{}rect} \PYG{o}{\PYGZus{}} \PYG{l+m+mi}{0} \PYG{o}{(λ} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZus{}} \PYG{n}{n}\PYG{o}{,} \PYG{n}{S} \PYG{n}{n}\PYG{o}{)} \PYG{n}{ls}\PYG{o}{.}
+\end{Verbatim}

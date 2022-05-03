@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{Lemma} \PYG{n}{lift\PYGZus{}let\PYGZus{}list\PYGZus{}rect} \PYG{n}{T} \PYG{n}{A} \PYG{n}{P} \PYG{n}{N} \PYG{n}{C} \PYG{o}{(}\PYG{n}{v} \PYG{o}{:} \PYG{n}{A}\PYG{o}{)} \PYG{n}{fls}
+\PYG{o}{:} \PYG{o}{@}\PYG{n}{list\PYGZus{}rect} \PYG{n}{T} \PYG{n}{P} \PYG{n}{N} \PYG{n}{C} \PYG{o}{(}\PYG{n}{Let\PYGZus{}In} \PYG{n}{v} \PYG{n}{fls}\PYG{o}{)} \PYG{o}{=} \PYG{n}{Let\PYGZus{}In} \PYG{n}{v} \PYG{o}{(}\PYG{k}{fun} \PYG{n}{v} \PYG{o}{=\PYGZgt{}} \PYG{o}{@}\PYG{n}{list\PYGZus{}rect} \PYG{n}{T} \PYG{n}{P} \PYG{n}{N} \PYG{n}{C} \PYG{o}{(}\PYG{n}{fls} \PYG{n}{v}\PYG{o}{)).}
+\PYG{k+kn}{Lemma} \PYG{n}{lift\PYGZus{}let\PYGZus{}cons} \PYG{n}{T} \PYG{n}{A} \PYG{n}{x} \PYG{o}{(}\PYG{n}{v} \PYG{o}{:} \PYG{n}{A}\PYG{o}{)} \PYG{n}{f}
+\PYG{o}{:} \PYG{o}{@}\PYG{n}{cons} \PYG{n}{T} \PYG{n}{x} \PYG{o}{(}\PYG{n}{Let\PYGZus{}In} \PYG{n}{v} \PYG{n}{f}\PYG{o}{)} \PYG{o}{=} \PYG{n}{Let\PYGZus{}In} \PYG{n}{v} \PYG{o}{(}\PYG{k}{fun} \PYG{n}{v} \PYG{o}{=\PYGZgt{}} \PYG{o}{@}\PYG{n}{cons} \PYG{n}{T} \PYG{n}{x} \PYG{o}{(}\PYG{n}{f} \PYG{n}{v}\PYG{o}{)).}
+\end{Verbatim}

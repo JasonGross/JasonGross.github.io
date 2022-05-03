@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{Make} \PYG{n}{rewriter} \PYG{o}{:=} \PYG{n}{Rewriter} \PYG{n}{For} \PYG{o}{(}\PYG{n}{zero\PYGZus{}plus}\PYG{o}{,} \PYG{n}{plus\PYGZus{}zero}\PYG{o}{,} \PYG{n}{times\PYGZus{}zero}\PYG{o}{,} \PYG{n}{times\PYGZus{}one}\PYG{o}{,} \PYG{n}{eval\PYGZus{}map}\PYG{o}{,}
+  \PYG{n}{eval\PYGZus{}fold\PYGZus{}left}\PYG{o}{,} \PYG{n}{do\PYGZus{}again} \PYG{n}{eval\PYGZus{}length}\PYG{o}{,} \PYG{n}{do\PYGZus{}again} \PYG{n}{eval\PYGZus{}combine}\PYG{o}{,}
+  \PYG{n}{eval\PYGZus{}rect} \PYG{n}{nat}\PYG{o}{,} \PYG{n}{eval\PYGZus{}rect} \PYG{n}{list}\PYG{o}{,} \PYG{n}{eval\PYGZus{}rect} \PYG{n}{prod}\PYG{o}{)} \PYG{o}{(}\PYG{k}{with} \PYG{n}{delta}\PYG{o}{)} \PYG{o}{(}\PYG{k}{with} \PYG{n}{extra} \PYG{n}{idents} \PYG{o}{(}\PYG{n}{seq}\PYG{o}{)).}
+\end{Verbatim}

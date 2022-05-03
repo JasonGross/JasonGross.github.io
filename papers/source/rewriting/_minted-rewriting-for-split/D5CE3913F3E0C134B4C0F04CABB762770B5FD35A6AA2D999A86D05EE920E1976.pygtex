@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{Lemma} \PYG{n}{zero\PYGZus{}plus} \PYG{o}{:} \PYG{o}{∀} \PYG{n}{n}\PYG{o}{,} \PYG{l+m+mi}{0} \PYG{o}{+} \PYG{n}{n} \PYG{o}{=} \PYG{n}{n}\PYG{o}{.}      \PYG{k+kn}{Lemma} \PYG{n}{times\PYGZus{}zero} \PYG{o}{:} \PYG{o}{∀} \PYG{n}{n}\PYG{o}{,} \PYG{n}{n} \PYG{o}{*} \PYG{l+m+mi}{0} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{o}{.}
+\PYG{k+kn}{Lemma} \PYG{n}{plus\PYGZus{}zero} \PYG{o}{:} \PYG{o}{∀} \PYG{n}{n}\PYG{o}{,} \PYG{n}{n} \PYG{o}{+} \PYG{l+m+mi}{0} \PYG{o}{=} \PYG{n}{n}\PYG{o}{.}      \PYG{k+kn}{Lemma} \PYG{n}{times\PYGZus{}one}  \PYG{o}{:} \PYG{o}{∀} \PYG{n}{n}\PYG{o}{,} \PYG{n}{n} \PYG{o}{*} \PYG{l+m+mi}{1} \PYG{o}{=} \PYG{n}{n}\PYG{o}{.}
+\end{Verbatim}

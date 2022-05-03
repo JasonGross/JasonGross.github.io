@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{Make} \PYG{n}{myrew} \PYG{o}{:=} \PYG{n}{Rewriter} \PYG{n}{For} \PYG{o}{(}\PYG{n}{Z}\PYG{o}{.}\PYG{n}{add\PYGZus{}0\PYGZus{}r}\PYG{o}{,} \PYG{n}{eval\PYGZus{}rect} \PYG{n}{nat}\PYG{o}{,} \PYG{n}{eval\PYGZus{}rect} \PYG{n}{prod}\PYG{o}{).}
+\end{Verbatim}

@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{Make} \PYG{n}{myrew} \PYG{o}{:=} \PYG{n}{Rewriter} \PYG{n}{For}
+  \PYG{o}{(}\PYG{n}{eval\PYGZus{}rect} \PYG{n}{nat}\PYG{o}{,} \PYG{n}{eval\PYGZus{}rect} \PYG{n}{prod}\PYG{o}{,} \PYG{n}{eval\PYGZus{}fold\PYGZus{}right}\PYG{o}{,}
+   \PYG{n}{eval\PYGZus{}map}\PYG{o}{,} \PYG{n}{do\PYGZus{}again} \PYG{n}{eval\PYGZus{}rev}\PYG{o}{,} \PYG{n}{eval\PYGZus{}rect} \PYG{n}{bool}\PYG{o}{,}
+   \PYG{o}{@}\PYG{n}{fst\PYGZus{}pair}\PYG{o}{,} \PYG{n}{eval\PYGZus{}rect} \PYG{n}{list}\PYG{o}{,} \PYG{n}{eval\PYGZus{}app}\PYG{o}{)}
+   \PYG{o}{(}\PYG{k}{with} \PYG{n}{extra} \PYG{n}{idents} \PYG{o}{(}\PYG{n}{Z}\PYG{o}{.}\PYG{n}{eqb}\PYG{o}{,} \PYG{n}{orb}\PYG{o}{,} \PYG{n}{Z}\PYG{o}{.}\PYG{n}{gtb}\PYG{o}{,}
+    \PYG{n}{PositiveSet}\PYG{o}{.}\PYG{n}{elements}\PYG{o}{,} \PYG{o}{@}\PYG{n}{fst}\PYG{o}{,} \PYG{o}{@}\PYG{n}{snd}\PYG{o}{,}
+    \PYG{n}{PositiveSet}\PYG{o}{.}\PYG{n}{mem}\PYG{o}{,} \PYG{n}{Pos}\PYG{o}{.}\PYG{n}{succ}\PYG{o}{,} \PYG{n}{PositiveSet}\PYG{o}{.}\PYG{n}{add}\PYG{o}{,}
+    \PYG{n}{List}\PYG{o}{.}\PYG{n}{fold\PYGZus{}right}\PYG{o}{,} \PYG{n}{List}\PYG{o}{.}\PYG{n}{map}\PYG{o}{,} \PYG{n}{List}\PYG{o}{.}\PYG{n}{seq}\PYG{o}{,} \PYG{n}{Pos}\PYG{o}{.}\PYG{n}{mul}\PYG{o}{,}
+    \PYG{n}{S}\PYG{o}{,} \PYG{n}{Pos}\PYG{o}{.}\PYG{n}{of\PYGZus{}nat}\PYG{o}{,} \PYG{n}{Z}\PYG{o}{.}\PYG{n}{to\PYGZus{}nat}\PYG{o}{,} \PYG{n}{Z}\PYG{o}{.}\PYG{n}{div}\PYG{o}{,} \PYG{n}{Z}\PYG{o}{.}\PYG{n}{pos}\PYG{o}{,} \PYG{n}{O}\PYG{o}{,}
+    \PYG{n}{PositiveSet}\PYG{o}{.}\PYG{n}{empty}\PYG{o}{))}
+  \PYG{o}{(}\PYG{k}{with} \PYG{n}{delta}\PYG{o}{).}
+\end{Verbatim}

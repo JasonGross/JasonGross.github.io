@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{Lemma} \PYG{n}{eval\PYGZus{}repeat} \PYG{n}{A} \PYG{n}{x} \PYG{n}{n}
+\PYG{o}{:} \PYG{o}{@}\PYG{n}{List}\PYG{o}{.}\PYG{k+kr}{repeat} \PYG{n}{A} \PYG{n}{x} \PYG{o}{(}\PYG{k}{\PYGZsq{}}\PYG{n}{n}\PYG{o}{)} \PYG{o}{=} \PYG{n}{ident}\PYG{o}{.}\PYG{n}{eagerly} \PYG{n}{nat\PYGZus{}rect} \PYG{o}{\PYGZus{}} \PYG{n+nb+bp}{[]} \PYG{o}{(λ} \PYG{n}{k} \PYG{n}{repeat\PYGZus{}k}\PYG{o}{,} \PYG{n}{x} \PYG{o}{::} \PYG{n}{repeat\PYGZus{}k}\PYG{o}{)} \PYG{o}{(}\PYG{k}{\PYGZsq{}}\PYG{n}{n}\PYG{o}{).}
+\end{Verbatim}
