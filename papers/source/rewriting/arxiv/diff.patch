@@ -1,0 +1,43 @@
+--- ../rewriting.tex	2022-05-03 09:37:15.740000000 +0100
++++ rewriting.tex	2022-05-03 09:37:47.570000000 +0100
+@@ -1,4 +1,4 @@
+-%\pdfoutput=1 %uncomment to ensure pdflatex processing (mandatatory e.g. to submit to arXiv)
++\pdfoutput=1 %uncomment to ensure pdflatex processing (mandatatory e.g. to submit to arXiv)
+ \RequirePackage{luatex85}
+ \PassOptionsToPackage{dvipsnames}{xcolor}
+ \RequirePackage{amssymb}
+@@ -31,7 +31,8 @@
+ %\usepackage{subfig}
+ %\newcommand{\subfigureautorefname}{\figureautorefname}
+ 
+-\usepackage{minted}
++\nolinenumbers% needef for arXiv
++\usepackage[frozencache]{minted}
+ \usemintedstyle{bw}
+ \usepackage{amsmath}
+ %\usepackage{amsthm}
+@@ -247,12 +248,12 @@
+ 
+ \ifthenelse{\boolean{tobesplit}}{%
+ %  \relatedversion{} %optional, e.g. full version hosted on arXiv, HAL, or other respository/website
+-\relatedversiondetails%[linktext={opt. text shown instead of the URL}, cite=DBLP:books/mk/GrayR93]
+-    {Full Version}{https://arxiv.org/abs/2205.00862} %linktext and cite are optional
++%  \relatedversiondetails%[linktext={opt. text shown instead of the URL}, cite=DBLP:books/mk/GrayR93]
++%      {Full Version}{https://arxiv.org/abs/2205.00862} %linktext and cite are optional
+ }{}
+ 
+ \supplement{%
+-  \url{https://jasongross.github.io/papers/2022-rewriting-itp-supplement.pdf},
++%  \url{https://jasongross.github.io/papers/2022-rewriting-itp-supplement.pdf},
+   \githublinkurl{mit-plv}{rewriter}[ITP-2022-perf-data],
+   \githublinkurl{mit-plv}{fiat-crypto}[perf-testing-data-ITP-2022-rewriting]%
+ }%optional, e.g. related research data, source code, ... hosted on a repository like zenodo, figshare, GitHub, ...
+@@ -262,7 +263,7 @@
+   This work was supported in part by a Google Research Award, National Science Foundation grants CCF-1253229, CCF-1512611, and CCF-1521584, and the National Science Foundation Graduate Research Fellowship under Grant Nos.\ 1122374 and 1745302.
+   Any opinion, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.%
+ }
+-%optional, to capture a funding statement, which applies to all authors. Please enter author specific funding statements as fifth argument of the \author macro.
++%\funding{(Optional) general funding statement \dots}%optional, to capture a funding statement, which applies to all authors. Please enter author specific funding statements as fifth argument of the \author macro.
+ 
+ %\acknowledgements{I want to thank \dots}%optional
+ 

@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{Definition} \PYG{n}{iter} \PYG{o}{(}\PYG{n}{m} \PYG{o}{:} \PYG{n}{nat}\PYG{o}{)} \PYG{o}{(}\PYG{n}{acc} \PYG{n}{v} \PYG{o}{:} \PYG{n}{Z}\PYG{o}{)} \PYG{o}{:=}
+  \PYG{o}{@}\PYG{n}{nat\PYGZus{}rect} \PYG{o}{(}\PYG{k}{fun} \PYG{o}{\PYGZus{}} \PYG{o}{=\PYGZgt{}} \PYG{n}{Z} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{Z}\PYG{o}{)}
+    \PYG{o}{(}\PYG{k}{fun} \PYG{n}{acc} \PYG{o}{=\PYGZgt{}} \PYG{n}{acc}\PYG{o}{)}
+    \PYG{o}{(}\PYG{k}{fun} \PYG{o}{\PYGZus{}} \PYG{n}{rec} \PYG{n}{acc} \PYG{o}{=\PYGZgt{}} \PYG{n}{rec} \PYG{o}{(}\PYG{n}{acc} \PYG{o}{+} \PYG{n}{v}\PYG{o}{))}
+    \PYG{n}{m}
+    \PYG{n}{acc}\PYG{o}{.}
+\PYG{k+kn}{Definition} \PYG{n}{make\PYGZus{}tree} \PYG{o}{(}\PYG{n}{n} \PYG{n}{m} \PYG{o}{:} \PYG{n}{nat}\PYG{o}{)} \PYG{o}{(}\PYG{n}{v} \PYG{n}{acc} \PYG{o}{:} \PYG{n}{Z}\PYG{o}{)} \PYG{o}{:=}
+ \PYG{n}{Eval} \PYG{k}{cbv} \PYG{o}{[}\PYG{n}{iter}\PYG{o}{]} \PYG{k}{in}
+  \PYG{o}{@}\PYG{n}{nat\PYGZus{}rect} \PYG{o}{(}\PYG{k}{fun} \PYG{o}{\PYGZus{}} \PYG{o}{=\PYGZgt{}} \PYG{n}{Z} \PYG{o}{*} \PYG{n}{Z} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{Z}\PYG{o}{)}
+    \PYG{o}{(}\PYG{k}{fun} \PYG{k}{\PYGZsq{}}\PYG{o}{(}\PYG{n}{v}\PYG{o}{,} \PYG{n}{acc}\PYG{o}{)} \PYG{o}{=\PYGZgt{}} \PYG{n}{iter} \PYG{n}{m} \PYG{o}{(}\PYG{n}{acc} \PYG{o}{+} \PYG{n}{acc}\PYG{o}{)} \PYG{n}{v}\PYG{o}{)}
+    \PYG{o}{(}\PYG{k}{fun} \PYG{o}{\PYGZus{}} \PYG{n}{rec} \PYG{k}{\PYGZsq{}}\PYG{o}{(}\PYG{n}{v}\PYG{o}{,} \PYG{n}{acc}\PYG{o}{)} \PYG{o}{=\PYGZgt{}}
+      \PYG{n}{iter} \PYG{n}{m} \PYG{o}{(}\PYG{n}{rec} \PYG{o}{(}\PYG{n}{v}\PYG{o}{,} \PYG{n}{acc}\PYG{o}{)} \PYG{o}{+} \PYG{n}{rec} \PYG{o}{(}\PYG{n}{v}\PYG{o}{,} \PYG{n}{acc}\PYG{o}{))} \PYG{n}{v}\PYG{o}{)}
+    \PYG{n}{n}
+    \PYG{o}{(}\PYG{n}{v}\PYG{o}{,} \PYG{n}{acc}\PYG{o}{).}
+\end{Verbatim}

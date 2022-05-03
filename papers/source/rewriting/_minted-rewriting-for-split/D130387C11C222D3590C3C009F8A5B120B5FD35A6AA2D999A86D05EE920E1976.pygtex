@@ -1,0 +1,40 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{Lemma} \PYG{n}{eval\PYGZus{}fold\PYGZus{}right} \PYG{n}{A} \PYG{n}{B} \PYG{n}{f} \PYG{n}{x} \PYG{n}{ls} \PYG{o}{:}
+\PYG{o}{@}\PYG{n}{List}\PYG{o}{.}\PYG{n}{fold\PYGZus{}right} \PYG{n}{A} \PYG{n}{B} \PYG{n}{f} \PYG{n}{x} \PYG{n}{ls}
+\PYG{o}{=} \PYG{n}{ident}\PYG{o}{.}\PYG{n}{eagerly} \PYG{n}{list\PYGZus{}rect} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZus{}}
+    \PYG{n}{x}
+    \PYG{o}{(λ} \PYG{n}{l} \PYG{n}{ls} \PYG{n}{fold\PYGZus{}right\PYGZus{}ls}\PYG{o}{,} \PYG{n}{f} \PYG{n}{l} \PYG{n}{fold\PYGZus{}right\PYGZus{}ls}\PYG{o}{)}
+    \PYG{n}{ls}\PYG{o}{.}
+
+\PYG{k+kn}{Lemma} \PYG{n}{eval\PYGZus{}app} \PYG{n}{A} \PYG{n}{xs} \PYG{n}{ys} \PYG{o}{:}
+\PYG{n}{xs} \PYG{o}{++} \PYG{n}{ys}
+\PYG{o}{=} \PYG{n}{ident}\PYG{o}{.}\PYG{n}{eagerly} \PYG{n}{list\PYGZus{}rect} \PYG{n}{A} \PYG{o}{\PYGZus{}}
+    \PYG{n}{ys}
+    \PYG{o}{(λ} \PYG{n}{x} \PYG{n}{xs} \PYG{n}{app\PYGZus{}xs\PYGZus{}ys}\PYG{o}{,} \PYG{n}{x} \PYG{o}{::} \PYG{n}{app\PYGZus{}xs\PYGZus{}ys}\PYG{o}{)}
+    \PYG{n}{xs}\PYG{o}{.}
+
+\PYG{k+kn}{Lemma} \PYG{n}{eval\PYGZus{}map} \PYG{n}{A} \PYG{n}{B} \PYG{n}{f} \PYG{n}{ls} \PYG{o}{:}
+\PYG{o}{@}\PYG{n}{List}\PYG{o}{.}\PYG{n}{map} \PYG{n}{A} \PYG{n}{B} \PYG{n}{f} \PYG{n}{ls}
+\PYG{o}{=} \PYG{n}{ident}\PYG{o}{.}\PYG{n}{eagerly} \PYG{n}{list\PYGZus{}rect} \PYG{o}{\PYGZus{}} \PYG{o}{\PYGZus{}}
+    \PYG{n+nb+bp}{[]}
+    \PYG{o}{(λ} \PYG{n}{l} \PYG{n}{ls} \PYG{n}{map\PYGZus{}ls}\PYG{o}{,} \PYG{n}{f} \PYG{n}{l} \PYG{o}{::} \PYG{n}{map\PYGZus{}ls}\PYG{o}{)}
+    \PYG{n}{ls}\PYG{o}{.}
+
+\PYG{k+kn}{Lemma} \PYG{n}{eval\PYGZus{}rev} \PYG{n}{A} \PYG{n}{xs} \PYG{o}{:}
+\PYG{o}{@}\PYG{n}{List}\PYG{o}{.}\PYG{n}{rev} \PYG{n}{A} \PYG{n}{xs}
+\PYG{o}{=} \PYG{o}{(@}\PYG{n}{list\PYGZus{}rect} \PYG{o}{\PYGZus{}} \PYG{o}{(}\PYG{k}{fun} \PYG{o}{\PYGZus{}} \PYG{o}{=\PYGZgt{}} \PYG{o}{\PYGZus{}))}
+    \PYG{n+nb+bp}{[]}
+    \PYG{o}{(λ} \PYG{n}{x} \PYG{n}{xs} \PYG{n}{rev\PYGZus{}xs}\PYG{o}{,} \PYG{n}{rev\PYGZus{}xs} \PYG{o}{++} \PYG{o}{[}\PYG{n}{x}\PYG{o}{])\PYGZpc{}}\PYG{n}{list}
+    \PYG{n}{xs}\PYG{o}{.}
+
+\PYG{n}{Scheme} \PYG{n}{Equality} \PYG{k}{for} \PYG{n}{PositiveSet}\PYG{o}{.}\PYG{n}{tree}\PYG{o}{.}
+
+\PYG{k+kn}{Definition} \PYG{n}{PositiveSet\PYGZus{}t\PYGZus{}beq}
+   \PYG{o}{:} \PYG{n}{PositiveSet}\PYG{o}{.}\PYG{n}{t} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{PositiveSet}\PYG{o}{.}\PYG{n}{t} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{bool}
+  \PYG{o}{:=} \PYG{n}{tree\PYGZus{}beq}\PYG{o}{.}
+
+\PYG{k+kn}{Global} \PYG{k+kn}{Instance} \PYG{n}{PositiveSet\PYGZus{}reflect\PYGZus{}eqb}
+ \PYG{o}{:} \PYG{n}{reflect\PYGZus{}rel} \PYG{o}{(@}\PYG{n}{eq} \PYG{n}{PositiveSet}\PYG{o}{.}\PYG{n}{t}\PYG{o}{)} \PYG{n}{PositiveSet\PYGZus{}t\PYGZus{}beq}
+ \PYG{o}{:=} \PYG{n}{reflect\PYGZus{}of\PYGZus{}brel}
+      \PYG{n}{internal\PYGZus{}tree\PYGZus{}dec\PYGZus{}bl} \PYG{n}{internal\PYGZus{}tree\PYGZus{}dec\PYGZus{}lb}\PYG{o}{.}
+\end{Verbatim}

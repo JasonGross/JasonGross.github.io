@@ -1,0 +1,530 @@
+Thank you for the reviews, which will help us revise the paper to e.g. convey more of the design choices that the reviewers felt stood out as missing.
+We include detailed responses on a review-by-review basis below, but here first are our most-important points.
+
+Probably the biggest point in Review A was about more thorough comparison with the rewriter of Malecha and Bengtson.  We go into substantial detail below, but the points we should highlight are:
+- *Advantage for them*: supporting rewrite relations beside equality
+- *Advantage for them*: connection to a larger reflective-automation framework
+- *Advantage for us*: much-simplified invocation, requiring no familiarity with reflection
+- *Advantage for us*: sharing preservation, lack of which pushes their rewriter to at least quadratic time on microbenchmarks where we exhibit linear time
+- *Advantage for us*: ahead-of-time specialization of the rewriter to a set of constants and rewrite rules, which we found improves performance by about 2× (and we note that doing this automatically rather than by hand is an important delta over Coq NbE by Boespflug et al., which Review B had concerns about)
+
+Also, some ways in which our framework is less general are only consequences of the simplified invocation using automatic reification.
+Our engine already supports arbitrary reflective automation for side conditions if users write lemmas' deeply embedded syntax trees directly.
+We could easily provide almost as much support for this style as Malecha and Bengtson do, by replacing the convenient syntax we provide with slightly lower-level commands that separate out the declaration of inductive types from the reification of the rewrite rules.
+Extension with new container types is possible by manually expanding a deep embedding of types and coding up associated eliminators and algebraic laws.
+Supporting quantifiers in formulas only requires changes to reification, and we didn't do it because rewriting under quantifiers generally can't be justified with equality (rather than setoids).
+
+Review A asked for clarity on the exact rewrite strategy.
+It's a slight variant on running a single bottom-up pass with eager βι-reduction:
+Any rule tagged with `do_again`, on success, triggers an extra bottom-up pass on the output of that rewrite rule.
+This repetition is fueled, with the fuel currently hardcoded to the number of rewrite rules (which works well when the rules form a dag), but this could easily be a parameter of the rewriter.
+
+Review B discusses a microbenchmark that only presents running time without reification, which must mean that we should make the graph clearer, since in fact it does include time with reification and all other elements of a top-level tactic invocation.  However, there is indeed a separate line without reification time.
+
+Finally, considering comments in several reviews, we should clarify that yes, our new experiments do include generating code for curve P-384, which timed out in the old Fiat-Crypto.  We found an independent improvement to Fiat-Crypto that made P-384 work without using our rewriter, and then code generation via extraction of our rewriter to OCaml improves generation time by about another 3x.
+
+---------------------------------------------------------------------------
+
+Responses to Review #81A
+===========================================================================
+
+Responses to Weaknesses
+-----------------------
+
+> - The exact rewrite strategy produced for a given rewrite system
+>   is not entirely clear to me.
+
+The rewrite strategy produced is a slight variant on running a single bottom-up pass with eager βι-reduction:
+
+- Any rule tagged with `do_again`, on success, triggers an extra bottom-up pass on the output of that rewrite rule.
+  This repetition is fueled, with the fuel currently hard-coded to the number of rewrite rules (which works well when the rules form a DAG), but this could easily be a parameter of the rewriter.
+
+> - The supported language of goals and rewrite rules is rather
+>   restricted compared to the one supported by Malecha and Bengston's
+>   reflexive rewriter, which can deal with quantified formulas for
+>   example and more general side conditions.
+
+In fact our rewriter could support both of these if the user is willing to put in the work to adjust the encoding by hand.
+We do not advertise support for these because the convenience machinery, which allows users to make use of our rewriter with nearly the same ease that they could use `autorewrite`, does not support them.
+
+There are in fact a couple of features of the rewriter of Malecha and Bengtson which would require fundamental design changes for us to support:
+
+- setoid relations (we only use pointwise equality)
+
+- supporting dependent types and computation at the type level (I'm actually not sure if they support this, but it seems plausible)
+
+- matching application patterns that are not in eta-long form (such as rewriting `flat_map f` without having it applied to a list)
+
+- matching application patterns where the head symbol is a unification variable
+
+There are a couple more features that they support which we could support with only relatively straightforward engineering work:
+
+- repeatedly rewriting until there are no more matches, using fuel
+
+- supporting non-linear patterns out-of-the-box (this would require some tweaking to the PHOAS types to support deciding equality of terms)
+
+Finally, there are the things that we don't claim support for just because our convenience code doesn't support them, but which are supported in principle by the core reflective framework:
+
+- discharging side-conditions through other reflective tactics
+
+- supporting arbitrary type families
+
+- support for quantified formulas
+
+Roughly, the first one merely requires reifying the rewriting lemma by hand, rather than using the convenience machinery;
+the success or failure of rewrite replacement can then be conditioned on the result of running another reflective procedure which decides the side-condition.
+
+Supporting arbitrary type families just requires extending the datatype of non-base-types;
+the parts which we did not know how to automate were
+(a) automatically turning the eliminator on a container type into an eliminator in the UnderLets monad (more precisely, in the NbE-value type augmented with the UnderLets monad), and
+(b) generating the section-retraction commutation of the container type and the `expr` type (i.e., automatically generating the functions `list (expr T) →
+expr (list T) → option (list (expr T))`, `expr A * expr B → expr (A * B) → option (expr A * expr B)`, `option (expr T) → expr (option T) → option (option (expr T))`, etc).
+We'd be excited to know about a general theory that handles this sort of thing.
+
+Supporting quantified formulas would merely require tweaking the current convenience code to treat `Prop`-valued things as term-like rather than type-like, and adding a bit of preprocessing for `forall` to turn it into a constant analogous to `ex`.
+This would not be very useful, though, unless users were assuming propositional extensionality, because we can only rewrite with pointwise equality.
+Nevertheless, we're not aware of any barriers in theory.
+
+
+To sum up, as I understand it, Malecha and Bengtson's rewriter is parameterized over a user-supplied type of symbols for types and terms, and the user needs to reify the lemmas themselves.
+If rather than relying on our plugin, our user writes the type codes by hand, then we can quite easily support a much richer language of types.
+Similarly, if the user codes the reified rewrite rule by hand rather than relying on our preprocessor, then it's quite trivial to solve side conditions with arbitrary other reflective tactics (though we don't provide infrastructure for sequencing them).
+So the differences here are that
+(a) we provide much more convenience to the user, and the cost of this is that we lose some of the expressivity that is available by writing the lower-level versions by hand, and
+(b) their rewriter fits into a much larger framework of reflective tactics that they can use for discharging side conditions, while our framework is just the rewriter.
+
+
+Finally, there are a couple of features that we support that we believe Malecha and Bengtson do not:
+
+- sharing preservation
+
+- a rewriting strategy that allows fine-grained control of which subterms are rewalked looking for more rewriting
+
+- automatically specializing the reflective language to the rewriting problem in a way that allows drastic speedups (I haven't seen this anywhere in the literature)
+
+- constructing the reflective tactic and applying it with syntax that's approximately as simple as the built-in autorewrite and doesn't require that the user know about reflection
+
+- interleaving βι reduction with rewriting (I'm actually not sure if they support this; the paper doesn't seem to say)
+
+The first one, in particular, is quite essential in the Fiat-Crypto example, as not having native support for lifting `let`-binders results in asymptotically worse performance.
+This is already apparent in the `LiftLetsMap` / "Binders and Recursive Functions" example in the paper.
+We achieve linear performance in $n\cdot m$ when you ignore the final `cbv`;
+`setoid_rewrite` and `rewrite_strat` are both cubic.
+The rewriter of Malecha and Bengtson cannot possibly achieve better than $\mathcal O(n\cdot m²)$ unless it can be sublinear in the number of rewrites.
+This is because our rewriter gets away with a constant number of rewrites (four), plus evaluating recursion principles for a total amount of work $\mathcal O(n\cdot m)$.
+But without primitive support for `let`-lifting, you instead need to lift the `let`s by rewrite rules, and you end up needing to perform $\mathcal O(n\cdot m²)$ rewrites just to lift the `let`s.
+The analysis is thus:
+running `make` simply gives us $m$ nested applications of `map_dbl` to a length $n$ list.
+To reduce a given call to `map_dbl`, you must first lift all existing `let`-binders (there are $n\cdot k$ of them on the $k$-innermost-call) across `map_dbl`, one at a time.
+Then the `map_dbl` adds another $n$ `let` binders.
+So we end up doing $\sum_{k=0}^{m} n\cdot k$ lifts, i.e., $n\cdot m(m+1)/2$ rewrites just to lift the `let`s.
+
+
+
+Responses to Comments for author
+--------------------------------
+> L93 "apostropher mark" does that refer to l' on L97?
+
+We mistakenly left this sentence in from a previous version of the example.
+The apostrophe mark in fact does not show up until the example on line 737–738, where `?l` and `?u` are prefixed with `'` to denote that they are literals.
+It shows up again on line 1371 where we prefix `n` with `'` to indicate that `List.repeat` should only be simplified when the length of the output list is a ground term.
+
+> L219: "before reaching normal forms".
+>    By strong normalization, you can always reach the normal form
+>    of an open term w.r.t. the reduction rules making up
+>    definitional equality.
+>    You seem to be referring to normal forms w.r.t. a larger rewrite
+>    system here, please be more specific.
+
+We had a mistaken understanding of the technical meaning of "normal
+forms"; the sentence should read "before reaching ground terms".
+
+> L623: Maybe you can just say that reify and reflect are structurally recursive
+>   on types and reduce on the expression?
+
+Sure.
+
+> L557 Let binders are not included here, unlike the grammar L359, why?
+
+This is an oversight.
+They should be included, thanks.
+
+> L762 Explains that you use a constant to represent them, it would be
+>   good to give a hint earlier about this encoding trick.
+
+We actually use this constant on the Gallina side, not on the `expr` side.
+They are, in fact, hard-coded into the `expr` type.
+
+
+> L709 Again we did not see any example of this syntax. Maybe you
+>   can provide an example here?
+
+This is the apostrophe mark described first on L93.
+There is an example on L737–738 and L1371, but indeed we should provide the example here of `∀ n1 m n2, 'n1 = 'n2 → 'n1 + m - 'n2 = m`.
+
+> L710. If I understand correctly this means that `Expr t` contains
+>     a boolean type among the base types, and certainly if-then-else and
+>     constants as well. Can this be added simply by updating the denotation
+>     of base types and constants (`denote_base_type` and `denoteI`)?
+
+This is actually not required.
+The boolean expression and the if-then-else live at the Gallina level.
+A rewrite rule returns an optional expression, so, for example, the aforementioned `∀ n1 m n2, 'n1 = 'n2 → 'n1 + m - 'n2 = m` rule would be encoded in pseudo-Gallina as something like:
+
+```
+{| pattern := '?1 + ?2 - '?3
+ ; replacement := λ (n1 : nat) (m : expr nat) (n2 : nat),
+       if Nat.eqb n1 n2
+       then Some m
+       else None |}
+```
+
+The transformation into a boolean statement happens entirely during reification, and the reflective procedure cannot inspect the condition in any way.
+(This, too, is how general side conditions could be handled, by replacing the condition of the `if` statement with any reflective procedure.)
+
+
+> L762 If Coq's `let ... in ..` are not reified as `Let_In`, are they then
+>     reduced during reification?
+
+Yes, but this behavior is tweakable using a preprocessing tactic
+(which can, for example, replace `let ... in ...` with `Let_In
+... ...`).
+
+>   I was a bit confused here because it is not clear in which world `Let_In`
+>   is leaving, as a Coq identifier or as something used only by the reification/
+>   interpretation. IIUC, you define a Coq constant
+>   `Let_In: forall {A B} (a : A) (b : A -> B) := b a` that is used to
+>   represent all lets in your goals and definitions to be reified?
+
+Yes.
+
+>   This `Let_In` application is then reified simply as an `App (Ident "Let_In") ...`
+>   in the deeply embedded language?
+
+No, there is a special constructor of `expr` that encodes this constant.
+But the fact that this is not just an `Ident` is largely a convenience choice and is not integral to the design.
+
+>   Interpretation of `UnderLets` in the semantic domain will hence target that
+>   constant too?
+
+Yes.
+
+>   Please provide a more detailed presentation of the treatments of lets, it
+>   sounds unnecessarily vague as it is.
+
+Undoubtedly some of this confusion is due to our attempt to present a sufficiently simplified version of the rewriter so as to be comprehensible.
+It seems we simplified too far, or else inconsistently.
+
+
+> L883: I'd like to know here what `cbv` does when it encounters
+>     `Let_In`, do you make it so that it does not reduce it,
+>     and only recurses in the value and body of the let independently?
+
+We pass `cbv` an explicit whitelist which does not include `Let_In`, hence indeed recursion is performed independently in the value and body.
+The source of quadratic behavior is explained by Pierre-Marie Pédrot in https://github.com/coq/coq/issues/11151#issuecomment-557435656.
+
+
+> L929: What exactly happens in the extracted OCaml version? You are
+>   running the compiled rewriter extracted to OCaml applied to the
+>   extraction of the deeply-embedded language?
+
+That's correct.
+We define a constant which is the application of the rewriter to a particular reified constant, and then apply a transformation which produces a string or other flat term (as the OCaml runtime does not normalize under binders).
+We then extract this constant, compile it, and run the program.
+
+>   Why didn't you also compare the native compilation mode for
+>   the prime example? It would also avoid the problem of doubly
+>   interpreting of the VM.
+
+The reification of the prime examples is quite large, and the native compiler is quite bad at large input terms and spends most of its time in compilation.
+The comparison is not worth making without having access to the fine-grained details of native timing (available with `Set NativeCompute Timing` in 8.12 but not before).
+For a point of comparison, synthesizing the approximately 5 lines of code for unsaturated addition on the prime $2^{255}-19$ with 5 limbs on a 64-bit machine takes 0.225s in the VM, 4.6s in cbv, 6.8s in lazy, and fails with a stack overflow after running for 168s in the native compiler.
+The smaller example of addition for $2^{127}-1$ with 2 limbs on 64 bits takes 0.056s in the VM, 0.519s in cbv, 0.57s in lazy, and the native compiler again fails with a stack overflow after 173s.
+
+
+> Typos:
+>
+> L883: refied
+
+Thanks!  Now fixed.
+
+
+Responses to Questions for the response period
+----------------------------------------------
+> - There seems to be no handling of "alien" terms (of "alien" type)
+>   in the reification/interpretation setup? Is it a difficulty that you
+>   side-step or can it be supported easily? Is it the purpose of the
+>   extra idents parameter of the Make command? In that case, the tactic
+>   would not be able to reify goals mentioning variables of alien types
+>   then which cannot be mentioned as extras?
+
+That's correct.
+One of the selling points and, we believe, innovations of this framework is that
+(a) reflective syntax can be automatically specialized to a particular domain on-the-fly with minor but nontrivial overhead, and
+(b) performing this specialization can be looked at as part of a form of precompilation of rewrite databases and allows significant speed-ups (about 2×, in our experience) by reducing identifier lookup to Gallina pattern matching.
+
+We could parameterize the entire framework on extra "alien" terms and types.
+Indeed this is the point of the `extra idents` parameter of `Make`.
+We don't currently have any examples where there are types in the goal which cannot be added to the `extra ident` list, and hence we don't currently see a pressing need to add direct support for this.
+Note also that supporting alien terms and types would would result in significant overhead unless very carefully engineered (to take a trivial example of this problem, we require decidable equality between constants/identifiers, and `decide equality` is cubic, if I recall correctly).
+
+> - The handling of LetIn is a bit strange: we switch between
+>   a grammar with a LetIn constructor to a presentation of `expr`
+>   which doesn't, but looking at the code (L588 of Rewriter/Language.v),
+>   `LetIn` does appear in the `expr` type which is interpreted to `dlet`,
+>   a notation for a `Let_In` constant. In the same file, L774, the
+>   preprocessing step of reification apparently inlines dependent lets
+>   or turn them into beta-redexes (depending on the dependency),
+>   so let-ins are not preserved by reification? Please clarify the situation.
+
+Apologies for the lack of clarity.
+The presentation of `expr` in the paper should contain a `LetIn` constructor.
+Indeed currently `let ... in ...` are inlined and `Let_In`s / `dlet ... in ...` are kept.
+This is quite easily configurable, though, by changing the relevant line of `reify_preprocess` in `src/Rewriter/Language/Language.v`, or indeed just overwriting the preprocesser with a different one using Ltac's reassignment (`::=`) feature.
+
+> - The framework requires no properties of the rewrite system
+>   except for semantics preservation, as far as I understand.
+>   In particular you don't guarantee that the final terms
+>   cannot be rewritten anymore by the rewrite rules, as
+>   `rewrite_head` only performs one rewrite at the head.
+>   Similarly, you use the `do_again` option to force the
+>   rewriter/reducer to perform an additional bottom-up pass.
+>   So, do I understand correctly that the NbE algorithm
+>   produces normal forms w.r.t. β, but it does not necessarily
+>   compute a normal form w.r.t. the rewrite rules?
+>   Does it also mean that the rewriter is resistant to looping
+>   rewrite rules like commutativity, e.g. `?x + ?y -> y + x`?
+>   Finally, if my assumption is correct, to compare with
+>   other rewriting strategies like `rewrite !` which loop
+>   until no rewrite matches appear, don't you need to
+>   repeatedly call your rewriter to obtain the same simplified
+>   terms in general?
+
+Yes, that is all correct.
+(And commutativity rules will only loop if you mark them with `do_again`.)
+On the particular examples where we compare, a single bottom-up pass (modulo the `do_again` rules) is indeed sufficient to fully normalize the term.
+For goals like quantifier-lifting or reassociation, where a single bottom-up pass is not sufficient, you would indeed need to repeatedly call the rewriter (guarded by some form of progress check).
+This is not too hard to implement, but we have not implemented it.
+
+---------------------------------------------------------------------------
+
+Responses to Review #81B
+===========================================================================
+
+Responses to Comments for author
+-------------------
+> NBE has been implemented in Coq (Boespflug et al.) and in other proof assistants, so is the contribution here to make it usable from a tactic in a way it can be proof-checked?
+
+Indeed, one of our contributions is tying all the pieces together in a form that can be invoked from a tactic and proof-checked.
+There is another contribution of ours, more interesting but less technically involved; let us review briefly the contribution of Boespflug et al. before describing our additional contribution.
+The paper of Boespflug et al. ("Efficient normalization by evaluation") discusses that representing constructors of the term language as constructors of the metalanguage is one of the best optimizations they found.
+Section 3.2 says
+"Replacing the constructor names with integers rather than strings to avoid string comparison cost does spare some computation, but it is better to avoid the \emph{Const} constructor altogether.
+Rather than representing a datatype as an in-memory tree, with \emph{App} constructors at branch nodes and \emph{Const} constructors at the leaves, each in its own memory cell, it is much more memory efficient to add all data constructors found in the syntax as additional constructors to the metalanguage interpretation, effectively flattening the representation in memory."
+However, as I understand it, this memory optimization is already effectively present in the `evalapply` benchmark, which in most cases shows not nearly as significant a gain as the constructors benchmark.
+Instead, as suggested by the performance numbers on page 14 of the Aehlig et al. paper, I expect that most of this gain actually comes from not using strings as constant names.
+Alas, Boespflug et al. neither include benchmarking results for replacing strings with integers without going all the way to constructors, and apparently nor did they include this optimization when benchmarking the strategy of Aehlig et al.
+While they correctly describe how making constructors of the object language into constructors of the metalanguage breaks modularity, their proposal to recover modularity is about the memory layout, not about the encoding of the constructors themselves.
+Furthermore, the proposal of using integers works fine for untyped NbE, but incurs significant overhead (proportional to the size of the term times the number of constants) when defining typed NbE.
+(Whether rewriting is better performed with typed or untyped NbE is a different question, not addressed in our paper.)
+One of our bigger conceptual contributions is to provide a way to have constructors in the object language be represented as constructors in the metalanguage, in a typed NbE setting, without breaking modularity nor incurring extra work for the user, for a minor but nontrivial up-front time cost.
+
+> Some other comments:
+>
+> - Please explain the notation [| E |] used on line 618 (or better show the Coq statement of the lemma?).
+
+The notation `[| E |]` stands for `DenoteE E`, with `DenoteE` defined on lines 582–583.
+Sorry for not making this clear.
+
+> - The paper could also elaborate/simplify the steps in 2.1 with the help of a small running example.
+
+We agree that a small running example would help elaborate the steps in 2.1, but we disagree that this would be a simplification.
+In particular, the framework is sufficiently intricate that even an example with no lemmas to rewrite involves emitting nearly a hundred definitions.
+Nevertheless, we will consider including it.
+Here is such an example:
+
+We use the example of subsection 1.1, where we write:
+```
+Make rewriter := Rewriter For (zero_plus, plus_zero, times_zero, times_one, eval_map,
+  eval_fold_left, do_again eval_length, do_again eval_combine,
+  eval_rect nat, eval_rect list, eval_rect prod) (with delta) (with extra idents (seq)).
+```
+
+1. The given lemma statements are scraped for which named functions and types the rewriter package will support.
+   In this case, the lemma statements are `zero_plus`, `plus_zero`, etc.; the types are `nat`, `list`, and `prod`; and the named functions are `Nat.add`, `Nat.mul`, `List.map`, `List.fold_left`, `List.length`, `List.combine`, `nat_rect`, `list_rect`, `prod_rect`, and the extra identifier given `List.seq`.
+2. Inductive types enumerating all available primitive types and functions are emitted.
+   In this example, the inductive types are approximately
+```
+Inductive base := nat | list (_ : base).
+Inductive ident := Nat_add | Nat_mul | List_map | List_fold_left | List_length | List_combine | nat_rect | list_rect | prod_rect | List_seq.
+```
+   In fact this list is not accurate, because some types are forced to be included (`nat` and `bool`) while others have hardcoded support separate from the list of base types (`list`, `option`, `unit`), and the list of identifiers is prefilled with some hardcoded support necessary for making the rewriter work at all.
+   The true inductive types generated are:
+```
+Inductive base : Set := base_nat : base | base_bool : base.
+Inductive ident : type (base.type base) → Type :=
+| ident_seq : ident (type.base (base.type.type_base base_nat) -> type.base (base.type.type_base base_nat) -> type.base (base.type.list (base.type.type_base base_nat)))
+| ident_combine : ∀ t t0 : base.type base, ident (type.base (base.type.list t) -> type.base (base.type.list t0) -> type.base (base.type.list (t * t0)))
+| ident_length : ∀ t : base.type base, ident (type.base (base.type.list t) -> type.base (base.type.type_base base_nat))
+| ident_fold_left : ∀ t t0 : base.type base, ident ((type.base t -> type.base t0 -> type.base t) -> type.base (base.type.list t0) -> type.base t -> type.base t)
+| ident_map : ∀ t t0 : base.type base, ident ((type.base t -> type.base t0) -> type.base (base.type.list t) -> type.base (base.type.list t0))
+| ident_succ : ident (type.base (base.type.type_base base_nat) -> type.base (base.type.type_base base_nat))
+| ident_mul : ident (type.base (base.type.type_base base_nat) -> type.base (base.type.type_base base_nat) -> type.base (base.type.type_base base_nat))
+| ident_O : ident (type.base (base.type.type_base base_nat))
+| ident_add : ident (type.base (base.type.type_base base_nat) -> type.base (base.type.type_base base_nat) -> type.base (base.type.type_base base_nat))
+| ident_literal : ∀ t : base, match t with | base_nat => nat | base_bool => bool end → ident (type.base (base.type.type_base t))
+| ident_nil : ∀ t : base.type base, ident (type.base (base.type.list t))
+| ident_cons : ∀ t : base.type base, ident (type.base t -> type.base (base.type.list t) -> type.base (base.type.list t))
+| ident_Some : ∀ t : base.type base, ident (type.base t -> type.base (base.type.option t))
+| ident_None : ∀ t : base.type base, ident (type.base (base.type.option t))
+| ident_pair : ∀ t t0 : base.type base, ident (type.base t -> type.base t0 -> type.base (t * t0))
+| ident_tt : ident (type.base ())
+| ident_prod_rect_nodep : ∀ t t0 t1 : base.type base, ident ((type.base t -> type.base t0 -> type.base t1) -> type.base (t * t0) -> type.base t1)
+| ident_bool_rect : ∀ t : base.type base, ident ((type.base () -> type.base t) -> (type.base () -> type.base t) -> type.base (base.type.type_base base_bool) -> type.base t)
+| ident_list_case : ∀ t t0 : base.type base, ident ((type.base () -> type.base t0) -> (type.base t -> type.base (base.type.list t) -> type.base t0) -> type.base (base.type.list t) -> type.base t0)
+| ident_option_rect : ∀ t t0 : base.type base, ident ((type.base t -> type.base t0) -> (type.base () -> type.base t0) -> type.base (base.type.option t) -> type.base t0)
+| ident_nat_rect : ∀ t : base.type base, ident ((type.base () -> type.base t) -> (type.base (base.type.type_base base_nat) -> type.base t -> type.base t) -> type.base (base.type.type_base base_nat) -> type.base t)
+| ident_eager_nat_rect : ∀ t : base.type base, ident ((type.base () -> type.base t) -> (type.base (base.type.type_base base_nat) -> type.base t -> type.base t) -> type.base (base.type.type_base base_nat) -> type.base t)
+| ident_nat_rect_arrow : ∀ t t0 : base.type base, ident ((type.base t -> type.base t0) -> (type.base (base.type.type_base base_nat) -> (type.base t -> type.base t0) -> type.base t -> type.base t0) -> type.base (base.type.type_base base_nat) -> type.base t -> type.base t0)
+| ident_eager_nat_rect_arrow : ∀ t t0 : base.type base, ident ((type.base t -> type.base t0) -> (type.base (base.type.type_base base_nat) -> (type.base t -> type.base t0) -> type.base t -> type.base t0) -> type.base (base.type.type_base base_nat) -> type.base t -> type.base t0)
+| ident_list_rect : ∀ t t0 : base.type base, ident ((type.base () -> type.base t0) -> (type.base t -> type.base (base.type.list t) -> type.base t0 -> type.base t0) -> type.base (base.type.list t) -> type.base t0)
+| ident_eager_list_rect : ∀ t t0 : base.type base, ident ((type.base () -> type.base t0) -> (type.base t -> type.base (base.type.list t) -> type.base t0 -> type.base t0) -> type.base (base.type.list t) -> type.base t0)
+| ident_list_rect_arrow : ∀ t t0 t1 : base.type base, ident ((type.base t0 -> type.base t1) -> (type.base t -> type.base (base.type.list t) -> (type.base t0 -> type.base t1) -> type.base t0 -> type.base t1) -> type.base (base.type.list t) -> type.base t0 -> type.base t1)
+| ident_eager_list_rect_arrow : ∀ t t0 t1 : base.type base, ident ((type.base t0 -> type.base t1) -> (type.base t -> type.base (base.type.list t) -> (type.base t0 -> type.base t1) -> type.base t0 -> type.base t1) -> type.base (base.type.list t) -> type.base t0 -> type.base t1)
+| ident_List_nth_default : ∀ t : base.type base, ident (type.base t -> type.base (base.type.list t) -> type.base (base.type.type_base base_nat) -> type.base t)
+| ident_eager_List_nth_default : ∀ t : base.type base, ident (type.base t -> type.base (base.type.list t) -> type.base (base.type.type_base base_nat) -> type.base t)
+.
+```
+   We believe that this is long enough as to be confusing rather than illuminating.
+   Note that there are in fact two more inductive types with roughly the same list of constructors as `ident` but which have different parameters and type signatures.
+3. Tactics generate all of the necessary definitions and prove all of the necessary lemmas for dealing with this particular set of inductive codes.
+   Definitions include operations like Boolean equality on type codes and lemmas like "all representable primitive types have decidable equality."
+   There are actually 69 definitions and lemmas generated during this step, so it would be hard to wrap one's head around all of them.
+   They can be found by inspecting the records `Rewriter.Language.IdentifiersBasicLibrary.Compilers.Basic.GoalType.package` and `Rewriter.Language.IdentifiersLibrary.Compilers.pattern.ident.GoalType.package`.
+   Note that the first of these has a couple of fields which are themselves records, and the definition of these records must also be inspected for the full picture.
+4. The statements of rewrite rules are reified and soundness and syntactic-well-formedness lemmas are proven about each of them.
+   Each instance of the former involves wrapping the user-provided proof with the right adapter to apply to the reified version.
+5. The definitions needed to perform reification and rewriting and the lemmas needed to prove correctness are assembled into a single package that can be passed by name to the rewriting tactic.
+   This step is semantically trivial but extremely verbose.
+
+
+We believe that working through an example like this in fact detracts from the presentation, due to its length and intricacy.
+If there's some subset of this example that would clarify the description of the paper, though, we'd be interested in that feedback.
+
+
+> - The micro-benchmark 4(a) does not include the reification time, which seems a little strange given that reification is very much part of the technique.
+
+The micro-benchmark 4(a) includes lines both with and without reification.
+The former is labeled "Our approach including reification, cbv, etc." while the latter is labeled "Our approach (only rewriting)".
+The lines are quite close, and both are significantly better than other approaches.
+Moreover, as explained in the benchmark of 4(c) (the only benchmark where the time of just rewriting diverges significantly from the full time), more than 99% of the overhead is due to *interpretation* in Coq's cbv tactic.
+
+In all microbenchmarks, we have constructed the input so that it is trivial to reify, and the overhead is negligible when there is any real rewriting work to be done.
+Reification time in the macrobenchmark is significant due to the fact that we reify modulo δ without sharing of subterms, but this is an artifact of the way that we've integrated the rewriter into Fiat-Crypto.
+
+Finally, as we explain at the end of the first paragraph of 5.1.1 on lines 785–788, the particular method of reification is not integral to the framework, and we have prior work demonstrating how to achieve extremely fast reification.
+
+> - Does the technique allow for compilation of P-384 in Fiat Crypto? The introduction mentions it, but the experiments never come back to it.
+
+Yes.
+P-384 is a prime close to $2^{384}$, and figure 4(d) shows that our benchmarks extend well past $2^{400}$.
+In fact, though, as described in section 5.2, "in the course of running this experiment, we found a way to improve the old approach for a fairer comparison."
+This improvement allows the old approach to compile P-384 (32-bit) in about 55 seconds.
+We achieve about 16 seconds if you extract and compile our code, or about 117 seconds if you run our code in Coq's VM.
+
+
+---------------------------------------------------------------------------
+
+Responses to Review #81C
+===========================================================================
+
+> That said, I doubt that even an expert could reproduce what they have
+> done, based on this paper.  There's an overview in 2.1, aspects of
+> which are fleshed out later, but a great deal is unspecified.  In a
+> paper of this length that's probably inevitable.  But it's still sad.
+
+This is true.
+We have another 28 pages of content merely describing the trickiest implementation and design choices, and the document describing the full design of the core of the framework (not including the code that makes the rewriter convenient to use, i.e., only including the rewriter itself and the correctness theorem used in step (3) of the second half of our nine-step approach in section 2.1) is a bit over 40 pages.
+Note that this document does not describe any of the proof techniques, only the definitions and proof statements.
+Documenting the full rewriter is undoubtedly a much larger effort and would not fit in a paper such as this.
+
+> It's a description of a substantial and sophisticated engineering
+> achivement, not a crisp, pearly idea.
+
+Indeed, and this is unfortunate.
+If there is a crisp, pearly idea to be found, beyond assembling preexisting techniques, it is that in the tradeoff between slow generic procedures and fast domain-specific code, we can have our pie and eat it too by specializing the generic reflective method to our specific domain and partially evaluating it in a pre-compilation phase.
+However, this paper is not about this pearl, but about the larger system in which it is applied.
+
+Responses to Comments for author
+-------------------
+Some small notes
+
+> * Fiat Crypto.  Line 897 says you replicate Erbsen; and yet on line 55
+>   you say you can do something they can't.  Which is right?  If they
+>   can't do P-384, how is it done in deployed systems?  Do the deployed
+>   systems use verified code?  If not, how does the verified code
+>   compared with the (presumably hand-written) deployed code?  Please
+>   be clearer about all this.
+
+We say on lines 910–911, "[a]ctually, in the course of running this experiment, we found a way to improve the old approach for a fairer comparison."
+This modification of their approach allows synthesis of P-384.
+
+Perhaps the following modifications would make the text clearer?
+To the first sentence ("[...] replicating the generation of performance-competitive finite-field-arithmetic code for all popular elliptic curves by Erbsen et al. [2019]"), there is an implicit "as well as generating code for a number of curves they were unable to generate code for".
+The second sentence, "In all cases, we generate essentially the same code as they did," should instead read "In all cases where they succeeded in generating code, [...]".
+
+The point of this comparison is that we are generating code from the same starting point and with the same ending point, but we can handle more and larger primes than could be handled in Erbsen et al. [2019].
+
+> * Line 93.  Special marker.  Is this part of Coq already, or are you
+>   inventing it?
+>
+> * Line 96 "Further marker".  Same question.
+
+Both of these are just the identity function under a different name.
+That is, we write
+```
+Definition literal {T} (v : T) := v.
+Notation "' x" := (literal x).
+```
+for the apostrophe marker and we write
+```
+Definition eagerly {T} (v : T) := v.
+```
+for the further marker.
+
+> * Line 106. I'm already.  I'm not a Coq user so I don't know
+>   what plugins do.  Is do_again defined by you or built-in?  "request
+>   that some rules trigger a bottom-up pass.."  Who implements that
+>   request.  It's all very baffling.
+
+Apologies for the confusion.
+
+A Coq plugin allows us to extend not just the tactic language but the vernacular language with new commands;
+we use it to create a single command that the user can type which will define the needed definitions and inductive types.
+
+When we speak of "requests" and "triggers," we are speaking of annotations which the user gives and which our rewrite procedure inspects to determine what to do.
+As a very simple example, you could write a tactic which takes in a pair of a boolean and a lemma, and rewrites with the lemma once when the boolean is false, but rewrites repeatedly when the boolean is true.
+This procedure could be written in Ltac as
+```
+Ltac my_procedure argument :=
+  lazymatch argument with
+  | (true, ?lemma) => repeat rewrite lemma
+  | (false, ?lemma) => rewrite lemma
+  end.
+```
+You could say that passing the true boolean is a request to the procedure which triggers repeated rewriting, and this is in fact almost exactly how our rewriter functions.
+
+To answer the last part of this question in full detail, we define `do_again` as another identity function:
+```
+Notation do_again := (@id (@snd bool Prop (pair true _))) (only parsing).
+```
+(Note the use of `pair true`, which is us annotating the lemma with a boolean indicating that rewriting should be repeated.
+We perform the annotation as an argument to the identity function merely for convenience of recognition by our tactic.)
+
+
+> * Line 226 little examples like this, illustrating what the perf
+>   challenges are, are really helpful.  More please.
+
+Glad to hear this!
+We like small examples like this too, but they tend to be notoriously hard to come by, especially in Coq and other proof assistants where there is a great deal going on under the hood, and it's not always clear where the bottlenecks are.
+We'd be interested in knowing if there are specific other parts of the paper that could benefit from examples like these.

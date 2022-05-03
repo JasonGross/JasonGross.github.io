@@ -78,21 +78,4 @@ giving them semantics via interpretation functions.},
   url = {https://jasongross.github.io/papers/2015-fiat-to-facade.pdf}
 }
 
-@Misc{rewriting,
-  author          = {Jason Gross and Andres Erbsen and Rajashree Agrawal and Jade Philipoom and Adam Chlipala},
-  title           = {Accelerating Verified-Compiler Development with a Verified Rewriting Engine},
-  month           = {January},
-  year            = {2022},
-  note            = {Submitted to \href{https://popl22.sigplan.org/}{POPL 2022}},
-  abstract        = {Compilers are a prime target for formal verification, since compiler bugs invalidate higher-level correctness guarantees, but compiler changes may become more labor-intensive to implement, if they must come with proof patches.
-One appealing approach is to present compilers as sets of algebraic rewrite rules, which a generic engine can apply efficiently.
-Now each rewrite rule can be proved separately, with no need to revisit past proofs for other parts of the compiler.
-We present the first realization of this idea, in the form of a framework for the Coq proof assistant.
-Our new Coq command takes normal proved theorems and combines them automatically into fast compilers with proofs.
-We applied our framework to improve the Fiat Cryptography toolchain for generating cryptographic arithmetic, producing an extracted command-line compiler that is about 1000$\times$ faster while actually featuring simpler compiler-specific proofs.},
-  artifact-tar-gz = {https://jasongross.github.io/papers/2022-rewriting-popl-draft.tar.gz},
-  code-github     = {https://github.com/mit-plv/rewriter},
-  url             = {https://jasongross.github.io/papers/2022-rewriting-popl-draft.pdf},
-}
-
 @Comment{jabref-meta: databaseType:bibtex;}

@@ -1,0 +1,64 @@
+--- ../rewriting.tex	2022-05-03 09:37:15.740000000 +0100
++++ rewriting.tex	2022-05-03 09:37:35.280000000 +0100
+@@ -1,5 +1,6 @@
++\newif\iftobesplit\tobesplittrue
+ %\pdfoutput=1 %uncomment to ensure pdflatex processing (mandatatory e.g. to submit to arXiv)
+-\RequirePackage{luatex85}
++%\RequirePackage{luatex85}
+ \PassOptionsToPackage{dvipsnames}{xcolor}
+ \RequirePackage{amssymb}
+ % order matters, see https://tex.stackexchange.com/a/83051/2066
+@@ -245,11 +246,9 @@
+ 
+ %\category{} %optional, e.g. invited paper
+ 
+-\ifthenelse{\boolean{tobesplit}}{%
+ %  \relatedversion{} %optional, e.g. full version hosted on arXiv, HAL, or other respository/website
+ \relatedversiondetails%[linktext={opt. text shown instead of the URL}, cite=DBLP:books/mk/GrayR93]
+     {Full Version}{https://arxiv.org/abs/2205.00862} %linktext and cite are optional
+-}{}
+ 
+ \supplement{%
+   \url{https://jasongross.github.io/papers/2022-rewriting-itp-supplement.pdf},
+@@ -1333,7 +1332,15 @@
+ \clearpage
+ %\nocite{*}
+ \bibliography{rewriting}
+-\clearpage
++
++% this minipage trick is a hack to get autocomputed text for references to the online appendices.  Sorry.
++\begin{minipage}[t][1cm]{\textwidth}
++\def\caption{}
++\def\subfloat{}
++\renewenvironment{figure*}{}{}
++\renewenvironment{figure}{}{}
++\vspace*{1.5\textheight}
++%\clearpage
+ 
+ \startsupplement
+ %% Appendix
+@@ -1525,7 +1532,7 @@
+ 
+ The data for this benchmark can be found on GitHub at \githublink{mit-plv}{fiat-crypto}[perf-testing-data-ITP-2022-rewriting].
+ 
+-\begin{figure*}[b]
++\begin{figure*}%[b]
+   \newcommand{\MacroSubfloat}[3]{%
+     \subfloat[Timing of different partial-evaluation implementations for Fiat Cryptography as prime modulus grows (only #2 #3)]{%
+   \resizebox{0.45\textwidth}{!}{\beginTikzpictureStamped[only marks]{
+@@ -1561,7 +1568,7 @@
+ Here we provide absolute-time graphs by grouping in \autoref{fig:timing-macro-various}.
+ 
+ \clearpage
+-\begin{figure}[t]
++\begin{figure}%[t]
+   \subfloat[Expressions computing initial code for Rewriting Without Binders]{%
+   {\small $\begin{aligned}
+   \text{iter}_m(v) & = v + \underbrace{0 + 0 + \cdots + 0}_m \\
+@@ -2412,5 +2419,5 @@
+ The hard-coding of the eliminators for use with \mintinline{coq}{ident.eagerly} ({c.f.} \autoref{sec:code:ident.eagerly}) is done in the tactics \mintinline{coq}{reify_ident_preprocess} and \mintinline{coq}{rewrite_interp_eager} in \texttt{rewriter/src/Rewriter/Language/Language.v}, in the inductive type \mintinline{coq}{restricted_ident} and the typeclass \mintinline{coq}{BuildEagerIdentT} in \texttt{rewriter/src/Rewriter/Language/Language.v}, and in the \Ltac{} tactic with the name of \mintinline{coq}{handle_reified_rewrite_rules_interp} defined in the file \texttt{rewriter/src/Rewriter/Rewriter/ProofsCommonTactics.v}.
+ 
+ The \mintinline{coq}{Let_In} constant is defined in \texttt{rewriter/src/Rewriter/Util/LetIn.v}.
+-
++\end{minipage}
+ \end{document}

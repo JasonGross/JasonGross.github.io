@@ -2,41 +2,14 @@
 <!-- This document was automatically generated with bibtex2html 1.99
      (see http://www.lri.fr/~filliatr/bibtex2html/),
      with the following command:
-     bibtex2html -d -r -nodoc -nf videos videos -nf reviews reviews -nf full-bibliography "full bibliography" -nf bibliography bibliography -nf code-v "code (.v)" -nf code-html "code (.html)" -nf code-agda "code (.agda)" -nf artifact-zip "artifact (.zip)" -nf artifact-tar-gz "artifact (.tar.gz)" -nf code-github "project (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" -nf artifact-github "artifact (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" -nf original-url "original conference submission (.pdf)" -nf presentation-annotated-pptx "presentation (.pptx, annotated with notes)" -nf presentation-pptx "presentation (.pptx)" -nf presentation-youtube "presentation (YouTube)" -nf url-pptx .pptx -nf presentation-pdf "presentation (.pdf)" -nf presentation-odp "presentation (.odp)" -nf project-homepage "project homepage" -nf published-url publication -nf published-url-springer "publication (<div style="overflow: hidden; max-width: 1em; display: inline-block; vertical-align: middle"><img src="media/Springer-Mark/PNG/logo.png" alt="Springer" title="Springer" style="height: 1.5em; vertical-align: text-bottom"></div>)" -nf published-url-elsevier-geoderma "publication (<img src="media/ScienceDirect-Mark/svg/elsevier-non-solus-new-grey.svg" alt="ScienceDirect" title="ScienceDirect" style="height: 1em;vertical-align: text-bottom;">)" -nf acm-authorize-url "<img src='https://dl.acm.org/images/oa.gif' width='25' height='25' border='0' alt='ACM DL Author-ize Publication' title='ACM DL Author-ize Publication' style='vertical-align:middle'/>" -nf dspace-url DSpace@MIT --title Drafts -o jason-gross-drafts jason-gross-drafts.bib  -->
+     bibtex2html -d -r -nodoc -nf videos videos -nf reviews reviews -nf full-bibliography "full bibliography" -nf bibliography bibliography -nf code-v "code (.v)" -nf code-html "code (.html)" -nf code-agda "code (.agda)" -nf artifact-zip "artifact (.zip)" -nf artifact-tar-gz "artifact (.tar.gz)" -nf code-github "project (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" -nf artifact-github "artifact (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" -nf artifact-figshare "artifact (<img src='media/Figshare-Mark/6238dbcd763032622be7658e_figshare_NoSubheadColour.svg' alt='Figshare' title='Figshare' style='height:1em; vertical-align:text-bottom' />)" -nf original-url "original conference submission (.pdf)" -nf presentation-annotated-pptx "presentation (.pptx, annotated with notes)" -nf presentation-pptx "presentation (.pptx)" -nf presentation-youtube "presentation (YouTube)" -nf url-pptx .pptx -nf presentation-pdf "presentation (.pdf)" -nf presentation-odp "presentation (.odp)" -nf project-homepage "project homepage" -nf published-url publication -nf published-url-springer "publication (<div style="overflow: hidden; max-width: 1em; display: inline-block; vertical-align: middle"><img src="media/Springer-Mark/PNG/logo.png" alt="Springer" title="Springer" style="height: 1.5em; vertical-align: text-bottom"></div>)" -nf published-url-elsevier-geoderma "publication (<img src="media/ScienceDirect-Mark/svg/elsevier-non-solus-new-grey.svg" alt="ScienceDirect" title="ScienceDirect" style="height: 1em;vertical-align: text-bottom;">)" -nf acm-authorize-url "<img src='https://dl.acm.org/images/oa.gif' width='25' height='25' border='0' alt='ACM DL Author-ize Publication' title='ACM DL Author-ize Publication' style='vertical-align:middle'/>" -nf dspace-url DSpace@MIT --title Drafts -o jason-gross-drafts jason-gross-drafts.bib  -->
 
 <h1>Drafts</h1>
 <table>
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="rewriting">1</a>]
-</td>
-<td class="bibtexitem">
-Jason Gross, Andres Erbsen, Rajashree Agrawal, Jade Philipoom, and Adam
-  Chlipala.
- Accelerating verified-compiler development with a verified rewriting
-  engine, January 2022.
- Submitted to <a href="https://popl22.sigplan.org/">POPL 2022</a>.
-[&nbsp;<a href="jason-gross-drafts_bib.html#rewriting">bib</a>&nbsp;| 
-<a href="https://github.com/mit-plv/rewriter">project (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)</a>&nbsp;| 
-<a href="https://jasongross.github.io/papers/2022-rewriting-popl-draft.tar.gz">artifact (.tar.gz)</a>&nbsp;| 
-<a href="https://jasongross.github.io/papers/2022-rewriting-popl-draft.pdf">.pdf</a>&nbsp;]
-<blockquote><font size="-1">
-Compilers are a prime target for formal verification, since compiler bugs invalidate higher-level correctness guarantees, but compiler changes may become more labor-intensive to implement, if they must come with proof patches.
-One appealing approach is to present compilers as sets of algebraic rewrite rules, which a generic engine can apply efficiently.
-Now each rewrite rule can be proved separately, with no need to revisit past proofs for other parts of the compiler.
-We present the first realization of this idea, in the form of a framework for the Coq proof assistant.
-Our new Coq command takes normal proved theorems and combines them automatically into fast compilers with proofs.
-We applied our framework to improve the Fiat Cryptography toolchain for generating cryptographic arithmetic, producing an extracted command-line compiler that is about 1000&#215; faster while actually featuring simpler compiler-specific proofs.
-</font></blockquote>
-
-</td>
-</tr>
-
-
-<tr valign="top">
-<td align="right" class="bibtexnumber">
-[<a name="lob-paper">2</a>]
+[<a name="lob-paper">1</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Jack Gallagher, and Benya Fallenstein.
@@ -69,7 +42,7 @@ giving them semantics via interpretation functions.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="parsing-parse-trees">3</a>]
+[<a name="parsing-parse-trees">2</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross and Adam Chlipala.
@@ -99,7 +72,7 @@ We present a functional parser for arbitrary context-free grammars,
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="pldi-15-fiat-to-facade">4</a>]
+[<a name="pldi-15-fiat-to-facade">3</a>]
 </td>
 <td class="bibtexitem">
 Cl&eacute;ment Pit-Claudel, Peng Wang, Jason Gross, Ben Delaware, and Adam Chlipala.

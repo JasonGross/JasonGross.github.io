@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{Lemma} \PYG{n}{Z}\PYG{o}{.}\PYG{n}{add\PYGZus{}0\PYGZus{}r} \PYG{o}{:} \PYG{k}{forall} \PYG{n}{z}\PYG{o}{,} \PYG{n}{z} \PYG{o}{+} \PYG{l+m+mi}{0} \PYG{o}{=} \PYG{n}{z}\PYG{o}{.}
+\end{Verbatim}
