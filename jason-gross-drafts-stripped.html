@@ -9,7 +9,37 @@
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="lob-paper" href="#lob-paper">1</a>]
+[<a name="superlinear-slowness" href="#superlinear-slowness">1</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross and Andres Erbsen.
+ 10 years of superlinear slowness in Coq, August 2022.
+ Submitted to <a href="https://coq-workshop.gitlab.io/2022/">The Coq
+  Workshop 2022</a>.
+[&nbsp;<a href="jason-gross-drafts_bib.html#superlinear-slowness">bib</a>&nbsp;| 
+<a href="https://jasongross.github.io/papers/2022-superlinear-slowness-coq-workshop-draft.pdf">.pdf</a>&nbsp;]
+<blockquote><font size="-1">
+In most programming languages, asymptotic performance issues can almost always be explained by reference to the algorithm being implemented.
+At most, the standard asymptotic performance of explicitly used operations on chosen data structures must be considered.
+Even the constant factors in performance bottlenecks can often be explained without reference to the implementation of the interpreter, compiler, nor underlying machine.<p />
+In 10+ years of working with Coq, we (the authors of this proposal and their colleagues) have found this pattern, which holds across multiple programming languages, to be the exception rather than the rule in Coq!
+This turns performant proof engineering, and especially performant proof automation engineering, from a straightforward science into an arcane form of wizardry.<p />
+By presenting in detail a sampling of examples, we propose a defense of the thesis:
+<em>Performance bottlenecks in proof automation almost always result from inefficiencies in parts of the system which are conceptually distant from the theorem being proven.</em>
+Said another way, <em>debugging, understanding, and fixing performance bottlenecks in automated proofs almost always requires extensive knowledge of the proof engine, and almost never requires any domain-specific knowledge of the theorem being proven</em>.
+Even worse, we know of no systematic proposal, nor even folklore among experts, of what primitives and performance characteristics are sufficient for a performant proof engine.
+There is no POPLMark for Proof Engines (yet).<p />
+We hope to start a discussion on the obvious corollary of this thesis: <em>This should not be!</em><p />
+Our presentation, we hope, will serve as a call for designing (and eventually implementing) an adequate proof engine for <em>scalable performant modular proof automation</em>.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="lob-paper" href="#lob-paper">2</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Jack Gallagher, and Benya Fallenstein.
@@ -42,7 +72,7 @@ giving them semantics via interpretation functions.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="parsing-parse-trees" href="#parsing-parse-trees">2</a>]
+[<a name="parsing-parse-trees" href="#parsing-parse-trees">3</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross and Adam Chlipala.
@@ -72,7 +102,7 @@ We present a functional parser for arbitrary context-free grammars,
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="pldi-15-fiat-to-facade" href="#pldi-15-fiat-to-facade">3</a>]
+[<a name="pldi-15-fiat-to-facade" href="#pldi-15-fiat-to-facade">4</a>]
 </td>
 <td class="bibtexitem">
 Cl&eacute;ment Pit-Claudel, Peng Wang, Jason Gross, Ben Delaware, and Adam Chlipala.

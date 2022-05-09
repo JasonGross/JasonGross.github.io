@@ -78,4 +78,29 @@ giving them semantics via interpretation functions.},
   url = {https://jasongross.github.io/papers/2015-fiat-to-facade.pdf}
 }
 
+@Misc{superlinear-slowness,
+  author =       {Jason Gross and Andres Erbsen},
+  title =        {10 Years of Superlinear Slowness in {C}oq},
+  month =        {August},
+  year =         {2022},
+  note =         {Submitted to \href{https://coq-workshop.gitlab.io/2022/}{The Coq Workshop 2022}},
+  abstract =     {In most programming languages, asymptotic performance issues can almost always be explained by reference to the algorithm being implemented.
+At most, the standard asymptotic performance of explicitly used operations on chosen data structures must be considered.
+Even the constant factors in performance bottlenecks can often be explained without reference to the implementation of the interpreter, compiler, nor underlying machine.
+
+In 10+ years of working with Coq, we (the authors of this proposal and their colleagues) have found this pattern, which holds across multiple programming languages, to be the exception rather than the rule in Coq!
+This turns performant proof engineering, and especially performant proof automation engineering, from a straightforward science into an arcane form of wizardry.
+
+By presenting in detail a sampling of examples, we propose a defense of the thesis:
+\emph{Performance bottlenecks in proof automation almost always result from inefficiencies in parts of the system which are conceptually distant from the theorem being proven.}
+Said another way, \emph{debugging, understanding, and fixing performance bottlenecks in automated proofs almost always requires extensive knowledge of the proof engine, and almost never requires any domain-specific knowledge of the theorem being proven}.
+Even worse, we know of no systematic proposal, nor even folklore among experts, of what primitives and performance characteristics are sufficient for a performant proof engine.
+There is no POPLMark for Proof Engines (yet).
+
+We hope to start a discussion on the obvious corollary of this thesis: \emph{This should not be!}
+
+Our presentation, we hope, will serve as a call for designing (and eventually implementing) an adequate proof engine for \emph{scalable performant modular proof automation}.},
+  url =          {https://jasongross.github.io/papers/2022-superlinear-slowness-coq-workshop-draft.pdf}
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
