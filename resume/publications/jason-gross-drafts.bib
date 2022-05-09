@@ -92,14 +92,18 @@ In 10+ years of working with Coq, we (the authors of this proposal and their col
 This turns performant proof engineering, and especially performant proof automation engineering, from a straightforward science into an arcane form of wizardry.
 
 By presenting in detail a sampling of examples, we propose a defense of the thesis:
-\emph{Performance bottlenecks in proof automation almost always result from inefficiencies in parts of the system which are conceptually distant from the theorem being proven.}
+\emph{%
+Performance bottlenecks in proof automation almost always result from inefficiencies in parts of the system which are conceptually distant from the theorem being proven.%
+}
 Said another way, \emph{debugging, understanding, and fixing performance bottlenecks in automated proofs almost always requires extensive knowledge of the proof engine, and almost never requires any domain-specific knowledge of the theorem being proven}.
-Even worse, we know of no systematic proposal, nor even folklore among experts, of what primitives and performance characteristics are sufficient for a performant proof engine.
-There is no POPLMark for Proof Engines (yet).
+Further, there is no clear direction of improvement:
+We know of no systematic proposal, nor even folklore among experts, of what primitives and performance characteristics are sufficient for a performant proof engine.
 
 We hope to start a discussion on the obvious corollary of this thesis: \emph{This should not be!}
 
-Our presentation, we hope, will serve as a call for designing (and eventually implementing) an adequate proof engine for \emph{scalable performant modular proof automation}.},
+Our presentation, we hope, will serve as a call for a POPLMark for Proof Engines, a call for designing and implementing a %n adequate
+proof engine for \emph{scalable performant modular proof automation}.
+},
   url =          {https://jasongross.github.io/papers/2022-superlinear-slowness-coq-workshop-draft.pdf}
 }
 
