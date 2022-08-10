@@ -27,6 +27,7 @@ BIBTEX2HTML_ARGS=-d -r -nodoc \
 	-nf published-url "publication" \
 	-nf published-url-springer 'publication (<div style="overflow: hidden; max-width: 1em; display: inline-block; vertical-align: middle"><img src="media/Springer-Mark/PNG/logo.png" alt="Springer" title="Springer" style="height: 1.5em; vertical-align: text-bottom"></div>)' \
 	-nf published-url-elsevier-geoderma 'publication (<img src="media/ScienceDirect-Mark/svg/elsevier-non-solus-new-grey.svg" alt="ScienceDirect" title="ScienceDirect" style="height: 1em;vertical-align: text-bottom;">)' \
+	-nf published-url-dagstuhl-lipics 'publication (<img src="media/Dagstuhl-Mark/lipics-color-160x34.png" alt="dblp LIPIcs" title="dblp LIPIcs" style="height: 1em;vertical-align: text-bottom;">)' \
 	-nf acm-authorize-url "<img src='https://dl.acm.org/images/oa.gif' width='25' height='25' border='0' alt='ACM DL Author-ize Publication' title='ACM DL Author-ize Publication' style='vertical-align:middle'/>" \
 	-nf dspace-url "DSpace@MIT" \
 	# -nf doi "<img src='https://www.doi.org/img/Logo_TM.png' width='25' height='25' border='0' alt='DOI' style='vertical-align:middle'/>"
