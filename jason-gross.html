@@ -9,7 +9,30 @@
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="superlinear-slowness">1</a>]
+[<a name="CryptoptPLDI23">1</a>]
+</td>
+<td class="bibtexitem">
+Joel Kuepper, Andres Erbsen, Jason Gross, Owen Conoly, Chuyue Sun, Samuel Tian,
+  David Wu, Adam Chlipala, Chitchanok Chuengsatiansup, Daniel Genkin, Markus
+  Wagner, and Yuval Yarom.
+ CryptOpt: Verified compilation with random program search for
+  cryptographic primitives.
+ In <em>PLDI'23: Proceedings of the 44th ACM SIGPLAN Conference on
+  Programming Language Design and Implementation</em>, June 2023.
+ Conditionally accepted.
+[&nbsp;<a href="jason-gross_bib.html#CryptoptPLDI23">bib</a>&nbsp;| 
+<a href="http://adam.chlipala.net/papers/CryptoptPLDI23/">http</a>&nbsp;]
+<blockquote><font size="-1">
+Most software domains rely on compilers to translate high-level code to multiple different machine languages, with performance not too much worse than what developers would have the patience to write directly in assembly language. However, cryptography has been an exception, where many performance-critical routines have been written directly in assembly (sometimes through metaprogramming layers). Some past work has shown how to do formal verification of that assembly, and other work has shown how to generate C code automatically along with formal proof, but with consequent performance penalties vs. the best-known assembly. We present Cryptopt, the first compilation pipeline that specializes high-level cryptographic functional programs into assembly code significantly faster than what GCC or Clang produce, with mechanized proof (in Coq) whose final theorem statement mentions little beyond the input functional program and the operational semantics of x86-64 assembly. On the optimization side, we apply randomized search through the space of assembly programs, with repeated automatic benchmarking on target CPUs. On the formal-verification side, we connect to the Fiat Cryptography framework (which translates functional programs into C-like IR code) and extend it with a new formally verified program-equivalence checker, incorporating a modest subset of known features of SMT solvers and symbolic-execution engines. The overall prototype is quite practical, e.g. producing new fastest-known implementations for the relatively new Intel i9 12G, of finite-field arithmetic for both Curve25519 (part of the TLS standard) and the Bitcoin elliptic curve secp256k1.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="superlinear-slowness">2</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross and Andres Erbsen.
@@ -43,7 +66,7 @@ Our presentation, we hope, will serve as a call for a POPLMark for Proof Engines
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="2022-itp-coq-bug-minimizer">2</a>]
+[<a name="2022-itp-coq-bug-minimizer">3</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Théo Zimmermann, Miraya Poddar-Agrawal, and Adam Chlipala.
@@ -77,7 +100,7 @@ We expect that our insights will generalize to other proof assistants.  We evalu
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="rewriting">3</a>]
+[<a name="rewriting">4</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Andres Erbsen, Jade Philipoom, Miraya Poddar-Agrawal, and Adam
@@ -112,7 +135,7 @@ Compilers are a prime target for formal verification, since compiler bugs invali
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2021thesis">4</a>]
+[<a name="Gross2021thesis">5</a>]
 </td>
 <td class="bibtexitem">
 Jason&nbsp;S. Gross.
@@ -146,7 +169,7 @@ Finally, we present additional lessons drawn from the case studies of a category
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="coqpl-21-reification-by-type-inference">5</a>]
+[<a name="coqpl-21-reification-by-type-inference">6</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -179,7 +202,7 @@ My goal will be that the audience understand completely how it works, why it wor
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Evaluation2021Huhmann">6</a>]
+[<a name="Evaluation2021Huhmann">7</a>]
 </td>
 <td class="bibtexitem">
 Linden&nbsp;B. Huhmann, Charles&nbsp;F. Harvey, Jason Gross, Anjal Uddin, Imtiaz
@@ -204,7 +227,7 @@ Keywords: Field kit, Rice paddy, Irrigation, Arsenic
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="FiatIJCAR20">7</a>]
+[<a name="FiatIJCAR20">8</a>]
 </td>
 <td class="bibtexitem">
 Cl&eacute;ment Pit-Claudel, Peng Wang, Benjamin Delaware, Jason Gross, and Adam
@@ -230,7 +253,7 @@ Using this approach, we complete the first proof-generating pipeline that goes a
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="fiat-crypto">8</a>]
+[<a name="fiat-crypto">9</a>]
 </td>
 <td class="bibtexitem">
 Andres Erbsen, Jade Philipoom, Jason Gross, Robert Sloan, and Adam Chlipala.
@@ -258,7 +281,7 @@ Implementations from our library were included in BoringSSL to replace existing 
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="reification-by-parametricity">9</a>]
+[<a name="reification-by-parametricity">10</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Andres Erbsen, and Adam Chlipala.
@@ -294,7 +317,7 @@ Additionally, our strategy automatically provides error messages that are no les
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2018-coq-workshop-proposal">10</a>]
+[<a name="Gross2018-coq-workshop-proposal">11</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -319,7 +342,7 @@ This interactive presentation aims to serve as a guide to these questions and mo
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="FiatSNAPL17">11</a>]
+[<a name="FiatSNAPL17">12</a>]
 </td>
 <td class="bibtexitem">
 Adam Chlipala, Benjamin Delaware, Samuel Duchovni, Jason Gross, Cl&eacute;ment
@@ -351,7 +374,7 @@ Keywords: domain-specific languages, synthesis, verification, proof assistants, 
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Bauer:2017:HLF:3018610.3018615">12</a>]
+[<a name="Bauer:2017:HLF:3018610.3018615">13</a>]
 </td>
 <td class="bibtexitem">
 Andrej Bauer, Jason Gross, Peter&nbsp;LeFanu Lumsdaine, Michael Shulman, Matthieu
@@ -378,7 +401,7 @@ Keywords: Coq, Higher inductive types, Homotopy type theory, Univalent foundatio
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="hott-hott-and-category-coq-experience">13</a>]
+[<a name="hott-hott-and-category-coq-experience">14</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -398,7 +421,7 @@ The HoTT/HoTT library is one of the major Coq libraries exploring univalent foun
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="jgross-masters-thesis">14</a>]
+[<a name="jgross-masters-thesis">15</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -418,7 +441,7 @@ Parsers have a long history in computer science. This thesis proposes a novel ap
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="coqpl-15-ltac-profiler">15</a>]
+[<a name="coqpl-15-ltac-profiler">16</a>]
 </td>
 <td class="bibtexitem">
 Tobias Tebbi and Jason Gross.
@@ -437,7 +460,7 @@ We present a simple profiler for the Ltac tactic language of the Coq Proof Assis
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="coqpl-15-coq-bug-minimizer">16</a>]
+[<a name="coqpl-15-coq-bug-minimizer">17</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -457,7 +480,7 @@ Are bugs the bane of your existence? Do you dread Coq upgrades, because they mea
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="adt-synthesis">17</a>]
+[<a name="adt-synthesis">18</a>]
 </td>
 <td class="bibtexitem">
 Ben Delaware, Cl&eacute;ment Pit-Claudel, Jason Gross, and Adam Chlipala.
@@ -482,7 +505,7 @@ We present Fiat, a library for the Coq proof assistant supporting refinement of 
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="2014-msr-x86proved-io">18</a>]
+[<a name="2014-msr-x86proved-io">19</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -502,7 +525,7 @@ The x86proved project can now verify assembly programs with input and output! Th
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="category-coq-experience">19</a>]
+[<a name="category-coq-experience">20</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Adam Chlipala, and David&nbsp;I. Spivak.
@@ -532,7 +555,7 @@ We describe our experience implementing a broad category-theory library in Coq. 
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2014c-coq-workshop-proposal">20</a>]
+[<a name="Gross2014c-coq-workshop-proposal">21</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -555,7 +578,7 @@ Coq 8.5 has a number of new features. It has more powerful universe polymorphism
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2014b-popl-minute-madness">21</a>]
+[<a name="Gross2014b-popl-minute-madness">22</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -572,7 +595,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2014a-coq-wishlist">22</a>]
+[<a name="Gross2014a-coq-wishlist">23</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -586,7 +609,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2013-csw">23</a>]
+[<a name="Gross2013-csw">24</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -604,7 +627,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2013b-popl-minute-madness">24</a>]
+[<a name="Gross2013b-popl-minute-madness">25</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -622,7 +645,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2013a-database-in-categories">25</a>]
+[<a name="Gross2013a-database-in-categories">26</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -640,7 +663,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Lake2011">26</a>]
+[<a name="Lake2011">27</a>]
 </td>
 <td class="bibtexitem">
 Brenden&nbsp;M. Lake, Ruslan Salakhutdinov, Jason Gross, and Joshua&nbsp;B. Tenenbaum.

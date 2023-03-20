@@ -46,36 +46,4 @@ giving them semantics via interpretation functions.},
   url = {https://jasongross.github.io/papers/2015-parsing-parse-trees.pdf}
 }
 
-@MISC{pldi-15-fiat-to-facade,
-  author = {Cl\'ement Pit--Claudel and Peng Wang and Jason Gross and Ben Delaware
-	and Adam Chlipala},
-  title = {Correct-by-Construction Program Derivation from Specifications to
-	Assembly Language},
-  month = {June},
-  year = {2015},
-  note = {Submitted to PLDI 2015},
-  abstract = {We present a Coq-based system to certify the entire process of implementing
-	declarative mathematical specifications with efficient assembly code.
-	That is, we produce formal assembly-code libraries with proofs, in
-	the style of Hoare logic, demonstrating compatibility with relational
-	specifications in higher-order logic. Most code-generation paths
-	from high-level languages involve the introduction of garbage collection
-	and other runtime support for source-level abstractions, but we generate
-	code suitable for resource-constrained embedded systems, using manual
-	memory management and in-place updating of heap-allocated data structures.
-	We start from very high-level source code, applying the Fiat framework
-	to refine set-theory expressions into functional programs; then we
-	further apply Fiat's refinement tools to translate functional programs
-	into Facade, a simple imperative language without a heap or aliasing;
-	and finally we plug into the assembly-generation features of the
-	Bedrock framework, where we link with handwritten data-structure
-	implementations and their associated proofs. Each program refinement
-	leads to a proved Hoare-logic specification for an assembly function,
-	with no trust dependencies on any aspect of our synthesis process,
-	which is highly automated.},
-  owner = {Jason},
-  timestamp = {2014.11.17},
-  url = {https://jasongross.github.io/papers/2015-fiat-to-facade.pdf}
-}
-
 @Comment{jabref-meta: databaseType:bibtex;}

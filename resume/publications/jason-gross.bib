@@ -483,4 +483,16 @@ Our presentation, we hope, will serve as a call for a POPLMark for Proof Engines
   url                         = {https://jasongross.github.io/papers/2022-superlinear-slowness-coq-workshop.pdf},
 }
 
+@InProceedings{CryptoptPLDI23,
+author = {Joel Kuepper and Andres Erbsen and Jason Gross and Owen Conoly and Chuyue Sun and Samuel Tian and David Wu and Adam Chlipala and Chitchanok Chuengsatiansup and Daniel Genkin and Markus Wagner and Yuval Yarom},
+title = {Crypt{O}pt: Verified Compilation with Random Program Search for Cryptographic Primitives},
+booktitle = {PLDI'23: Proceedings of the 44th ACM SIGPLAN Conference on Programming Language Design and Implementation},
+month = {June},
+year = {2023},
+location = {Orlando, FL, USA},
+note = {Conditionally accepted},
+abstract = {Most software domains rely on compilers to translate high-level code to multiple different machine languages, with performance not too much worse than what developers would have the patience to write directly in assembly language. However, cryptography has been an exception, where many performance-critical routines have been written directly in assembly (sometimes through metaprogramming layers). Some past work has shown how to do formal verification of that assembly, and other work has shown how to generate C code automatically along with formal proof, but with consequent performance penalties vs. the best-known assembly. We present Cryptopt, the first compilation pipeline that specializes high-level cryptographic functional programs into assembly code significantly faster than what GCC or Clang produce, with mechanized proof (in Coq) whose final theorem statement mentions little beyond the input functional program and the operational semantics of x86-64 assembly. On the optimization side, we apply randomized search through the space of assembly programs, with repeated automatic benchmarking on target CPUs. On the formal-verification side, we connect to the Fiat Cryptography framework (which translates functional programs into C-like IR code) and extend it with a new formally verified program-equivalence checker, incorporating a modest subset of known features of SMT solvers and symbolic-execution engines. The overall prototype is quite practical, e.g. producing new fastest-known implementations for the relatively new Intel i9 12G, of finite-field arithmetic for both Curve25519 (part of the TLS standard) and the Bitcoin elliptic curve secp256k1.},
+url = {http://adam.chlipala.net/papers/CryptoptPLDI23/},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

@@ -137,6 +137,10 @@ $(filter presentations/coq-workshop-2014/html/CoqWorkshop.%.html,$(OUTPUTS)): co
 COQ_2014:=$(shell pwd)/presentations/coq-workshop-2014-coq
 COQBIN_2014:=$(COQ_2014)/bin/
 
+.PHONY: patch-coq-workshop-2014-coq
+patch-coq-workshop-2014-coq::
+	cd $(COQ_2014); git apply ../coq-workshop-2014-coq.patch
+
 $(COQ_2014)/config/Makefile: $(COQ_2014)/configure
 	cd $(COQ_2014); ./configure -local -coqide no
 
