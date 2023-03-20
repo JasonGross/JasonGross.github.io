@@ -75,7 +75,7 @@ jobs:
           eval $(opam env --set-switch --switch=${OCAML_2014_VERSION})
           echo "::endgroup::"
           echo "::group::opam install"
-          opam install -y "camlp5<6.16" ocamlfind hevea oUnit dune num zarith # merlin ocp-indent
+          opam install -y "camlp5<8" ocamlfind hevea oUnit dune num zarith # merlin ocp-indent
           echo "::endgroup::"
           echo "::group::opam switch"
           opam switch
