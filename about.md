@@ -5,7 +5,7 @@ permalink: /about/
 ---
 
 <link rel="stylesheet" href="{{ "/assets/photo.css" | relative_url }}">
-<div class="circle-photo-wrapper">
+<div class="circle-photo-wrapper center">
 <img src="jason-gross.jpg" class="circle-photo">
 </div>
 
