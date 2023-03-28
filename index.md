@@ -5,9 +5,13 @@ permalink: /
 ---
 
 <link rel="stylesheet" href="{{ "/assets/photo.css" | relative_url }}">
+<div class="photo-wrapper-wrapper">
 <div class="circle-photo-wrapper center">
 <img src="jason-gross.jpg" class="circle-photo">
 </div>
+</div>
+
+<p style="text-align: center;">Hello!</p>
 
 I'm a researcher at the [Machine Intelligence Research Institute](https://intelligence.org/).
 Humanity is building AI systems to be subject to fewer constraints of the world, let's not be subject to the AI systems either.
