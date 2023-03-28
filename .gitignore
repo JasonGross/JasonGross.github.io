@@ -53,9 +53,7 @@ papers/lob-bibliography-filtered.bib
 papers/lob-bibliography.html
 papers/lob-bibliography_bib.html
 papers/source/coqpl-2021/*.pdf
-presentations/coq-workshop-*/*.pdf
 presentations/coq-workshop-*/Makefile.coq
-presentations/coq-workshop-*/html
 presentations/csw-2013/*.pdf
 presentations/csw-2013/jgross-presentation-no-pause.tex
 presentations/popl-2013/*.pdf

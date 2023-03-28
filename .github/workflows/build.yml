@@ -20,6 +20,7 @@ jobs:
       # Try to create reproducible .pdfs
       SOURCE_DATE_EPOCH: 1
       SOURCE_DATE_EPOCH_TEX_PRIMITIVES: 1
+      REBUILD_COQ: false
 
     steps:
       - uses: actions/checkout@v3
@@ -84,17 +85,20 @@ jobs:
           opam list
           echo "::endgroup::"
           popd
+        if: ${{ env.REBUILD_COQ == 'true' }}
       - name: Build 2014 Coq
         run: |
           opam switch ${OCAML_2014_VERSION}
           eval $(opam env --set-switch --switch=${OCAML_2014_VERSION})
           make patch-coq-workshop-2014-coq
           make coq-workshop-2014-html
+        if: ${{ env.REBUILD_COQ == 'true' }}
       - name: Build 2018 Coq
         run: |
           opam switch ${OCAML_2018_VERSION}
           eval $(opam env --set-switch --switch=${OCAML_2018_VERSION})
           make coq-workshop-2018-html
+        if: ${{ env.REBUILD_COQ == 'true' }}
       - name: make
         run: |
           opam switch ${OCAML_DEFAULT_VERSION}
