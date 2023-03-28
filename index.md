@@ -1,7 +1,7 @@
 ---
 layout: page
-title: About
-permalink: /about/
+title: Jason Gross
+permalink: /
 ---
 
 <link rel="stylesheet" href="{{ "/assets/photo.css" | relative_url }}">
