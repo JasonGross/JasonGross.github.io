@@ -16,6 +16,7 @@
 title: Jason Gross
 email: jgross@mit.edu
 description: >- # this means to ignore newlines until "baseurl:"
+  Personal website of Jason Gross
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: diagram_chaser
