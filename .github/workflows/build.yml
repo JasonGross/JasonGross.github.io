@@ -46,6 +46,29 @@ jobs:
         uses: ocaml/setup-ocaml@v2
         with:
           ocaml-compiler: ${{ env.OCAML_DEFAULT_VERSION }}
+      - name: Set up OCaml switch
+        run: |
+          pushd /tmp # work around https://github.com/ocaml/setup-ocaml/issues/207
+          echo "::group::opam update"
+          opam update
+          echo "::endgroup::"
+          echo "::group::opam switch ${OCAML_DEFAULT_VERSION}"
+          opam switch ${OCAML_DEFAULT_VERSION} || opam switch create ${OCAML_DEFAULT_VERSION}
+          opam switch ${OCAML_DEFAULT_VERSION}
+          echo "::endgroup::"
+          echo "::group::eval opam env"
+          eval $(opam env --set-switch --switch=${OCAML_DEFAULT_VERSION})
+          echo "::endgroup::"
+          #echo "::group::opam install"
+          #opam install -y "camlp5<8" ocamlfind hevea oUnit dune num zarith # merlin ocp-indent
+          #echo "::endgroup::"
+          echo "::group::opam switch"
+          opam switch
+          echo "::endgroup::"
+          echo "::group::opam list"
+          opam list
+          echo "::endgroup::"
+          popd
       - name: Install OCaml deps
         run: |
           pushd /tmp # work around https://github.com/ocaml/setup-ocaml/issues/207
