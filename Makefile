@@ -46,6 +46,11 @@ OUTPUTS := \
 	papers/category-coq-experience.html \
 	jason-gross.html \
 	papers/category-coq-experience-filtered.bib \
+	#
+OLD_NO_LONGER_BUILT_OUTPUTS := \
+	papers/lob-paper/html/lob.html \
+	papers/lob-paper/supplemental-nonymous.zip \
+	papers/lob-bibliography.html \
 	presentations/coq-workshop-2014/coq-workshop-proposal-tactics-in-terms.pdf \
 	presentations/coq-workshop-2014/html/CoqWorkshop.tactics_in_terms_paper_examples.html \
 	presentations/coq-workshop-2018/coq-workshop-proposal-notations.pdf \
@@ -53,11 +58,6 @@ OUTPUTS := \
 	presentations/coq-workshop-2018/html/CoqWorkshop.Notations.html \
 	presentations/coq-workshop-2018/html/CoqWorkshop.NotationsMITPresentation.html \
 	presentations/coq-workshop-2018/html/CoqWorkshop.NotationsCoqWorkshop.html \
-	#
-OLD_NO_LONGER_BUILT_OUTPUTS := \
-	papers/lob-paper/html/lob.html \
-	papers/lob-paper/supplemental-nonymous.zip \
-	papers/lob-bibliography.html \
 	#
 
 all: $(OUTPUTS)
