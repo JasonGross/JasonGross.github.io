@@ -157,7 +157,7 @@ presentations/coq-workshop-2014/%.pdf: presentations/coq-workshop-2014/%.tex pre
 papers/source/coqpl-2021/%.pdf: papers/source/coqpl-2021/%.tex papers/source/coqpl-2021/Makefile papers/source/coqpl-2021/reification_by_type_inference_tex.v
 	cd papers/source/coqpl-2021; $(MAKE) $(*:=.pdf)
 
-$(filter presentations/coq-workshop-2014/html/CoqWorkshop.%.html,$(OUTPUTS)): coq-workshop-2014-html
+$(filter presentations/coq-workshop-2014/html/CoqWorkshop.%.html,$(OUTPUTS) $(OLD_NO_LONGER_BUILT_OUTPUTS)): coq-workshop-2014-html
 
 
 COQ_2014:=$(shell pwd)/presentations/coq-workshop-2014-coq
@@ -180,7 +180,7 @@ coq-workshop-2014-html: $(COQ_2014)/bin/coqc
 presentations/coq-workshop-2018/%.pdf: presentations/coq-workshop-2018/%.tex presentations/coq-workshop-2018/Makefile
 	cd presentations/coq-workshop-2018; $(MAKE) $(*:=.pdf)
 
-$(filter presentations/coq-workshop-2018/html/CoqWorkshop.%.html,$(OUTPUTS)): coq-workshop-2018-html
+$(filter presentations/coq-workshop-2018/html/CoqWorkshop.%.html,$(OUTPUTS) $(OLD_NO_LONGER_BUILT_OUTPUTS)): coq-workshop-2018-html
 
 COQ_2018:=$(shell pwd)/presentations/coq-workshop-2018-coq
 COQBIN_2018:=$(COQ_2018)/bin/
