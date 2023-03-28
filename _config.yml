@@ -21,12 +21,38 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: diagram_chaser
 github_username:  JasonGross
+google_scholar_url: https://scholar.google.com/citations?user=QouPlrMAAAAJ
 
 # Build settings
 markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
+
+
+minima:
+  social_links:
+  #   - { platform: devto,          user_url: "https://dev.to/jekyll" }
+  #   - { platform: dribbble,       user_url: "https://dribbble.com/jekyll" }
+  #   - { platform: facebook,       user_url: "https://www.facebook.com/jekyll" }
+  #   - { platform: flickr,         user_url: "https://www.flickr.com/photos/jekyll" }
+    - { platform: github,         user_url: "https://github.com/JasonGross" }
+    - { platform: google_scholar, user_url: "https://scholar.google.com/citations?user=QouPlrMAAAAJ" }
+  #   - { platform: instagram,      user_url: "https://www.instagram.com/jekyll" }
+  #   - { platform: keybase,        user_url: "https://keybase.io/jekyll" }
+  #   - { platform: linkedin,       user_url: "https://www.linkedin.com/in/jekyll" }
+  #   - { platform: microdotblog,   user_url: "https://micro.blog/jekyll" }
+  #   - { platform: pinterest,      user_url: "https://www.pinterest.com/jekyll" }
+    - { platform: stackoverflow,  user_url: "https://stackoverflow.com/users/377022/jason-gross" }
+  #   - { platform: telegram,       user_url: "https://t.me/jekyll" }
+    - { platform: twitter,        user_url: "https://twitter.com/diagram_chaser" }
+    - { platform: youtube,        user_url: "https://www.youtube.com/channel/UC3pWbAJIbC6CJktva7JxuIQ" }
+
+header_pages:
+  - about.md
+  - contact.md
+  - publications.md
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
