@@ -13,9 +13,9 @@ BIBTEX2HTML_ARGS=-d -r -nodoc \
 	-nf code-agda "code (.agda)" \
 	-nf artifact-zip "artifact (.zip)" \
 	-nf artifact-tar-gz "artifact (.tar.gz)" \
-	-nf code-github "project (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" \
-	-nf artifact-github "artifact (<img src='media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" \
-	-nf artifact-figshare "artifact (<img src='media/Figshare-Mark/6238dbcd763032622be7658e_figshare_NoSubheadColour.svg' alt='Figshare' title='Figshare' style='height:1em; vertical-align:text-bottom' />)" \
+	-nf code-github "project (<img src='/media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" \
+	-nf artifact-github "artifact (<img src='/media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" \
+	-nf artifact-figshare "artifact (<img src='/media/Figshare-Mark/6238dbcd763032622be7658e_figshare_NoSubheadColour.svg' alt='Figshare' title='Figshare' style='height:1em; vertical-align:text-bottom' />)" \
 	-nf original-url "original conference submission (.pdf)" \
 	-nf presentation-annotated-pptx "presentation (.pptx, annotated with notes)" \
 	-nf presentation-pptx "presentation (.pptx)" \
@@ -25,9 +25,9 @@ BIBTEX2HTML_ARGS=-d -r -nodoc \
 	-nf presentation-odp "presentation (.odp)" \
 	-nf project-homepage "project homepage" \
 	-nf published-url "publication" \
-	-nf published-url-springer 'publication (<div style="overflow: hidden; max-width: 1em; display: inline-block; vertical-align: middle"><img src="media/Springer-Mark/PNG/logo.png" alt="Springer" title="Springer" style="height: 1.5em; vertical-align: text-bottom"></div>)' \
-	-nf published-url-elsevier-geoderma 'publication (<img src="media/ScienceDirect-Mark/svg/elsevier-non-solus-new-grey.svg" alt="ScienceDirect" title="ScienceDirect" style="height: 1em;vertical-align: text-bottom;">)' \
-	-nf published-url-dagstuhl-lipics 'publication (<img src="media/Dagstuhl-Mark/lipics-color-160x34.png" alt="dblp LIPIcs" title="dblp LIPIcs" style="height: 1em;vertical-align: text-bottom;">)' \
+	-nf published-url-springer 'publication (<div style="overflow: hidden; max-width: 1em; display: inline-block; vertical-align: middle"><img src="/media/Springer-Mark/PNG/logo.png" alt="Springer" title="Springer" style="height: 1.5em; vertical-align: text-bottom"></div>)' \
+	-nf published-url-elsevier-geoderma 'publication (<img src="/media/ScienceDirect-Mark/svg/elsevier-non-solus-new-grey.svg" alt="ScienceDirect" title="ScienceDirect" style="height: 1em;vertical-align: text-bottom;">)' \
+	-nf published-url-dagstuhl-lipics 'publication (<img src="/media/Dagstuhl-Mark/lipics-color-160x34.png" alt="dblp LIPIcs" title="dblp LIPIcs" style="height: 1em;vertical-align: text-bottom;">)' \
 	-nf acm-authorize-url "<img src='https://dl.acm.org/images/oa.gif' width='25' height='25' border='0' alt='ACM DL Author-ize Publication' title='ACM DL Author-ize Publication' style='vertical-align:middle'/>" \
 	-nf dspace-url "DSpace@MIT" \
 	# -nf doi "<img src='https://www.doi.org/img/Logo_TM.png' width='25' height='25' border='0' alt='DOI' style='vertical-align:middle'/>"
@@ -52,14 +52,17 @@ COMMON_SED_REPS := \
 	-e s',</p>,,g' \
 	-e s'|\[<a name="\([^"]*\)">\([^<]*\)</a>\]|[<a name="\1" href="$(POUND)\1">\2</a>]|g'
 
+PUBS_SED_REPS := \
+	-e s',\(<blockquote><font[^>]*>\),\1<p />,g'
+
 jason-gross-stripped.html: jason-gross.html Makefile
-	sed $(COMMON_SED_REPS) -e s'/<h2>/<h2 id="publications">/g' $< > $@
+	sed $(COMMON_SED_REPS) $(PUBS_SED_REPS) -e s'/<h2>/<h2 id="publications">/g' $< > $@
 
 jason-gross.html: %.html : %.bib $(BIBTEX2HTML) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Papers and Presentations" -o "$*" "$<"
 
 jason-gross-drafts-stripped.html: jason-gross-drafts.html Makefile
-	sed $(COMMON_SED_REPS) -e s'/<h2>/<h2 id="drafts">/g' $< > $@
+	sed $(COMMON_SED_REPS) $(PUBS_SED_REPS) -e s'/<h2>/<h2 id="drafts">/g' $< > $@
 
 jason-gross-drafts.html: %.html : %.bib $(BIBTEX2HTML) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Drafts" -o "$*" "$<"
