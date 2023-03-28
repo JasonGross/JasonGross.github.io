@@ -4,7 +4,10 @@ title: About
 permalink: /about/
 ---
 
-# About me
+<link rel="stylesheet" href="{{ "/assets/photo.css" | relative_url }}">
+<div class="circle-photo-wrapper">
+<img src="jason-gross.jpg" class="circle-photo">
+</div>
 
 I'm a researcher at the [Machine Intelligence Research Institute](https://intelligence.org/).
 Humanity is building AI systems to be subject to fewer constraints of the world, let's not be subject to the AI systems either.
