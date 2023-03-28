@@ -22,6 +22,7 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: diagram_chaser
 github_username:  JasonGross
 google_scholar_url: https://scholar.google.com/citations?user=QouPlrMAAAAJ
+youtube_username: JasonSaulG
 
 # Build settings
 markdown: kramdown
@@ -57,11 +58,13 @@ header_pages:
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - presentations/coq-workshop-2018-coq
+  - resume/biblatex
