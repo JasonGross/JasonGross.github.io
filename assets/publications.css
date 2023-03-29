@@ -1,6 +1,7 @@
 blockquote, p {
     text-align: justify;
     font-style: normal;
+    letter-spacing: 0;
 }
 .bibtexitem {
     position: relative;
