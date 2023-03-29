@@ -3,6 +3,9 @@ blockquote, p {
     font-style: normal;
     letter-spacing: 0;
 }
+.bibtexitem img {
+    max-width: none;
+}
 .bibtexitem {
     position: relative;
 }
