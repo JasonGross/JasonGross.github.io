@@ -73,10 +73,13 @@ COMMON_SED_REPS := \
 	-e s'/h1/h2/g' \
 	-e s',<p>,<p />,g' \
 	-e s',</p>,,g' \
-	-e s'|\[<a name="\([^"]*\)">\([^<]*\)</a>\]|[<a name="\1" href="$(POUND)\1">\2</a>]|g'
+	-e s'|\[<a name="\([^"]*\)">\([^<]*\)</a>\]|[<a name="\1" href="$(POUND)\1">\2</a>]|g' \
+	#
 
 PUBS_SED_REPS := \
-	-e s',\(<blockquote><font[^>]*>\),\1<p />,g'
+	-e s',\(<blockquote><font[^>]*>\),\1<p />,g' \
+	-e s',\(</font></blockquote>\),<p />\1,g' \
+	#
 
 jason-gross-stripped.html: jason-gross.html Makefile
 	sed $(COMMON_SED_REPS) $(PUBS_SED_REPS) -e s'/<h2>/<h2 id="publications">/g' $< > $@
