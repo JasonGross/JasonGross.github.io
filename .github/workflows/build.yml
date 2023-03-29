@@ -132,6 +132,9 @@ jobs:
           find .
           git status
       - run: make deploy-separate
+      - name: Display size info
+        run: |
+          find build -print0 | xargs -0 du -sh | sort -h
       - uses: actions/upload-artifact@v3
         with:
           name: build
