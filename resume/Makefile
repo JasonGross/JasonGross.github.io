@@ -18,7 +18,7 @@ WGET ?= wget
 
 BIBER = $(shell which ./biber 2>/dev/null || echo biber)
 
-all: Resume.pdf JasonGross-curriculum-vitae.pdf
+all: Resume.pdf ResumeOld.pdf JasonGross-curriculum-vitae.pdf
 
 Resume-curriculum-vitae.pdf: Resume.pdf
 
@@ -29,14 +29,14 @@ JasonGross-curriculum-vitae.pdf: Resume-curriculum-vitae.pdf | Resume.pdf
 jason-gross.bib: publications/jason-gross.bib
 	sed -e 's/month\s*=\s*{January},/month = {1},/g' -e 's/month\s*=\s*{February},/month = {2},/g' -e 's/month\s*=\s*{March},/month = {3},/g' -e 's/month\s*=\s*{April},/month = {4},/g' -e 's/month\s*=\s*{May},/month = {5},/g' -e 's/month\s*=\s*{June},/month = {6},/g' -e 's/month\s*=\s*{July},/month = {7},/g' -e 's/month\s*=\s*{August},/month = {8},/g' -e 's/month\s*=\s*{September},/month = {9},/g' -e 's/month\s*=\s*{October},/month = {10},/g' -e 's/month\s*=\s*{November},/month = {11},/g' -e 's/month\s*=\s*{December},/month = {12},/g' -e s'/•/\$$\\bullet\$$/g' $< > $@
 
-Resume.pdf: Resume.tex res.cls jason-gross.bib
-	pdflatex --enable-write18 -synctex=1 Resume.tex
-	$(BIBER) Resume
-	pdflatex --enable-write18 -synctex=1 -interaction=nonstopmode Resume.tex 2>/dev/null >/dev/null
-	pdflatex --enable-write18 -synctex=1 Resume.tex
+Resume.pdf ResumeOld.pdf : %.pdf : %.tex res.cls jason-gross.bib
+	pdflatex --enable-write18 -synctex=1 $<
+	$(BIBER) $*
+	pdflatex --enable-write18 -synctex=1 -interaction=nonstopmode $< 2>/dev/null >/dev/null
+	pdflatex --enable-write18 -synctex=1 $<
 
 clean:
-	rm -f *.pdf Resume-*.tex *.log *.out *.mtx *.aux *.bbl *.blg *.run.xml *.bcf *-blx.bib jason-gross.bib
+	rm -f *.pdf Resume-*.tex ResumeOld-*.tex *.log *.out *.mtx *.aux *.bbl *.blg *.run.xml *.bcf *-blx.bib jason-gross.bib
 
 .PHONY: all clean
 
