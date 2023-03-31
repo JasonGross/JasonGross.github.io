@@ -13,6 +13,7 @@
 [submodule "papers/lob-paper"]
 	path = papers/lob-paper
 	url = ../lob-paper.git
+	branch = with-build-artifacts
 [submodule "bibtex2html"]
 	path = bibtex2html
 	url = https://github.com/backtracking/bibtex2html.git
