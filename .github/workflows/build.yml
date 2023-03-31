@@ -135,11 +135,6 @@ jobs:
       - name: Display size info
         run: |
           find build -print0 | xargs -0 du -sh | sort -h
-      - uses: actions/upload-artifact@v3
-        with:
-          name: build
-          path: build/
-        if: always()
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.4.1
@@ -148,3 +143,9 @@ jobs:
           folder: build # The folder the action should deploy.
           git-config-email: JasonGross@users.noreply.github.com
         if: ${{ github.ref == 'refs/heads/master' }}
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build/
+        if: always()
