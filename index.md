@@ -17,10 +17,10 @@ I'm a researcher at the [Machine Intelligence Research Institute](https://intell
 Humanity is building AI systems to be subject to fewer constraints of the world, let's not be subject to the AI systems either.
 I'm bushwhacking for moonshots that make this possible!
 
-In the ancient times, I developed [Fiat Cryptography](https://github.com/mit-plv/fiat-crypto) which enables the majority of secure connections to the internet (the big prime numbers behind the https lock icon), reported [the plurality of all-time bugs in the proof-assistant Coq](media/coq-bug-reports-by-year.svg) (and joined [the dev team](https://coq.inria.fr/coq-team.html) to help handle them!), and contributed [category theory to the Coq-HoTT library](https://github.com/HoTT/Coq-HoTT/tree/master/theories/Categories) (hoorah for beautiful, unifying mathematics).
+In the ancient times, I developed [Fiat Cryptography](https://github.com/mit-plv/fiat-crypto) which enables the majority of secure connections to the internet (the big prime numbers behind the https lock icon), reported [the plurality of all-time bugs in the proof-assistant Coq]({{ "/media/coq-bug-reports-by-year.svg" | relative_url }}) (and joined [the dev team](https://coq.inria.fr/coq-team.html) to help handle them!), and contributed [category theory to the Coq-HoTT library](https://github.com/HoTT/Coq-HoTT/tree/master/theories/Categories) (hoorah for beautiful, unifying mathematics).
 
 The compelling observation from these projects is that [proof assistants are systematically slow](https://youtu.be/m-iGCCuHBvY), and if we expect verified security to scale as fast as we deploy software in critical infrastructure, we need to be engineering significantly more performant ways of generating and checking formal proofs.
-I wrote this up in [a dense PhD thesis in 2020](#Gross2021thesis).
+I wrote this up in [a dense PhD thesis in 2020]({{ "/publications/#Gross2021thesis" | relative_url }}).
 
 If the stakes weren't so high, I would spend more time on cute maker projects, sailing, dancing, [circling](https://web.mit.edu/~jgross/Public/social-interactions/circling.txt), and physics.
 

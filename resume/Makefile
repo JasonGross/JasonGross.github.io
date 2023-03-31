@@ -21,6 +21,7 @@ BIBER = $(shell which ./biber 2>/dev/null || echo biber)
 all: Resume.pdf ResumeOld.pdf JasonGross-curriculum-vitae.pdf
 
 Resume-curriculum-vitae.pdf: Resume.pdf
+	cp $< $@
 
 JasonGross-curriculum-vitae.pdf: Resume-curriculum-vitae.pdf | Resume.pdf
 	cp $< $@
