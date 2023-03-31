@@ -93,8 +93,9 @@
 
 \newsectionwidth{1em}
 \makeatletter
-\pretocmd{\employer}{\vskip-\baselineskip}{}{}
-\apptocmd{\@@section}{\vskip1.5\baselineskip\relax}{}{}
+\def\firstemployerskip{\vskip-\baselineskip\def\employerskip{}}
+\pretocmd{\employer}{\employerskip}{}{}
+\apptocmd{\@@section}{\vskip1.5\baselineskip\relax\def\employerskip{\firstemployerskip}}{}{}
 \makeatother
 \resumewidth=7.5in
 
