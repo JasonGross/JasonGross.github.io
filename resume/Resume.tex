@@ -6,7 +6,8 @@
 \usepackage{calc}
 \usepackage{amsmath}
 \usepackage{etoolbox}[2011/01/03]
-\usepackage[backend=biber,maxbibnames=99,sorting=ymdnt,noerroretextools=true,style=alphabetic]{biblatex}
+\expandafter\def\csname blx@noerroretextools\endcsname{}
+\usepackage[backend=biber,maxbibnames=99,sorting=ymdnt,style=alphabetic]{biblatex}
 % http://tex.stackexchange.com/a/140641
 \DeclareSortingTemplate{ymdnt}{
     \sort{
@@ -101,21 +102,30 @@
 
 \newcommand{\aswidthof}[2]{\rlap{#1}\hphantom{#2}}
 
-\name{\LARGE \bf \parbox{\widthof{github.com/JasonGross}}{%
-    \centering Jason Gross \\
-    \vspace{0.2cm}
-    \large \href{https://github.com/JasonGross/}{github.com/JasonGross} \\
-    \href{https://people.csail.mit.edu/jgross/}{people.csail.mit.edu/jgross} \\
-    $\left.\right.$ \\
-    $\left.\right.$ \\%
-}}
+\name{\LARGE Jason Gross\vspace{0.75cm}}
+%\parbox{\textwidth}{%\widthof{github.com/JasonGross}}{%
+%    {\LARGE \centering \textbf{Jason Gross}} \\
+%    \vspace{0.2cm}
+%    \large
+%    \href{https://github.com/JasonGross/}{github.com/JasonGross} \\
+%    \href{https://people.csail.mit.edu/jgross/}{people.csail.mit.edu/jgross} \\
+%    $\left.\right.$ \\
+%    $\left.\right.$ \\%
+%}}
 
-\vspace{5cm}
 
+
+\address{\parbox{\textwidth}{%
+  \href{mailto:jgross@mit.edu}{\large Email: \normalsize jgross@mit.edu}\hfill
+  \href{https://people.csail.mit.edu/jgross/}{\large Website: \normalsize people.csail.mit.edu/jgross} \\
+  \href{https://github.com/JasonGross/}{\large GitHub: \normalsize JasonGross}\hfill
+  \href{https://scholar.google.com/citations?user=QouPlrMAAAAJ&hl=en}{\large Google Scholar: \normalsize QouPlrMAAAAJ}%
+}%
+}
 %\address{}%\textsc{Address}\\258 Prospect Street, Apt \# 1L\\Cambridge, MA 02139}
 %\address{\textsc{Contact}\\\href{mailto:jgross@mit.edu}{jgross@mit.edu}\\(631) 790-8962}
-\newcommand{\addressaswidth}[1]{\makebox[\widthof{\textsc{jgross@mit.edu}}][c]{#1}}
-\address{\addressaswidth{\textsc{Contact}}\\\addressaswidth{\href{mailto:jgross@mit.edu}{jgross@mit.edu}}\\\addressaswidth{(631) 790-8962}}
+%\newcommand{\addressaswidth}[1]{\makebox[\widthof{\textsc{jgross@mit.edu}}][c]{#1}}
+%\address{\addressaswidth{\textsc{Contact}}\\\addressaswidth{\href{mailto:jgross@mit.edu}{jgross@mit.edu}}\\\addressaswidth{(631) 790-8962}}
 
 \begin{document}
 
@@ -123,30 +133,47 @@
 
 \section{\textsc{Research Interests}}
 \begin{itemize}
-\item Programming Languages and AI: Löb's Theorem, Type Theory, Compact Proof Generation
-\item Trust and Security Engineering: Formal Verification, Cryptography, Performance Engineering
+\item AI: Mechanistic Interpretability, Heuristic Arguments, Compact Proofs, Löb's Theorem
+\item Security \& Engineering: Formal Verification, Cryptography, Bugs Infrastructure
+\item Programming Languages: Type Theory, Performance, Proof Engines \& Automation
+%
+%\item Mechanistic Interpretability: Heuristic Arguments, Compact Proofs, Type Theory
+%\item Security Engineering: Formal Verification, Cryptography, Performance Engineering
+%\item Programming Languages and AI: Löb's Theorem, Type Theory, Compact Proof Generation
+%%\item Trust and Security Engineering: Formal Verification, Cryptography, Performance Engineering
 \end{itemize}
 
 \section{\textsc{Experience}}
 
-\employer{Machine Intelligence Research Institute (MIRI)}
+\employer{Special Project of ARC Theory}
+\dates{August 2023--Present}
+\title{Project Lead}
+\location{Berkeley, CA}
+\begin{position}
+  \begin{itemize}
+  \item Building the first machine-checked functional-correctness proofs of mechanistic interpretability arguments about transformers in Coq (\href{https://github.com/JasonGross/neural-net-coq-interp}{\texttt{github.com/JasonGross/neural-net-coq-interp}})
+  \item Raised \$150k and leading an interdisciplinary team of ML researchers and mathematicians
+  \end{itemize}
+\end{position}
+
+\employer{\mbox{Machine Intelligence Research Institute (MIRI)}}
 \dates{February 2021--Present}
 \title{Research Staff}
 \location{Berkeley, CA (remote)}
 \begin{position}
   \begin{itemize}
-  \item Performing self-directed research into topics in fundamental programming language theory and mathematics%, bringing insights and understanding back to my supervisor
+  \item Performing self-directed research into fundamental programming language theory and math%ematics%, bringing insights and understanding back to my supervisor
   \end{itemize}
 \end{position}
 
 \employer{Coq Development Team, INRIA}
 \dates{June 2021--Present}
-\title{Core Team Member}
+\title{Member of Core Team}
 \location{Nantes, France (remote)}
 \begin{position}
   \begin{itemize}
   \item Reported the plurality of all-time bugs in Coq (since 2012)
-  \item Designed and engineered a bug minimizer for automatically producing minimized stand-alone test-cases from bug reports with automatic support for minimizing regressions in external projects tested by Coq CI
+  \item Designed and engineered a bug report minimizer for automatically producing minimized standalone test-cases and minimizing regressions in external projects tested by Coq's CI
   \item Researching performance issues that impact scalability of automated verification
   \end{itemize}
 \end{position}
@@ -157,8 +184,8 @@
 \location{Cambridge, MA}
 \begin{position}
   \begin{itemize}
-  \item Main Project: Fiat Cryptography (\href{https://github.com/mit-plv/fiat-crypto}{github.com/mit-plv/fiat-crypto})
-  \item Fiat Cryptography is a developer tool to generate proven-correct cryptographic code. The project has wide industry adoption, including powering the plurality of secure connections in Google Chrome and Firefox
+  \item Main Project: Fiat Cryptography (\href{https://github.com/mit-plv/fiat-crypto}{\texttt{github.com/mit-plv/fiat-crypto}})
+  \item Fiat Cryptography is a developer tool to generate proven-correct cryptographic code, with wide industry adoption, powering the plurality of secure connections in Chrome and Firefox
   \item Lead development of one of the world's first algorithm-level-optimizing compilers
   \item Collaboratively implemented the tool; wrote backends to C, Go, Java, and JSON; managed development of backends to Rust and Zig
   \end{itemize}
@@ -228,13 +255,14 @@
 \section{\textsc{Programming Languages}}
 \begin{itemize}
 \item
-  Proficient: Coq, %\onlymultitex{\cvlongfiles}{\TeX{} macro language, }
-  Mathematica, git, Python, JavaScript, BASIC
+  Proficient: Coq, Agda, Python, %\onlymultitex{\cvlongfiles}{\TeX{} macro language, }
+  Mathematica, BASIC, \TeX{} macro language, git, JavaScript
 \item
   Working knowledge: %\onlymultitex{\cvlongfiles}{\LaTeX{}, }
-  C, C++, Agda, OCaml, Haskell, Scheme, HTML, CSS, Perl, Java
+  C, C++, OCaml, Haskell, Scheme%/Racket
+  , HTML, CSS, Perl, Bash, Java
 \item
-  Basic knowledge: Matlab, Lean, Idris, Ruby, Go, Ur/Web, x86 Assembly
+  Basic knowledge: MATLAB, Lean, Idris, Ruby, Go, Ur/Web, x86 Assembly, SQL, Batch
 \end{itemize}
 
 \nocite{*}
