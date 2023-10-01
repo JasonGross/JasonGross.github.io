@@ -60,15 +60,17 @@ The bottom of the list has some less ambitious projects.
    - Estimated commitment: the [work on `N`](https://github.com/coq/coq/pull/16203) was +765,-270, the work on `Z` should be 1×--2× as involved
 
 7. Fill out Coq's theory of primitive integers.
-   There's some [work in progress on a theory of integers modulo `n`](https://github.com/coq/coq/pull/17043); I'd love to see this extended and applied to Coq's `Uint63` and `Sint63`.
-   Additionally, it would be nice to have the basic order modules and relation structure (such as transitivity of comparison) filled out.
+   - There's some [work in progress on a theory of integers modulo `n`](https://github.com/coq/coq/pull/17043); I'd love to see this extended/completed and applied to Coq's `Uint63` and `Sint63`.
+   - Additionally, it would be nice to have the basic order modules and relation structure (such as transitivity of comparison) filled out.
+   - Finally, `zify`, `lia`, and `nia` don't work quite as well on `int` as on `Z`, `N`, `nat`, due to all the moduli.
+     It would be nice to figure out an efficient strategy for deciding linear and nonlinear equations modulo a fixed modulus.
 
 8. [Extending printing reduction effects to timing effects.](https://github.com/coq-community/reduction-effects/issues/18)
-<!--   - Estimated commitment: -->
+   - Estimated commitment: 10--100 loc, probably at most a couple days of work
 
 9. [Extending reduction effects to the VM and native compiler.](https://github.com/coq-community/reduction-effects/issues/8)
 
-10. Extending `rewrite_strat` with `cbv` and `lazy` reduction ordering strategies.
-<!--    See slide 32 [of the presentation](https://jasongross.github.io/presentations/itp-2022-rewriting/rewriting.pdf) [the paper](https://arxiv.org/pdf/2205.00862.pdf)  [Accelerating Verified-Compiler Development with a Verified Rewriting Engine](https://jasongross.github.io/publications/#rewriting). -->
-
-11. Extending the Ltac Profiler to Ltac2.
+10. Extending `rewrite_strat` with `cbv` and `lazy` reduction ordering strategies (currently it [supports only `topdown`, `bottomup`, `subterms`, `innermost`, `outermost`](https://coq.inria.fr/refman/addendum/generalized-rewriting.html#definitions)).
+    - See [slide 32 of the presentation](https://jasongross.github.io/presentations/itp-2022-rewriting/rewriting.pdf#page=32) of [*Accelerating Verified-Compiler Development with a Verified Rewriting Engine*](https://jasongross.github.io/publications/#rewriting) ([15m50s into the presentation on YouTube](https://youtu.be/Ma6olMYe510?si=M7P99HzCt8rnqC3Q&t=950)) or [page 14 of *Towards a Scalable Proof Engine: A Performant Prototype Rewriting Primitive for Coq*](https://arxiv.org/pdf/2305.02521.pdf#page=14) for some explanation of why we want reduction-ordering for rewriting.
+    - Estimated commitment: [the current implementation of `subterm`](https://github.com/coq/coq/blob/a2bf79287d63f437937f3086fe19a72eaae58d96/tactics/rewrite.ml#L990-L1231) is 241 loc, `lazy` is about [150 loc](https://github.com/coq/coq/blob/master/kernel/reduction.ml) + [1250 loc](https://github.com/coq/coq/blob/master/kernel/cClosure.ml), [`cbv` is about 550 loc](https://github.com/coq/coq/blob/master/pretyping/cbv.ml).
+      Adapting `rewrite_strat` will probably take a 0.5--3 hours of designing how reduction ordering should work in theory, and then some amount of implementation time (depending on how much code can be reused, how much has to be redone from scratch, how long it takes to understand the existing code, etc).
