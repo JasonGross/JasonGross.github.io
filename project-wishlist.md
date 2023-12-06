@@ -86,3 +86,7 @@ The bottom of the list has some less ambitious projects.
     - Estimated commitment: [the current implementation of `subterm`](https://github.com/coq/coq/blob/a2bf79287d63f437937f3086fe19a72eaae58d96/tactics/rewrite.ml#L990-L1231) is 241 loc, `lazy` is about [150 loc](https://github.com/coq/coq/blob/master/kernel/reduction.ml) + [1250 loc](https://github.com/coq/coq/blob/master/kernel/cClosure.ml), [`cbv` is about 550 loc](https://github.com/coq/coq/blob/master/pretyping/cbv.ml).
       Adapting `rewrite_strat` will probably take a 0.5--3 hours of designing how reduction ordering should work in theory, and then some amount of implementation time (depending on how much code can be reused, how much has to be redone from scratch, how long it takes to understand the existing code, etc).
     <hr>
+
+11. [Explore the idea of proving that the image under denotation of the reduction relation of a dependently typed λ calculus satisfies K.](https://homotopytypetheory.org/2014/03/03/hott-should-eat-itself/#comment-198202)
+    - Estimated commitment: maybe a week to a month of coding and exploration to determine whether or not there's an non-trivial obstacle?
+    <hr>
