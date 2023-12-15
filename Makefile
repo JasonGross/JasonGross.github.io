@@ -17,6 +17,7 @@ BIBTEX2HTML_ARGS=-d -r -nodoc \
 	-nf artifact-github "artifact (<img src='/media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" \
 	-nf artifact-figshare "artifact (<img src='/media/Figshare-Mark/6238dbcd763032622be7658e_figshare_NoSubheadColour.svg' alt='Figshare' title='Figshare' style='height:1em; vertical-align:text-bottom' />)" \
 	-nf original-url "original conference submission (.pdf)" \
+	-nf presentation-google-slides "presentation (Google Slides)" \
 	-nf presentation-annotated-pptx "presentation (.pptx, annotated with notes)" \
 	-nf presentation-pptx "presentation (.pptx)" \
 	-nf presentation-youtube "presentation (YouTube)" \
