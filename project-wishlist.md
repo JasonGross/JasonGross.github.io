@@ -5,7 +5,7 @@ permalink: /project-wishlist/
 ---
 
 This is a list of projects that I would love to see happen.
-Alas, lacking infinite time, I don't have any concrete plans to make them happen, but I'd be happy to advise others undertaking these projects.
+Alas, lacking infinite time, I don't have any concrete plans to make them happen, but I'd be happy to advise and mentor others undertaking these projects.
 Some of these might serve as good bachelor's or master's thesis projects, while others are likely too ambitious or not adequately ambitious.
 I've included estimates of how much work I think each project would take *me*, so adjust accordingly for your greater or lesser experience with the domain.
 The bottom of the list has some less ambitious projects.
@@ -85,4 +85,18 @@ The bottom of the list has some less ambitious projects.
     - See [slide 32 of the presentation](https://jasongross.github.io/presentations/itp-2022-rewriting/rewriting.pdf#page=32) of [*Accelerating Verified-Compiler Development with a Verified Rewriting Engine*](https://jasongross.github.io/publications/#rewriting) ([15m50s into the presentation on YouTube](https://youtu.be/Ma6olMYe510?si=M7P99HzCt8rnqC3Q&t=950)) or [page 14 of *Towards a Scalable Proof Engine: A Performant Prototype Rewriting Primitive for Coq*](https://arxiv.org/pdf/2305.02521.pdf#page=14) for some explanation of why we want reduction-ordering for rewriting.
     - Estimated commitment: [the current implementation of `subterm`](https://github.com/coq/coq/blob/a2bf79287d63f437937f3086fe19a72eaae58d96/tactics/rewrite.ml#L990-L1231) is 241 loc, `lazy` is about [150 loc](https://github.com/coq/coq/blob/master/kernel/reduction.ml) + [1250 loc](https://github.com/coq/coq/blob/master/kernel/cClosure.ml), [`cbv` is about 550 loc](https://github.com/coq/coq/blob/master/pretyping/cbv.ml).
       Adapting `rewrite_strat` will probably take a 0.5--3 hours of designing how reduction ordering should work in theory, and then some amount of implementation time (depending on how much code can be reused, how much has to be redone from scratch, how long it takes to understand the existing code, etc).
+    <hr>
+
+11. Establish a methodology for performing PHOAS passes that need to produce both `expr`-like output and data-like output simultaneously without exponential blowup
+    - Concretely:
+      * solve [mit-plv/fiat-crypto#1604 with option (2)](https://github.com/mit-plv/fiat-crypto/issues/1604#issuecomment-1553341559) without exponential blowup; and
+      * rework [mit-plv/fiat-crypto#1761](https://github.com/mit-plv/fiat-crypto/pull/1761) to avoid exponential blowup
+    - Idea:
+      Currently we're trying to write a pass that is `expr var1 * expr var2 -> A * expr var3`.
+      If we define an expr-like-tree-structure that (a) doesn't use higher-order things for Abs nodes, and (b) stores `A` at every node, then I think we can write a pass that is
+      `expr var1 * expr var2 -> A * tree-of-A`
+      and then
+      `expr var1 * expr var2 * tree-of-A -> expr var3`
+      such that we incur only linear overhead.
+    - Estimated commitment if I were doing it: maybe a day for [mit-plv/fiat-crypto#1604](https://github.com/mit-plv/fiat-crypto/issues/1604) and a couple days to a week for [mit-plv/fiat-crypto#1761](https://github.com/mit-plv/fiat-crypto/pull/1761), and then a couple weeks to a month or two to make the performance charts, write up a clean functional-pearl implementation, and write a conference paper.
     <hr>
