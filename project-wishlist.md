@@ -100,3 +100,12 @@ The bottom of the list has some less ambitious projects.
       such that we incur only linear overhead.
     - Estimated commitment if I were doing it: maybe a day for [mit-plv/fiat-crypto#1604](https://github.com/mit-plv/fiat-crypto/issues/1604) and a couple days to a week for [mit-plv/fiat-crypto#1761](https://github.com/mit-plv/fiat-crypto/pull/1761), and then a couple weeks to a month or two to make the performance charts, write up a clean functional-pearl implementation, and write a conference paper.
     <hr>
+
+12. Build a toy model for the relationship (if any) between inequality of opportunity and non-hyperbolic discounting.
+    - As I understand it, hyperbolic discounting (combined with finite life span?) gives rise to exploring more early in life and exploiting more later in life.
+    - It seems like successful people exploit more early in life and explore more later in life, suggesting that successful people might not be hyperbolic discounters?
+    - Is there a way to set up, e.g., RL environments that vary the optimal explore-expoit tradeoffs?
+      e.g., tweaking:
+      - if agents start with some initial wealth, and initial wealth increases opportunities...
+      - compound accumulation of reward?
+    <hr>
