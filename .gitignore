@@ -57,3 +57,4 @@ presentations/coq-workshop-*/Makefile.coq
 presentations/csw-2013/*.pdf
 presentations/csw-2013/jgross-presentation-no-pause.tex
 presentations/popl-2013/*.pdf
+*:Zone.Identifier
