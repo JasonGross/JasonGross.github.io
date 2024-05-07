@@ -13,7 +13,7 @@ permalink: /
 
 <p style="text-align: center;">Hello!</p>
 
-I'm a researcher at the [Machine Intelligence Research Institute](https://intelligence.org/).
+Until recently, I was a researcher at the [Machine Intelligence Research Institute](https://intelligence.org/).
 Humanity is building AI systems to be subject to fewer constraints of the world, let's not be subject to the AI systems either.
 I'm bushwhacking for moonshots that make this possible!
 
