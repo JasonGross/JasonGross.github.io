@@ -32,7 +32,6 @@ plugins:
 
 header_pages:
   - publications.md
-  - questions.md
   - project-wishlist.md
 
 # Exclude from processing.
