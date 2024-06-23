@@ -6,6 +6,13 @@
 \usepackage{calc}
 \usepackage{amsmath}
 \usepackage{etoolbox}[2011/01/03]
+\let\origifempty\ifempty
+\let\origforlistloop\forlistloop
+\undef\ifempty
+\usepackage{etextools}
+\let\eifempty\ifempty
+\let\ifempty\origifempty
+\let\forlistloop\origforlistloop
 \expandafter\def\csname blx@noerroretextools\endcsname{}
 \usepackage[backend=biber,maxbibnames=99,sorting=ymdnt,style=alphabetic]{biblatex}
 % http://tex.stackexchange.com/a/140641
@@ -44,19 +51,6 @@
 }
 \addbibresource{jason-gross.bib}
 \DeclareBibliographyCategory{exclude}
-\makeatletter
-\@ifpackageloaded{etextools}{%
-}{%
-  \let\origifempty\ifempty
-  \let\origforlistloop\forlistloop
-  \undef\ifempty
-  \usepackage{etextools}
-  \let\eifempty\ifempty
-  \let\ifempty\origifempty
-  \let\forlistloop\origforlistloop
-  \def\preetextools{\let\ifempty\eifempty}
-}%
-\makeatother
 \begin{format}
   \employer{l}\dates{r}\\
   \title{l}\location{r} \\
@@ -279,7 +273,7 @@ I'm excited about what scalable performant automation can make possible.
 \clearpage
 \section{\textsc{Selected Presentations and Publications}}
 \addtocategory{exclude}{Evaluation2021Huhmann}
-\printbibliography[title={$\left.\right.$},notcategory=exclude]
+\printbibliography[title={\ensuremath{\left.\right.}},notcategory=exclude]
 
 \endresume
 \end{document}
