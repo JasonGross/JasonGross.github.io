@@ -21,6 +21,8 @@ BIBTEX2HTML_ARGS=-d -r -nodoc \
 	-nf url-poster "poster" \
 	-nf poster-pdf "poster (.pdf)" \
 	-nf url-alignment-forum "blog (<span style='color:\#3f51b5;'>AF</span>)" \
+	-nf url-tweet-thread "tweet thread (<img src='/media/Twitter-Mark/SVG/Logo blue.svg' alt='Twitter' title='Twitter' style='height:1em; vertical-align:text-bottom' />)" \
+	-nf url-X-thread "tweet thread (<img src='/media/X-Mark/logo.svg' alt='Twitter' title='Twitter' style='height:1em; vertical-align:text-bottom' />)" \
 	-nf presentation-google-slides "presentation (Google Slides)" \
 	-nf presentation-annotated-pptx "presentation (.pptx, annotated with notes)" \
 	-nf presentation-pptx "presentation (.pptx)" \
