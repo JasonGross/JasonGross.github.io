@@ -43,7 +43,7 @@ jobs:
         run: |
           pip install Pygments
       - name: Use OCaml ${{ env.OCAML_DEFAULT_VERSION }}
-        uses: ocaml/setup-ocaml@v2
+        uses: ocaml/setup-ocaml@v3
         with:
           ocaml-compiler: ${{ env.OCAML_DEFAULT_VERSION }}
       - name: Set up OCaml switch
