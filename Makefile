@@ -93,6 +93,8 @@ COMMON_SED_REPS := \
 PUBS_SED_REPS := \
 	-e s',\(<blockquote><font[^>]*>\),\1<p />,g' \
 	-e s',\(</font></blockquote>\),<p />\1,g' \
+	-e s',jason-gross_bib.html,//publications-bib/,g' \
+	-e s',jason-gross-drafts_bib.html,//publications-bib/,g' \
 	#
 
 jason-gross-stripped.html: jason-gross.html Makefile
