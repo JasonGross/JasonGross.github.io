@@ -53,13 +53,12 @@ OUTPUTS := \
 	jason-gross-stripped.html \
 	presentations/coq-8.6-wishlist/jgross-coq-8-6-wishlist-no-pause.pdf \
 	presentations/csw-2013/jgross-presentation-no-pause.pdf \
-	presentations/popl-2013/jgross-student-talk.pdf \
-	presentations/popl-2013/minute-madness.pdf \
 	papers/source/coqpl-2021/reification-by-type-inference.pdf \
 	resume/resume.pdf \
 	papers/category-coq-experience.html \
 	jason-gross.html \
 	papers/category-coq-experience-filtered.bib \
+	jason-gross_bib-stripped.html jason-gross-drafts_bib-stripped.html \
 	#
 OLD_NO_LONGER_BUILT_OUTPUTS := \
 	papers/lob-paper/html/lob.html \
@@ -72,6 +71,8 @@ OLD_NO_LONGER_BUILT_OUTPUTS := \
 	presentations/coq-workshop-2018/html/CoqWorkshop.Notations.html \
 	presentations/coq-workshop-2018/html/CoqWorkshop.NotationsMITPresentation.html \
 	presentations/coq-workshop-2018/html/CoqWorkshop.NotationsCoqWorkshop.html \
+	presentations/popl-2013/jgross-student-talk.pdf \
+	presentations/popl-2013/minute-madness.pdf \
 	#
 
 all: $(OUTPUTS)
@@ -80,6 +81,11 @@ clean:
 	rm -f jason-gross_bib.html papers/category-coq-experience_bib.html $(OUTPUTS)
 
 POUND=\#
+
+COMMON_HTML_SED_REPS := \
+	-e s'/{/\\{/g' \
+	-e s'/}/\\}/g' \
+	#
 
 COMMON_SED_REPS := \
 	-e s'/This file/This reference list/g' \
@@ -102,6 +108,9 @@ jason-gross-stripped.html: jason-gross.html Makefile
 
 jason-gross.html: %.html : %.bib $(BIBTEX2HTML) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Papers and Presentations" -o "$*" "$<"
+
+jason-gross_bib-stripped.html jason-gross-drafts_bib-stripped.html: %-stripped.html : %.html Makefile
+	sed $(COMMON_HTML_SED_REPS) $< > $@
 
 jason-gross-drafts-stripped.html: jason-gross-drafts.html Makefile
 	sed $(COMMON_SED_REPS) $(PUBS_SED_REPS) -e s'/<h2>/<h2 id="drafts">/g' $< > $@

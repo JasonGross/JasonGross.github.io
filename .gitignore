@@ -57,5 +57,9 @@ presentations/coq-workshop-*/Makefile.coq
 presentations/csw-2013/*.pdf
 presentations/csw-2013/jgross-presentation-no-pause.tex
 presentations/popl-2013/*.pdf
+!presentations/popl-2013/jgross-student-talk.pdf
+!presentations/popl-2013/minute-madness.pdf
 *:Zone.Identifier
 .DS_Store
+jason-gross-drafts_bib-stripped.html
+jason-gross_bib-stripped.html
