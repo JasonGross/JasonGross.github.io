@@ -58,7 +58,6 @@ OUTPUTS := \
 	papers/category-coq-experience.html \
 	jason-gross.html \
 	papers/category-coq-experience-filtered.bib \
-	jason-gross_bib-stripped.html jason-gross-drafts_bib-stripped.html \
 	#
 OLD_NO_LONGER_BUILT_OUTPUTS := \
 	papers/lob-paper/html/lob.html \
@@ -82,11 +81,6 @@ clean:
 
 POUND=\#
 
-COMMON_HTML_SED_REPS := \
-	-e s'/{/\\{/g' \
-	-e s'/}/\\}/g' \
-	#
-
 COMMON_SED_REPS := \
 	-e s'/This file/This reference list/g' \
 	-e s'/<hr>//g' \
@@ -108,9 +102,6 @@ jason-gross-stripped.html: jason-gross.html Makefile
 
 jason-gross.html: %.html : %.bib $(BIBTEX2HTML) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Papers and Presentations" -o "$*" "$<"
-
-jason-gross_bib-stripped.html jason-gross-drafts_bib-stripped.html: %-stripped.html : %.html Makefile
-	sed $(COMMON_HTML_SED_REPS) $< > $@
 
 jason-gross-drafts-stripped.html: jason-gross-drafts.html Makefile
 	sed $(COMMON_SED_REPS) $(PUBS_SED_REPS) -e s'/<h2>/<h2 id="drafts">/g' $< > $@
