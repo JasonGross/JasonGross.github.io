@@ -65,7 +65,31 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="metacoq-quotation-2023" href="#metacoq-quotation-2023">3</a>]
+[<a name="gross2023scalable" href="#gross2023scalable">3</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross, Andres Erbsen, Jade Philipoom, Rajashree Agrawal, and Adam
+  Chlipala.
+ Towards a scalable proof engine: A performant prototype rewriting
+  primitive for Coq.
+ <em>Journal of Automated Reasoning</em>, 68(3):19, Aug 2024.
+[&nbsp;<a href="//publications-bib/#gross2023scalable">bib</a>&nbsp;| 
+<a href="https://doi.org/10.1007/s10817-024-09705-6">DOI</a>&nbsp;| 
+<a href="http://arxiv.org/abs/2305.02521">arXiv</a>&nbsp;| 
+<a href="https://doi.org/10.1007/s10817-024-09705-6">publication (<div style="overflow: hidden; max-width: 1em; display: inline-block; vertical-align: middle"><img src="/media/Springer-Mark/PNG/logo.png" alt="Springer" title="Springer" style="height: 1.5em; vertical-align: text-bottom"></div>)</a>&nbsp;]
+<blockquote><font size="-1"><p />
+We address the challenges of scaling verification efforts to match the increasing complexity and size of systems. We propose a research agenda aimed at building a performant proof engine by studying the asymptotic performance of proof engines and redesigning their building blocks. As a case study, we explore equational rewriting and introduce a novel prototype proof engine building block for rewriting in Coq, utilizing proof by reflection for enhanced performance.
+                            
+                            Our prototype implementation can significantly improve the development of verified compilers, as demonstrated in a case study with the Fiat Cryptography toolchain. The resulting extracted command-line compiler is about 1000× faster while featuring simpler compiler-specific proofs. This work lays some foundation for scaling verification efforts and contributes to the broader goal of developing a proof engine with good asymptotic performance, ultimately aimed at enabling the verification of larger and more complex systems.
+<p /></font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="metacoq-quotation-2023" href="#metacoq-quotation-2023">4</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -87,7 +111,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="CryptoptPLDI23" href="#CryptoptPLDI23">4</a>]
+[<a name="CryptoptPLDI23" href="#CryptoptPLDI23">5</a>]
 </td>
 <td class="bibtexitem">
 Joel Kuepper, Andres Erbsen, Jason Gross, Owen Conoly, Chuyue Sun, Samuel Tian,
@@ -104,29 +128,6 @@ Joel Kuepper, Andres Erbsen, Jason Gross, Owen Conoly, Chuyue Sun, Samuel Tian,
 <a href="http://adam.chlipala.net/papers/CryptoptPLDI23/">http</a>&nbsp;]
 <blockquote><font size="-1"><p />
 Most software domains rely on compilers to translate high-level code to multiple different machine languages, with performance not too much worse than what developers would have the patience to write directly in assembly language. However, cryptography has been an exception, where many performance-critical routines have been written directly in assembly (sometimes through metaprogramming layers). Some past work has shown how to do formal verification of that assembly, and other work has shown how to generate C code automatically along with formal proof, but with consequent performance penalties vs. the best-known assembly. We present Cryptopt, the first compilation pipeline that specializes high-level cryptographic functional programs into assembly code significantly faster than what GCC or Clang produce, with mechanized proof (in Coq) whose final theorem statement mentions little beyond the input functional program and the operational semantics of x86-64 assembly. On the optimization side, we apply randomized search through the space of assembly programs, with repeated automatic benchmarking on target CPUs. On the formal-verification side, we connect to the Fiat Cryptography framework (which translates functional programs into C-like IR code) and extend it with a new formally verified program-equivalence checker, incorporating a modest subset of known features of SMT solvers and symbolic-execution engines. The overall prototype is quite practical, e.g. producing new fastest-known implementations for the relatively new Intel i9 12G, of finite-field arithmetic for both Curve25519 (part of the TLS standard) and the Bitcoin elliptic curve secp256k1.
-<p /></font></blockquote>
-
-</td>
-</tr>
-
-
-<tr valign="top">
-<td align="right" class="bibtexnumber">
-[<a name="gross2023scalable" href="#gross2023scalable">5</a>]
-</td>
-<td class="bibtexitem">
-Jason Gross, Andres Erbsen, Jade Philipoom, Rajashree Agrawal, and Adam
-  Chlipala.
- Towards a scalable proof engine: A performant prototype rewriting
-  primitive for Coq.
- <em>Selected Extended Papers of ITP 2022 in the Journal of Automated
-  Reasoning</em>, 2023.
-[&nbsp;<a href="//publications-bib/#gross2023scalable">bib</a>&nbsp;| 
-<a href="http://arxiv.org/abs/2305.02521">arXiv</a>&nbsp;]
-<blockquote><font size="-1"><p />
-We address the challenges of scaling verification efforts to match the increasing complexity and size of systems. We propose a research agenda aimed at building a performant proof engine by studying the asymptotic performance of proof engines and redesigning their building blocks. As a case study, we explore equational rewriting and introduce a novel prototype proof engine building block for rewriting in Coq, utilizing proof by reflection for enhanced performance.
-                   
-                   Our prototype implementation can significantly improve the development of verified compilers, as demonstrated in a case study with the Fiat Cryptography toolchain. The resulting extracted command-line compiler is about 1000× faster while featuring simpler compiler-specific proofs. This work lays some foundation for scaling verification efforts and contributes to the broader goal of developing a proof engine with good asymptotic performance, ultimately aimed at enabling the verification of larger and more complex systems.
 <p /></font></blockquote>
 
 </td>
