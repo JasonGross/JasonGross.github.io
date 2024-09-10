@@ -13,6 +13,7 @@ BIBTEX2HTML_ARGS=-d -r -nodoc \
 	-nf code-agda "code (.agda)" \
 	-nf artifact-zip "artifact (.zip)" \
 	-nf artifact-tar-gz "artifact (.tar.gz)" \
+	-nf code-colab "code (<img src='/media/Colab-Mark/Google_Colaboratory_SVG_Logo_Cropped.svg' alt='Colab' title='Colab' style='height:1em; vertical-align:text-bottom' />)" \
 	-nf code-github "project (<img src='/media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" \
 	-nf artifact-github "artifact (<img src='/media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)" \
 	-nf artifact-figshare "artifact (<img src='/media/Figshare-Mark/6238dbcd763032622be7658e_figshare_NoSubheadColour.svg' alt='Figshare' title='Figshare' style='height:1em; vertical-align:text-bottom' />)" \
