@@ -618,7 +618,7 @@
   code-github = \{<a href="https://github.com/JasonGross/guarantees-based-mechanistic-interpretability/">https://github.com/JasonGross/guarantees-based-mechanistic-interpretability/</a>\},
   year = \{2024\},
   month = \{June\},
-  note = \{accepted to \href\{https://icml2024mi.pages.dev/\}\{2024 ICML MI Workshop\} (\href\{https://openreview.net/forum?id=4B5Ovl9MLE\}\{Spotlight\})\},
+  note = \{accepted to \href\{https://icml2024mi.pages.dev/\}\{ICML 2024 Workshop on Mechanistic Interpretability\} (\href\{https://openreview.net/forum?id=4B5Ovl9MLE\}\{Spotlight\})\},
   published-url-openreview = \{<a href="https://openreview.net/forum?id=4B5Ovl9MLE">https://openreview.net/forum?id=4B5Ovl9MLE</a>\},
   url-alignment-forum = \{<a href="https://www.alignmentforum.org/posts/bRsKimQcPTX3tNNJZ/compact-proofs-of-model-performance-via-mechanistic">https://www.alignmentforum.org/posts/bRsKimQcPTX3tNNJZ/compact-proofs-of-model-performance-via-mechanistic</a>\},
   tweet-thread = \{<a href="https://twitter.com/diagram_chaser/status/1805337592143265801">https://twitter.com/diagram_chaser/status/1805337592143265801</a>\},
@@ -630,12 +630,29 @@
   eprint = \{2406.11779\},
   arxiv-url = \{<a href="https://arxiv.org/abs/2406.11779">https://arxiv.org/abs/2406.11779</a>\},
   eprinttype = \{arXiv\},
-  abstract = \{In this work, we propose using mechanistic interpretability -- techniques for reverse engineering model weights into human-interpretable algorithms -- to derive and compactly prove formal guarantees on model performance.
+  abstract = \{We propose using mechanistic interpretability -- techniques for reverse engineering model weights into human-interpretable algorithms -- to derive and compactly prove formal guarantees on model performance.
                                 We prototype this approach by formally proving lower bounds on the accuracy of 151 small transformers trained on a Max-of-$K$ task.
                                 We create 102 different computer-assisted proof strategies and assess their length and tightness of bound on each of our models.
                                 Using quantitative metrics, we find that shorter proofs seem to require and provide more mechanistic understanding.
                                 Moreover, we find that more faithful mechanistic understanding leads to tighter performance bounds. We confirm these connections by qualitatively examining a subset of our proofs.
                                 Finally, we identify compounding structureless noise as a key challenge for using mechanistic interpretability to generate compact proofs on model performance.\}
+\}
+</pre>
+
+<a name="numerical-integration-mi-workshop-2024"></a><pre>
+@misc\{<a href="jason-gross.html#numerical-integration-mi-workshop-2024">numerical-integration-mi-workshop-2024</a>,
+  author = \{Chun Hei Yip and Rajashree Agrawal and Jason Gross\},
+  title = \{Re\{LU\} \{MLP\}s Can Compute Numerical Integration: Mechanistic Interpretation of a Non-linear Activation\},
+  note = \{accepted to \href\{https://icml2024mi.pages.dev/\}\{ICML 2024 Workshop on Mechanistic Interpretability\}\},
+  year = \{2024\},
+  month = \{June\},
+  code-colab = \{<a href="https://tinyurl.com/mod-add-integration">https://tinyurl.com/mod-add-integration</a>\},
+  url = \{<a href="https://openreview.net/forum?id=rngMb1wDOZ">https://openreview.net/forum?id=rngMb1wDOZ</a>\},
+  poster-pdf = \{<a href="https://jasongross.github.io/presentations/icml-2024-mech-interp-workshop/numerical-integration-poster.pdf">https://jasongross.github.io/presentations/icml-2024-mech-interp-workshop/numerical-integration-poster.pdf</a>\},
+  abstract = \{Extending the analysis from Nanda et al. (2023) and Zhong et al. (2023), we offer an end-to-end interpretation of the 1 layer MLP-only modular addition transformer model with symmetric embeds.
+                We present a clear and mathematically rigorous description of the computation at each layer, in preparation for the proofs-based verification approach as set out in concurrent work under review.
+                In doing so, we present a new interpretation of MLP layers: that they implement quadrature schemes to carry out numerical integration, providing anecdotal and mathematical evidence in support.
+                This overturns the existing idea that neurons in neural networks are merely on-off switches that test for the presence of ``features'' -- instead multiple neurons can be combined in non-trivial ways to produce continuous quantities.\}
 \}
 </pre>
 
