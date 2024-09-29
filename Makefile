@@ -91,14 +91,40 @@ define \n
 
 endef
 
+SAVE_SPECIAL_BIB_FILES := \
+	doi \
+	#
+EXTRA_STRIP_SPECIAL_BIB_FIELDS := \
+	timestamp \
+	owner \
+	#
+STRIP_SPECIAL_BIB_FIELDS:=$(strip $(sort $(EXTRA_STRIP_SPECIAL_BIB_FIELDS) $(filter-out $(SAVE_SPECIAL_BIB_FILES),$(patsubst -nf-%,%,$(filter -nf-%,$(subst $(space)-nf , -nf-,$(BIBTEX2HTML_ARGS)))))))
+STRIP_SPECIAL_BIB_FIELDS_SED_REPS := -e 's/^\s*\($(subst $(space),\|,$(STRIP_SPECIAL_BIB_FIELDS))\)\s*=\s*{[^{]*}\s*,\?\s*//g'
+
+STRIP_BIB_COMMENT_SED_REPS := \
+	-e 's/@comment{.*jabref-meta.*}$$//g' \
+	#
+
 COMMON_HTML_SED_REPS := \
-	-e s'/{/\\{/g' \
-	-e s'/}/\\}/g' \
+	-e s'/{{/{\\{/g' \
+	-e s'/}}/}\\}/g' \
 	#
 
 BIB_HTML_SED_REPS := \
-	-e 's,\(<pre>\),{% raw %}\1{% endraw %},g' \
-	-e 's,\(</pre>\),{% raw %}\1{% endraw %},g' \
+    -e 's,<pre>,<pre class="language-bibtex"><code>,g' \
+	-e 's,</pre>,</code></pre>,g' \
+	-e 's,<a href="jason-gross.html,<a href="{{ "/publications/" | relative_url }},g' \
+	-e 's,^\(    \) *,\1,g' \
+	# -e 's,\(<pre>\),{% raw %}\1{% endraw %},g' \
+	# -e 's,\(</pre>\),{% raw %}\1{% endraw %},g' \
+	#
+
+BIB_HTML_PRE_PIPE := \
+    sed -e 's/PIPE/_PIPE_/g; s/|/@PIPE@/g; s/<pre>/|<pre>/g' \
+	| tr '\n' '|' \
+	| sed -e 's,<pre>|*,<pre>,g; s,<pre></pre>,,g; s/},\?||\+}/}|}/g; s/\(,|\)|\+\( *[^ ]* *= *{\)/\1\2/g' \
+	| tr '|' '\n' \
+	| sed -e 's/@PIPE@/|/g; s/_PIPE_/PIPE/g' \
 	#
 
 BIB_HTML_MD_PRE_PIPE := \
@@ -127,7 +153,7 @@ jason-gross.html: %.html : %.bib $(BIBTEX2HTML) Makefile
 	$(BIBTEX2HTML) $(BIBTEX2HTML_ARGS) --title "Papers and Presentations" -o "$*" "$<"
 
 jason-gross_bib-stripped.html jason-gross-drafts_bib-stripped.html: %-stripped.html : %.html Makefile
-	sed $(COMMON_HTML_SED_REPS) $(BIB_HTML_SED_REPS) $< > $@
+	sed $(STRIP_BIB_COMMENT_SED_REPS) $(STRIP_SPECIAL_BIB_FIELDS_SED_REPS) $(COMMON_HTML_SED_REPS) $< | $(BIB_HTML_PRE_PIPE) | sed $(BIB_HTML_SED_REPS) > $@
 
 jason-gross-drafts-stripped.html: jason-gross-drafts.html Makefile
 	sed $(COMMON_SED_REPS) $(PUBS_SED_REPS) -e s'/<h2>/<h2 id="drafts">/g' $< > $@
@@ -246,6 +272,13 @@ papers/lob-paper/html/lob.html:
 papers/lob-paper/supplemental-nonymous.zip: papers/lob-paper/html/lob.html
 	cd papers/lob-paper; $(MAKE) supplemental
 
+SUPPORTS_FIND_XTYPE:=$(strip $(shell find . -maxdepth 1 -xtype l -print -quit 2>/dev/null >/dev/null; echo $$?))
+ifeq ($(SUPPORTS_FIND_XTYPE),0)
+find_broken_symlinks_args:=-xtype l
+else
+find_broken_symlinks_args:=-type l ! -exec test -e {} \;
+endif
+
 .PHONY: deploy
 deploy:
 	rm -rf build
@@ -253,7 +286,7 @@ deploy:
 	find . -path ./build -prune -false -name "*.pdf" -print0 -o -name "*.html" -print0 | xargs -0 tar -cf - | { cd build; tar -xvf -; }
 	git ls-files --recurse-submodules -z | xargs -0 tar -cf - | { cd build; tar -xvf -; }
 	find build -name ".gitignore" -delete -o -name ".gitmodules" -delete
-	find build/*/ -xtype l -delete # remove broken symbolic links
+	find build/*/ $(find_broken_symlinks_args) -print -delete # remove broken symbolic links
 
 .PHONY: deploy-separate
 deploy-separate:
@@ -261,4 +294,4 @@ deploy-separate:
 	mkdir build
 	/bin/bash -c 'while IFS= read i; do tar -cf - "$$i" | { cd build; tar -xvf -; }; done < <(find . -path ./build -prune -false -o -name "*.pdf" -print -o -name "*.html" -print; git ls-files --recurse-submodules)'
 	find build -name ".gitignore" -delete -o -name ".gitmodules" -delete
-	find build/*/ -xtype l -delete # remove broken symbolic links
+	find build/*/ $(find_broken_symlinks_args) -print -delete # remove broken symbolic links

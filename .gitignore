@@ -39,6 +39,7 @@ bibtex2html-*/aux2bib
 bibtex2html-*/bib2bib
 bibtex2html-*/bibtex2html
 build/
+_site/
 index.html
 jason-gross-stripped.html
 jason-gross.bib.bak
