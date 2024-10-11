@@ -91,7 +91,33 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="gross2023scalable">4</a>]
+[<a name="wu2024unifyingverifyingmechanisticinterpretations">4</a>]
+</td>
+<td class="bibtexitem">
+Wilson Wu, Louis Jaburi, Jacob Drori, and Jason Gross.
+ Unifying and verifying mechanistic interpretations: A case study with
+  group operations, 2024.
+[&nbsp;<a href="jason-gross_bib.html#wu2024unifyingverifyingmechanisticinterpretations">bib</a>&nbsp;| 
+<a href="https://doi.org/10.48550/arxiv.2410.07476">DOI</a>&nbsp;| 
+<a href="http://arxiv.org/abs/2410.07476">arXiv</a>&nbsp;| 
+<a href="https://arxiv.org/abs/2410.07476">https</a>&nbsp;]
+<blockquote><font size="-1">
+A recent line of work in mechanistic interpretability has focused on reverse-engineering the computation performed by neural networks trained on the binary operation of finite groups.
+                   We investigate the internals of one-hidden-layer neural networks trained on this task, revealing previously unidentified structure
+                   and producing a more complete description of such models that unifies the explanations of previous works&nbsp;(Chughtai et al., 2023; Stander et al., 2024).
+                   Notably, these models approximate <i>equivariance</i> in each input argument.
+                   We verify that our explanation applies to a large fraction of networks trained on this task by translating it into a <i>compact proof of model performance</i>, a quantitative evaluation of model understanding.
+                   In particular, our explanation yields a guarantee of model accuracy that runs in 30% the time of brute force and gives a &gt;=95% accuracy bound for 45% of the models we trained.
+                   We were unable to obtain nontrivial non-vacuous accuracy bounds using only explanations from previous works.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="gross2023scalable">5</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Andres Erbsen, Jade Philipoom, Rajashree Agrawal, and Adam
@@ -104,8 +130,7 @@ Jason Gross, Andres Erbsen, Jade Philipoom, Rajashree Agrawal, and Adam
 <a href="http://arxiv.org/abs/2305.02521">arXiv</a>&nbsp;| 
 <a href="https://doi.org/10.1007/s10817-024-09705-6">publication (<div style="overflow: hidden; max-width: 1em; display: inline-block; vertical-align: middle"><img src="/media/Springer-Mark/PNG/logo.png" alt="Springer" title="Springer" style="height: 1.5em; vertical-align: text-bottom"></div>)</a>&nbsp;]
 <blockquote><font size="-1">
-We address the challenges of scaling verification efforts to match the increasing complexity and size of systems. We propose a research agenda aimed at building a performant proof engine by studying the asymptotic performance of proof engines and redesigning their building blocks. As a case study, we explore equational rewriting and introduce a novel prototype proof engine building block for rewriting in Coq, utilizing proof by reflection for enhanced performance.
-                            
+We address the challenges of scaling verification efforts to match the increasing complexity and size of systems. We propose a research agenda aimed at building a performant proof engine by studying the asymptotic performance of proof engines and redesigning their building blocks. As a case study, we explore equational rewriting and introduce a novel prototype proof engine building block for rewriting in Coq, utilizing proof by reflection for enhanced performance.<p>
                             Our prototype implementation can significantly improve the development of verified compilers, as demonstrated in a case study with the Fiat Cryptography toolchain. The resulting extracted command-line compiler is about 1000× faster while featuring simpler compiler-specific proofs. This work lays some foundation for scaling verification efforts and contributes to the broader goal of developing a proof engine with good asymptotic performance, ultimately aimed at enabling the verification of larger and more complex systems.
 </font></blockquote>
 
@@ -115,7 +140,7 @@ We address the challenges of scaling verification efforts to match the increasin
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="metacoq-quotation-2023">5</a>]
+[<a name="metacoq-quotation-2023">6</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -137,7 +162,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="CryptoptPLDI23">6</a>]
+[<a name="CryptoptPLDI23">7</a>]
 </td>
 <td class="bibtexitem">
 Joel Kuepper, Andres Erbsen, Jason Gross, Owen Conoly, Chuyue Sun, Samuel Tian,
@@ -162,7 +187,7 @@ Most software domains rely on compilers to translate high-level code to multiple
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="superlinear-slowness">7</a>]
+[<a name="superlinear-slowness">8</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross and Andres Erbsen.
@@ -178,19 +203,15 @@ Jason Gross and Andres Erbsen.
 <blockquote><font size="-1">
 In most programming languages, asymptotic performance issues can almost always be explained by reference to the algorithm being implemented.
                                  At most, the standard asymptotic performance of explicitly used operations on chosen data structures must be considered.
-                                 Even the constant factors in performance bottlenecks can often be explained without reference to the implementation of the interpreter, compiler, nor underlying machine.
-                                 
+                                 Even the constant factors in performance bottlenecks can often be explained without reference to the implementation of the interpreter, compiler, nor underlying machine.<p>
                                  In 10+ years of working with Coq, we (Jason, Andres, and our colleagues) have found this pattern, which holds across multiple programming languages, to be the exception rather than the rule in Coq!
-                                 This turns performant proof engineering, especially performant proof automation engineering, from straightforward science into unpredictable and fragile guesswork.
-                                 
+                                 This turns performant proof engineering, especially performant proof automation engineering, from straightforward science into unpredictable and fragile guesswork.<p>
                                  By presenting in detail a sampling of examples, we propose a defense of the thesis:
                                  <em>Performance bottlenecks in proof automation almost always result from inefficiencies in parts of the system which are conceptually distant from the theorem being proven.</em>
                                  Said another way, <em>debugging, understanding, and fixing performance bottlenecks in automated proofs almost always requires extensive knowledge of the proof engine, and almost never requires any domain-specific knowledge of the theorem being proven</em>.
                                  Further, there is no clear direction of improvement:
-                                 We know of no systematic proposal, nor even folklore among experts, of what primitives and performance characteristics are sufficient for a performant proof engine.
-                                 
-                                 We hope to start a discussion on the obvious corollary of this thesis: <em>This should not be!</em>
-                                 
+                                 We know of no systematic proposal, nor even folklore among experts, of what primitives and performance characteristics are sufficient for a performant proof engine.<p>
+                                 We hope to start a discussion on the obvious corollary of this thesis: <em>This should not be!</em><p>
                                  Our presentation, we hope, will serve as a call for a POPLMark for Proof Engines, a call for designing and implementing a proof engine for <em>scalable performant modular proof automation</em>.
 </font></blockquote>
 
@@ -200,7 +221,7 @@ In most programming languages, asymptotic performance issues can almost always b
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="2022-itp-coq-bug-minimizer">8</a>]
+[<a name="2022-itp-coq-bug-minimizer">9</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Théo Zimmermann, Miraya Poddar-Agrawal, and Adam Chlipala.
@@ -234,7 +255,7 @@ As the adoption of proof assistants increases, there is a need for efficiency in
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="rewriting">9</a>]
+[<a name="rewriting">10</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Andres Erbsen, Jade Philipoom, Miraya Poddar-Agrawal, and Adam
@@ -269,7 +290,7 @@ Compilers are a prime target for formal verification, since compiler bugs invali
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2021thesis">10</a>]
+[<a name="Gross2021thesis">11</a>]
 </td>
 <td class="bibtexitem">
 Jason&nbsp;S. Gross.
@@ -285,18 +306,15 @@ Jason&nbsp;S. Gross.
 <blockquote><font size="-1">
 Formal verification is increasingly valuable as our world comes to rely more on software for critical infrastructure.
                           A significant and understudied cost of developing mechanized proofs, especially at scale, is the computer performance of proof generation.
-                          This dissertation aims to be a partial guide to identifying and resolving performance bottlenecks in dependently typed tactic-driven proof assistants like Coq.
-                          
+                          This dissertation aims to be a partial guide to identifying and resolving performance bottlenecks in dependently typed tactic-driven proof assistants like Coq.<p>
                           We present a survey of the landscape of performance issues in Coq, with micro- and macro-benchmarks.
                           We describe various metrics that allow prediction of performance, such as term size, goal size, and number of binders, and note the occasional surprising lack of a bottleneck for some factors, such as total proof term size.
-                          To our knowledge such a roadmap to performance bottlenecks is a new contribution of this dissertation.
-                          
+                          To our knowledge such a roadmap to performance bottlenecks is a new contribution of this dissertation.<p>
                           The central new technical contribution presented by this dissertation is a reflective framework for partial evaluation and rewriting, already used to compile a code generator for field-arithmetic cryptographic primitives which generates code currently used in Google Chrome.
                           We believe this prototype is the first scalably performant realization of an approach for code specialization which does not require adding to the trusted code base.
                           Our extensible engine, which combines the traditional concepts of tailored term reduction and automatic rewriting from hint databases with on-the-fly generation of inductive codes for constants, is also of interest to replace these ingredients in proof assistants' proof checkers and tactic engines.
                           Additionally, we use the development of this framework itself as a case study for the various performance issues that can arise when designing large proof libraries.
-                          We also present a novel method of simple and fast reification, developed and published during this PhD.
-                          
+                          We also present a novel method of simple and fast reification, developed and published during this PhD.<p>
                           Finally, we present additional lessons drawn from the case studies of a category-theory library, a proof-producing parser generator, and cryptographic code generation.
 </font></blockquote>
 
@@ -306,7 +324,7 @@ Formal verification is increasingly valuable as our world comes to rely more on 
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="coqpl-21-reification-by-type-inference">11</a>]
+[<a name="coqpl-21-reification-by-type-inference">12</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -320,17 +338,14 @@ Jason Gross.
 <blockquote><font size="-1">
 Proof by reflection is a common and well-studied automation tool.
                           Reification---generally written using <em>L</em><sub><i>tac</i></sub>, OCaml, typeclasses, or canonical structures---is the means by which a structured representation is derived from an unstructured representation.
-                          The reflective automation then operates on the structured representation, relying on an interpretation or denotation function to justify a correspondence between the structured and unstructured representations.
-                          
+                          The reflective automation then operates on the structured representation, relying on an interpretation or denotation function to justify a correspondence between the structured and unstructured representations.<p>
                           A couple of years ago, I presented a trick for blazing fast reification in two lines of <em>L</em><sub><i>tac</i></sub>---using the <tt>pattern</tt> tactic---which I termed reification by parametricity.
-                          While I still advocate for parametricity as the preferred method of domain-specific reification, I would like to present here yet another method.
-                          
+                          While I still advocate for parametricity as the preferred method of domain-specific reification, I would like to present here yet another method.<p>
                           While reification typically requires meta-programming features, I was surprised and delighted to discover that, in some restricted cases, reification can be performed entirely by a combination of the notation system and type inference.
                           In some sense, this is trivial: by redefining the basic syntactic notations, a term can be &ldquo;reified&rdquo; merely by writing the same symbols in another scope.
                           In another sense, though, this trick is quite surprising: we use the notation system merely to insert &ldquo;reify here&rdquo; functions at every atom, and the reification itself is in fact performed by type inference.
                           My hope is that the audience will walk away with this new trick in their toolbox, and that some day some problem will come along demanding a slight generalization of this trick, and that generalization will be new and interesting in its own right.
-                          This, after all, is how reification by parametricity was discovered.
-                          
+                          This, after all, is how reification by parametricity was discovered.<p>
                           I propose to present the one example I have for this trick: reifying the type structure of a function in a way that allows manipulations of the arguments, such as uncurrying, reassociation of the uncurried structure, and reordering.
                           I will present the simple code for this example in detail.
                           My goal will be that the audience understand completely how it works, why it works, and how it might be used elsewhere.
@@ -342,7 +357,7 @@ Proof by reflection is a common and well-studied automation tool.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Evaluation2021Huhmann">12</a>]
+[<a name="Evaluation2021Huhmann">13</a>]
 </td>
 <td class="bibtexitem">
 Linden&nbsp;B. Huhmann, Charles&nbsp;F. Harvey, Jason Gross, Anjal Uddin, Imtiaz
@@ -367,7 +382,7 @@ Keywords: Field kit, Rice paddy, Irrigation, Arsenic
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="FiatIJCAR20">13</a>]
+[<a name="FiatIJCAR20">14</a>]
 </td>
 <td class="bibtexitem">
 Cl&eacute;ment Pit-Claudel, Peng Wang, Benjamin Delaware, Jason Gross, and Adam
@@ -383,8 +398,7 @@ Cl&eacute;ment Pit-Claudel, Peng Wang, Benjamin Delaware, Jason Gross, and Adam
 <a href="https://link.springer.com/chapter/10.1007/978-3-030-51054-1_7">publication (<div style="overflow: hidden; max-width: 1em; display: inline-block; vertical-align: middle"><img src="/media/Springer-Mark/PNG/logo.png" alt="Springer" title="Springer" style="height: 1.5em; vertical-align: text-bottom"></div>)</a>&nbsp;| 
 <a href="https://github.com/mit-plv/fiat">project (<img src='/media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)</a>&nbsp;]
 <blockquote><font size="-1">
-We present an original approach to sound program extraction in a proof assistant, using syntax-driven automation to derive correct-by-construction imperative programs from nondeterministic functional source code. Our approach does not require committing to a single inflexible compilation strategy and instead makes it straightforward to create domain-specific code translators. In addition to a small set of core definitions, our framework is a large, user-extensible collection of compilation rules each phrased to handle specific language constructs, code patterns, or data manipulations. By mixing and matching these pieces of logic, users can easily tailor extraction to their own domains and programs, getting maximum performance and ensuring correctness of the resulting assembly code.
-                            
+We present an original approach to sound program extraction in a proof assistant, using syntax-driven automation to derive correct-by-construction imperative programs from nondeterministic functional source code. Our approach does not require committing to a single inflexible compilation strategy and instead makes it straightforward to create domain-specific code translators. In addition to a small set of core definitions, our framework is a large, user-extensible collection of compilation rules each phrased to handle specific language constructs, code patterns, or data manipulations. By mixing and matching these pieces of logic, users can easily tailor extraction to their own domains and programs, getting maximum performance and ensuring correctness of the resulting assembly code.<p>
                             Using this approach, we complete the first proof-generating pipeline that goes automatically from high-level specifications to assembly code. In our main case study, the original specifications are phrased to resemble SQL-style queries, while the final assembly code does manual memory management, calls out to foreign data structures and functions, and is suitable to deploy on resource-constrained platforms. The pipeline runs entirely within the Coq proof assistant, leading to final, linked assembly code with overall full-functional-correctness proofs in separation logic.
 </font></blockquote>
 
@@ -394,7 +408,7 @@ We present an original approach to sound program extraction in a proof assistant
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="fiat-crypto">14</a>]
+[<a name="fiat-crypto">15</a>]
 </td>
 <td class="bibtexitem">
 Andres Erbsen, Jade Philipoom, Jason Gross, Robert Sloan, and Adam Chlipala.
@@ -410,8 +424,7 @@ Andres Erbsen, Jade Philipoom, Jason Gross, Robert Sloan, and Adam Chlipala.
 <a href="https://jasongross.github.io/papers/2019-fiat-crypto-ieee-sp.pdf">.pdf</a>&nbsp;]
 <blockquote><font size="-1">
 We introduce a new approach for implementing cryptographic arithmetic in short high-level code with machine-checked proofs of functional correctness.
-                       We further demonstrate that simple partial evaluation is sufficient to transform into the fastest-known C code, breaking the decades-old pattern that the only fast implementations are those whose instruction-level steps were written out by hand.
-                       
+                       We further demonstrate that simple partial evaluation is sufficient to transform into the fastest-known C code, breaking the decades-old pattern that the only fast implementations are those whose instruction-level steps were written out by hand.<p>
                        These techniques were used to build an elliptic-curve library that achieves competitive performance for 80 prime fields and multiple CPU architectures, showing that implementation and proof effort scales with the number and complexity of conceptually different algorithms, not their use cases.
                        As one outcome, we present the first verified high-performance implementation of P-256, the most widely used elliptic curve.
                        Implementations from our library were included in BoringSSL to replace existing specialized code, for inclusion in several large deployments for Chrome, Android, and CloudFlare.
@@ -423,7 +436,7 @@ We introduce a new approach for implementing cryptographic arithmetic in short h
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="reification-by-parametricity">15</a>]
+[<a name="reification-by-parametricity">16</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Andres Erbsen, and Adam Chlipala.
@@ -446,8 +459,7 @@ Jason Gross, Andres Erbsen, and Adam Chlipala.
 We present a new strategy for performing reification in Coq.
                                  That is, we show how to generate first-class abstract syntax trees from &ldquo;native&rdquo; terms of Coq's logic, suitable as inputs to verified compilers or procedures in the <em>proof-by-reflection</em> style.
                                  Our new strategy, based on simple generalization of subterms as variables, is straightforward, short, and fast.
-                                 In its pure form, it is only complete for constants and function applications, but &ldquo;let&rdquo; binders, eliminators, lambdas, and quantifiers can be accommodated through lightweight coding conventions or preprocessing.
-                                 
+                                 In its pure form, it is only complete for constants and function applications, but &ldquo;let&rdquo; binders, eliminators, lambdas, and quantifiers can be accommodated through lightweight coding conventions or preprocessing.<p>
                                  We survey the existing methods of reification across multiple Coq metaprogramming facilities, describing various design choices and tricks that can be used to speed them up, as well as various limitations.
                                  We report benchmarking results for 18 variants, in addition to our own, finding that our own reification outperforms 16 of these methods in all cases, and one additional method in some cases; writing an OCaml plugin is the only method tested to be faster.
                                  Our method is the most concise of the strategies we considered, reifying terms using only two to four lines of <tt>Ltac</tt>---beyond lists of the identifiers to reify and their reified variants.
@@ -460,7 +472,7 @@ We present a new strategy for performing reification in Coq.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2018-coq-workshop-proposal">16</a>]
+[<a name="Gross2018-coq-workshop-proposal">17</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -485,7 +497,7 @@ Coq's notation system is both extremely powerful and confusingly ad-hoc.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="FiatSNAPL17">17</a>]
+[<a name="FiatSNAPL17">18</a>]
 </td>
 <td class="bibtexitem">
 Adam Chlipala, Benjamin Delaware, Samuel Duchovni, Jason Gross, Cl&eacute;ment
@@ -517,7 +529,7 @@ Keywords: domain-specific languages, synthesis, verification, proof assistants, 
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Bauer:2017:HLF:3018610.3018615">18</a>]
+[<a name="Bauer:2017:HLF:3018610.3018615">19</a>]
 </td>
 <td class="bibtexitem">
 Andrej Bauer, Jason Gross, Peter&nbsp;LeFanu Lumsdaine, Michael Shulman, Matthieu
@@ -544,7 +556,7 @@ Keywords: Coq, Higher inductive types, Homotopy type theory, Univalent foundatio
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="hott-hott-and-category-coq-experience">19</a>]
+[<a name="hott-hott-and-category-coq-experience">20</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -564,7 +576,7 @@ The HoTT/HoTT library is one of the major Coq libraries exploring univalent foun
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="jgross-masters-thesis">20</a>]
+[<a name="jgross-masters-thesis">21</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -584,7 +596,7 @@ Parsers have a long history in computer science. This thesis proposes a novel ap
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="coqpl-15-ltac-profiler">21</a>]
+[<a name="coqpl-15-ltac-profiler">22</a>]
 </td>
 <td class="bibtexitem">
 Tobias Tebbi and Jason Gross.
@@ -603,7 +615,7 @@ We present a simple profiler for the Ltac tactic language of the Coq Proof Assis
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="coqpl-15-coq-bug-minimizer">22</a>]
+[<a name="coqpl-15-coq-bug-minimizer">23</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -623,7 +635,7 @@ Are bugs the bane of your existence? Do you dread Coq upgrades, because they mea
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="adt-synthesis">23</a>]
+[<a name="adt-synthesis">24</a>]
 </td>
 <td class="bibtexitem">
 Ben Delaware, Cl&eacute;ment Pit-Claudel, Jason Gross, and Adam Chlipala.
@@ -648,7 +660,7 @@ We present Fiat, a library for the Coq proof assistant supporting refinement of 
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="2014-msr-x86proved-io">24</a>]
+[<a name="2014-msr-x86proved-io">25</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -668,7 +680,7 @@ The x86proved project can now verify assembly programs with input and output! Th
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="category-coq-experience">25</a>]
+[<a name="category-coq-experience">26</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Adam Chlipala, and David&nbsp;I. Spivak.
@@ -698,7 +710,7 @@ We describe our experience implementing a broad category-theory library in Coq. 
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2014c-coq-workshop-proposal">26</a>]
+[<a name="Gross2014c-coq-workshop-proposal">27</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -721,7 +733,7 @@ Coq 8.5 has a number of new features. It has more powerful universe polymorphism
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2014b-popl-minute-madness">27</a>]
+[<a name="Gross2014b-popl-minute-madness">28</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -738,7 +750,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2014a-coq-wishlist">28</a>]
+[<a name="Gross2014a-coq-wishlist">29</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -752,7 +764,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2013-csw">29</a>]
+[<a name="Gross2013-csw">30</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -770,7 +782,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2013b-popl-minute-madness">30</a>]
+[<a name="Gross2013b-popl-minute-madness">31</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -788,7 +800,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2013a-database-in-categories">31</a>]
+[<a name="Gross2013a-database-in-categories">32</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -806,7 +818,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Lake2011">32</a>]
+[<a name="Lake2011">33</a>]
 </td>
 <td class="bibtexitem">
 Brenden&nbsp;M. Lake, Ruslan Salakhutdinov, Jason Gross, and Joshua&nbsp;B. Tenenbaum.
