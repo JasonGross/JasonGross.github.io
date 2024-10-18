@@ -26,11 +26,19 @@ The bottom of the list has some less ambitious projects.
        2. Figuring out how to deal with universes / universe polymorphism of typing judgments.
           Roughly the problem is: given the definition of [`quote_prod : (A → Ast.term) → (B → Ast.term) → A × B → Ast.term`](https://github.com/MetaCoq/metacoq/blob/77234210ad9593d7304f9f0d453f70424b2c8f90/quotation/theories/ToPCUIC/Coq/Init.v#L36), how do we formulate the proof that whenever the two arguments always generate well-typed `Ast.term`s, the result of `quote_prod` is also well-typed, given that I may use this across different universes.
           (See also [`qpair_cps`](https://github.com/MetaCoq/metacoq/blob/77234210ad9593d7304f9f0d453f70424b2c8f90/quotation/theories/ToPCUIC/Coq/Init.v#L36) for a slightly simpler version of this problem.)
+
+          Some notes on the current state of systematically handling universes in quoted terms and a likely solution:
+          * The problem is that, as far as I can tell, Coq ASTs are not in general quantified over their universe variables, so a systematic treatment must quantify over any template or polymorphic universes at the Gallina level.
+            (Quotation is supposed to be possible in a fixed global environment, so we cannot simply add a polymorphic constant to the global env for every polymorphic definition we wish to quote.)
+            That is, it seems that a quoter for `option A` should emit not something of type `option A -> AST.term`, but something of type `option A -> Instance.t -> AST.term`.
+          * To systematically handle these instances, we should treat every quotation as being the quotation of a template/universe polymorphic constant.
+            Any time we quote a constant, inductive, etc, we must thread through the "natural" universe instance, and abstract at the Gallina level over all occurrences of these universes.
+            When we are quoting a term, we should be parametrized on both the natural universe instance of the term we are quoting, and the replacement instance.  
      + The next major issue after these is likely:
-       3. Figuring out how to abstract over Gallina context variables so that we can adequately deduplicate work across safechecker invocations (probably we can turn external quantifications into internal ones and safecheck the abstracted term, but some details need to be worked out).
+       1. Figuring out how to abstract over Gallina context variables so that we can adequately deduplicate work across safechecker invocations (probably we can turn external quantifications into internal ones and safecheck the abstracted term, but some details need to be worked out).
      + And finally if that's solved, the next two major issues I forsee are:
-       4. The axioms used by the various parts of MetaCoq, and whether or not they cause problems when duplicated into the quoted Γ
-       5. I'm worry about size of terms and performance a bit, things might be painful.
+       1. The axioms used by the various parts of MetaCoq, and whether or not they cause problems when duplicated into the quoted Γ
+       2. I'm worry about size of terms and performance a bit, things might be painful.
    <hr>
 
 2. Löb's theorem in MetaCoq: For those who think the above project is not ambitious enough.
