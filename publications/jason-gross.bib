@@ -45,7 +45,7 @@
   month             = {May},
   abstract          = {We introduce a new approach for implementing cryptographic arithmetic in short high-level code with machine-checked proofs of functional correctness.
                        We further demonstrate that simple partial evaluation is sufficient to transform into the fastest-known C code, breaking the decades-old pattern that the only fast implementations are those whose instruction-level steps were written out by hand.
-
+                       
                        These techniques were used to build an elliptic-curve library that achieves competitive performance for 80 prime fields and multiple CPU architectures, showing that implementation and proof effort scales with the number and complexity of conceptually different algorithms, not their use cases.
                        As one outcome, we present the first verified high-performance implementation of P-256, the most widely used elliptic curve.
                        Implementations from our library were included in BoringSSL to replace existing specialized code, for inclusion in several large deployments for Chrome, Android, and CloudFlare.},
@@ -235,7 +235,7 @@
                                  That is, we show how to generate first-class abstract syntax trees from ``native'' terms of Coq's logic, suitable as inputs to verified compilers or procedures in the \emph{proof-by-reflection} style.
                                  Our new strategy, based on simple generalization of subterms as variables, is straightforward, short, and fast.
                                  In its pure form, it is only complete for constants and function applications, but ``let'' binders, eliminators, lambdas, and quantifiers can be accommodated through lightweight coding conventions or preprocessing.
-
+                                 
                                  We survey the existing methods of reification across multiple Coq metaprogramming facilities, describing various design choices and tricks that can be used to speed them up, as well as various limitations.
                                  We report benchmarking results for 18 variants, in addition to our own, finding that our own reification outperforms 16 of these methods in all cases, and one additional method in some cases; writing an OCaml plugin is the only method tested to be faster.
                                  Our method is the most concise of the strategies we considered, reifying terms using only two to four lines of \texttt{Ltac}---beyond lists of the identifiers to reify and their reified variants.
@@ -306,7 +306,7 @@
   address                = {Cham},
   pages                  = {119--137},
   abstract               = {We present an original approach to sound program extraction in a proof assistant, using syntax-driven automation to derive correct-by-construction imperative programs from nondeterministic functional source code. Our approach does not require committing to a single inflexible compilation strategy and instead makes it straightforward to create domain-specific code translators. In addition to a small set of core definitions, our framework is a large, user-extensible collection of compilation rules each phrased to handle specific language constructs, code patterns, or data manipulations. By mixing and matching these pieces of logic, users can easily tailor extraction to their own domains and programs, getting maximum performance and ensuring correctness of the resulting assembly code.
-
+                            
                             Using this approach, we complete the first proof-generating pipeline that goes automatically from high-level specifications to assembly code. In our main case study, the original specifications are phrased to resemble SQL-style queries, while the final assembly code does manual memory management, calls out to foreign data structures and functions, and is suitable to deploy on resource-constrained platforms. The pipeline runs entirely within the Coq proof assistant, leading to final, linked assembly code with overall full-functional-correctness proofs in separation logic.},
   isbn                   = {978-3-030-51054-1}
 }
@@ -345,16 +345,16 @@
   abstract             = {Proof by reflection is a common and well-studied automation tool.
                           Reification---generally written using $\mathcal{L}_{\text{\textit{tac}}}$, OCaml, typeclasses, or canonical structures---is the means by which a structured representation is derived from an unstructured representation.
                           The reflective automation then operates on the structured representation, relying on an interpretation or denotation function to justify a correspondence between the structured and unstructured representations.
-
+                          
                           A couple of years ago, I presented a trick for blazing fast reification in two lines of $\mathcal{L}_{\text{\textit{tac}}}$---using the \texttt{pattern} tactic---which I termed reification by parametricity.
                           While I still advocate for parametricity as the preferred method of domain-specific reification, I would like to present here yet another method.
-
+                          
                           While reification typically requires meta-programming features, I was surprised and delighted to discover that, in some restricted cases, reification can be performed entirely by a combination of the notation system and type inference.
                           In some sense, this is trivial: by redefining the basic syntactic notations, a term can be ``reified'' merely by writing the same symbols in another scope.
                           In another sense, though, this trick is quite surprising: we use the notation system merely to insert ``reify here'' functions at every atom, and the reification itself is in fact performed by type inference.
                           My hope is that the audience will walk away with this new trick in their toolbox, and that some day some problem will come along demanding a slight generalization of this trick, and that generalization will be new and interesting in its own right.
                           This, after all, is how reification by parametricity was discovered.
-
+                          
                           I propose to present the one example I have for this trick: reifying the type structure of a function in a way that allows manipulations of the arguments, such as uncurrying, reassociation of the uncurried structure, and reordering.
                           I will present the simple code for this example in detail.
                           My goal will be that the audience understand completely how it works, why it works, and how it might be used elsewhere.},
@@ -374,17 +374,17 @@
   abstract             = {Formal verification is increasingly valuable as our world comes to rely more on software for critical infrastructure.
                           A significant and understudied cost of developing mechanized proofs, especially at scale, is the computer performance of proof generation.
                           This dissertation aims to be a partial guide to identifying and resolving performance bottlenecks in dependently typed tactic-driven proof assistants like Coq.
-
+                          
                           We present a survey of the landscape of performance issues in Coq, with micro- and macro-benchmarks.
                           We describe various metrics that allow prediction of performance, such as term size, goal size, and number of binders, and note the occasional surprising lack of a bottleneck for some factors, such as total proof term size.
                           To our knowledge such a roadmap to performance bottlenecks is a new contribution of this dissertation.
-
+                          
                           The central new technical contribution presented by this dissertation is a reflective framework for partial evaluation and rewriting, already used to compile a code generator for field-arithmetic cryptographic primitives which generates code currently used in Google Chrome.
                           We believe this prototype is the first scalably performant realization of an approach for code specialization which does not require adding to the trusted code base.
                           Our extensible engine, which combines the traditional concepts of tailored term reduction and automatic rewriting from hint databases with on-the-fly generation of inductive codes for constants, is also of interest to replace these ingredients in proof assistants' proof checkers and tactic engines.
                           Additionally, we use the development of this framework itself as a case study for the various performance issues that can arise when designing large proof libraries.
                           We also present a novel method of simple and fast reification, developed and published during this PhD.
-
+                          
                           Finally, we present additional lessons drawn from the case studies of a category-theory library, a proof-producing parser generator, and cryptographic code generation.},
   dspace-url           = {https://dspace.mit.edu/handle/1721.1/130763},
   url                  = {https://jasongross.github.io/papers/2021-JGross-PhD-EECS-Feb2021.pdf},
@@ -463,18 +463,18 @@
   abstract                    = {In most programming languages, asymptotic performance issues can almost always be explained by reference to the algorithm being implemented.
                                  At most, the standard asymptotic performance of explicitly used operations on chosen data structures must be considered.
                                  Even the constant factors in performance bottlenecks can often be explained without reference to the implementation of the interpreter, compiler, nor underlying machine.
-
+                                 
                                  In 10+ years of working with Coq, we (Jason, Andres, and our colleagues) have found this pattern, which holds across multiple programming languages, to be the exception rather than the rule in Coq!
                                  This turns performant proof engineering, especially performant proof automation engineering, from straightforward science into unpredictable and fragile guesswork.
-
+                                 
                                  By presenting in detail a sampling of examples, we propose a defense of the thesis:
                                  \emph{Performance bottlenecks in proof automation almost always result from inefficiencies in parts of the system which are conceptually distant from the theorem being proven.}
                                  Said another way, \emph{debugging, understanding, and fixing performance bottlenecks in automated proofs almost always requires extensive knowledge of the proof engine, and almost never requires any domain-specific knowledge of the theorem being proven}.
                                  Further, there is no clear direction of improvement:
                                  We know of no systematic proposal, nor even folklore among experts, of what primitives and performance characteristics are sufficient for a performant proof engine.
-
+                                 
                                  We hope to start a discussion on the obvious corollary of this thesis: \emph{This should not be!}
-
+                                 
                                  Our presentation, we hope, will serve as a call for a POPLMark for Proof Engines, a call for designing and implementing a proof engine for \emph{scalable performant modular proof automation}.},
   presentation-annotated-pptx = {https://jasongross.github.io/presentations/coq-workshop-2022/superlinear-slowness-with-notes.pptx},
   presentation-pdf            = {https://jasongross.github.io/presentations/coq-workshop-2022/superlinear-slowness.pdf},
@@ -516,7 +516,7 @@
   primaryclass           = {cs.PL},
   arxiv-url              = {https://arxiv.org/abs/2305.02521},
   abstract               = {We address the challenges of scaling verification efforts to match the increasing complexity and size of systems. We propose a research agenda aimed at building a performant proof engine by studying the asymptotic performance of proof engines and redesigning their building blocks. As a case study, we explore equational rewriting and introduce a novel prototype proof engine building block for rewriting in Coq, utilizing proof by reflection for enhanced performance.
-
+                            
                             Our prototype implementation can significantly improve the development of verified compilers, as demonstrated in a case study with the Fiat Cryptography toolchain. The resulting extracted command-line compiler is about 1000× faster while featuring simpler compiler-specific proofs. This work lays some foundation for scaling verification efforts and contributes to the broader goal of developing a proof engine with good asymptotic performance, ultimately aimed at enabling the verification of larger and more complex systems.}
 }
 
@@ -613,16 +613,17 @@
 }
 
 @misc{compact-proofs-iliad2024,
-  title                = {Short Formal Proofs of Transformers via Mechanistic Interpretability},
-  author               = {Jason Gross},
-  presentation-youtube = {https://youtu.be/KGUn8-sJCXU},
-  year                 = {2024},
-  month                = {August},
-  day                  = {29},
-  note                 = {Presented at ILIAD Conference, Berkeley, California},
-  abstract             = {It's possible to formally prove theorems about concrete neural nets --- mechanistic understanding is what allows us to make the proofs short enough to be feasible to construct and check while tightly constraining the actual behavior.
-                          This framework gives us a quantitative and theoretically grounded metric for measuring the quality of an explanation of neural net behavior.
-                          We'll present the results from our initial explorations of this agenda (\url{https://www.alignmentforum.org/posts/bRsKimQcPTX3tNNJZ/compact-proofs-of-model-performance-via-mechanistic}), and bridge into discussing exciting future directions and ongoing work in making models more interpretable via fine-tuning on partial explanations.}
+  title                      = {Short Formal Proofs of Transformers via Mechanistic Interpretability},
+  author                     = {Jason Gross},
+  presentation-youtube       = {https://youtu.be/KGUn8-sJCXU},
+  year                       = {2024},
+  month                      = {August},
+  day                        = {29},
+  presentation-google-slides = {https://docs.google.com/presentation/d/1iuaMi_oPeLTRBmHVfbnvIhM4WzAkxZmlx8f9tBuSKTc/edit?usp=sharing},
+  note                       = {Presented at ILIAD Conference, Berkeley, California},
+  abstract                   = {It's possible to formally prove theorems about concrete neural nets --- mechanistic understanding is what allows us to make the proofs short enough to be feasible to construct and check while tightly constraining the actual behavior.
+                                This framework gives us a quantitative and theoretically grounded metric for measuring the quality of an explanation of neural net behavior.
+                                We'll present the results from our initial explorations of this agenda (\url{https://www.alignmentforum.org/posts/bRsKimQcPTX3tNNJZ/compact-proofs-of-model-performance-via-mechanistic}), and bridge into discussing exciting future directions and ongoing work in making models more interpretable via fine-tuning on partial explanations.}
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
