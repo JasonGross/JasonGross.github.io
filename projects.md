@@ -18,7 +18,11 @@ permalink: /projects/
 - Extensions of numerical integration in toy transformers:
   - Building on [Not All Language Model Features Are Linear](https://arxiv.org/abs/2405.14860), do we find numerical integration in small LLMs, such as Lamma 7B / Mistral 8B?
   - What exactly is going on in the "clock" algorithm?
-  - What is going on with neuron re-indexing?
+  - Building on [Unifying and Verifying Mechanistic Interpretations: A Case Study with Group Operations]({{ "/publications/" | relative_url }}wu2024unifyingverifyingmechanisticinterpretations), it seems that change of variables in integration corresponds to neuron reindexing, and that shift of integration limits corresponds to a symmetry of the MLP.
+    Does this technique generalize to demonstrate how it might be relatively unimportant what non-linear activation is used?
+    - In particular, we have $\int_{-\pi}^{\pi} \mathrm{d}\phi\,\cos(kc+2\phi)\mathrm{ReLU}\left[\cos({\textstyle \frac{k}{2}}(a-b))\cos({\textstyle \frac{k}{2}}(a+b) + \phi)]$ or, simplified, we are looking at $\int_{-\pi}^{\pi}\mathrm{d}\phi \,\cos(2\phi)\left|\cos(\phi + a+b)\cos(a-b)\right|$.
+      Change of variables gives $\int_{a+b-\pi}^{a+b+\pi}\mathrm{d}\psi \,\cos(2\psi-2(a+b))\left|\cos(\psi)\cos(a-b)\right|$, and symmetry gives $\int_{-\pi}^{\pi}\mathrm{d}\psi \,\cos(2\psi-2(a+b))\left|\cos(\psi)\cos(a-b)\right|$.
+      Here the dependence on $a+b$ has been taken out from under the activation, and the activation is now only a scaling factor varying over irrelevant axes.
 - Proofy mech interp bounds as a metric on SAEs
 - [Partial list of possible extensions to the proofy mech interp agenda](https://docs.google.com/document/d/1bt1Rj_K6PkT9fDTpZES9ctGPnyGSPephB00pbgoiuog/edit#heading=h.qskmoqbfj7mn)
 - [Synthetic Proof-Repair Data Generation via Denoising](https://docs.google.com/document/d/1R4HkreEUVLn1_LavdkigXIthwZbs4unNEWCTibWuhOk/) (aka bootstrapping open-source AlphaProof)
