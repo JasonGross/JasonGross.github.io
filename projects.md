@@ -23,6 +23,20 @@ permalink: /projects/
     - In particular, we have $\int_{-\pi}^{\pi} \mathrm{d}\phi\,\cos(kc+2\phi)\mathrm{ReLU}\left[\cos({\textstyle \frac{k}{2}}(a-b))\cos({\textstyle \frac{k}{2}}(a+b) + \phi)]$ or, simplified, we are looking at $\int_{-\pi}^{\pi}\mathrm{d}\phi \,\cos(2\phi)\left|\cos(\phi + a+b)\cos(a-b)\right|$.
       Change of variables gives $\int_{a+b-\pi}^{a+b+\pi}\mathrm{d}\psi \,\cos(2\psi-2(a+b))\left|\cos(\psi)\cos(a-b)\right|$, and symmetry gives $\int_{-\pi}^{\pi}\mathrm{d}\psi \,\cos(2\psi-2(a+b))\left|\cos(\psi)\cos(a-b)\right|$.
       Here the dependence on $a+b$ has been taken out from under the activation, and the activation is now only a scaling factor varying over irrelevant axes.
+- Arguing that fine-tuning should work even when we have multiple algorithms that are competing and therefore that we can't fully drive to zero without destroying behavior:
+  - Insofar as we believe in something like linear representation, we should expect that distinct features / circuits are nearly orthogonal.
+  - The easy case (as in the min&max model) is when we can have them be "fully orthogonal".
+  - The thing that is hard for proofs in general seems to be when the random case is enough on average.
+    (EVOU in Max-of-$K$ is already a good example of this)
+  - If we can replace "random" with "systematically coded to be uniform", then we should be able to make a proof go through, and fine-tuning should not impact behavior too much.
+  - Notes on targeting this via a linear-in-parameter-count proof of Max-of-$K$:
+      - Counting should look at distinguishing based only on the max token, each max should have a largest permissible non-max token.
+      - We drop the counting based on number of copies of non-max (or we fold it into proof search, having a # copies max table indexed on max token).
+      - The query direction is approximated as uniform rather than just rank 1.
+      - I'm not 100% sure how to get `d_vocab · d_model` instead of `d_vocab · d_model + d_model³`, but we can do this version by treating `E`,`VOU` (or `EVO`, `U`, or `EV`, `OU`) as transposed embeddings on hypercube corners.
+      - I guess maybe the thing to do is to train orthogonal matrices to bring the output of `E` to be as close to hypercube corners as possible, and then modify the model by inserting this matrix and its inverse around `E`, `Q`, `K`, `V`, `O`, and `U`, so that the overall equation of the model is unchanged.
+      - Then we can fine-tune this new model on a proof that computes divergence from the hypercube, represent `V` and `O` as scaled permutation + error?
+      - And we'll probably start off with something that is basically vacuous, but the hope is that we'll get near 100% acc by the end of training.
 - Proofy mech interp bounds as a metric on SAEs
 - [Partial list of possible extensions to the proofy mech interp agenda](https://docs.google.com/document/d/1bt1Rj_K6PkT9fDTpZES9ctGPnyGSPephB00pbgoiuog/edit#heading=h.qskmoqbfj7mn)
 - [Synthetic Proof-Repair Data Generation via Denoising](https://docs.google.com/document/d/1R4HkreEUVLn1_LavdkigXIthwZbs4unNEWCTibWuhOk/) (aka bootstrapping open-source AlphaProof)
