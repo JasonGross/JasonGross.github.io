@@ -42,13 +42,18 @@ jobs:
       - name: install Python deps
         run: |
           pip install Pygments
+      - name: Cache
+        id: cache-opam
+        uses: actions/cache@v4
+        with:
+          path: ~/.opam
+          key: ${{ runner.os }}-opam-${{ env.OCAML_DEFAULT_VERSION }}+${{ env.OCAML_2014_VERSION }}+${{ env.OCAML_2018_VERSION }}
       - name: Use OCaml ${{ env.OCAML_DEFAULT_VERSION }}
         uses: ocaml/setup-ocaml@v3
         with:
           ocaml-compiler: ${{ env.OCAML_DEFAULT_VERSION }}
       - name: Set up OCaml switch
         run: |
-          pushd /tmp # work around https://github.com/ocaml/setup-ocaml/issues/207
           echo "::group::opam update"
           opam update
           echo "::endgroup::"
@@ -71,7 +76,6 @@ jobs:
           popd
       - name: Install OCaml deps
         run: |
-          pushd /tmp # work around https://github.com/ocaml/setup-ocaml/issues/207
           echo "::group::opam update"
           opam update
           echo "::endgroup::"
