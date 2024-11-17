@@ -73,7 +73,6 @@ jobs:
           echo "::group::opam list"
           opam list
           echo "::endgroup::"
-          popd
       - name: Install OCaml deps
         run: |
           echo "::group::opam update"
@@ -111,7 +110,6 @@ jobs:
           echo "::group::opam list"
           opam list
           echo "::endgroup::"
-          popd
         if: ${{ env.REBUILD_COQ == 'true' }}
       - name: Build 2014 Coq
         run: |
