@@ -8,7 +8,7 @@ This is a list of projects that I would love to see happen.
 Alas, lacking infinite time, I don't have any concrete plans to make them happen, but I'd be happy to advise and mentor others undertaking these projects.
 Some of these might serve as good bachelor's or master's thesis projects, while others are likely too ambitious or not adequately ambitious.
 I've included estimates of how much work I think each project would take *me*, so adjust accordingly for your greater or lesser experience with the domain.
-The bottom of the list has some less ambitious projects.
+The bottom of the list has some less ambitious or less well-fleshed-out projects.
 
 <hr>
 
@@ -107,4 +107,12 @@ The bottom of the list has some less ambitious projects.
       `expr var1 * expr var2 * tree-of-A -> expr var3`
       such that we incur only linear overhead.
     - Estimated commitment if I were doing it: maybe a day for [mit-plv/fiat-crypto#1604](https://github.com/mit-plv/fiat-crypto/issues/1604) and a couple days to a week for [mit-plv/fiat-crypto#1761](https://github.com/mit-plv/fiat-crypto/pull/1761), and then a couple weeks to a month or two to make the performance charts, write up a clean functional-pearl implementation, and write a conference paper.
+    <hr>
+
+12. Establish a supported package manager for Coq/OCaml that gives (a) binary distributions rather than recompilations, and (b) tree-like version dependencies rather than duplication
+    - In particular, I'd like to have only one copy of each version of `ocamlc` on disk, I'd like to be able to install multiple versions of mathcomp without having to duplicate the install of Coq, etc.
+    - It's possible that `docker compose` is good enough that the right way of building images would give deduplication, and if so, it seems like an almost good enough solution.
+    <hr>
+
+13. Some version of skyhooks for Coq (or at least loops not based on well-founded recursion) so that `native_compute` isn't 30,000× slower than pytorch
     <hr>
