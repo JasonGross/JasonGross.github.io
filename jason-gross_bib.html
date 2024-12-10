@@ -617,12 +617,17 @@
   title = {Compact Proofs of Model Performance via Mechanistic Interpretability},
   code-github = {<a href="https://github.com/JasonGross/guarantees-based-mechanistic-interpretability/">https://github.com/JasonGross/guarantees-based-mechanistic-interpretability/</a>},
   year = {2024},
-  month = {June},
-  note = {accepted to \href{https://icml2024mi.pages.dev/}{ICML 2024 Workshop on Mechanistic Interpretability} (\href{https://openreview.net/forum?id=4B5Ovl9MLE}{Spotlight})},
-  published-url-openreview = {<a href="https://openreview.net/forum?id=4B5Ovl9MLE">https://openreview.net/forum?id=4B5Ovl9MLE</a>},
+  month-old = {June},
+  month = {December},
+  note = {accepted to \href{https://neurips.cc/Conferences/2024}{The Thirty-Eighth Annual Conference on Neural Information Processing Systems}},
+  note-old = {accepted to the \href{https://icml2024mi.pages.dev/}{ICML 2024 Workshop on Mechanistic Interpretability} (\href{https://openreview.net/forum?id=4B5Ovl9MLE}{Spotlight})},
+  published-url-openreview-old = {<a href="https://openreview.net/forum?id=4B5Ovl9MLE">https://openreview.net/forum?id=4B5Ovl9MLE</a>},
+  published-url-openreview = {<a href="https://openreview.net/forum?id=2zWbzx50mH">https://openreview.net/forum?id=2zWbzx50mH</a>},
   url-alignment-forum = {<a href="https://www.alignmentforum.org/posts/bRsKimQcPTX3tNNJZ/compact-proofs-of-model-performance-via-mechanistic">https://www.alignmentforum.org/posts/bRsKimQcPTX3tNNJZ/compact-proofs-of-model-performance-via-mechanistic</a>},
   tweet-thread = {<a href="https://twitter.com/diagram_chaser/status/1805337592143265801">https://twitter.com/diagram_chaser/status/1805337592143265801</a>},
-  poster-pdf = {<a href="https://jasongross.github.io/presentations/icml-2024-mech-interp-workshop/compact-proofs-poster.pdf">https://jasongross.github.io/presentations/icml-2024-mech-interp-workshop/compact-proofs-poster.pdf</a>},
+  poster-pdf-old = {<a href="https://jasongross.github.io/presentations/icml-2024-mech-interp-workshop/compact-proofs-poster.pdf">https://jasongross.github.io/presentations/icml-2024-mech-interp-workshop/compact-proofs-poster.pdf</a>},
+  poster-pdf = {<a href="https://jasongross.github.io/presentations/neurips-2024/compact-proofs-poster.pdf">https://jasongross.github.io/presentations/neurips-2024/compact-proofs-poster.pdf</a>},
+  poster-url = {<a href="https://neurips.cc/virtual/2024/poster/96781">https://neurips.cc/virtual/2024/poster/96781</a>},
   presentation-google-slides = {<a href="https://docs.google.com/presentation/d/15Ws0UwuIjS-rEEziKTAr5rTfvaMN9M1sFFkBV3MHp94">https://docs.google.com/presentation/d/15Ws0UwuIjS-rEEziKTAr5rTfvaMN9M1sFFkBV3MHp94</a>},
   presentation-pdf = {<a href="https://jasongross.github.io/presentations/presentations/icml-2024-mech-interp-workshop/compact-proofs.pdf">https://jasongross.github.io/presentations/presentations/icml-2024-mech-interp-workshop/compact-proofs.pdf</a>},
   presentation-pptx = {<a href="https://jasongross.github.io/presentations/presentations/icml-2024-mech-interp-workshop/compact-proofs.pptx">https://jasongross.github.io/presentations/presentations/icml-2024-mech-interp-workshop/compact-proofs.pptx</a>},
@@ -631,11 +636,12 @@
   arxiv-url = {<a href="https://arxiv.org/abs/2406.11779">https://arxiv.org/abs/2406.11779</a>},
   eprinttype = {arXiv},
   abstract = {We propose using mechanistic interpretability -- techniques for reverse engineering model weights into human-interpretable algorithms -- to derive and compactly prove formal guarantees on model performance.
-                                We prototype this approach by formally proving lower bounds on the accuracy of 151 small transformers trained on a Max-of-$K$ task.
-                                We create 102 different computer-assisted proof strategies and assess their length and tightness of bound on each of our models.
-                                Using quantitative metrics, we find that shorter proofs seem to require and provide more mechanistic understanding.
-                                Moreover, we find that more faithful mechanistic understanding leads to tighter performance bounds. We confirm these connections by qualitatively examining a subset of our proofs.
-                                Finally, we identify compounding structureless noise as a key challenge for using mechanistic interpretability to generate compact proofs on model performance.}
+                                  We prototype this approach by formally proving accuracy lower bounds for a small transformer trained on Max-of-$K$, validating proof transferability across 151 random seeds and four values of $K$.
+                                  We create 102 different computer-assisted proof strategies and assess their length and tightness of bound on each of our models.
+                                  Using quantitative metrics, we find that shorter proofs seem to require and provide more mechanistic understanding.
+                                  Moreover, we find that more faithful mechanistic understanding leads to tighter performance bounds.
+                                  We confirm these connections by qualitatively examining a subset of our proofs.
+                                  Finally, we identify compounding structureless errors as a key challenge for using mechanistic interpretability to generate compact proofs on model performance.}
 }
 </pre>
 
@@ -691,6 +697,25 @@
   abstract = {It's possible to formally prove theorems about concrete neural nets --- mechanistic understanding is what allows us to make the proofs short enough to be feasible to construct and check while tightly constraining the actual behavior.
                                 This framework gives us a quantitative and theoretically grounded metric for measuring the quality of an explanation of neural net behavior.
                                 We'll present the results from our initial explorations of this agenda (\url{https://www.alignmentforum.org/posts/bRsKimQcPTX3tNNJZ/compact-proofs-of-model-performance-via-mechanistic}), and bridge into discussing exciting future directions and ongoing work in making models more interpretable via fine-tuning on partial explanations.}
+}
+</pre>
+
+<a name="numerical-integration-mlp"></a><pre>
+@misc{<a href="jason-gross.html#numerical-integration-mlp">numerical-integration-mlp</a>,
+  title = {Modular addition without black-boxes: Compressing explanations of {MLP}s that compute numerical integration},
+  author = {Chun Hei Yip and Rajashree Agrawal and Lawrence Chan and Jason Gross},
+  year = {2024},
+  eprint = {2412.03773},
+  archiveprefix = {arXiv},
+  primaryclass = {cs.LG},
+  abstract = {The goal of mechanistic interpretability is discovering simpler, low-rank algorithms implemented by models.
+                   While we can compress activations into features, compressing nonlinear feature-maps---like MLP layers---is an open problem.
+                   In this work, we present the first case study in rigorously compressing nonlinear feature-maps, which are the leading asymptotic bottleneck to compressing small transformer models.
+                   We work in the classic setting of the modular addition models, and target a non-vacuous bound on the behaviour of the ReLU MLP in time linear in the parameter-count of the circuit.
+                   To study the ReLU MLP analytically, we use the infinite-width lens, which turns post-activation matrix multiplications into approximate integrals.
+                   We discover a novel interpretation of the MLP layer in one-layer transformers implementing the ``pizza'' algorithm: the MLP can be understood as evaluating a quadrature scheme, where each neuron computes the area of a rectangle under the curve of a trigonometric integral identity.
+                   Our code is available at \url{https://tinyurl.com/mod-add-integration}.},
+  url = {<a href="https://arxiv.org/abs/2412.03773">https://arxiv.org/abs/2412.03773</a>}
 }
 </pre>
 

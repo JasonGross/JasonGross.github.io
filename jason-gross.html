@@ -9,7 +9,42 @@
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="compact-proofs-iliad2024">1</a>]
+[<a name="compact-proofs">1</a>]
+</td>
+<td class="bibtexitem">
+Jason Gross, Rajashree Agrawal, Thomas Kwa, Euan Ong, Chun&nbsp;Hei Yip, Alex
+  Gibson, Soufiane Noubir, and Lawrence Chan.
+ Compact proofs of model performance via mechanistic interpretability,
+  December 2024.
+ accepted to <a href="https://neurips.cc/Conferences/2024">The
+  Thirty-Eighth Annual Conference on Neural Information Processing Systems</a>.
+[&nbsp;<a href="jason-gross_bib.html#compact-proofs">bib</a>&nbsp;| 
+<a href="https://doi.org/10.48550/arxiv.2406.11779">DOI</a>&nbsp;| 
+<a href="http://arxiv.org/abs/2406.11779">arXiv</a>&nbsp;| 
+<a href="https://openreview.net/forum?id=2zWbzx50mH">publication</a>&nbsp;| 
+<a href="https://jasongross.github.io/presentations/presentations/icml-2024-mech-interp-workshop/compact-proofs.pdf">presentation (.pdf)</a>&nbsp;| 
+<a href="https://jasongross.github.io/presentations/presentations/icml-2024-mech-interp-workshop/compact-proofs.pptx">presentation (.pptx)</a>&nbsp;| 
+<a href="https://docs.google.com/presentation/d/15Ws0UwuIjS-rEEziKTAr5rTfvaMN9M1sFFkBV3MHp94">presentation (Google Slides)</a>&nbsp;| 
+<a href="https://www.alignmentforum.org/posts/bRsKimQcPTX3tNNJZ/compact-proofs-of-model-performance-via-mechanistic">blog (<span style='color:#3f51b5;'>AF</span>)</a>&nbsp;| 
+<a href="https://jasongross.github.io/presentations/neurips-2024/compact-proofs-poster.pdf">poster (.pdf)</a>&nbsp;| 
+<a href="https://github.com/JasonGross/guarantees-based-mechanistic-interpretability/">project (<img src='/media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)</a>&nbsp;]
+<blockquote><font size="-1">
+We propose using mechanistic interpretability -- techniques for reverse engineering model weights into human-interpretable algorithms -- to derive and compactly prove formal guarantees on model performance.
+                                  We prototype this approach by formally proving accuracy lower bounds for a small transformer trained on Max-of-<em>K</em>, validating proof transferability across 151 random seeds and four values of <em>K</em>.
+                                  We create 102 different computer-assisted proof strategies and assess their length and tightness of bound on each of our models.
+                                  Using quantitative metrics, we find that shorter proofs seem to require and provide more mechanistic understanding.
+                                  Moreover, we find that more faithful mechanistic understanding leads to tighter performance bounds.
+                                  We confirm these connections by qualitatively examining a subset of our proofs.
+                                  Finally, we identify compounding structureless errors as a key challenge for using mechanistic interpretability to generate compact proofs on model performance.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="compact-proofs-iliad2024">2</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -31,7 +66,7 @@ It's possible to formally prove theorems about concrete neural nets --- mechanis
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="numerical-integration-mi-workshop-2024">2</a>]
+[<a name="numerical-integration-mi-workshop-2024">3</a>]
 </td>
 <td class="bibtexitem">
 Chun&nbsp;Hei Yip, Rajashree Agrawal, and Jason Gross.
@@ -48,41 +83,6 @@ Extending the analysis from Nanda et al. (2023) and Zhong et al. (2023), we offe
                 We present a clear and mathematically rigorous description of the computation at each layer, in preparation for the proofs-based verification approach as set out in concurrent work under review.
                 In doing so, we present a new interpretation of MLP layers: that they implement quadrature schemes to carry out numerical integration, providing anecdotal and mathematical evidence in support.
                 This overturns the existing idea that neurons in neural networks are merely on-off switches that test for the presence of &ldquo;features&rdquo; -- instead multiple neurons can be combined in non-trivial ways to produce continuous quantities.
-</font></blockquote>
-
-</td>
-</tr>
-
-
-<tr valign="top">
-<td align="right" class="bibtexnumber">
-[<a name="compact-proofs">3</a>]
-</td>
-<td class="bibtexitem">
-Jason Gross, Rajashree Agrawal, Thomas Kwa, Euan Ong, Chun&nbsp;Hei Yip, Alex
-  Gibson, Soufiane Noubir, and Lawrence Chan.
- Compact proofs of model performance via mechanistic interpretability,
-  June 2024.
- accepted to <a href="https://icml2024mi.pages.dev/">ICML 2024 Workshop
-  on Mechanistic Interpretability</a>
-  (<a href="https://openreview.net/forum?id=4B5Ovl9MLE">Spotlight</a>).
-[&nbsp;<a href="jason-gross_bib.html#compact-proofs">bib</a>&nbsp;| 
-<a href="https://doi.org/10.48550/arxiv.2406.11779">DOI</a>&nbsp;| 
-<a href="http://arxiv.org/abs/2406.11779">arXiv</a>&nbsp;| 
-<a href="https://openreview.net/forum?id=4B5Ovl9MLE">publication</a>&nbsp;| 
-<a href="https://jasongross.github.io/presentations/presentations/icml-2024-mech-interp-workshop/compact-proofs.pdf">presentation (.pdf)</a>&nbsp;| 
-<a href="https://jasongross.github.io/presentations/presentations/icml-2024-mech-interp-workshop/compact-proofs.pptx">presentation (.pptx)</a>&nbsp;| 
-<a href="https://docs.google.com/presentation/d/15Ws0UwuIjS-rEEziKTAr5rTfvaMN9M1sFFkBV3MHp94">presentation (Google Slides)</a>&nbsp;| 
-<a href="https://www.alignmentforum.org/posts/bRsKimQcPTX3tNNJZ/compact-proofs-of-model-performance-via-mechanistic">blog (<span style='color:#3f51b5;'>AF</span>)</a>&nbsp;| 
-<a href="https://jasongross.github.io/presentations/icml-2024-mech-interp-workshop/compact-proofs-poster.pdf">poster (.pdf)</a>&nbsp;| 
-<a href="https://github.com/JasonGross/guarantees-based-mechanistic-interpretability/">project (<img src='/media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)</a>&nbsp;]
-<blockquote><font size="-1">
-We propose using mechanistic interpretability -- techniques for reverse engineering model weights into human-interpretable algorithms -- to derive and compactly prove formal guarantees on model performance.
-                                We prototype this approach by formally proving lower bounds on the accuracy of 151 small transformers trained on a Max-of-<em>K</em> task.
-                                We create 102 different computer-assisted proof strategies and assess their length and tightness of bound on each of our models.
-                                Using quantitative metrics, we find that shorter proofs seem to require and provide more mechanistic understanding.
-                                Moreover, we find that more faithful mechanistic understanding leads to tighter performance bounds. We confirm these connections by qualitatively examining a subset of our proofs.
-                                Finally, we identify compounding structureless noise as a key challenge for using mechanistic interpretability to generate compact proofs on model performance.
 </font></blockquote>
 
 </td>
@@ -113,7 +113,32 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="wu2024unifyingverifyingmechanisticinterpretations">5</a>]
+[<a name="numerical-integration-mlp">5</a>]
+</td>
+<td class="bibtexitem">
+Chun&nbsp;Hei Yip, Rajashree Agrawal, Lawrence Chan, and Jason Gross.
+ Modular addition without black-boxes: Compressing explanations of
+  MLPs that compute numerical integration, 2024.
+[&nbsp;<a href="jason-gross_bib.html#numerical-integration-mlp">bib</a>&nbsp;| 
+<a href="http://arxiv.org/abs/2412.03773">arXiv</a>&nbsp;| 
+<a href="https://arxiv.org/abs/2412.03773">https</a>&nbsp;]
+<blockquote><font size="-1">
+The goal of mechanistic interpretability is discovering simpler, low-rank algorithms implemented by models.
+                   While we can compress activations into features, compressing nonlinear feature-maps---like MLP layers---is an open problem.
+                   In this work, we present the first case study in rigorously compressing nonlinear feature-maps, which are the leading asymptotic bottleneck to compressing small transformer models.
+                   We work in the classic setting of the modular addition models, and target a non-vacuous bound on the behaviour of the ReLU MLP in time linear in the parameter-count of the circuit.
+                   To study the ReLU MLP analytically, we use the infinite-width lens, which turns post-activation matrix multiplications into approximate integrals.
+                   We discover a novel interpretation of the MLP layer in one-layer transformers implementing the &ldquo;pizza&rdquo; algorithm: the MLP can be understood as evaluating a quadrature scheme, where each neuron computes the area of a rectangle under the curve of a trigonometric integral identity.
+                   Our code is available at <a href="https://tinyurl.com/mod-add-integration">https://tinyurl.com/mod-add-integration</a>.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="wu2024unifyingverifyingmechanisticinterpretations">6</a>]
 </td>
 <td class="bibtexitem">
 Wilson Wu, Louis Jaburi, Jacob Drori, and Jason Gross.
@@ -139,7 +164,7 @@ A recent line of work in mechanistic interpretability has focused on reverse-eng
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="gross2023scalable">6</a>]
+[<a name="gross2023scalable">7</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Andres Erbsen, Jade Philipoom, Rajashree Agrawal, and Adam
@@ -163,7 +188,7 @@ We address the challenges of scaling verification efforts to match the increasin
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="metacoq-quotation-2023">7</a>]
+[<a name="metacoq-quotation-2023">8</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -185,7 +210,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="CryptoptPLDI23">8</a>]
+[<a name="CryptoptPLDI23">9</a>]
 </td>
 <td class="bibtexitem">
 Joel Kuepper, Andres Erbsen, Jason Gross, Owen Conoly, Chuyue Sun, Samuel Tian,
@@ -210,7 +235,7 @@ Most software domains rely on compilers to translate high-level code to multiple
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="superlinear-slowness">9</a>]
+[<a name="superlinear-slowness">10</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross and Andres Erbsen.
@@ -248,7 +273,7 @@ In most programming languages, asymptotic performance issues can almost always b
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="2022-itp-coq-bug-minimizer">10</a>]
+[<a name="2022-itp-coq-bug-minimizer">11</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Théo Zimmermann, Miraya Poddar-Agrawal, and Adam Chlipala.
@@ -282,7 +307,7 @@ As the adoption of proof assistants increases, there is a need for efficiency in
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="rewriting">11</a>]
+[<a name="rewriting">12</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Andres Erbsen, Jade Philipoom, Miraya Poddar-Agrawal, and Adam
@@ -317,7 +342,7 @@ Compilers are a prime target for formal verification, since compiler bugs invali
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2021thesis">12</a>]
+[<a name="Gross2021thesis">13</a>]
 </td>
 <td class="bibtexitem">
 Jason&nbsp;S. Gross.
@@ -354,7 +379,7 @@ Formal verification is increasingly valuable as our world comes to rely more on 
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="coqpl-21-reification-by-type-inference">13</a>]
+[<a name="coqpl-21-reification-by-type-inference">14</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -390,7 +415,7 @@ Proof by reflection is a common and well-studied automation tool.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Evaluation2021Huhmann">14</a>]
+[<a name="Evaluation2021Huhmann">15</a>]
 </td>
 <td class="bibtexitem">
 Linden&nbsp;B. Huhmann, Charles&nbsp;F. Harvey, Jason Gross, Anjal Uddin, Imtiaz
@@ -415,7 +440,7 @@ Keywords: Field kit, Rice paddy, Irrigation, Arsenic
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="FiatIJCAR20">15</a>]
+[<a name="FiatIJCAR20">16</a>]
 </td>
 <td class="bibtexitem">
 Cl&eacute;ment Pit-Claudel, Peng Wang, Benjamin Delaware, Jason Gross, and Adam
@@ -442,7 +467,7 @@ We present an original approach to sound program extraction in a proof assistant
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="fiat-crypto">16</a>]
+[<a name="fiat-crypto">17</a>]
 </td>
 <td class="bibtexitem">
 Andres Erbsen, Jade Philipoom, Jason Gross, Robert Sloan, and Adam Chlipala.
@@ -471,7 +496,7 @@ We introduce a new approach for implementing cryptographic arithmetic in short h
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="reification-by-parametricity">17</a>]
+[<a name="reification-by-parametricity">18</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Andres Erbsen, and Adam Chlipala.
@@ -508,7 +533,7 @@ We present a new strategy for performing reification in Coq.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2018-coq-workshop-proposal">18</a>]
+[<a name="Gross2018-coq-workshop-proposal">19</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -533,7 +558,7 @@ Coq's notation system is both extremely powerful and confusingly ad-hoc.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="FiatSNAPL17">19</a>]
+[<a name="FiatSNAPL17">20</a>]
 </td>
 <td class="bibtexitem">
 Adam Chlipala, Benjamin Delaware, Samuel Duchovni, Jason Gross, Cl&eacute;ment
@@ -565,7 +590,7 @@ Keywords: domain-specific languages, synthesis, verification, proof assistants, 
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Bauer:2017:HLF:3018610.3018615">20</a>]
+[<a name="Bauer:2017:HLF:3018610.3018615">21</a>]
 </td>
 <td class="bibtexitem">
 Andrej Bauer, Jason Gross, Peter&nbsp;LeFanu Lumsdaine, Michael Shulman, Matthieu
@@ -592,7 +617,7 @@ Keywords: Coq, Higher inductive types, Homotopy type theory, Univalent foundatio
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="hott-hott-and-category-coq-experience">21</a>]
+[<a name="hott-hott-and-category-coq-experience">22</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -612,7 +637,7 @@ The HoTT/HoTT library is one of the major Coq libraries exploring univalent foun
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="jgross-masters-thesis">22</a>]
+[<a name="jgross-masters-thesis">23</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -632,7 +657,7 @@ Parsers have a long history in computer science. This thesis proposes a novel ap
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="coqpl-15-ltac-profiler">23</a>]
+[<a name="coqpl-15-ltac-profiler">24</a>]
 </td>
 <td class="bibtexitem">
 Tobias Tebbi and Jason Gross.
@@ -651,7 +676,7 @@ We present a simple profiler for the Ltac tactic language of the Coq Proof Assis
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="coqpl-15-coq-bug-minimizer">24</a>]
+[<a name="coqpl-15-coq-bug-minimizer">25</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -671,7 +696,7 @@ Are bugs the bane of your existence? Do you dread Coq upgrades, because they mea
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="adt-synthesis">25</a>]
+[<a name="adt-synthesis">26</a>]
 </td>
 <td class="bibtexitem">
 Ben Delaware, Cl&eacute;ment Pit-Claudel, Jason Gross, and Adam Chlipala.
@@ -696,7 +721,7 @@ We present Fiat, a library for the Coq proof assistant supporting refinement of 
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="2014-msr-x86proved-io">26</a>]
+[<a name="2014-msr-x86proved-io">27</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -716,7 +741,7 @@ The x86proved project can now verify assembly programs with input and output! Th
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="category-coq-experience">27</a>]
+[<a name="category-coq-experience">28</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Adam Chlipala, and David&nbsp;I. Spivak.
@@ -746,7 +771,7 @@ We describe our experience implementing a broad category-theory library in Coq. 
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2014c-coq-workshop-proposal">28</a>]
+[<a name="Gross2014c-coq-workshop-proposal">29</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -769,7 +794,7 @@ Coq 8.5 has a number of new features. It has more powerful universe polymorphism
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2014b-popl-minute-madness">29</a>]
+[<a name="Gross2014b-popl-minute-madness">30</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -786,7 +811,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2014a-coq-wishlist">30</a>]
+[<a name="Gross2014a-coq-wishlist">31</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -800,7 +825,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2013-csw">31</a>]
+[<a name="Gross2013-csw">32</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -818,7 +843,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2013b-popl-minute-madness">32</a>]
+[<a name="Gross2013b-popl-minute-madness">33</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -836,7 +861,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Gross2013a-database-in-categories">33</a>]
+[<a name="Gross2013a-database-in-categories">34</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -854,7 +879,7 @@ Jason Gross.
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="Lake2011">34</a>]
+[<a name="Lake2011">35</a>]
 </td>
 <td class="bibtexitem">
 Brenden&nbsp;M. Lake, Ruslan Salakhutdinov, Jason Gross, and Joshua&nbsp;B. Tenenbaum.
