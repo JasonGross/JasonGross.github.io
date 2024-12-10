@@ -20,6 +20,7 @@ BIBTEX2HTML_ARGS=-d -r -nodoc \
 	-nf original-url "original conference submission (.pdf)" \
 	-nf url-pdf ".pdf" \
 	-nf url-poster "poster" \
+	-nf poster-url "poster" \
 	-nf poster-pdf "poster (.pdf)" \
 	-nf url-alignment-forum "blog (<span style='color:\#3f51b5;'>AF</span>)" \
 	-nf url-tweet-thread "tweet thread (<img src='/media/Twitter-Mark/SVG/Logo blue.svg' alt='Twitter' title='Twitter' style='height:1em; vertical-align:text-bottom' /> 🧵)" \
