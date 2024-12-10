@@ -9,7 +9,32 @@
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="compact-proofs">1</a>]
+[<a name="numerical-integration-mlp">1</a>]
+</td>
+<td class="bibtexitem">
+Chun&nbsp;Hei Yip, Rajashree Agrawal, Lawrence Chan, and Jason Gross.
+ Modular addition without black-boxes: Compressing explanations of
+  MLPs that compute numerical integration, December 2024.
+[&nbsp;<a href="jason-gross_bib.html#numerical-integration-mlp">bib</a>&nbsp;| 
+<a href="http://arxiv.org/abs/2412.03773">arXiv</a>&nbsp;| 
+<a href="https://arxiv.org/abs/2412.03773">https</a>&nbsp;]
+<blockquote><font size="-1">
+The goal of mechanistic interpretability is discovering simpler, low-rank algorithms implemented by models.
+                   While we can compress activations into features, compressing nonlinear feature-maps---like MLP layers---is an open problem.
+                   In this work, we present the first case study in rigorously compressing nonlinear feature-maps, which are the leading asymptotic bottleneck to compressing small transformer models.
+                   We work in the classic setting of the modular addition models, and target a non-vacuous bound on the behaviour of the ReLU MLP in time linear in the parameter-count of the circuit.
+                   To study the ReLU MLP analytically, we use the infinite-width lens, which turns post-activation matrix multiplications into approximate integrals.
+                   We discover a novel interpretation of the MLP layer in one-layer transformers implementing the &ldquo;pizza&rdquo; algorithm: the MLP can be understood as evaluating a quadrature scheme, where each neuron computes the area of a rectangle under the curve of a trigonometric integral identity.
+                   Our code is available at <a href="https://tinyurl.com/mod-add-integration">https://tinyurl.com/mod-add-integration</a>.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="compact-proofs">2</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross, Rajashree Agrawal, Thomas Kwa, Euan Ong, Chun&nbsp;Hei Yip, Alex
@@ -44,7 +69,33 @@ We propose using mechanistic interpretability -- techniques for reverse engineer
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="compact-proofs-iliad2024">2</a>]
+[<a name="wu2024unifyingverifyingmechanisticinterpretations">3</a>]
+</td>
+<td class="bibtexitem">
+Wilson Wu, Louis Jaburi, Jacob Drori, and Jason Gross.
+ Unifying and verifying mechanistic interpretations: A case study with
+  group operations, October 2024.
+[&nbsp;<a href="jason-gross_bib.html#wu2024unifyingverifyingmechanisticinterpretations">bib</a>&nbsp;| 
+<a href="https://doi.org/10.48550/arxiv.2410.07476">DOI</a>&nbsp;| 
+<a href="http://arxiv.org/abs/2410.07476">arXiv</a>&nbsp;| 
+<a href="https://arxiv.org/abs/2410.07476">https</a>&nbsp;]
+<blockquote><font size="-1">
+A recent line of work in mechanistic interpretability has focused on reverse-engineering the computation performed by neural networks trained on the binary operation of finite groups.
+                   We investigate the internals of one-hidden-layer neural networks trained on this task, revealing previously unidentified structure
+                   and producing a more complete description of such models that unifies the explanations of previous works&nbsp;(Chughtai et al., 2023; Stander et al., 2024).
+                   Notably, these models approximate <i>equivariance</i> in each input argument.
+                   We verify that our explanation applies to a large fraction of networks trained on this task by translating it into a <i>compact proof of model performance</i>, a quantitative evaluation of model understanding.
+                   In particular, our explanation yields a guarantee of model accuracy that runs in 30% the time of brute force and gives a &gt;=95% accuracy bound for 45% of the models we trained.
+                   We were unable to obtain nontrivial non-vacuous accuracy bounds using only explanations from previous works.
+</font></blockquote>
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="compact-proofs-iliad2024">4</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -66,7 +117,7 @@ It's possible to formally prove theorems about concrete neural nets --- mechanis
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="numerical-integration-mi-workshop-2024">3</a>]
+[<a name="numerical-integration-mi-workshop-2024">5</a>]
 </td>
 <td class="bibtexitem">
 Chun&nbsp;Hei Yip, Rajashree Agrawal, and Jason Gross.
@@ -91,7 +142,7 @@ Extending the analysis from Nanda et al. (2023) and Zhong et al. (2023), we offe
 
 <tr valign="top">
 <td align="right" class="bibtexnumber">
-[<a name="gdmi-far-2024">4</a>]
+[<a name="gdmi-far-2024">6</a>]
 </td>
 <td class="bibtexitem">
 Jason Gross.
@@ -106,57 +157,6 @@ Jason Gross.
 <a href="https://jasongross.github.io/presentations/far-ai-2024/guarantees-driven-mechanistic-interpretability.pptx">presentation (.pptx)</a>&nbsp;| 
 <a href="https://docs.google.com/presentation/d/1Tmj-9NhpDrMLkD1Qma8frEKjSRKzcld00l0My92Rs_I/">presentation (Google Slides)</a>&nbsp;| 
 <a href="https://github.com/JasonGross/guarantees-based-mechanistic-interpretability/">project (<img src='/media/GitHub-Mark/PNG/GitHub-Mark-32px.png' alt='GitHub' title='GitHub' style='height:1em; vertical-align:text-bottom' />)</a>&nbsp;]
-
-</td>
-</tr>
-
-
-<tr valign="top">
-<td align="right" class="bibtexnumber">
-[<a name="numerical-integration-mlp">5</a>]
-</td>
-<td class="bibtexitem">
-Chun&nbsp;Hei Yip, Rajashree Agrawal, Lawrence Chan, and Jason Gross.
- Modular addition without black-boxes: Compressing explanations of
-  MLPs that compute numerical integration, 2024.
-[&nbsp;<a href="jason-gross_bib.html#numerical-integration-mlp">bib</a>&nbsp;| 
-<a href="http://arxiv.org/abs/2412.03773">arXiv</a>&nbsp;| 
-<a href="https://arxiv.org/abs/2412.03773">https</a>&nbsp;]
-<blockquote><font size="-1">
-The goal of mechanistic interpretability is discovering simpler, low-rank algorithms implemented by models.
-                   While we can compress activations into features, compressing nonlinear feature-maps---like MLP layers---is an open problem.
-                   In this work, we present the first case study in rigorously compressing nonlinear feature-maps, which are the leading asymptotic bottleneck to compressing small transformer models.
-                   We work in the classic setting of the modular addition models, and target a non-vacuous bound on the behaviour of the ReLU MLP in time linear in the parameter-count of the circuit.
-                   To study the ReLU MLP analytically, we use the infinite-width lens, which turns post-activation matrix multiplications into approximate integrals.
-                   We discover a novel interpretation of the MLP layer in one-layer transformers implementing the &ldquo;pizza&rdquo; algorithm: the MLP can be understood as evaluating a quadrature scheme, where each neuron computes the area of a rectangle under the curve of a trigonometric integral identity.
-                   Our code is available at <a href="https://tinyurl.com/mod-add-integration">https://tinyurl.com/mod-add-integration</a>.
-</font></blockquote>
-
-</td>
-</tr>
-
-
-<tr valign="top">
-<td align="right" class="bibtexnumber">
-[<a name="wu2024unifyingverifyingmechanisticinterpretations">6</a>]
-</td>
-<td class="bibtexitem">
-Wilson Wu, Louis Jaburi, Jacob Drori, and Jason Gross.
- Unifying and verifying mechanistic interpretations: A case study with
-  group operations, 2024.
-[&nbsp;<a href="jason-gross_bib.html#wu2024unifyingverifyingmechanisticinterpretations">bib</a>&nbsp;| 
-<a href="https://doi.org/10.48550/arxiv.2410.07476">DOI</a>&nbsp;| 
-<a href="http://arxiv.org/abs/2410.07476">arXiv</a>&nbsp;| 
-<a href="https://arxiv.org/abs/2410.07476">https</a>&nbsp;]
-<blockquote><font size="-1">
-A recent line of work in mechanistic interpretability has focused on reverse-engineering the computation performed by neural networks trained on the binary operation of finite groups.
-                   We investigate the internals of one-hidden-layer neural networks trained on this task, revealing previously unidentified structure
-                   and producing a more complete description of such models that unifies the explanations of previous works&nbsp;(Chughtai et al., 2023; Stander et al., 2024).
-                   Notably, these models approximate <i>equivariance</i> in each input argument.
-                   We verify that our explanation applies to a large fraction of networks trained on this task by translating it into a <i>compact proof of model performance</i>, a quantitative evaluation of model understanding.
-                   In particular, our explanation yields a guarantee of model accuracy that runs in 30% the time of brute force and gives a &gt;=95% accuracy bound for 45% of the models we trained.
-                   We were unable to obtain nontrivial non-vacuous accuracy bounds using only explanations from previous works.
-</font></blockquote>
 
 </td>
 </tr>
