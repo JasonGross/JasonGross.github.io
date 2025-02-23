@@ -19,10 +19,8 @@ My current projects are in formally verifying transformer models and using mecha
 <!--Humanity is building AI systems to be subject to fewer constraints of the world, let's not be subject to the AI systems either.-->
 <!--I'm bushwhacking for moonshots that make this possible!-->
 
-Previously, I developed [Fiat Cryptography](https://github.com/mit-plv/fiat-crypto) which [enables the majority of secure connections to the internet](https://andres.systems/fiat-crypto-adoption.html) (the big prime numbers behind the https lock icon), reported [the plurality of all-time bugs in the proof-assistant Coq]({{ "/media/coq-bug-reports-by-year.svg" | relative_url }}) (and joined [the dev team](https://coq.inria.fr/coq-team.html) to help handle them!), and contributed [category theory to the Coq-HoTT library](https://github.com/HoTT/Coq-HoTT/tree/master/theories/Categories) (hoorah for beautiful, unifying mathematics).
-
-The compelling observation from these projects was that [proof assistants are systematically slow](https://youtu.be/m-iGCCuHBvY), and if we expect verified security to scale as fast as we deploy software in critical infrastructure, we need to be engineering significantly more performant ways of generating and checking formal proofs.
-I wrote this up in [a dense PhD thesis in 2020]({{ "/publications/#Gross2021thesis" | relative_url }}).
+Previously, I developed [Fiat Cryptography](https://github.com/mit-plv/fiat-crypto) which [enables the majority of secure connections to the internet](https://andres.systems/fiat-crypto-adoption.html) (the big prime numbers behind the https lock icon). 
+Over the course of the project, I reported [the plurality of all-time bugs in the proof-assistant Coq]({{ "/media/coq-bug-reports-by-year.svg" | relative_url }}) because [proof assistants are systematically slow](https://youtu.be/m-iGCCuHBvY). If we want verified security to scale as fast as we deploy software in critical infrastructure, we need to develop significantly more performant ways of generating and checking formal proofs!
 
 I live in the Bay Area, and I like to [sail](https://www.cal-sailing.org/).
 Reach out if you want to chat, or do water sports!
