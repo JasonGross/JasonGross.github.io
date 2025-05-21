@@ -15,7 +15,7 @@ permalink: /
 
 I'm building [Theorem](https://theoremlabs.com/) to work on the oversight problem in massively scaling up software deployment. 
 
-Previously, I developed [Fiat Cryptography](https://github.com/mit-plv/fiat-crypto) which [enables the majority of secure connections to the internet](https://andres.systems/fiat-crypto-adoption.html) (the big prime numbers behind the https lock icon). 
+Previously, I developed [Fiat Cryptography](https://github.com/mit-plv/fiat-crypto) which [enables tens of trillions of secure connections to the internet every day](https://andres.systems/fiat-crypto-adoption.html) (the big prime numbers behind the https lock icon). 
 Over the course of the project, I reported [the plurality of all-time bugs in the proof-assistant Rocq]({{ "/media/coq-bug-reports-by-year.svg" | relative_url }}) and joined the [dev team](https://rocq-prover.org/rocq-team/core) to help solve them. 
 I've found that [proof assistants are systematically slow](https://youtu.be/m-iGCCuHBvY) when you apply them to real world problems, and got [my](https://www.youtube.com/watch?v=K0_zr2UC_YE) [PhD](https://jasongross.github.io/papers/2021-JGross-PhD-EECS-Feb2021.pdf) for making them a bit faster. 
 
