@@ -13,12 +13,7 @@ permalink: /
 
 <p style="text-align: center;">Hello!</p>
 
-I'm building [Theorem](https://theoremlabs.com/) to work on the trust and oversight problem in massively scaling up software deployment. 
-
-
-<!--Until recently, I was a researcher at the [Machine Intelligence Research Institute](https://intelligence.org/).--!>
-<!--Humanity is building AI systems to be subject to fewer constraints of the world, let's not be subject to the AI systems either.-->
-<!--I'm bushwhacking for moonshots that make this possible!-->
+I'm building [Theorem](https://theoremlabs.com/) to work on the oversight problem in massively scaling up software deployment. 
 
 Previously, I developed [Fiat Cryptography](https://github.com/mit-plv/fiat-crypto) which [enables the majority of secure connections to the internet](https://andres.systems/fiat-crypto-adoption.html) (the big prime numbers behind the https lock icon). 
 Over the course of the project, I reported [the plurality of all-time bugs in the proof-assistant Rocq]({{ "/media/coq-bug-reports-by-year.svg" | relative_url }}) and joined the [dev team](https://rocq-prover.org/rocq-team/core) to help solve them. 
