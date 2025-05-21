@@ -13,14 +13,16 @@ permalink: /
 
 <p style="text-align: center;">Hello!</p>
 
-I'm excited about understanding and securing software systems.
-My current projects are in formally verifying transformer models and using mechanistic interpretability for anomaly detection.
+I'm building [Theorem](https://theoremlabs.com/) to work on the trust and oversight problem in massively scaling up software deployment. 
+
+
 <!--Until recently, I was a researcher at the [Machine Intelligence Research Institute](https://intelligence.org/).--!>
 <!--Humanity is building AI systems to be subject to fewer constraints of the world, let's not be subject to the AI systems either.-->
 <!--I'm bushwhacking for moonshots that make this possible!-->
 
 Previously, I developed [Fiat Cryptography](https://github.com/mit-plv/fiat-crypto) which [enables the majority of secure connections to the internet](https://andres.systems/fiat-crypto-adoption.html) (the big prime numbers behind the https lock icon). 
-Over the course of the project, I reported [the plurality of all-time bugs in the proof-assistant Coq]({{ "/media/coq-bug-reports-by-year.svg" | relative_url }}) because [proof assistants are systematically slow](https://youtu.be/m-iGCCuHBvY) when you apply them to real world problems. If we want verified security at scale, we need significantly more performant ways of generating and checking formal proofs!
+Over the course of the project, I reported [the plurality of all-time bugs in the proof-assistant Rocq]({{ "/media/coq-bug-reports-by-year.svg" | relative_url }}) and joined the [dev team](https://rocq-prover.org/rocq-team/core) to help solve them. 
+I've found that [proof assistants are systematically slow](https://youtu.be/m-iGCCuHBvY) when you apply them to real world problems, and got [my](https://www.youtube.com/watch?v=K0_zr2UC_YE) [PhD](https://jasongross.github.io/papers/2021-JGross-PhD-EECS-Feb2021.pdf) for making them a bit faster. 
 
 I live in the Bay Area, and I like to [sail](https://www.cal-sailing.org/).
 Reach out if you want to chat, or do water sports!
