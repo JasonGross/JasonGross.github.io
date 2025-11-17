@@ -33,7 +33,8 @@ The bottom of the list has some less ambitious or less well-fleshed-out projects
             That is, it seems that a quoter for `option A` should emit not something of type `option A -> AST.term`, but something of type `option A -> Instance.t -> AST.term`.
           * To systematically handle these instances, we should treat every quotation as being the quotation of a template/universe polymorphic constant.
             Any time we quote a constant, inductive, etc, we must thread through the "natural" universe instance, and abstract at the Gallina level over all occurrences of these universes.
-            When we are quoting a term, we should be parametrized on both the natural universe instance of the term we are quoting, and the replacement instance.  
+            When we are quoting a term, we should be parametrized on both the natural universe instance of the term we are quoting, and the replacement instance.
+            Alternatively, we can perhaps do the generalization post-hoc, perhaps with a function `replace_instance : AST.term -> Instance.t -> Instance.t -> AST.term`.
      + The next major issue after these is likely:
        1. Figuring out how to abstract over Gallina context variables so that we can adequately deduplicate work across safechecker invocations (probably we can turn external quantifications into internal ones and safecheck the abstracted term, but some details need to be worked out).
      + And finally if that's solved, the next two major issues I forsee are:
