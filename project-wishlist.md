@@ -35,6 +35,7 @@ The bottom of the list has some less ambitious or less well-fleshed-out projects
             Any time we quote a constant, inductive, etc, we must thread through the "natural" universe instance, and abstract at the Gallina level over all occurrences of these universes.
             When we are quoting a term, we should be parametrized on both the natural universe instance of the term we are quoting, and the replacement instance.
             Alternatively, we can perhaps do the generalization post-hoc, perhaps with a function `replace_instance : AST.term -> Instance.t -> Instance.t -> AST.term`.
+            See also [this Zulip message](https://rocq-prover.zulipchat.com/#narrow/channel/237658-MetaRocq/topic/universe.20instance.20of.20template.20polymorphic.20constants.3F/near/478212551).
      + The next major issue after these is likely:
        1. Figuring out how to abstract over Gallina context variables so that we can adequately deduplicate work across safechecker invocations (probably we can turn external quantifications into internal ones and safecheck the abstracted term, but some details need to be worked out).
      + And finally if that's solved, the next two major issues I forsee are:
