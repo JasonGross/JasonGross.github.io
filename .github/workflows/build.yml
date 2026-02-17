@@ -48,7 +48,7 @@ jobs:
           ocaml-compiler: ${{ env.OCAML_DEFAULT_VERSION }}
       - name: Cache
         id: cache-opam
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.opam
           key: ${{ runner.os }}-opam-${{ env.OCAML_DEFAULT_VERSION }}+${{ env.OCAML_2014_VERSION }}+${{ env.OCAML_2018_VERSION }}
